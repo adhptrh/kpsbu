@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jun 01, 2022 at 10:13 AM
--- Server version: 5.7.33
--- PHP Version: 7.3.33
+-- Host: 127.0.0.1
+-- Generation Time: Jun 17, 2022 at 08:52 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -101,9 +100,9 @@ CREATE TABLE `aset` (
   `aset` varchar(255) NOT NULL,
   `umur_aset` int(11) NOT NULL,
   `id_supplier` varchar(233) NOT NULL,
-  `kel_akun` int(11) NOT NULL DEFAULT '0',
-  `kel_akun_peny_d` int(11) NOT NULL DEFAULT '0',
-  `kel_akun_peny_k` int(11) NOT NULL DEFAULT '0'
+  `kel_akun` int(11) NOT NULL DEFAULT 0,
+  `kel_akun_peny_d` int(11) NOT NULL DEFAULT 0,
+  `kel_akun_peny_k` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -432,7 +431,35 @@ INSERT INTO `buku_kas_kecil` (`id`, `id_ref`, `tgl_transaksi`, `nominal`, `keter
 (87, 'PNJWASERDA010622008', '2022-06-01', 2500, 'Penjualan', 'd'),
 (88, 'PNJWASERDA010622009', '2022-06-01', 29500, 'Penjualan', 'd'),
 (89, 'PNJWASERDA010622010', '2022-06-01', 35000, 'Penjualan', 'd'),
-(90, 'PNJWASERDA010622011', '2022-06-01', 20000, 'Penjualan', 'd');
+(90, 'PNJWASERDA010622011', '2022-06-01', 20000, 'Penjualan', 'd'),
+(91, 'PNJWASERDA140622012', '2022-06-14', 2500, 'Penjualan', 'd'),
+(92, 'PNJWASERDA140622013', '2022-06-14', 5000, 'Penjualan', 'd'),
+(93, 'PNJWASERDA140622014', '2022-06-14', 2500, 'Penjualan', 'd'),
+(94, 'PNJWASERDA140622015', '2022-06-14', 6000, 'Penjualan', 'd'),
+(95, 'PNJWASERDA140622016', '2022-06-14', 2500, 'Penjualan', 'd'),
+(96, 'PNJWASERDA140622017', '2022-06-14', 10000, 'Penjualan', 'd'),
+(97, 'PNJWASERDA140622018', '2022-06-14', 2500, 'Penjualan', 'd'),
+(98, 'PNJWASERDA140622019', '2022-06-14', 2000, 'Penjualan', 'd'),
+(99, 'PNJWASERDA150622020', '2022-06-15', 2000, 'Penjualan', 'd'),
+(100, 'PNJWASERDA150622021', '2022-06-15', 2000, 'Penjualan', 'd'),
+(101, 'PNJWASERDA150622022', '2022-06-15', 2000, 'Penjualan', 'd'),
+(102, 'PNJWASERDA150622023', '2022-06-15', 2000, 'Penjualan', 'd'),
+(103, 'PNJWASERDA150622024', '2022-06-15', 2500, 'Penjualan', 'd'),
+(104, 'PNJWASERDA150622025', '2022-06-15', 4500, 'Penjualan', 'd'),
+(105, 'PNJWASERDA150622026', '2022-06-15', 12500, 'Penjualan', 'd'),
+(106, 'PNJWASERDA160622027', '2022-06-16', 2500, 'Penjualan', 'd'),
+(107, 'PNJWASERDA160622027', '2022-06-16', 2500, 'Penjualan', 'd'),
+(108, 'PNJWASERDA160622027', '2022-06-16', 4000, 'Penjualan', 'd'),
+(109, 'PNJWASERDA160622027', '2022-06-16', 4000, 'Penjualan', 'd'),
+(110, 'PNJWASERDA160622027', '2022-06-16', 4000, 'Penjualan', 'd'),
+(111, 'PNJWASERDA160622027', '2022-06-16', 4000, 'Penjualan', 'd'),
+(112, 'PNJWASERDA160622027', '2022-06-16', 6000, 'Penjualan', 'd'),
+(113, 'PNJWASERDA160622028', '2022-06-16', 2500, 'Penjualan', 'd'),
+(114, 'PNJWASERDA160622029', '2022-06-16', 25000, 'Penjualan', 'd'),
+(115, 'PNJWASERDA160622030', '2022-06-16', 2500, 'Penjualan', 'd'),
+(116, 'PNJWASERDA170622031', '2022-06-17', 5000, 'Penjualan', 'd'),
+(117, 'PNJWASERDA170622032', '2022-06-17', 2500, 'Penjualan', 'd'),
+(118, 'PNJWASERDA170622033', '2022-06-17', 22500, 'Penjualan', 'd');
 
 -- --------------------------------------------------------
 
@@ -482,7 +509,11 @@ INSERT INTO `buku_pembantu_kas` (`id`, `id_ref`, `tanggal`, `nominal`, `kd_coa`,
 (30, 'PNJWASERDA010622004', '2022-06-01', '11000', 1111, 'd', 'Penjualan Tunai'),
 (31, 'PNJWASERDA010622006', '2022-06-01', '55000', 1111, 'd', 'Penjualan Tunai'),
 (32, 'PNJWASERDA010622007', '2022-06-01', '35000', 1111, 'd', 'Penjualan Tunai'),
-(33, 'PNJWASERDA010622009', '2022-06-01', '29500', 1111, 'd', 'Penjualan Tunai');
+(33, 'PNJWASERDA010622009', '2022-06-01', '29500', 1111, 'd', 'Penjualan Tunai'),
+(34, 'PNJWASERDA150622026', '2022-06-15', '60000', 1111, 'd', 'Penjualan Tunai'),
+(35, 'PNJWASERDA160622027', '2022-06-16', '10000', 1111, 'd', 'Penjualan Tunai'),
+(36, 'PNJWASERDA160622029', '2022-06-16', '30000', 1111, 'd', 'Penjualan Tunai'),
+(37, 'PNJWASERDA160622030', '2022-06-16', '2500', 1111, 'd', 'Penjualan Tunai');
 
 -- --------------------------------------------------------
 
@@ -510,10 +541,10 @@ CREATE TABLE `coa` (
   `saldo_awal` int(50) NOT NULL,
   `header` int(11) NOT NULL,
   `saldo_normal` varchar(50) NOT NULL DEFAULT 'd',
-  `is_shu` tinyint(4) NOT NULL DEFAULT '0',
-  `is_arus_kas` tinyint(4) DEFAULT '0',
-  `is_penerimaan` tinyint(4) DEFAULT '0',
-  `is_waserda` tinyint(4) DEFAULT '0'
+  `is_shu` tinyint(4) NOT NULL DEFAULT 0,
+  `is_arus_kas` tinyint(4) DEFAULT 0,
+  `is_penerimaan` tinyint(4) DEFAULT 0,
+  `is_waserda` tinyint(4) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -570,7 +601,7 @@ INSERT INTO `coa` (`id`, `no_coa`, `nama_coa`, `jenis_coa`, `saldo_awal`, `heade
 (47, 6113, 'Harga Pokok Penjualan', '', 0, 6, 'd', 1, 0, 0, 1),
 (48, 4211, 'SHU', '', 0, 4, 'd', 0, 0, 0, 0),
 (49, 5313, 'Beban Reparasi Kendaraan', '', 0, 5, 'k', 0, 0, 0, 1),
-(50, 5314, 'Beban Bensin', '', 0, 5, 'k', 0, 0, 0, 1),
+(50, 5314, 'Beban Transportasi', '', 0, 5, 'k', 0, 0, 0, 1),
 (51, 5400, 'Beban Lembur', '', 0, 5, 'd', 0, 0, 0, 0),
 (52, 1414, 'Pers. Barang Dagang', '', 0, 1, 'd', 0, 0, 0, 0),
 (53, 2130, 'PPN Masukan', '', 0, 2, 'd', 0, 0, 0, 0),
@@ -739,7 +770,7 @@ CREATE TABLE `detail_pembelian` (
   `cek_bulan_peny` varchar(11) NOT NULL DEFAULT '0000-00',
   `cek_bulan_perb` varchar(11) DEFAULT NULL,
   `id_detail_aset` varchar(255) NOT NULL,
-  `is_rev` tinyint(1) NOT NULL DEFAULT '0'
+  `is_rev` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -877,7 +908,10 @@ INSERT INTO `detail_pembelian_bb` (`id`, `no_trans`, `no_bb`, `jumlah`, `harga`,
 (83, 'PMB_068', 'BB_001', 150, '100', 15000, 'PTRNK_016'),
 (84, 'PMB_068', 'BB_001', 500, '5000', 2500000, 'PTRNK_016'),
 (85, 'PMB_069', 'BB_001', 400, '4500', 1800000, 'PTRNK_021'),
-(86, 'PMB_069', 'BB_001', 50, '3500', 175000, 'PTRNK_021');
+(86, 'PMB_069', 'BB_001', 50, '3500', 175000, 'PTRNK_021'),
+(87, 'PMB_070', 'BB_001', 100, '5700', 570000, 'PTRNK_037'),
+(88, 'PMB_071', 'BB_001', 50, '5700', 285000, 'PTRNK_038'),
+(89, 'PMB_072', 'BB_001', 30, '5700', 171000, 'PTRNK_039');
 
 -- --------------------------------------------------------
 
@@ -965,7 +999,9 @@ INSERT INTO `detail_pnj_susu` (`kd_pnj_susu`, `kd_produk`, `nm_produk`, `jml_lit
 ('PNJSO20211216003', 'PR_013', 'Yogurt 2 ', 13, 7500, 97500),
 ('PNJSO20211216003', 'PR_012', 'Testing Yogurt', 12, 5000, 60000),
 ('PNJS20220109004', 'PR_016', 'Asi', 100, 1233, 123300),
-('PNJPKN20220109006', 'PR_015', 'Rumput Grade B', 1000, 15000, 15000000);
+('PNJPKN20220109006', 'PR_015', 'Rumput Grade B', 1000, 15000, 15000000),
+('PNJS20220702005', 'PR_010', 'Test sarah', 100, 7000, 700000),
+('PNJS20220702006', 'PR_010', 'Test sarah', 50, 7000, 350000);
 
 -- --------------------------------------------------------
 
@@ -1033,6 +1069,16 @@ CREATE TABLE `detail_transaksi_shu` (
   `nominal` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `detail_transaksi_shu`
+--
+
+INSERT INTO `detail_transaksi_shu` (`id`, `kode_shu`, `uraian`, `nominal`) VALUES
+(1, 'SHU20220001', 'Cadangan koperasi', 6462298),
+(2, 'SHU20220001', 'Jasa anggota', 4038937),
+(3, 'SHU20220001', 'Jasa modal', 3231149),
+(4, 'SHU20220001', 'Jasa lain-lain', 2423362);
+
 -- --------------------------------------------------------
 
 --
@@ -1047,7 +1093,7 @@ CREATE TABLE `jadwal_shift` (
   `tgl_akhir` date DEFAULT NULL,
   `desc` varchar(50) DEFAULT NULL,
   `create_by` varchar(50) DEFAULT NULL,
-  `is_complete` tinyint(1) DEFAULT '0'
+  `is_complete` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -1171,7 +1217,64 @@ INSERT INTO `jurnal` (`no`, `id_jurnal`, `tgl_jurnal`, `no_coa`, `posisi_dr_cr`,
 (41, 'PNJWASERDA010622011', '2022-06-01', 2140, 'd', 2000),
 (42, 'PNJWASERDA010622011', '2022-06-01', 4116, 'k', 22000),
 (43, 'PNJWASERDA010622011', '2022-06-01', 6113, 'd', 20000),
-(44, 'PNJWASERDA010622011', '2022-06-01', 1414, 'k', 20000);
+(44, 'PNJWASERDA010622011', '2022-06-01', 1414, 'k', 20000),
+(45, 'PNJWASERDA150622026', '2022-06-15', 1111, 'd', 60000),
+(46, 'PNJWASERDA150622026', '2022-06-15', 2140, 'k', 1375),
+(47, 'PNJWASERDA150622026', '2022-06-15', 4116, 'k', 12500),
+(48, 'PNJWASERDA150622026', '2022-06-15', 6113, 'd', 8750),
+(49, 'PNJWASERDA150622026', '2022-06-15', 1414, 'k', 8750),
+(50, 'PNJWASERDA150622020', '2022-06-16', 1998, 'd', 2220),
+(51, 'PNJWASERDA150622020', '2022-06-16', 2140, 'k', 220),
+(52, 'PNJWASERDA150622020', '2022-06-16', 4116, 'k', 2000),
+(53, 'PNJWASERDA150622020', '2022-06-16', 6113, 'd', 1500),
+(54, 'PNJWASERDA150622020', '2022-06-16', 1414, 'k', 1500),
+(55, 'PNJWASERDA160622027', '2022-06-16', 1111, 'd', 10000),
+(56, 'PNJWASERDA160622027', '2022-06-16', 2140, 'k', 660),
+(57, 'PNJWASERDA160622027', '2022-06-16', 4116, 'k', 6660),
+(58, 'PNJWASERDA160622027', '2022-06-16', 6113, 'd', 4500),
+(59, 'PNJWASERDA160622027', '2022-06-16', 1414, 'k', 4500),
+(60, 'PNJWASERDA160622029', '2022-06-16', 1111, 'd', 30000),
+(61, 'PNJWASERDA160622029', '2022-06-16', 2140, 'k', 2750),
+(62, 'PNJWASERDA160622029', '2022-06-16', 4116, 'k', 27750),
+(63, 'PNJWASERDA160622029', '2022-06-16', 6113, 'd', 17500),
+(64, 'PNJWASERDA160622029', '2022-06-16', 1414, 'k', 17500),
+(65, 'PNJWASERDA160622030', '2022-06-16', 1111, 'd', 2500),
+(66, 'PNJWASERDA160622030', '2022-06-16', 2140, 'k', 275),
+(67, 'PNJWASERDA160622030', '2022-06-16', 4116, 'k', 2775),
+(68, 'PNJWASERDA160622030', '2022-06-16', 6113, 'd', 1750),
+(69, 'PNJWASERDA160622030', '2022-06-16', 1414, 'k', 1750),
+(70, 'DPPTRNK_037', '2022-06-18', 1111, 'd', 25000),
+(71, 'DPPTRNK_037', '2022-06-18', 3111, 'k', 25000),
+(72, 'DPPTRNK_038', '2022-06-18', 1111, 'd', 25000),
+(73, 'DPPTRNK_038', '2022-06-18', 3111, 'k', 25000),
+(74, 'DPPTRNK_039', '2022-06-18', 1111, 'd', 25000),
+(75, 'DPPTRNK_039', '2022-06-18', 3111, 'k', 25000),
+(76, 'PMB_070', '2022-06-18', 1112, 'd', 570000),
+(77, 'PMB_070', '2022-06-18', 2111, 'k', 570000),
+(78, 'PMB_071', '2022-06-18', 1112, 'd', 285000),
+(79, 'PMB_071', '2022-06-18', 2111, 'k', 285000),
+(80, 'PMB_072', '2022-06-18', 1112, 'd', 171000),
+(81, 'PMB_072', '2022-06-18', 2111, 'k', 171000),
+(82, 'PMBS-020720220005', '2022-07-02', 2111, 'd', 570000),
+(83, 'PMBS-020720220005', '2022-07-02', 1111, 'k', 558000),
+(84, 'PMBS-020720220005', '2022-07-02', 3112, 'k', 2000),
+(85, 'PMBS-020720220005', '2022-07-02', 3113, 'k', 10000),
+(86, 'PMBS-020720220006', '2022-07-02', 2111, 'd', 285000),
+(87, 'PMBS-020720220006', '2022-07-02', 1111, 'k', 274000),
+(88, 'PMBS-020720220006', '2022-07-02', 3112, 'k', 1000),
+(89, 'PMBS-020720220006', '2022-07-02', 3113, 'k', 10000),
+(90, 'PMBS-020720220007', '2022-07-02', 2111, 'd', 171000),
+(91, 'PMBS-020720220007', '2022-07-02', 1111, 'k', 160400),
+(92, 'PMBS-020720220007', '2022-07-02', 3112, 'k', 600),
+(93, 'PMBS-020720220007', '2022-07-02', 3113, 'k', 10000),
+(94, 'PNJS20220702005', '2022-07-02', 1111, 'd', 700000),
+(95, 'PNJS20220702005', '2022-07-02', 4113, 'k', 700000),
+(96, 'PNJS20220702006', '2022-07-02', 1111, 'd', 350000),
+(97, 'PNJS20220702006', '2022-07-02', 4113, 'k', 350000),
+(98, 'HPP-0004', '2022-06-18', 6113, 'd', 10000000),
+(99, 'HPP-0004', '2022-06-18', 1413, 'k', 10000000),
+(100, 'HPP-0005', '2022-06-18', 6113, 'd', 5000000),
+(101, 'HPP-0005', '2022-06-18', 1413, 'k', 5000000);
 
 -- --------------------------------------------------------
 
@@ -1247,13 +1350,39 @@ INSERT INTO `konsumen_ips` (`no_ips`, `nama_ips`, `notel`, `alamat`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `laporan_kartu_stock`
+--
+
+CREATE TABLE `laporan_kartu_stock` (
+  `id` int(11) NOT NULL,
+  `tanggal` datetime NOT NULL DEFAULT current_timestamp(),
+  `kode_produk` varchar(255) NOT NULL,
+  `mode` varchar(5) NOT NULL,
+  `unit` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `laporan_kartu_stock`
+--
+
+INSERT INTO `laporan_kartu_stock` (`id`, `tanggal`, `kode_produk`, `mode`, `unit`) VALUES
+(1, '2022-06-17 12:00:12', 'WSP001', 'in', 1),
+(2, '2022-06-17 14:06:23', 'WSP001', 'in', 10),
+(3, '2022-06-17 14:12:24', 'WSP001', 'out', 2),
+(4, '2022-06-17 15:22:17', 'WSP001', 'in', 5),
+(5, '2022-06-17 15:54:04', 'WSP001', 'out', 1),
+(6, '2022-06-17 18:10:09', 'WSP001', 'out', 9);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `log_bayar_pinjaman`
 --
 
 CREATE TABLE `log_bayar_pinjaman` (
   `id` int(11) NOT NULL,
   `id_ref_pinjaman` varchar(255) DEFAULT NULL,
-  `waktu_bayar` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `waktu_bayar` timestamp NULL DEFAULT current_timestamp(),
   `id_anggota` varchar(255) DEFAULT NULL,
   `nominal` int(11) DEFAULT NULL,
   `kd_coa` int(11) DEFAULT NULL
@@ -1299,8 +1428,8 @@ CREATE TABLE `log_confirm_truck` (
   `tgl_confirm` date DEFAULT NULL,
   `nama_aset` varchar(255) DEFAULT NULL,
   `id_detail_truck` varchar(255) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT '0',
-  `tgl_pengajuan` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+  `status` tinyint(1) DEFAULT 0,
+  `tgl_pengajuan` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -1338,8 +1467,8 @@ CREATE TABLE `log_pembayaran_susu` (
   `jumlah_liter_susu` int(30) NOT NULL,
   `jumlah_harga_susu` int(30) NOT NULL,
   `simpanan_masuka` int(30) NOT NULL,
-  `simpanan_wajib` int(30) NOT NULL DEFAULT '0',
-  `pinjaman_anggota` int(30) NOT NULL DEFAULT '0',
+  `simpanan_wajib` int(30) NOT NULL DEFAULT 0,
+  `pinjaman_anggota` int(30) NOT NULL DEFAULT 0,
   `bayar_tunai` int(255) NOT NULL,
   `subtotal` int(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1406,7 +1535,10 @@ INSERT INTO `log_pembayaran_susu` (`id`, `id_pembayaran`, `id_anggota`, `jumlah_
 (55, 'PMBS-150720210003', 'PTRNK_036', 100, 350000, 10000, 2000, 0, 0, 338000),
 (56, 'PMBS-200120220003', 'PTRNK_016', 100, 450000, 10000, 2000, 0, 0, 438000),
 (57, 'PMBS-040220220003', 'PTRNK_016', 650, 2515000, 10000, 13000, 0, 0, 2492000),
-(58, 'PMBS-200120220004', 'PTRNK_021', 450, 1975000, 10000, 9000, 0, 0, 1956000);
+(58, 'PMBS-200120220004', 'PTRNK_021', 450, 1975000, 10000, 9000, 0, 0, 1956000),
+(59, 'PMBS-020720220005', 'PTRNK_037', 100, 570000, 10000, 2000, 0, 0, 558000),
+(60, 'PMBS-020720220006', 'PTRNK_038', 50, 285000, 10000, 1000, 0, 0, 274000),
+(61, 'PMBS-020720220007', 'PTRNK_039', 30, 171000, 10000, 600, 0, 0, 160400);
 
 -- --------------------------------------------------------
 
@@ -1458,9 +1590,9 @@ CREATE TABLE `log_pinjaman` (
   `kode_pinjaman` varchar(255) NOT NULL,
   `id_anggota` varchar(255) NOT NULL,
   `tanggal_pinjaman` date NOT NULL,
-  `nominal` int(255) NOT NULL DEFAULT '0',
+  `nominal` int(255) NOT NULL DEFAULT 0,
   `status` varchar(1) NOT NULL DEFAULT '1',
-  `sisa_pinjaman` int(11) DEFAULT '0'
+  `sisa_pinjaman` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -1521,8 +1653,8 @@ CREATE TABLE `pegawai` (
   `nama_bank` varchar(255) DEFAULT NULL,
   `no_rek` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT '1',
-  `status_kredit` tinyint(1) DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+  `status_kredit` tinyint(1) DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -1530,11 +1662,11 @@ CREATE TABLE `pegawai` (
 --
 
 INSERT INTO `pegawai` (`id`, `id_jabatan`, `id_ptkp`, `id_jenis_pegawai`, `pendidikan`, `rfid`, `nip`, `npwp`, `nama`, `alamat`, `no_telp`, `tempat_lahir`, `tgl_lahir`, `nama_bank`, `no_rek`, `status`, `status_kredit`, `created_at`) VALUES
-(1, 'Staff', '0', '0', NULL, '2635346361', '123123123', '', 'Data Test', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
-(2, 'Staff', '0', '0', NULL, '1', '123', '', 'Testing 2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
-(3, 'Staff', '0', '0', NULL, '2', '1234', '', 'Testing 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
-(4, 'Staff', '0', '0', NULL, '3', '1235', '', 'Testing 4', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
-(5, 'Staff', '0', '0', NULL, '4', '1236', '', 'Testing 5', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(1, 'Staff', '0', '0', NULL, '2635346361', '123123123', '', 'Data Test', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL),
+(2, 'Staff', '0', '0', NULL, '1', '123', '', 'Testing 2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL),
+(3, 'Staff', '0', '0', NULL, '2', '1234', '', 'Testing 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL),
+(4, 'Staff', '0', '0', NULL, '3', '1235', '', 'Testing 4', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL),
+(5, 'Staff', '0', '0', NULL, '4', '1236', '', 'Testing 5', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL),
 (6, 'Staff', '1', 'Tetap', NULL, '44', '44', '', 'Ale', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL),
 (7, 'Staff', '0', '0', NULL, '55', '55', '', 'Siti', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL),
 (8, 'Staff', '', 'Kontrak', NULL, '111', '111', '111111', 'Heni', 'Bandung', '0898998989', 'Bandung', '1998-03-01', 'Mandiri', '11223321', '1', 0, '2021-12-04 11:17:34'),
@@ -1570,6 +1702,15 @@ CREATE TABLE `pembagian_shu` (
   `jasa_anggota` int(50) DEFAULT NULL,
   `sisa_hasil_usaha` int(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pembagian_shu`
+--
+
+INSERT INTO `pembagian_shu` (`id`, `tanggal`, `id_trans`, `id_anggota`, `jasa_modal`, `jasa_anggota`, `sisa_hasil_usaha`) VALUES
+(1, '2022-06-18', 'PMBG.SHU20220001', 'PTRNK_037', 244664, 186137, 430801),
+(2, '2022-06-18', 'PMBG.SHU20220002', 'PTRNK_038', 238052, 93069, 331121),
+(3, '2022-06-18', 'PMBG.SHU20220003', 'PTRNK_039', 235407, 55841, 291248);
 
 -- --------------------------------------------------------
 
@@ -1615,7 +1756,7 @@ CREATE TABLE `pembayaran_susu` (
   `kode_pembayaran` varchar(255) NOT NULL,
   `total_bayar` int(20) NOT NULL,
   `tgl_transaksi` date NOT NULL,
-  `is_paid` tinyint(1) DEFAULT '0'
+  `is_paid` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -1626,6 +1767,9 @@ INSERT INTO `pembayaran_susu` (`kode_pembayaran`, `total_bayar`, `tgl_transaksi`
 ('PMBS-010120210002', 450000, '2021-01-01', 1),
 ('PMBS-020220210002', 462000, '2021-02-02', 1),
 ('PMBS-020420200003', 183700, '2020-04-02', 1),
+('PMBS-020720220005', 558000, '2022-07-02', 1),
+('PMBS-020720220006', 274000, '2022-07-02', 1),
+('PMBS-020720220007', 160400, '2022-07-02', 1),
 ('PMBS-021120200002', 625400, '2020-11-02', 1),
 ('PMBS-021220200002', 425000, '2020-12-02', 1),
 ('PMBS-040220220003', 2492000, '2022-02-04', 1),
@@ -1728,7 +1872,7 @@ CREATE TABLE `pembelian_bb` (
   `tgl_trans` date NOT NULL,
   `total` int(100) NOT NULL,
   `status` varchar(100) NOT NULL,
-  `id_detail_truck` int(11) DEFAULT '0'
+  `id_detail_truck` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -1804,7 +1948,10 @@ INSERT INTO `pembelian_bb` (`id`, `no_trans`, `tgl_trans`, `total`, `status`, `i
 (66, 'PMB_066', '2021-12-02', 350000, '1', 0),
 (67, 'PMB_067', '2022-01-06', 450000, '1', 0),
 (68, 'PMB_068', '2022-01-21', 2515000, '1', 0),
-(69, 'PMB_069', '2022-01-06', 1975000, '1', 0);
+(69, 'PMB_069', '2022-01-06', 1975000, '1', 0),
+(70, 'PMB_070', '2022-06-18', 570000, '1', 0),
+(71, 'PMB_071', '2022-06-18', 285000, '1', 0),
+(72, 'PMB_072', '2022-06-18', 171000, '1', 0);
 
 -- --------------------------------------------------------
 
@@ -1862,7 +2009,7 @@ CREATE TABLE `pengajuan_bonus` (
   `nip` int(20) NOT NULL,
   `nominal` int(50) NOT NULL,
   `keterangan` varchar(255) DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0'
+  `status` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -1936,7 +2083,46 @@ INSERT INTO `pengajuan_jurnal` (`id`, `kode`, `tanggal`, `nominal`, `status`, `j
 (44, 'PNJWASERDA010622007', '2022-06-01', 38500, 'selesai', 'Penjualan Barang Waserda'),
 (45, 'PNJWASERDA010622008', '2022-06-01', 2750, 'pending', 'Penjualan Barang Waserda'),
 (46, 'PNJWASERDA010622009', '2022-06-01', 32450, 'selesai', 'Penjualan Barang Waserda'),
-(47, 'PNJWASERDA010622011', '2022-06-01', 22000, 'selesai', 'Penjualan Barang Kredit Waserda');
+(47, 'PNJWASERDA010622011', '2022-06-01', 22000, 'selesai', 'Penjualan Barang Kredit Waserda'),
+(48, 'PNJWASERDA140622012', '2022-06-14', 3000, 'pending', 'Penjualan Barang Tunai Waserda'),
+(49, 'PNJWASERDA140622013', '2022-06-14', 10000, 'pending', 'Penjualan Barang Tunai Waserda'),
+(50, 'PNJWASERDA140622014', '2022-06-14', 3000, 'pending', 'Penjualan Barang Tunai Waserda'),
+(51, 'PNJWASERDA140622015', '2022-06-14', 6660, 'pending', 'Penjualan Barang Kredit Waserda'),
+(52, 'PNJWASERDA140622016', '2022-06-14', 5000, 'pending', 'Penjualan Barang Tunai Waserda'),
+(53, 'PNJWASERDA140622017', '2022-06-14', 20000, 'pending', 'Penjualan Barang Tunai Waserda'),
+(54, 'PNJWASERDA140622018', '2022-06-14', 2775, 'pending', 'Penjualan Barang Kredit Waserda'),
+(55, 'PNJWASERDA140622019', '2022-06-14', 2220, 'pending', 'Penjualan Barang Kredit Waserda'),
+(56, 'PNJWASERDA150622020', '2022-06-15', 2220, 'selesai', 'Penjualan Barang Kredit Waserda'),
+(57, 'PNJWASERDA150622021', '2022-06-15', 3000, 'pending', 'Penjualan Barang Tunai Waserda'),
+(58, 'PNJWASERDA150622022', '2022-06-15', 50000, 'pending', 'Penjualan Barang Tunai Waserda'),
+(59, 'PNJWASERDA150622023', '2022-06-15', 10000, 'pending', 'Penjualan Barang Tunai Waserda'),
+(60, 'PNJWASERDA150622024', '2022-06-15', 10000, 'pending', 'Penjualan Barang Tunai Waserda'),
+(61, 'PMBWASERDA150622012', '2022-06-15', 5550, 'pending', 'Pembelian Barang Waserda'),
+(62, 'PMBWASERDA150622013', '2022-06-15', 1943, 'pending', 'Pembelian Barang Waserda'),
+(63, 'PMBWASERDA150622014', '2022-06-15', 7493, 'pending', 'Pembelian Barang Waserda'),
+(64, 'PNJWASERDA150622025', '2022-06-15', 10000, 'pending', 'Penjualan Barang Tunai Waserda'),
+(65, 'PNJWASERDA150622026', '2022-06-15', 60000, 'selesai', 'Penjualan Barang Tunai Waserda'),
+(66, 'PNJWASERDA160622027', '2022-06-16', 3000, 'selesai', 'Penjualan Barang Tunai Waserda'),
+(67, 'PNJWASERDA160622027', '2022-06-16', 3000, 'selesai', 'Penjualan Barang Tunai Waserda'),
+(68, 'PNJWASERDA160622027', '2022-06-16', 4440, 'selesai', 'Penjualan Barang Kredit Waserda'),
+(69, 'PNJWASERDA160622027', '2022-06-16', 10000, 'selesai', 'Penjualan Barang Tunai Waserda'),
+(70, 'PNJWASERDA160622027', '2022-06-16', 10000, 'selesai', 'Penjualan Barang Tunai Waserda'),
+(71, 'PNJWASERDA160622027', '2022-06-16', 10000, 'selesai', 'Penjualan Barang Tunai Waserda'),
+(72, 'PNJWASERDA160622027', '2022-06-16', 10000, 'selesai', 'Penjualan Barang Tunai Waserda'),
+(73, 'PNJWASERDA160622028', '2022-06-16', 10000, 'pending', 'Penjualan Barang Tunai Waserda'),
+(74, 'PNJWASERDA160622029', '2022-06-16', 30000, 'selesai', 'Penjualan Barang Tunai Waserda'),
+(75, 'PNJWASERDA160622030', '2022-06-16', 10000, 'selesai', 'Penjualan Barang Tunai Waserda'),
+(76, 'PMBWASERDA160622015', '2022-06-16', 9713, 'pending', 'Pembelian Barang Waserda'),
+(77, 'PMBWASERDA170622016', '2022-06-17', 5828, 'pending', 'Pembelian Barang Waserda'),
+(78, 'PMBWASERDA170622017', '2022-06-17', 1943, 'pending', 'Pembelian Barang Waserda'),
+(79, 'PMBWASERDA170622018', '2022-06-17', 19425, 'pending', 'Pembelian Barang Waserda'),
+(80, 'PNJWASERDA170622031', '2022-06-17', 6000, 'pending', 'Penjualan Barang Tunai Waserda'),
+(81, 'PMBWASERDA170622019', '2022-06-17', 9713, 'pending', 'Pembelian Barang Waserda'),
+(82, 'PNJWASERDA170622032', '2022-06-17', 3000, 'pending', 'Penjualan Barang Tunai Waserda'),
+(83, 'PNJWASERDA170622033', '2022-06-17', 30000, 'pending', 'Penjualan Barang Tunai Waserda'),
+(84, 'PMBG.SHU20220001', '2022-06-18', 430801, 'pending', 'pembagian shu'),
+(85, 'PMBG.SHU20220002', '2022-06-18', 331121, 'pending', 'pembagian shu'),
+(86, 'PMBG.SHU20220003', '2022-06-18', 291248, 'pending', 'pembagian shu');
 
 -- --------------------------------------------------------
 
@@ -2076,12 +2262,12 @@ CREATE TABLE `peternak` (
   `notel` varchar(50) NOT NULL,
   `alamat` varchar(50) NOT NULL,
   `deposit` varchar(233) DEFAULT NULL,
-  `pinjaman` int(255) NOT NULL DEFAULT '0',
+  `pinjaman` int(255) NOT NULL DEFAULT 0,
   `kd_tps` varchar(255) DEFAULT NULL,
   `nm_peternakan` varchar(255) NOT NULL,
-  `is_deactive` tinyint(1) NOT NULL DEFAULT '0',
-  `status_kredit` tinyint(1) NOT NULL DEFAULT '0',
-  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `is_deactive` tinyint(1) NOT NULL DEFAULT 0,
+  `status_kredit` tinyint(1) NOT NULL DEFAULT 0,
+  `create_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -2124,7 +2310,10 @@ INSERT INTO `peternak` (`no_peternak`, `nama_peternak`, `notel`, `alamat`, `depo
 ('PTRNK_033', 'testinglagi', '0822176282', 'coba', '25000', 0, 'TPS_001', 'bismillah', 1, 0, '2021-07-06 18:45:18'),
 ('PTRNK_034', 'Rozak', '082219765426', 'jl. cibiru', '25000', 0, 'TPS_001', 'Fresh milk', 0, 1, '2021-12-08 13:31:28'),
 ('PTRNK_035', 'Budi', '08228172615', 'jl. cikidang, lembang selatan', '25000', 150000, 'TPS_003', 'Abadi Ternak', 0, 0, '2021-07-21 06:58:59'),
-('PTRNK_036', 'Galih', '082222334455', 'jl. ciaul, lembang', '25000', 0, 'TPS_001', 'Go farm', 0, 0, '2021-07-01 10:26:27');
+('PTRNK_036', 'Galih', '082222334455', 'jl. ciaul, lembang', '25000', 0, 'TPS_001', 'Go farm', 0, 0, '2021-07-01 10:26:27'),
+('PTRNK_037', 'ani', '123456', 'dwd', '25000', 0, 'TPS_001', 'aji', 0, 0, '2022-06-17 17:48:04'),
+('PTRNK_038', 'asdwd', '13241', 'zczc', '25000', 0, 'TPS_001', 'dsdaw', 0, 0, '2022-06-17 17:48:22'),
+('PTRNK_039', 'asdf', '3232', 'faw', '25000', 0, 'TPS_001', 'peternakan a', 0, 0, '2022-06-17 17:49:27');
 
 -- --------------------------------------------------------
 
@@ -2173,7 +2362,9 @@ INSERT INTO `pnj_susu` (`id`, `kd_pnj_susu`, `nm_pelanggan`, `total`, `status`, 
 (10, 'PNJSO20211216002', 'Test', 500000, 'selesai', '2021-12-16', 'susu_olahan'),
 (11, 'PNJSO20211216003', 'aa', 157500, 'selesai', '2021-12-16', 'susu_olahan'),
 (12, 'PNJS20220109004', 'Dd', 123300, 'selesai', '2022-01-09', 'susu_murni'),
-(13, 'PNJPKN20220109006', 'dede', 15000000, 'selesai', '2022-01-09', 'pakan_konsentrat');
+(13, 'PNJPKN20220109006', 'dede', 15000000, 'selesai', '2022-01-09', 'pakan_konsentrat'),
+(14, 'PNJS20220702005', 'agus', 700000, 'selesai', '2022-07-02', 'susu_murni'),
+(15, 'PNJS20220702006', 'anto', 350000, 'selesai', '2022-07-02', 'susu_murni');
 
 -- --------------------------------------------------------
 
@@ -2188,34 +2379,45 @@ CREATE TABLE `pos_detail_pembelian` (
   `id_produk` varchar(50) DEFAULT NULL,
   `harga_satuan` int(11) DEFAULT NULL,
   `jml` int(11) DEFAULT NULL,
-  `status` varchar(50) DEFAULT NULL
+  `status` varchar(50) DEFAULT NULL,
+  `tanggal_kadaluwarsa` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pos_detail_pembelian`
 --
 
-INSERT INTO `pos_detail_pembelian` (`id`, `invoice`, `id_supplier`, `id_produk`, `harga_satuan`, `jml`, `status`) VALUES
-(1, 'KPSBUPMB270522001', 'WSS001', 'WSP001', 1500, 100, 'selesai'),
-(2, 'KPSBUPMB280522002', 'WSS001', 'WSP001', 1500, 10, 'selesai'),
-(3, 'KPSBUPMB280522003', 'WSS001', 'WSP001', 1500, 10, 'selesai'),
-(4, 'KPSBUPMB010622004', 'WSS001', 'WSP001', 1500, 10, 'selesai'),
-(5, 'KPSBUPMB010622005', 'WSS001', 'WSP001', 1500, 2, 'selesai'),
-(6, 'KPSBUPMB010622005', 'WSS002', 'WSP003', 1500, 11, 'selesai'),
-(7, 'KPSBUPMB010622006', 'WSS001', 'WSP001', 1500, 10, 'selesai'),
-(8, 'KPSBUPMB010622006', 'WSS002', 'WSP003', 1500, 12, 'selesai'),
-(9, 'PMBWASERDA010622007', 'WSS001', 'WSP001', 1500, 12, 'selesai'),
-(10, 'PMBWASERDA010622007', 'WSS002', 'WSP003', 1500, 11, 'selesai'),
-(11, 'PMBWASERDA010622008', 'WSS001', 'WSP001', 1750, 11, 'selesai'),
-(12, 'PMBWASERDA010622008', 'WSS001', 'WSP002', 1500, 10, 'selesai'),
-(13, 'PMBWASERDA010622009', 'WSS001', 'WSP001', 1750, 12, 'selesai'),
-(14, 'PMBWASERDA010622009', 'WSS002', 'WSP003', 1500, 12, 'selesai'),
-(15, 'PMBWASERDA010622010', 'WSS001', 'WSP001', 1750, 10, 'selesai'),
-(16, 'PMBWASERDA010622010', 'WSS002', 'WSP003', 1500, 5, 'selesai'),
-(17, 'PMBWASERDA010622010', 'WSS003', 'WSP004', 1500, 100, 'selesai'),
-(18, 'PMBWASERDA010622011', 'WSS001', 'WSP001', 1750, 10, 'selesai'),
-(19, 'PMBWASERDA010622011', 'WSS002', 'WSP003', 1500, 15, 'selesai'),
-(20, 'PMBWASERDA010622011', 'WSS003', 'WSP004', 1500, 12, 'selesai');
+INSERT INTO `pos_detail_pembelian` (`id`, `invoice`, `id_supplier`, `id_produk`, `harga_satuan`, `jml`, `status`, `tanggal_kadaluwarsa`) VALUES
+(1, 'KPSBUPMB270522001', 'WSS001', 'WSP001', 1500, 100, 'selesai', '2022-06-15'),
+(2, 'KPSBUPMB280522002', 'WSS001', 'WSP001', 1500, 10, 'selesai', '2022-06-15'),
+(3, 'KPSBUPMB280522003', 'WSS001', 'WSP001', 1500, 10, 'selesai', '2022-06-15'),
+(4, 'KPSBUPMB010622004', 'WSS001', 'WSP001', 1500, 10, 'selesai', '2022-06-15'),
+(5, 'KPSBUPMB010622005', 'WSS001', 'WSP001', 1500, 2, 'selesai', '2022-06-15'),
+(6, 'KPSBUPMB010622005', 'WSS002', 'WSP003', 1500, 11, 'selesai', '2022-06-15'),
+(7, 'KPSBUPMB010622006', 'WSS001', 'WSP001', 1500, 10, 'selesai', '2022-06-15'),
+(8, 'KPSBUPMB010622006', 'WSS002', 'WSP003', 1500, 12, 'selesai', '2022-06-15'),
+(9, 'PMBWASERDA010622007', 'WSS001', 'WSP001', 1500, 12, 'selesai', '2022-06-15'),
+(10, 'PMBWASERDA010622007', 'WSS002', 'WSP003', 1500, 11, 'selesai', '2022-06-15'),
+(11, 'PMBWASERDA010622008', 'WSS001', 'WSP001', 1750, 11, 'selesai', '2022-06-15'),
+(12, 'PMBWASERDA010622008', 'WSS001', 'WSP002', 1500, 10, 'selesai', '2022-06-15'),
+(13, 'PMBWASERDA010622009', 'WSS001', 'WSP001', 1750, 12, 'selesai', '2022-06-15'),
+(14, 'PMBWASERDA010622009', 'WSS002', 'WSP003', 1500, 12, 'selesai', '2022-06-15'),
+(15, 'PMBWASERDA010622010', 'WSS001', 'WSP001', 1750, 10, 'selesai', '2022-06-15'),
+(16, 'PMBWASERDA010622010', 'WSS002', 'WSP003', 1500, 5, 'selesai', '2022-06-15'),
+(17, 'PMBWASERDA010622010', 'WSS003', 'WSP004', 1500, 100, 'selesai', '2022-06-15'),
+(18, 'PMBWASERDA010622011', 'WSS001', 'WSP001', 1750, 10, 'selesai', '2022-06-15'),
+(19, 'PMBWASERDA010622011', 'WSS002', 'WSP003', 1500, 15, 'selesai', '2022-06-15'),
+(20, 'PMBWASERDA010622011', 'WSS003', 'WSP004', 1500, 12, 'selesai', '2022-06-15'),
+(22, 'PMBWASERDA150622012', 'WSS001', 'WSP001', 1750, 2, 'selesai', '2022-06-15'),
+(23, 'PMBWASERDA150622012', 'WSS001', 'WSP002', 1500, 1, 'selesai', '2022-06-15'),
+(26, 'PMBWASERDA150622013', 'WSS001', 'WSP001', 1750, 1, 'selesai', '2030-06-15'),
+(27, 'PMBWASERDA150622014', 'WSS001', 'WSP001', 1750, 3, 'selesai', '2022-06-15'),
+(28, 'PMBWASERDA150622014', 'WSS001', 'WSP002', 1500, 1, 'selesai', '2022-06-15'),
+(30, 'PMBWASERDA160622015', 'WSS001', 'WSP001', 1750, 5, 'selesai', '2026-01-16'),
+(31, 'PMBWASERDA170622016', 'WSS001', 'WSP001', 1750, 3, 'selesai', '2026-01-17'),
+(32, 'PMBWASERDA170622017', 'WSS001', 'WSP001', 1750, 1, 'selesai', '2022-06-17'),
+(33, 'PMBWASERDA170622018', 'WSS001', 'WSP001', 1750, 10, 'selesai', '2022-06-17'),
+(34, 'PMBWASERDA170622019', 'WSS001', 'WSP001', 1750, 5, 'selesai', '2022-06-17');
 
 -- --------------------------------------------------------
 
@@ -2252,7 +2454,34 @@ INSERT INTO `pos_detail_penjualan` (`id`, `invoice`, `id_produk`, `jml`, `harga`
 (15, 'PNJWASERDA010622009', 'WSP003', '1', 2000, 'dalam proses'),
 (16, 'PNJWASERDA010622010', 'WSP001', '10', 2500, 'dalam proses'),
 (17, 'PNJWASERDA010622010', 'WSP003', '5', 2000, 'dalam proses'),
-(18, 'PNJWASERDA010622011', 'WSP003', '10', 2000, 'dalam proses');
+(18, 'PNJWASERDA010622011', 'WSP003', '10', 2000, 'dalam proses'),
+(19, 'PNJWASERDA140622012', NULL, '1', NULL, 'dalam proses'),
+(20, 'PNJWASERDA140622012', 'WSP001', '1', 2500, 'dalam proses'),
+(21, 'PNJWASERDA140622013', 'WSP001', '2', 2500, 'dalam proses'),
+(22, 'PNJWASERDA140622014', 'WSP001', '1', 2500, 'dalam proses'),
+(23, 'PNJWASERDA140622015', 'WSP003', '3', 2000, 'dalam proses'),
+(24, 'PNJWASERDA140622016', 'WSP001', '1', 2500, 'dalam proses'),
+(25, 'PNJWASERDA140622017', 'WSP001', '4', 2500, 'dalam proses'),
+(26, 'PNJWASERDA140622018', 'WSP001', '1', 2500, 'dalam proses'),
+(27, 'PNJWASERDA140622019', 'WSP003', '1', 2000, 'dalam proses'),
+(28, 'PNJWASERDA150622020', 'WSP003', '1', 2000, 'dalam proses'),
+(29, 'PNJWASERDA150622021', 'WSP003', '1', 2000, 'dalam proses'),
+(30, 'PNJWASERDA150622022', 'WSP003', '1', 2000, 'dalam proses'),
+(31, 'PNJWASERDA150622023', 'WSP003', '1', 2000, 'dalam proses'),
+(32, 'PNJWASERDA150622024', 'WSP001', '1', 2500, 'dalam proses'),
+(33, 'PNJWASERDA150622025', 'WSP001', '1', 2500, 'dalam proses'),
+(34, 'PNJWASERDA150622025', 'WSP003', '1', 2000, 'dalam proses'),
+(35, 'PNJWASERDA150622026', 'WSP001', '5', 2500, 'dalam proses'),
+(36, 'PNJWASERDA150622027', 'WSP001', '1', 2500, 'dalam proses'),
+(38, 'PNJWASERDA160622027', 'WSP003', '2', 2000, 'dalam proses'),
+(39, 'PNJWASERDA160622027', 'WSP004', '1', 2000, 'dalam proses'),
+(40, 'PNJWASERDA160622028', 'WSP001', '1', 2500, 'dalam proses'),
+(41, 'PNJWASERDA160622029', 'WSP001', '10', 2500, 'dalam proses'),
+(42, 'PNJWASERDA160622030', NULL, '1', NULL, 'dalam proses'),
+(43, 'PNJWASERDA160622030', 'WSP001', '1', 2500, 'dalam proses'),
+(44, 'PNJWASERDA170622031', 'WSP001', '2', 2500, 'dalam proses'),
+(45, 'PNJWASERDA170622032', 'WSP001', '1', 2500, 'dalam proses'),
+(46, 'PNJWASERDA170622033', 'WSP001', '9', 2500, 'dalam proses');
 
 -- --------------------------------------------------------
 
@@ -2285,7 +2514,15 @@ INSERT INTO `pos_pembelian` (`id`, `invoice`, `total`, `ppn`, `grandtotal`, `tan
 (8, 'PMBWASERDA010622008', 34250, 3425, 37675, '2022-06-01', 'selesai'),
 (9, 'PMBWASERDA010622009', 39000, 3900, 42900, '2022-06-01', 'selesai'),
 (10, 'PMBWASERDA010622010', 175000, 17500, 192500, '2022-06-01', 'selesai'),
-(11, 'PMBWASERDA010622011', 58000, 5800, 63800, '2022-06-01', 'selesai');
+(11, 'PMBWASERDA010622011', 58000, 5800, 63800, '2022-06-01', 'selesai'),
+(12, 'PMBWASERDA150622012', 5000, 550, 5550, '2022-06-15', 'selesai'),
+(13, 'PMBWASERDA150622013', 1750, 193, 1943, '2022-06-15', 'selesai'),
+(14, 'PMBWASERDA150622014', 6750, 743, 7493, '2022-06-15', 'selesai'),
+(15, 'PMBWASERDA160622015', 8750, 963, 9713, '2022-06-16', 'selesai'),
+(16, 'PMBWASERDA170622016', 5250, 578, 5828, '2022-06-17', 'selesai'),
+(17, 'PMBWASERDA170622017', 1750, 193, 1943, '2022-06-17', 'selesai'),
+(18, 'PMBWASERDA170622018', 17500, 1925, 19425, '2022-06-17', 'selesai'),
+(19, 'PMBWASERDA170622019', 8750, 963, 9713, '2022-06-17', 'selesai');
 
 -- --------------------------------------------------------
 
@@ -2306,7 +2543,7 @@ CREATE TABLE `pos_penjualan` (
   `ppn` int(50) DEFAULT NULL,
   `total_trans` int(50) DEFAULT NULL,
   `id_detail_jenis_anggota` int(50) DEFAULT NULL,
-  `date_payment` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_payment` timestamp NULL DEFAULT current_timestamp(),
   `status_kredit` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2325,7 +2562,29 @@ INSERT INTO `pos_penjualan` (`id`, `invoice`, `total`, `status`, `tanggal`, `nam
 (9, 'PNJWASERDA010622008', 2750, 'terbayar', '2022-06-01', 'Test Data', 'tunai', 0, 2750, 250, 2500, 1, '2022-06-01 09:34:58', NULL),
 (10, 'PNJWASERDA010622009', 32450, 'terbayar', '2022-06-01', 'Heni', 'tunai', 0, 32450, 2950, 29500, 1, '2022-06-01 09:47:31', NULL),
 (11, 'PNJWASERDA010622010', 38500, 'kredit', '2022-06-01', 'Siti', 'kredit', 0, 38500, 3500, 35000, 1, '2022-06-01 09:56:33', NULL),
-(12, 'PNJWASERDA010622011', 22000, 'kredit', '2022-06-01', 'Ale', 'kredit', 0, 22000, 2000, 20000, 1, '2022-06-01 10:05:11', NULL);
+(12, 'PNJWASERDA010622011', 22000, 'kredit', '2022-06-01', 'Ale', 'kredit', 0, 22000, 2000, 20000, 1, '2022-06-01 10:05:11', NULL),
+(13, 'PNJWASERDA140622012', 2775, 'terbayar', '2022-06-14', 'Guest', '', 225, 3000, 275, 2500, 2, '2022-06-14 11:36:07', NULL),
+(14, 'PNJWASERDA140622013', 5550, 'terbayar', '2022-06-14', 'Heni', 'tunai', 4450, 10000, 550, 5000, 1, '2022-06-14 15:22:42', NULL),
+(15, 'PNJWASERDA140622014', 2775, 'terbayar', '2022-06-14', 'Guest', '', 225, 3000, 275, 2500, 2, '2022-06-14 15:33:48', NULL),
+(16, 'PNJWASERDA140622015', 6660, 'kredit', '2022-06-14', 'Testing 2', 'kredit', 0, 6660, 660, 6000, 1, '2022-06-14 15:35:09', NULL),
+(17, 'PNJWASERDA140622016', 2775, 'terbayar', '2022-06-14', 'Guest', '', 2225, 5000, 275, 2500, 2, '2022-06-14 15:41:53', NULL),
+(18, 'PNJWASERDA140622017', 11100, 'terbayar', '2022-06-14', 'Guest', '', 8900, 20000, 1100, 10000, 2, '2022-06-14 15:44:52', NULL),
+(19, 'PNJWASERDA140622018', 2775, 'kredit', '2022-06-14', 'Data Test', 'kredit', 0, 2775, 275, 2500, 1, '2022-06-14 15:45:43', NULL),
+(20, 'PNJWASERDA140622019', 2220, 'kredit', '2022-06-14', 'Testing 4', 'kredit', 0, 2220, 220, 2000, 1, '2022-06-14 15:46:16', NULL),
+(21, 'PNJWASERDA150622020', 2220, 'kredit', '2022-06-15', 'Testing 3', 'kredit', 0, 2220, 220, 2000, 1, '2022-06-14 18:02:52', NULL),
+(22, 'PNJWASERDA150622021', 2220, 'terbayar', '2022-06-15', 'Guest', '', 780, 3000, 220, 2000, 2, '2022-06-14 18:03:35', NULL),
+(23, 'PNJWASERDA150622022', 2220, 'terbayar', '2022-06-15', 'Guest', '', 47780, 50000, 220, 2000, 2, '2022-06-14 18:05:54', NULL),
+(24, 'PNJWASERDA150622023', 2220, 'terbayar', '2022-06-15', 'Guest', '', 7780, 10000, 220, 2000, 2, '2022-06-14 18:10:00', NULL),
+(25, 'PNJWASERDA150622024', 2775, 'terbayar', '2022-06-15', 'Guest', '', 7225, 10000, 275, 2500, 2, '2022-06-14 18:10:51', NULL),
+(26, 'PNJWASERDA150622025', 4995, 'terbayar', '2022-06-15', 'Guest', '', 5005, 10000, 495, 4500, 2, '2022-06-15 05:50:20', NULL),
+(27, 'PNJWASERDA150622026', 13875, 'terbayar', '2022-06-15', 'Guest', '', 46125, 60000, 1375, 12500, 2, '2022-06-15 15:57:47', NULL),
+(29, 'PNJWASERDA160622027', 6660, 'terbayar', '2022-06-16', 'Guest', '', 3340, 10000, 660, 6000, 2, '2022-06-16 04:17:42', NULL),
+(30, 'PNJWASERDA160622028', 2775, 'terbayar', '2022-06-16', 'Guest', '', 7225, 10000, 275, 2500, 2, '2022-06-16 04:19:45', NULL),
+(31, 'PNJWASERDA160622029', 27750, 'terbayar', '2022-06-16', 'Aji', '', 2250, 30000, 2750, 25000, 2, '2022-06-16 04:51:38', NULL),
+(32, 'PNJWASERDA160622030', 2775, 'terbayar', '2022-06-16', 'Hendra', '', 7225, 10000, 275, 2500, 2, '2022-06-16 05:16:05', NULL),
+(33, 'PNJWASERDA170622031', 5550, 'terbayar', '2022-06-17', 'Guest', '', 450, 6000, 550, 5000, 2, '2022-06-17 07:10:24', NULL),
+(34, 'PNJWASERDA170622032', 2775, 'terbayar', '2022-06-17', 'Guest', '', 225, 3000, 275, 2500, 2, '2022-06-17 08:53:55', NULL),
+(35, 'PNJWASERDA170622033', 24975, 'terbayar', '2022-06-17', 'Guest', '', 5025, 30000, 2475, 22500, 2, '2022-06-17 11:10:01', NULL);
 
 -- --------------------------------------------------------
 
@@ -2399,7 +2658,7 @@ CREATE TABLE `produksi_ke2` (
 CREATE TABLE `revaluasi` (
   `id` int(11) NOT NULL,
   `id_revaluasi` varchar(255) DEFAULT NULL,
-  `tgl_input` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `tgl_input` timestamp NULL DEFAULT current_timestamp(),
   `id_detail` varchar(255) DEFAULT NULL,
   `bulan_revaluasi` varchar(255) DEFAULT NULL,
   `tarif_revaluasi` int(20) DEFAULT NULL,
@@ -2542,13 +2801,13 @@ CREATE TABLE `target_produksi` (
 CREATE TABLE `tb_cuti` (
   `id` int(20) NOT NULL,
   `id_pengajuan` varchar(50) DEFAULT NULL,
-  `tgl_pengajuan` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `tgl_pengajuan` timestamp NULL DEFAULT current_timestamp(),
   `nip` varchar(50) DEFAULT NULL,
   `jumlah_hari` int(20) DEFAULT NULL,
   `tgl_mulai` date DEFAULT NULL,
   `tgl_selesai` date DEFAULT NULL,
   `alasan_cuti` varchar(50) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT '0'
+  `status` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -2574,7 +2833,7 @@ CREATE TABLE `tb_detail_penggajian` (
   `ptkp` int(20) DEFAULT NULL,
   `tot_penghasilan` int(20) DEFAULT NULL,
   `tot_pengurang` int(20) DEFAULT NULL,
-  `total` int(20) NOT NULL DEFAULT '0'
+  `total` int(20) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -2639,7 +2898,7 @@ CREATE TABLE `tb_lembur` (
   `tgl_pengajuan` date NOT NULL,
   `id_pegawai` varchar(255) NOT NULL,
   `total_jam` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT 0,
   `nominal_perjam` int(20) NOT NULL,
   `total_nominal_lembur` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -2740,7 +2999,9 @@ CREATE TABLE `transaksi_hpp` (
 INSERT INTO `transaksi_hpp` (`id`, `kode_trans`, `tanggal`, `deskripsi`, `nominal`) VALUES
 (1, 'HPP-0001', '2022-01-08', 'Susu Murni', 5000000),
 (2, 'HPP-0002', '2022-01-08', 'Pakan Konsentrat', 2500000),
-(3, 'HPP-0003', '2022-01-10', 'Susu Olahan', 2500000);
+(3, 'HPP-0003', '2022-01-10', 'Susu Olahan', 2500000),
+(4, 'HPP-0004', '2022-06-18', 'Susu Murni', 10000000),
+(5, 'HPP-0005', '2022-06-18', 'Susu Olahan', 5000000);
 
 -- --------------------------------------------------------
 
@@ -2756,6 +3017,13 @@ CREATE TABLE `transaksi_shu` (
   `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `transaksi_shu`
+--
+
+INSERT INTO `transaksi_shu` (`id`, `kode_shu`, `tanggal`, `nominal`, `status`) VALUES
+(1, 'SHU20220001', '2022-06-18', 16155746, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -2765,13 +3033,13 @@ CREATE TABLE `transaksi_shu` (
 CREATE TABLE `trans_peny_rev` (
   `id` int(11) NOT NULL,
   `id_trans` varchar(50) DEFAULT NULL,
-  `tgl_trans` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `tgl_trans` timestamp NULL DEFAULT current_timestamp(),
   `total_peny` int(20) DEFAULT NULL,
   `total_akum` int(20) DEFAULT NULL,
   `nilai_peny` int(20) DEFAULT NULL,
-  `tarif_rev` int(20) DEFAULT '0',
-  `nilai_bk_perbaikan` int(20) DEFAULT '0',
-  `nilai_bk_baru` int(20) DEFAULT '0',
+  `tarif_rev` int(20) DEFAULT 0,
+  `nilai_bk_perbaikan` int(20) DEFAULT 0,
+  `nilai_bk_baru` int(20) DEFAULT 0,
   `id_detail` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2798,8 +3066,8 @@ CREATE TABLE `truck_information` (
   `id_aset` varchar(255) NOT NULL,
   `nama_aset` varchar(255) DEFAULT NULL,
   `id_detail_pembelian` varchar(255) DEFAULT NULL,
-  `is_deleted` tinyint(1) DEFAULT '0',
-  `is_confirm` tinyint(1) DEFAULT '0'
+  `is_deleted` tinyint(1) DEFAULT 0,
+  `is_confirm` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -3135,7 +3403,335 @@ INSERT INTO `waserda_kartu_stok` (`no`, `no_transaksi`, `kode`, `tgl_transaksi`,
 (211, 'PNJWASERDA010622010', 'WSP003', '2022-06-01 09:57:21', '', '0', '0', '0', '0', '0', '0', '5', '2000', '10000'),
 (212, 'PNJWASERDA010622010', 'WSP003', '2022-06-01 09:57:21', '', '0', '0', '0', '0', '0', '0', '15', '2000', '30000'),
 (213, 'PNJWASERDA010622011', 'WSP003', '2022-06-01 10:05:21', '', '0', '0', '0', '10', '2000', '20000', '5', '2000', '10000'),
-(214, 'PNJWASERDA010622011', 'WSP003', '2022-06-01 10:05:21', '', '0', '0', '0', '0', '0', '0', '15', '2000', '30000');
+(214, 'PNJWASERDA010622011', 'WSP003', '2022-06-01 10:05:21', '', '0', '0', '0', '0', '0', '0', '15', '2000', '30000'),
+(215, 'PNJWASERDA140622012', 'WSP001', '2022-06-14 14:31:33', '', '0', '0', '0', '1', '2500', '2500', '12', '2500', '30000'),
+(216, 'PNJWASERDA140622012', 'WSP001', '2022-06-14 14:31:33', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(217, 'PNJWASERDA140622012', 'WSP001', '2022-06-14 14:31:33', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(218, 'PNJWASERDA140622012', 'WSP001', '2022-06-14 14:31:33', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(219, 'PNJWASERDA140622012', 'WSP001', '2022-06-14 14:31:33', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(220, 'PNJWASERDA140622012', 'WSP001', '2022-06-14 14:31:33', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(221, 'PNJWASERDA140622012', 'WSP001', '2022-06-14 14:31:33', '', '0', '0', '0', '0', '0', '0', '11', '2500', '27500'),
+(222, 'PNJWASERDA140622012', 'WSP001', '2022-06-14 14:31:33', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(223, 'PNJWASERDA140622012', 'WSP001', '2022-06-14 14:31:33', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(224, 'PNJWASERDA140622012', 'WSP001', '2022-06-14 14:31:33', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(225, 'PNJWASERDA140622013', 'WSP001', '2022-06-14 15:23:08', '', '0', '0', '0', '2', '2500', '5000', '10', '2500', '25000'),
+(226, 'PNJWASERDA140622013', 'WSP001', '2022-06-14 15:23:08', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(227, 'PNJWASERDA140622013', 'WSP001', '2022-06-14 15:23:08', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(228, 'PNJWASERDA140622013', 'WSP001', '2022-06-14 15:23:08', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(229, 'PNJWASERDA140622013', 'WSP001', '2022-06-14 15:23:08', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(230, 'PNJWASERDA140622013', 'WSP001', '2022-06-14 15:23:08', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(231, 'PNJWASERDA140622013', 'WSP001', '2022-06-14 15:23:08', '', '0', '0', '0', '0', '0', '0', '11', '2500', '27500'),
+(232, 'PNJWASERDA140622013', 'WSP001', '2022-06-14 15:23:08', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(233, 'PNJWASERDA140622013', 'WSP001', '2022-06-14 15:23:08', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(234, 'PNJWASERDA140622013', 'WSP001', '2022-06-14 15:23:08', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(235, 'PNJWASERDA140622014', 'WSP001', '2022-06-14 15:33:58', '', '0', '0', '0', '1', '2500', '2500', '9', '2500', '22500'),
+(236, 'PNJWASERDA140622014', 'WSP001', '2022-06-14 15:33:58', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(237, 'PNJWASERDA140622014', 'WSP001', '2022-06-14 15:33:58', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(238, 'PNJWASERDA140622014', 'WSP001', '2022-06-14 15:33:58', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(239, 'PNJWASERDA140622014', 'WSP001', '2022-06-14 15:33:58', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(240, 'PNJWASERDA140622014', 'WSP001', '2022-06-14 15:33:58', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(241, 'PNJWASERDA140622014', 'WSP001', '2022-06-14 15:33:58', '', '0', '0', '0', '0', '0', '0', '11', '2500', '27500'),
+(242, 'PNJWASERDA140622014', 'WSP001', '2022-06-14 15:33:58', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(243, 'PNJWASERDA140622014', 'WSP001', '2022-06-14 15:33:58', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(244, 'PNJWASERDA140622014', 'WSP001', '2022-06-14 15:33:58', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(245, 'PNJWASERDA140622015', 'WSP003', '2022-06-14 15:35:26', '', '0', '0', '0', '3', '2000', '6000', '2', '2000', '4000'),
+(246, 'PNJWASERDA140622015', 'WSP003', '2022-06-14 15:35:26', '', '0', '0', '0', '0', '0', '0', '15', '2000', '30000'),
+(247, 'PNJWASERDA140622016', 'WSP001', '2022-06-14 15:42:03', '', '0', '0', '0', '1', '2500', '2500', '8', '2500', '20000'),
+(248, 'PNJWASERDA140622016', 'WSP001', '2022-06-14 15:42:03', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(249, 'PNJWASERDA140622016', 'WSP001', '2022-06-14 15:42:03', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(250, 'PNJWASERDA140622016', 'WSP001', '2022-06-14 15:42:03', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(251, 'PNJWASERDA140622016', 'WSP001', '2022-06-14 15:42:03', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(252, 'PNJWASERDA140622016', 'WSP001', '2022-06-14 15:42:03', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(253, 'PNJWASERDA140622016', 'WSP001', '2022-06-14 15:42:03', '', '0', '0', '0', '0', '0', '0', '11', '2500', '27500'),
+(254, 'PNJWASERDA140622016', 'WSP001', '2022-06-14 15:42:03', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(255, 'PNJWASERDA140622016', 'WSP001', '2022-06-14 15:42:03', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(256, 'PNJWASERDA140622016', 'WSP001', '2022-06-14 15:42:03', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(257, 'PNJWASERDA140622017', 'WSP001', '2022-06-14 15:45:00', '', '0', '0', '0', '4', '2500', '10000', '4', '2500', '10000'),
+(258, 'PNJWASERDA140622017', 'WSP001', '2022-06-14 15:45:00', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(259, 'PNJWASERDA140622017', 'WSP001', '2022-06-14 15:45:00', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(260, 'PNJWASERDA140622017', 'WSP001', '2022-06-14 15:45:00', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(261, 'PNJWASERDA140622017', 'WSP001', '2022-06-14 15:45:00', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(262, 'PNJWASERDA140622017', 'WSP001', '2022-06-14 15:45:00', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(263, 'PNJWASERDA140622017', 'WSP001', '2022-06-14 15:45:00', '', '0', '0', '0', '0', '0', '0', '11', '2500', '27500'),
+(264, 'PNJWASERDA140622017', 'WSP001', '2022-06-14 15:45:00', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(265, 'PNJWASERDA140622017', 'WSP001', '2022-06-14 15:45:00', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(266, 'PNJWASERDA140622017', 'WSP001', '2022-06-14 15:45:00', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(267, 'PNJWASERDA140622018', 'WSP001', '2022-06-14 15:45:57', '', '0', '0', '0', '1', '2500', '2500', '3', '2500', '7500'),
+(268, 'PNJWASERDA140622018', 'WSP001', '2022-06-14 15:45:57', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(269, 'PNJWASERDA140622018', 'WSP001', '2022-06-14 15:45:57', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(270, 'PNJWASERDA140622018', 'WSP001', '2022-06-14 15:45:57', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(271, 'PNJWASERDA140622018', 'WSP001', '2022-06-14 15:45:57', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(272, 'PNJWASERDA140622018', 'WSP001', '2022-06-14 15:45:57', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(273, 'PNJWASERDA140622018', 'WSP001', '2022-06-14 15:45:57', '', '0', '0', '0', '0', '0', '0', '11', '2500', '27500'),
+(274, 'PNJWASERDA140622018', 'WSP001', '2022-06-14 15:45:57', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(275, 'PNJWASERDA140622018', 'WSP001', '2022-06-14 15:45:57', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(276, 'PNJWASERDA140622018', 'WSP001', '2022-06-14 15:45:57', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(277, 'PNJWASERDA140622019', 'WSP003', '2022-06-14 15:46:26', '', '0', '0', '0', '1', '2000', '2000', '1', '2000', '2000'),
+(278, 'PNJWASERDA140622019', 'WSP003', '2022-06-14 15:46:26', '', '0', '0', '0', '0', '0', '0', '15', '2000', '30000'),
+(279, 'PNJWASERDA150622020', 'WSP003', '2022-06-14 18:03:05', '', '0', '0', '0', '1', '2000', '2000', '0', '0', '0'),
+(280, 'PNJWASERDA150622020', 'WSP003', '2022-06-14 18:03:05', '', '0', '0', '0', '0', '0', '0', '15', '2000', '30000'),
+(281, 'PNJWASERDA150622021', 'WSP003', '2022-06-14 18:03:54', '', '0', '0', '0', '1', '2000', '2000', '14', '2000', '28000'),
+(282, 'PNJWASERDA150622022', 'WSP003', '2022-06-14 18:06:02', '', '0', '0', '0', '1', '2000', '2000', '13', '2000', '26000'),
+(283, 'PNJWASERDA150622023', 'WSP003', '2022-06-14 18:10:09', '', '0', '0', '0', '1', '2000', '2000', '12', '2000', '24000'),
+(284, 'PNJWASERDA150622024', 'WSP001', '2022-06-14 18:10:59', '', '0', '0', '0', '1', '2500', '2500', '2', '2500', '5000'),
+(285, 'PNJWASERDA150622024', 'WSP001', '2022-06-14 18:10:59', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(286, 'PNJWASERDA150622024', 'WSP001', '2022-06-14 18:10:59', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(287, 'PNJWASERDA150622024', 'WSP001', '2022-06-14 18:10:59', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(288, 'PNJWASERDA150622024', 'WSP001', '2022-06-14 18:10:59', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(289, 'PNJWASERDA150622024', 'WSP001', '2022-06-14 18:10:59', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(290, 'PNJWASERDA150622024', 'WSP001', '2022-06-14 18:10:59', '', '0', '0', '0', '0', '0', '0', '11', '2500', '27500'),
+(291, 'PNJWASERDA150622024', 'WSP001', '2022-06-14 18:10:59', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(292, 'PNJWASERDA150622024', 'WSP001', '2022-06-14 18:10:59', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(293, 'PNJWASERDA150622024', 'WSP001', '2022-06-14 18:10:59', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(294, 'PMBWASERDA150622012', 'WSP001', '2022-06-15 06:23:11', NULL, '2', '1750', '3500', '0', '0', '0', '2', '1750', '3500'),
+(295, 'PMBWASERDA150622012', 'WSP001', '2022-06-15 06:23:11', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(296, 'PMBWASERDA150622012', 'WSP001', '2022-06-15 06:23:11', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(297, 'PMBWASERDA150622012', 'WSP001', '2022-06-15 06:23:11', NULL, '0', '0', '0', '0', '0', '0', '2', '1750', '3500'),
+(298, 'PMBWASERDA150622012', 'WSP001', '2022-06-15 06:23:11', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(299, 'PMBWASERDA150622012', 'WSP001', '2022-06-15 06:23:11', NULL, '0', '0', '0', '0', '0', '0', '12', '1750', '21000'),
+(300, 'PMBWASERDA150622012', 'WSP001', '2022-06-15 06:23:11', NULL, '0', '0', '0', '0', '0', '0', '11', '1750', '19250'),
+(301, 'PMBWASERDA150622012', 'WSP001', '2022-06-15 06:23:11', NULL, '0', '0', '0', '0', '0', '0', '12', '1750', '21000'),
+(302, 'PMBWASERDA150622012', 'WSP001', '2022-06-15 06:23:11', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(303, 'PMBWASERDA150622012', 'WSP001', '2022-06-15 06:23:11', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(304, 'PMBWASERDA150622012', 'WSP001', '2022-06-15 06:23:11', NULL, '0', '0', '0', '0', '0', '0', '2', '1750', '3500'),
+(305, 'PMBWASERDA150622012', 'WSP002', '2022-06-15 06:23:11', NULL, '1', '1500', '1500', '0', '0', '0', '10', '1500', '15000'),
+(306, 'PMBWASERDA150622012', 'WSP002', '2022-06-15 06:23:11', NULL, '0', '0', '0', '0', '0', '0', '1', '1500', '1500'),
+(307, 'PMBWASERDA150622013', 'WSP001', '2022-06-15 06:49:47', NULL, '1', '1750', '1750', '0', '0', '0', '2', '1750', '3500'),
+(308, 'PMBWASERDA150622013', 'WSP001', '2022-06-15 06:49:47', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(309, 'PMBWASERDA150622013', 'WSP001', '2022-06-15 06:49:47', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(310, 'PMBWASERDA150622013', 'WSP001', '2022-06-15 06:49:47', NULL, '0', '0', '0', '0', '0', '0', '2', '1750', '3500'),
+(311, 'PMBWASERDA150622013', 'WSP001', '2022-06-15 06:49:47', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(312, 'PMBWASERDA150622013', 'WSP001', '2022-06-15 06:49:47', NULL, '0', '0', '0', '0', '0', '0', '12', '1750', '21000'),
+(313, 'PMBWASERDA150622013', 'WSP001', '2022-06-15 06:49:47', NULL, '0', '0', '0', '0', '0', '0', '11', '1750', '19250'),
+(314, 'PMBWASERDA150622013', 'WSP001', '2022-06-15 06:49:47', NULL, '0', '0', '0', '0', '0', '0', '12', '1750', '21000'),
+(315, 'PMBWASERDA150622013', 'WSP001', '2022-06-15 06:49:47', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(316, 'PMBWASERDA150622013', 'WSP001', '2022-06-15 06:49:47', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(317, 'PMBWASERDA150622013', 'WSP001', '2022-06-15 06:49:47', NULL, '0', '0', '0', '0', '0', '0', '2', '1750', '3500'),
+(318, 'PMBWASERDA150622013', 'WSP001', '2022-06-15 06:49:47', NULL, '0', '0', '0', '0', '0', '0', '1', '1750', '1750'),
+(319, 'PMBWASERDA150622014', 'WSP001', '2022-06-15 10:17:20', NULL, '3', '1750', '5250', '0', '0', '0', '2', '1750', '3500'),
+(320, 'PMBWASERDA150622014', 'WSP001', '2022-06-15 10:17:20', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(321, 'PMBWASERDA150622014', 'WSP001', '2022-06-15 10:17:20', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(322, 'PMBWASERDA150622014', 'WSP001', '2022-06-15 10:17:20', NULL, '0', '0', '0', '0', '0', '0', '2', '1750', '3500'),
+(323, 'PMBWASERDA150622014', 'WSP001', '2022-06-15 10:17:20', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(324, 'PMBWASERDA150622014', 'WSP001', '2022-06-15 10:17:20', NULL, '0', '0', '0', '0', '0', '0', '12', '1750', '21000'),
+(325, 'PMBWASERDA150622014', 'WSP001', '2022-06-15 10:17:20', NULL, '0', '0', '0', '0', '0', '0', '11', '1750', '19250'),
+(326, 'PMBWASERDA150622014', 'WSP001', '2022-06-15 10:17:20', NULL, '0', '0', '0', '0', '0', '0', '12', '1750', '21000'),
+(327, 'PMBWASERDA150622014', 'WSP001', '2022-06-15 10:17:20', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(328, 'PMBWASERDA150622014', 'WSP001', '2022-06-15 10:17:20', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(329, 'PMBWASERDA150622014', 'WSP001', '2022-06-15 10:17:20', NULL, '0', '0', '0', '0', '0', '0', '2', '1750', '3500'),
+(330, 'PMBWASERDA150622014', 'WSP001', '2022-06-15 10:17:20', NULL, '0', '0', '0', '0', '0', '0', '1', '1750', '1750'),
+(331, 'PMBWASERDA150622014', 'WSP001', '2022-06-15 10:17:20', NULL, '0', '0', '0', '0', '0', '0', '3', '1750', '5250'),
+(332, 'PMBWASERDA150622014', 'WSP002', '2022-06-15 10:17:20', NULL, '1', '1500', '1500', '0', '0', '0', '10', '1500', '15000'),
+(333, 'PMBWASERDA150622014', 'WSP002', '2022-06-15 10:17:20', NULL, '0', '0', '0', '0', '0', '0', '1', '1500', '1500'),
+(334, 'PMBWASERDA150622014', 'WSP002', '2022-06-15 10:17:20', NULL, '0', '0', '0', '0', '0', '0', '1', '1500', '1500'),
+(335, 'PNJWASERDA150622025', 'WSP001', '2022-06-15 13:58:58', '', '0', '0', '0', '1', '2500', '2500', '1', '2500', '2500'),
+(336, 'PNJWASERDA150622025', 'WSP001', '2022-06-15 13:58:58', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(337, 'PNJWASERDA150622025', 'WSP001', '2022-06-15 13:58:58', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(338, 'PNJWASERDA150622025', 'WSP001', '2022-06-15 13:58:58', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(339, 'PNJWASERDA150622025', 'WSP001', '2022-06-15 13:58:58', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(340, 'PNJWASERDA150622025', 'WSP001', '2022-06-15 13:58:58', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(341, 'PNJWASERDA150622025', 'WSP001', '2022-06-15 13:58:58', '', '0', '0', '0', '0', '0', '0', '11', '2500', '27500'),
+(342, 'PNJWASERDA150622025', 'WSP001', '2022-06-15 13:58:58', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(343, 'PNJWASERDA150622025', 'WSP001', '2022-06-15 13:58:58', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(344, 'PNJWASERDA150622025', 'WSP001', '2022-06-15 13:58:58', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(345, 'PNJWASERDA150622025', 'WSP001', '2022-06-15 13:58:58', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(346, 'PNJWASERDA150622025', 'WSP001', '2022-06-15 13:58:58', '', '0', '0', '0', '0', '0', '0', '1', '2500', '2500'),
+(347, 'PNJWASERDA150622025', 'WSP001', '2022-06-15 13:58:58', '', '0', '0', '0', '0', '0', '0', '3', '2500', '7500'),
+(348, 'PNJWASERDA150622025', 'WSP003', '2022-06-15 13:58:58', '', '0', '0', '0', '1', '2000', '2000', '11', '2000', '22000'),
+(349, 'PNJWASERDA150622026', 'WSP001', '2022-06-15 15:58:16', '', '0', '0', '0', '5', '2500', '12500', '0', '0', '0'),
+(350, 'PNJWASERDA150622026', 'WSP001', '2022-06-15 15:58:16', '', '0', '0', '0', '0', '0', '0', '6', '2500', '15000'),
+(351, 'PNJWASERDA150622026', 'WSP001', '2022-06-15 15:58:16', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(352, 'PNJWASERDA150622026', 'WSP001', '2022-06-15 15:58:16', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(353, 'PNJWASERDA150622026', 'WSP001', '2022-06-15 15:58:16', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(354, 'PNJWASERDA150622026', 'WSP001', '2022-06-15 15:58:16', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(355, 'PNJWASERDA150622026', 'WSP001', '2022-06-15 15:58:16', '', '0', '0', '0', '0', '0', '0', '11', '2500', '27500'),
+(356, 'PNJWASERDA150622026', 'WSP001', '2022-06-15 15:58:16', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(357, 'PNJWASERDA150622026', 'WSP001', '2022-06-15 15:58:16', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(358, 'PNJWASERDA150622026', 'WSP001', '2022-06-15 15:58:16', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(359, 'PNJWASERDA150622026', 'WSP001', '2022-06-15 15:58:16', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(360, 'PNJWASERDA150622026', 'WSP001', '2022-06-15 15:58:16', '', '0', '0', '0', '0', '0', '0', '1', '2500', '2500'),
+(361, 'PNJWASERDA150622026', 'WSP001', '2022-06-15 15:58:16', '', '0', '0', '0', '0', '0', '0', '3', '2500', '7500'),
+(362, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:57:37', '', '0', '0', '0', '1', '2500', '2500', '5', '2500', '12500'),
+(363, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:57:37', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(364, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:57:37', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(365, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:57:37', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(366, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:57:37', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(367, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:57:37', '', '0', '0', '0', '0', '0', '0', '11', '2500', '27500'),
+(368, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:57:37', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(369, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:57:37', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(370, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:57:37', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(371, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:57:37', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(372, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:57:37', '', '0', '0', '0', '0', '0', '0', '1', '2500', '2500'),
+(373, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:57:37', '', '0', '0', '0', '0', '0', '0', '3', '2500', '7500'),
+(374, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:58:19', '', '0', '0', '0', '0', '0', '0', '4', '2500', '10000'),
+(375, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:58:19', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(376, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:58:19', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(377, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:58:19', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(378, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:58:19', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(379, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:58:19', '', '0', '0', '0', '0', '0', '0', '11', '2500', '27500'),
+(380, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:58:19', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(381, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:58:19', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(382, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:58:19', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(383, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:58:19', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(384, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:58:19', '', '0', '0', '0', '0', '0', '0', '1', '2500', '2500'),
+(385, 'PNJWASERDA160622027', 'WSP001', '2022-06-16 03:58:19', '', '0', '0', '0', '0', '0', '0', '3', '2500', '7500'),
+(386, 'PNJWASERDA160622027', 'WSP003', '2022-06-16 03:59:07', '', '0', '0', '0', '2', '2000', '4000', '9', '2000', '18000'),
+(387, 'PNJWASERDA160622027', 'WSP003', '2022-06-16 04:01:45', '', '0', '0', '0', '0', '0', '0', '7', '2000', '14000'),
+(388, 'PNJWASERDA160622027', 'WSP003', '2022-06-16 04:02:15', '', '0', '0', '0', '0', '0', '0', '5', '2000', '10000'),
+(389, 'PNJWASERDA160622027', 'WSP003', '2022-06-16 04:03:21', '', '0', '0', '0', '0', '0', '0', '3', '2000', '6000'),
+(390, 'PNJWASERDA160622027', 'WSP003', '2022-06-16 04:19:06', '', '0', '0', '0', '0', '0', '0', '1', '2000', '2000'),
+(391, 'PNJWASERDA160622027', 'WSP004', '2022-06-16 04:19:06', '', '0', '0', '0', '1', '2000', '2000', '94', '2000', '188000'),
+(392, 'PNJWASERDA160622027', 'WSP004', '2022-06-16 04:19:06', '', '0', '0', '0', '0', '0', '0', '12', '2000', '24000'),
+(393, 'PNJWASERDA160622028', 'WSP001', '2022-06-16 04:19:51', '', '0', '0', '0', '1', '2500', '2500', '3', '2500', '7500'),
+(394, 'PNJWASERDA160622028', 'WSP001', '2022-06-16 04:19:51', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(395, 'PNJWASERDA160622028', 'WSP001', '2022-06-16 04:19:51', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(396, 'PNJWASERDA160622028', 'WSP001', '2022-06-16 04:19:51', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(397, 'PNJWASERDA160622028', 'WSP001', '2022-06-16 04:19:51', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(398, 'PNJWASERDA160622028', 'WSP001', '2022-06-16 04:19:51', '', '0', '0', '0', '0', '0', '0', '11', '2500', '27500'),
+(399, 'PNJWASERDA160622028', 'WSP001', '2022-06-16 04:19:51', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(400, 'PNJWASERDA160622028', 'WSP001', '2022-06-16 04:19:51', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(401, 'PNJWASERDA160622028', 'WSP001', '2022-06-16 04:19:51', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(402, 'PNJWASERDA160622028', 'WSP001', '2022-06-16 04:19:51', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(403, 'PNJWASERDA160622028', 'WSP001', '2022-06-16 04:19:51', '', '0', '0', '0', '0', '0', '0', '1', '2500', '2500'),
+(404, 'PNJWASERDA160622028', 'WSP001', '2022-06-16 04:19:51', '', '0', '0', '0', '0', '0', '0', '3', '2500', '7500'),
+(405, 'PNJWASERDA160622029', 'WSP001', '2022-06-16 04:52:07', '', '0', '0', '0', '10', '2500', '25000', '0', '0', '0'),
+(406, 'PNJWASERDA160622029', 'WSP001', '2022-06-16 04:52:07', '', '0', '0', '0', '0', '0', '0', '3', '2500', '7500'),
+(407, 'PNJWASERDA160622029', 'WSP001', '2022-06-16 04:52:07', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(408, 'PNJWASERDA160622029', 'WSP001', '2022-06-16 04:52:07', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(409, 'PNJWASERDA160622029', 'WSP001', '2022-06-16 04:52:07', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(410, 'PNJWASERDA160622029', 'WSP001', '2022-06-16 04:52:07', '', '0', '0', '0', '0', '0', '0', '11', '2500', '27500'),
+(411, 'PNJWASERDA160622029', 'WSP001', '2022-06-16 04:52:07', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(412, 'PNJWASERDA160622029', 'WSP001', '2022-06-16 04:52:07', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(413, 'PNJWASERDA160622029', 'WSP001', '2022-06-16 04:52:07', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(414, 'PNJWASERDA160622029', 'WSP001', '2022-06-16 04:52:07', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(415, 'PNJWASERDA160622029', 'WSP001', '2022-06-16 04:52:07', '', '0', '0', '0', '0', '0', '0', '1', '2500', '2500'),
+(416, 'PNJWASERDA160622029', 'WSP001', '2022-06-16 04:52:07', '', '0', '0', '0', '0', '0', '0', '3', '2500', '7500'),
+(417, 'PNJWASERDA160622030', 'WSP001', '2022-06-16 05:16:22', '', '0', '0', '0', '1', '2500', '2500', '2', '2500', '5000'),
+(418, 'PNJWASERDA160622030', 'WSP001', '2022-06-16 05:16:22', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(419, 'PNJWASERDA160622030', 'WSP001', '2022-06-16 05:16:22', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(420, 'PNJWASERDA160622030', 'WSP001', '2022-06-16 05:16:22', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000');
+INSERT INTO `waserda_kartu_stok` (`no`, `no_transaksi`, `kode`, `tgl_transaksi`, `keterangan`, `unit_in`, `harga_in`, `total_in`, `unit_out`, `harga_out`, `total_out`, `unit_total`, `harga_total`, `total`) VALUES
+(421, 'PNJWASERDA160622030', 'WSP001', '2022-06-16 05:16:22', '', '0', '0', '0', '0', '0', '0', '11', '2500', '27500'),
+(422, 'PNJWASERDA160622030', 'WSP001', '2022-06-16 05:16:22', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(423, 'PNJWASERDA160622030', 'WSP001', '2022-06-16 05:16:22', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(424, 'PNJWASERDA160622030', 'WSP001', '2022-06-16 05:16:22', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(425, 'PNJWASERDA160622030', 'WSP001', '2022-06-16 05:16:22', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(426, 'PNJWASERDA160622030', 'WSP001', '2022-06-16 05:16:22', '', '0', '0', '0', '0', '0', '0', '1', '2500', '2500'),
+(427, 'PNJWASERDA160622030', 'WSP001', '2022-06-16 05:16:22', '', '0', '0', '0', '0', '0', '0', '3', '2500', '7500'),
+(428, 'PMBWASERDA160622015', 'WSP001', '2022-06-16 07:11:26', NULL, '5', '1750', '8750', '0', '0', '0', '2', '1750', '3500'),
+(429, 'PMBWASERDA160622015', 'WSP001', '2022-06-16 07:11:26', NULL, '0', '0', '0', '0', '0', '0', '2', '1750', '3500'),
+(430, 'PMBWASERDA160622015', 'WSP001', '2022-06-16 07:11:26', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(431, 'PMBWASERDA160622015', 'WSP001', '2022-06-16 07:11:26', NULL, '0', '0', '0', '0', '0', '0', '12', '1750', '21000'),
+(432, 'PMBWASERDA160622015', 'WSP001', '2022-06-16 07:11:26', NULL, '0', '0', '0', '0', '0', '0', '11', '1750', '19250'),
+(433, 'PMBWASERDA160622015', 'WSP001', '2022-06-16 07:11:26', NULL, '0', '0', '0', '0', '0', '0', '12', '1750', '21000'),
+(434, 'PMBWASERDA160622015', 'WSP001', '2022-06-16 07:11:26', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(435, 'PMBWASERDA160622015', 'WSP001', '2022-06-16 07:11:26', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(436, 'PMBWASERDA160622015', 'WSP001', '2022-06-16 07:11:26', NULL, '0', '0', '0', '0', '0', '0', '2', '1750', '3500'),
+(437, 'PMBWASERDA160622015', 'WSP001', '2022-06-16 07:11:26', NULL, '0', '0', '0', '0', '0', '0', '1', '1750', '1750'),
+(438, 'PMBWASERDA160622015', 'WSP001', '2022-06-16 07:11:26', NULL, '0', '0', '0', '0', '0', '0', '3', '1750', '5250'),
+(439, 'PMBWASERDA160622015', 'WSP001', '2022-06-16 07:11:26', NULL, '0', '0', '0', '0', '0', '0', '5', '1750', '8750'),
+(440, 'PMBWASERDA170622016', 'WSP001', '2022-06-17 04:53:48', NULL, '3', '1750', '5250', '0', '0', '0', '2', '1750', '3500'),
+(441, 'PMBWASERDA170622016', 'WSP001', '2022-06-17 04:53:48', NULL, '0', '0', '0', '0', '0', '0', '2', '1750', '3500'),
+(442, 'PMBWASERDA170622016', 'WSP001', '2022-06-17 04:53:48', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(443, 'PMBWASERDA170622016', 'WSP001', '2022-06-17 04:53:48', NULL, '0', '0', '0', '0', '0', '0', '12', '1750', '21000'),
+(444, 'PMBWASERDA170622016', 'WSP001', '2022-06-17 04:53:48', NULL, '0', '0', '0', '0', '0', '0', '11', '1750', '19250'),
+(445, 'PMBWASERDA170622016', 'WSP001', '2022-06-17 04:53:48', NULL, '0', '0', '0', '0', '0', '0', '12', '1750', '21000'),
+(446, 'PMBWASERDA170622016', 'WSP001', '2022-06-17 04:53:48', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(447, 'PMBWASERDA170622016', 'WSP001', '2022-06-17 04:53:48', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(448, 'PMBWASERDA170622016', 'WSP001', '2022-06-17 04:53:48', NULL, '0', '0', '0', '0', '0', '0', '2', '1750', '3500'),
+(449, 'PMBWASERDA170622016', 'WSP001', '2022-06-17 04:53:48', NULL, '0', '0', '0', '0', '0', '0', '1', '1750', '1750'),
+(450, 'PMBWASERDA170622016', 'WSP001', '2022-06-17 04:53:48', NULL, '0', '0', '0', '0', '0', '0', '3', '1750', '5250'),
+(451, 'PMBWASERDA170622016', 'WSP001', '2022-06-17 04:53:48', NULL, '0', '0', '0', '0', '0', '0', '5', '1750', '8750'),
+(452, 'PMBWASERDA170622016', 'WSP001', '2022-06-17 04:53:48', NULL, '0', '0', '0', '0', '0', '0', '3', '1750', '5250'),
+(453, 'PMBWASERDA170622017', 'WSP001', '2022-06-17 05:00:12', NULL, '1', '1750', '1750', '0', '0', '0', '2', '1750', '3500'),
+(454, 'PMBWASERDA170622017', 'WSP001', '2022-06-17 05:00:12', NULL, '0', '0', '0', '0', '0', '0', '2', '1750', '3500'),
+(455, 'PMBWASERDA170622017', 'WSP001', '2022-06-17 05:00:12', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(456, 'PMBWASERDA170622017', 'WSP001', '2022-06-17 05:00:12', NULL, '0', '0', '0', '0', '0', '0', '12', '1750', '21000'),
+(457, 'PMBWASERDA170622017', 'WSP001', '2022-06-17 05:00:12', NULL, '0', '0', '0', '0', '0', '0', '11', '1750', '19250'),
+(458, 'PMBWASERDA170622017', 'WSP001', '2022-06-17 05:00:12', NULL, '0', '0', '0', '0', '0', '0', '12', '1750', '21000'),
+(459, 'PMBWASERDA170622017', 'WSP001', '2022-06-17 05:00:12', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(460, 'PMBWASERDA170622017', 'WSP001', '2022-06-17 05:00:12', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(461, 'PMBWASERDA170622017', 'WSP001', '2022-06-17 05:00:12', NULL, '0', '0', '0', '0', '0', '0', '2', '1750', '3500'),
+(462, 'PMBWASERDA170622017', 'WSP001', '2022-06-17 05:00:12', NULL, '0', '0', '0', '0', '0', '0', '1', '1750', '1750'),
+(463, 'PMBWASERDA170622017', 'WSP001', '2022-06-17 05:00:12', NULL, '0', '0', '0', '0', '0', '0', '3', '1750', '5250'),
+(464, 'PMBWASERDA170622017', 'WSP001', '2022-06-17 05:00:12', NULL, '0', '0', '0', '0', '0', '0', '5', '1750', '8750'),
+(465, 'PMBWASERDA170622017', 'WSP001', '2022-06-17 05:00:12', NULL, '0', '0', '0', '0', '0', '0', '3', '1750', '5250'),
+(466, 'PMBWASERDA170622017', 'WSP001', '2022-06-17 05:00:12', NULL, '0', '0', '0', '0', '0', '0', '1', '1750', '1750'),
+(467, 'PMBWASERDA170622018', 'WSP001', '2022-06-17 07:06:23', NULL, '10', '1750', '17500', '0', '0', '0', '2', '1750', '3500'),
+(468, 'PMBWASERDA170622018', 'WSP001', '2022-06-17 07:06:23', NULL, '0', '0', '0', '0', '0', '0', '2', '1750', '3500'),
+(469, 'PMBWASERDA170622018', 'WSP001', '2022-06-17 07:06:23', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(470, 'PMBWASERDA170622018', 'WSP001', '2022-06-17 07:06:23', NULL, '0', '0', '0', '0', '0', '0', '12', '1750', '21000'),
+(471, 'PMBWASERDA170622018', 'WSP001', '2022-06-17 07:06:23', NULL, '0', '0', '0', '0', '0', '0', '11', '1750', '19250'),
+(472, 'PMBWASERDA170622018', 'WSP001', '2022-06-17 07:06:23', NULL, '0', '0', '0', '0', '0', '0', '12', '1750', '21000'),
+(473, 'PMBWASERDA170622018', 'WSP001', '2022-06-17 07:06:23', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(474, 'PMBWASERDA170622018', 'WSP001', '2022-06-17 07:06:23', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(475, 'PMBWASERDA170622018', 'WSP001', '2022-06-17 07:06:23', NULL, '0', '0', '0', '0', '0', '0', '2', '1750', '3500'),
+(476, 'PMBWASERDA170622018', 'WSP001', '2022-06-17 07:06:23', NULL, '0', '0', '0', '0', '0', '0', '1', '1750', '1750'),
+(477, 'PMBWASERDA170622018', 'WSP001', '2022-06-17 07:06:23', NULL, '0', '0', '0', '0', '0', '0', '3', '1750', '5250'),
+(478, 'PMBWASERDA170622018', 'WSP001', '2022-06-17 07:06:23', NULL, '0', '0', '0', '0', '0', '0', '5', '1750', '8750'),
+(479, 'PMBWASERDA170622018', 'WSP001', '2022-06-17 07:06:23', NULL, '0', '0', '0', '0', '0', '0', '3', '1750', '5250'),
+(480, 'PMBWASERDA170622018', 'WSP001', '2022-06-17 07:06:23', NULL, '0', '0', '0', '0', '0', '0', '1', '1750', '1750'),
+(481, 'PMBWASERDA170622018', 'WSP001', '2022-06-17 07:06:23', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(482, 'PNJWASERDA170622031', 'WSP001', '2022-06-17 07:12:24', '', '0', '0', '0', '2', '2500', '5000', '0', '0', '0'),
+(483, 'PNJWASERDA170622031', 'WSP001', '2022-06-17 07:12:24', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(484, 'PNJWASERDA170622031', 'WSP001', '2022-06-17 07:12:24', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(485, 'PNJWASERDA170622031', 'WSP001', '2022-06-17 07:12:24', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(486, 'PNJWASERDA170622031', 'WSP001', '2022-06-17 07:12:24', '', '0', '0', '0', '0', '0', '0', '11', '2500', '27500'),
+(487, 'PNJWASERDA170622031', 'WSP001', '2022-06-17 07:12:24', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(488, 'PNJWASERDA170622031', 'WSP001', '2022-06-17 07:12:24', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(489, 'PNJWASERDA170622031', 'WSP001', '2022-06-17 07:12:24', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(490, 'PNJWASERDA170622031', 'WSP001', '2022-06-17 07:12:24', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(491, 'PNJWASERDA170622031', 'WSP001', '2022-06-17 07:12:24', '', '0', '0', '0', '0', '0', '0', '1', '2500', '2500'),
+(492, 'PNJWASERDA170622031', 'WSP001', '2022-06-17 07:12:24', '', '0', '0', '0', '0', '0', '0', '3', '2500', '7500'),
+(493, 'PNJWASERDA170622031', 'WSP001', '2022-06-17 07:12:24', '', '0', '0', '0', '0', '0', '0', '5', '2500', '12500'),
+(494, 'PNJWASERDA170622031', 'WSP001', '2022-06-17 07:12:24', '', '0', '0', '0', '0', '0', '0', '3', '2500', '7500'),
+(495, 'PNJWASERDA170622031', 'WSP001', '2022-06-17 07:12:24', '', '0', '0', '0', '0', '0', '0', '1', '2500', '2500'),
+(496, 'PNJWASERDA170622031', 'WSP001', '2022-06-17 07:12:24', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(497, 'PMBWASERDA170622019', 'WSP001', '2022-06-17 08:22:17', NULL, '5', '1750', '8750', '0', '0', '0', '2', '1750', '3500'),
+(498, 'PMBWASERDA170622019', 'WSP001', '2022-06-17 08:22:17', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(499, 'PMBWASERDA170622019', 'WSP001', '2022-06-17 08:22:17', NULL, '0', '0', '0', '0', '0', '0', '12', '1750', '21000'),
+(500, 'PMBWASERDA170622019', 'WSP001', '2022-06-17 08:22:17', NULL, '0', '0', '0', '0', '0', '0', '11', '1750', '19250'),
+(501, 'PMBWASERDA170622019', 'WSP001', '2022-06-17 08:22:17', NULL, '0', '0', '0', '0', '0', '0', '12', '1750', '21000'),
+(502, 'PMBWASERDA170622019', 'WSP001', '2022-06-17 08:22:17', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(503, 'PMBWASERDA170622019', 'WSP001', '2022-06-17 08:22:17', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(504, 'PMBWASERDA170622019', 'WSP001', '2022-06-17 08:22:17', NULL, '0', '0', '0', '0', '0', '0', '2', '1750', '3500'),
+(505, 'PMBWASERDA170622019', 'WSP001', '2022-06-17 08:22:17', NULL, '0', '0', '0', '0', '0', '0', '1', '1750', '1750'),
+(506, 'PMBWASERDA170622019', 'WSP001', '2022-06-17 08:22:17', NULL, '0', '0', '0', '0', '0', '0', '3', '1750', '5250'),
+(507, 'PMBWASERDA170622019', 'WSP001', '2022-06-17 08:22:17', NULL, '0', '0', '0', '0', '0', '0', '5', '1750', '8750'),
+(508, 'PMBWASERDA170622019', 'WSP001', '2022-06-17 08:22:17', NULL, '0', '0', '0', '0', '0', '0', '3', '1750', '5250'),
+(509, 'PMBWASERDA170622019', 'WSP001', '2022-06-17 08:22:17', NULL, '0', '0', '0', '0', '0', '0', '1', '1750', '1750'),
+(510, 'PMBWASERDA170622019', 'WSP001', '2022-06-17 08:22:17', NULL, '0', '0', '0', '0', '0', '0', '10', '1750', '17500'),
+(511, 'PMBWASERDA170622019', 'WSP001', '2022-06-17 08:22:17', NULL, '0', '0', '0', '0', '0', '0', '5', '1750', '8750'),
+(512, 'PNJWASERDA170622032', 'WSP001', '2022-06-17 08:54:04', '', '0', '0', '0', '1', '2500', '2500', '1', '2500', '2500'),
+(513, 'PNJWASERDA170622032', 'WSP001', '2022-06-17 08:54:04', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(514, 'PNJWASERDA170622032', 'WSP001', '2022-06-17 08:54:04', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(515, 'PNJWASERDA170622032', 'WSP001', '2022-06-17 08:54:04', '', '0', '0', '0', '0', '0', '0', '11', '2500', '27500'),
+(516, 'PNJWASERDA170622032', 'WSP001', '2022-06-17 08:54:04', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(517, 'PNJWASERDA170622032', 'WSP001', '2022-06-17 08:54:04', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(518, 'PNJWASERDA170622032', 'WSP001', '2022-06-17 08:54:04', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(519, 'PNJWASERDA170622032', 'WSP001', '2022-06-17 08:54:04', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(520, 'PNJWASERDA170622032', 'WSP001', '2022-06-17 08:54:04', '', '0', '0', '0', '0', '0', '0', '1', '2500', '2500'),
+(521, 'PNJWASERDA170622032', 'WSP001', '2022-06-17 08:54:04', '', '0', '0', '0', '0', '0', '0', '3', '2500', '7500'),
+(522, 'PNJWASERDA170622032', 'WSP001', '2022-06-17 08:54:04', '', '0', '0', '0', '0', '0', '0', '5', '2500', '12500'),
+(523, 'PNJWASERDA170622032', 'WSP001', '2022-06-17 08:54:04', '', '0', '0', '0', '0', '0', '0', '3', '2500', '7500'),
+(524, 'PNJWASERDA170622032', 'WSP001', '2022-06-17 08:54:04', '', '0', '0', '0', '0', '0', '0', '1', '2500', '2500'),
+(525, 'PNJWASERDA170622032', 'WSP001', '2022-06-17 08:54:04', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(526, 'PNJWASERDA170622032', 'WSP001', '2022-06-17 08:54:04', '', '0', '0', '0', '0', '0', '0', '5', '2500', '12500'),
+(527, 'PNJWASERDA170622033', 'WSP001', '2022-06-17 11:10:09', '', '0', '0', '0', '9', '2500', '22500', '0', '0', '0'),
+(528, 'PNJWASERDA170622033', 'WSP001', '2022-06-17 11:10:09', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(529, 'PNJWASERDA170622033', 'WSP001', '2022-06-17 11:10:09', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(530, 'PNJWASERDA170622033', 'WSP001', '2022-06-17 11:10:09', '', '0', '0', '0', '0', '0', '0', '11', '2500', '27500'),
+(531, 'PNJWASERDA170622033', 'WSP001', '2022-06-17 11:10:09', '', '0', '0', '0', '0', '0', '0', '12', '2500', '30000'),
+(532, 'PNJWASERDA170622033', 'WSP001', '2022-06-17 11:10:09', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(533, 'PNJWASERDA170622033', 'WSP001', '2022-06-17 11:10:09', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(534, 'PNJWASERDA170622033', 'WSP001', '2022-06-17 11:10:09', '', '0', '0', '0', '0', '0', '0', '2', '2500', '5000'),
+(535, 'PNJWASERDA170622033', 'WSP001', '2022-06-17 11:10:09', '', '0', '0', '0', '0', '0', '0', '1', '2500', '2500'),
+(536, 'PNJWASERDA170622033', 'WSP001', '2022-06-17 11:10:09', '', '0', '0', '0', '0', '0', '0', '3', '2500', '7500'),
+(537, 'PNJWASERDA170622033', 'WSP001', '2022-06-17 11:10:09', '', '0', '0', '0', '0', '0', '0', '5', '2500', '12500'),
+(538, 'PNJWASERDA170622033', 'WSP001', '2022-06-17 11:10:09', '', '0', '0', '0', '0', '0', '0', '3', '2500', '7500'),
+(539, 'PNJWASERDA170622033', 'WSP001', '2022-06-17 11:10:09', '', '0', '0', '0', '0', '0', '0', '1', '2500', '2500'),
+(540, 'PNJWASERDA170622033', 'WSP001', '2022-06-17 11:10:09', '', '0', '0', '0', '0', '0', '0', '10', '2500', '25000'),
+(541, 'PNJWASERDA170622033', 'WSP001', '2022-06-17 11:10:09', '', '0', '0', '0', '0', '0', '0', '5', '2500', '12500');
 
 -- --------------------------------------------------------
 
@@ -3193,7 +3789,37 @@ INSERT INTO `waserda_log_stok` (`no_trans`, `id_produk`, `jml_baris_sblmnya`) VA
 ('PNJWASERDA010622009', 'WSP003', 4),
 ('PNJWASERDA010622010', 'WSP001', 10),
 ('PNJWASERDA010622010', 'WSP003', 4),
-('PNJWASERDA010622011', 'WSP003', 3);
+('PNJWASERDA010622011', 'WSP003', 3),
+('PNJWASERDA140622012', 'WSP001', 10),
+('PNJWASERDA140622013', 'WSP001', 10),
+('PNJWASERDA140622014', 'WSP001', 10),
+('PNJWASERDA140622015', 'WSP003', 2),
+('PNJWASERDA140622016', 'WSP001', 10),
+('PNJWASERDA140622017', 'WSP001', 10),
+('PNJWASERDA140622018', 'WSP001', 10),
+('PNJWASERDA140622019', 'WSP003', 2),
+('PNJWASERDA150622020', 'WSP003', 2),
+('PNJWASERDA150622021', 'WSP003', 1),
+('PNJWASERDA150622022', 'WSP003', 1),
+('PNJWASERDA150622023', 'WSP003', 1),
+('PNJWASERDA150622024', 'WSP001', 10),
+('PNJWASERDA150622025', 'WSP001', 13),
+('PNJWASERDA150622025', 'WSP003', 1),
+('PNJWASERDA150622026', 'WSP001', 13),
+('PNJWASERDA160622027', 'WSP001', 12),
+('PNJWASERDA160622027', 'WSP001', 12),
+('PNJWASERDA160622027', 'WSP003', 1),
+('PNJWASERDA160622027', 'WSP003', 1),
+('PNJWASERDA160622027', 'WSP003', 1),
+('PNJWASERDA160622027', 'WSP003', 1),
+('PNJWASERDA160622027', 'WSP003', 1),
+('PNJWASERDA160622027', 'WSP004', 2),
+('PNJWASERDA160622028', 'WSP001', 12),
+('PNJWASERDA160622029', 'WSP001', 12),
+('PNJWASERDA160622030', 'WSP001', 11),
+('PNJWASERDA170622031', 'WSP001', 15),
+('PNJWASERDA170622032', 'WSP001', 15),
+('PNJWASERDA170622033', 'WSP001', 15);
 
 -- --------------------------------------------------------
 
@@ -3207,7 +3833,7 @@ CREATE TABLE `waserda_log_transaksi` (
   `jenis_transaksi` varchar(50) DEFAULT NULL,
   `jumlah` int(11) DEFAULT NULL,
   `stok_akhir` int(11) DEFAULT NULL,
-  `date_input` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+  `date_input` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -3215,12 +3841,12 @@ CREATE TABLE `waserda_log_transaksi` (
 --
 
 INSERT INTO `waserda_log_transaksi` (`id`, `id_produk`, `jenis_transaksi`, `jumlah`, `stok_akhir`, `date_input`) VALUES
-(1, 'WSP001', 'Stok Masuk', 100, 13, '2022-05-27 15:29:20'),
-(2, 'WSP001', 'Stok Masuk', 10, 10, '2022-05-28 13:28:13'),
-(3, 'WSP001', 'Stok Masuk', 10, 10, '2022-06-01 08:08:27'),
-(4, 'WSP001', 'Stok Masuk', 2, 2, '2022-06-01 08:10:02'),
+(1, 'WSP001', 'Stok Masuk', 100, 0, '2022-05-27 15:29:20'),
+(2, 'WSP001', 'Stok Masuk', 10, 0, '2022-05-28 13:28:13'),
+(3, 'WSP001', 'Stok Masuk', 10, 0, '2022-06-01 08:08:27'),
+(4, 'WSP001', 'Stok Masuk', 2, 0, '2022-06-01 08:10:02'),
 (5, 'WSP003', 'Stok Masuk', 11, 0, '2022-06-01 08:10:02'),
-(6, 'WSP001', 'Stok Masuk', 10, 10, '2022-06-01 08:14:48'),
+(6, 'WSP001', 'Stok Masuk', 10, 2, '2022-06-01 08:14:48'),
 (7, 'WSP003', 'Stok Masuk', 12, 0, '2022-06-01 08:14:48'),
 (8, 'WSP001', 'Stok Masuk', 12, 12, '2022-06-01 08:35:44'),
 (9, 'WSP003', 'Stok Masuk', 11, 0, '2022-06-01 08:35:44'),
@@ -3229,11 +3855,21 @@ INSERT INTO `waserda_log_transaksi` (`id`, `id_produk`, `jenis_transaksi`, `juml
 (12, 'WSP001', 'Stok Masuk', 12, 12, '2022-06-01 08:49:57'),
 (13, 'WSP003', 'Stok Masuk', 12, 0, '2022-06-01 08:49:57'),
 (14, 'WSP001', 'Stok Masuk', 10, 10, '2022-06-01 08:50:42'),
-(15, 'WSP003', 'Stok Masuk', 5, 5, '2022-06-01 08:50:42'),
-(16, 'WSP004', 'Stok Masuk', 100, 95, '2022-06-01 08:50:42'),
+(15, 'WSP003', 'Stok Masuk', 5, 0, '2022-06-01 08:50:42'),
+(16, 'WSP004', 'Stok Masuk', 100, 94, '2022-06-01 08:50:42'),
 (17, 'WSP001', 'Stok Masuk', 10, 10, '2022-06-01 08:55:09'),
-(18, 'WSP003', 'Stok Masuk', 15, 15, '2022-06-01 08:55:09'),
-(19, 'WSP004', 'Stok Masuk', 12, 12, '2022-06-01 08:55:09');
+(18, 'WSP003', 'Stok Masuk', 15, 1, '2022-06-01 08:55:09'),
+(19, 'WSP004', 'Stok Masuk', 12, 12, '2022-06-01 08:55:09'),
+(20, 'WSP001', 'Stok Masuk', 2, 2, '2022-06-15 06:23:11'),
+(21, 'WSP002', 'Stok Masuk', 1, 1, '2022-06-15 06:23:11'),
+(22, 'WSP001', 'Stok Masuk', 1, 1, '2022-06-15 06:49:47'),
+(23, 'WSP001', 'Stok Masuk', 3, 3, '2022-06-15 10:17:20'),
+(24, 'WSP002', 'Stok Masuk', 1, 1, '2022-06-15 10:17:20'),
+(25, 'WSP001', 'Stok Masuk', 5, 5, '2022-06-16 07:11:26'),
+(26, 'WSP001', 'Stok Masuk', 3, 3, '2022-06-17 04:53:48'),
+(27, 'WSP001', 'Stok Masuk', 1, 1, '2022-06-17 05:00:12'),
+(28, 'WSP001', 'Stok Masuk', 10, 10, '2022-06-17 07:06:23'),
+(29, 'WSP001', 'Stok Masuk', 5, 5, '2022-06-17 08:22:17');
 
 -- --------------------------------------------------------
 
@@ -3249,8 +3885,8 @@ CREATE TABLE `waserda_pembayaran_kredit` (
   `nama` varchar(50) DEFAULT NULL,
   `jenis_anggota` varchar(50) DEFAULT NULL,
   `nominal` int(11) DEFAULT NULL,
-  `date_payment` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` tinyint(4) DEFAULT '0'
+  `date_payment` timestamp NULL DEFAULT current_timestamp(),
+  `status` tinyint(4) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -3259,7 +3895,12 @@ CREATE TABLE `waserda_pembayaran_kredit` (
 
 INSERT INTO `waserda_pembayaran_kredit` (`id`, `id_pembayaran`, `invoice`, `tanggal`, `nama`, `jenis_anggota`, `nominal`, `date_payment`, `status`) VALUES
 (1, NULL, 'PNJWASERDA010622010', NULL, 'Siti', 'pegawai', 38500, '2022-06-01 09:57:21', 0),
-(2, NULL, 'PNJWASERDA010622011', NULL, 'Ale', 'pegawai', 22000, '2022-06-01 10:05:21', 0);
+(2, NULL, 'PNJWASERDA010622011', NULL, 'Ale', 'pegawai', 22000, '2022-06-01 10:05:21', 0),
+(3, NULL, 'PNJWASERDA140622015', NULL, 'Testing 2', 'pegawai', 6660, '2022-06-14 15:35:26', 0),
+(4, NULL, 'PNJWASERDA140622018', NULL, 'Data Test', 'pegawai', 2775, '2022-06-14 15:45:57', 0),
+(5, NULL, 'PNJWASERDA140622019', NULL, 'Testing 4', 'pegawai', 2220, '2022-06-14 15:46:26', 0),
+(6, NULL, 'PNJWASERDA150622020', NULL, 'Testing 3', 'pegawai', 2220, '2022-06-14 18:03:05', 0),
+(7, NULL, 'PNJWASERDA160622027', NULL, 'Testing 5', 'pegawai', 4440, '2022-06-16 03:59:06', 0);
 
 -- --------------------------------------------------------
 
@@ -3276,6 +3917,13 @@ CREATE TABLE `waserda_pengajuan_barang` (
   `status` varchar(50) DEFAULT 'menunggu approval'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `waserda_pengajuan_barang`
+--
+
+INSERT INTO `waserda_pengajuan_barang` (`id`, `tanggal_pengajuan`, `nama_barang`, `jumlah`, `deskripsi`, `status`) VALUES
+(1, '2022-06-15 01:25:00', 'Indomie Goreng', 23, 'aaayam', 'Approved');
+
 -- --------------------------------------------------------
 
 --
@@ -3289,7 +3937,7 @@ CREATE TABLE `waserda_pengeluaran_beban` (
   `no_coa` varchar(250) DEFAULT NULL,
   `keterangan` varchar(250) DEFAULT NULL,
   `nominal` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -3308,9 +3956,9 @@ CREATE TABLE `waserda_produk` (
   `harga_satuan` int(11) DEFAULT NULL,
   `harga_jual` int(50) NOT NULL,
   `satuan_produk` varchar(50) DEFAULT NULL,
-  `jml` int(11) DEFAULT '0',
-  `status` tinyint(4) DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+  `jml` int(11) DEFAULT 0,
+  `status` tinyint(4) DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -3318,10 +3966,10 @@ CREATE TABLE `waserda_produk` (
 --
 
 INSERT INTO `waserda_produk` (`id`, `kode`, `barcode_id`, `id_kategori`, `id_supplier_produk`, `nama_produk`, `harga_satuan`, `harga_jual`, `satuan_produk`, `jml`, `status`, `created_at`) VALUES
-(1, 'WSP001', '8886008101053', 'WSK001', 'WSS001', 'Indomie Goreng', 1750, 2500, 'pcs', 100, 1, '2021-10-15 15:38:31'),
-(2, 'WSP002', NULL, 'WSK001', 'WSS001', 'Indomie Goreng Ayam Bawang', 1500, 2000, 'pcs', 10, 0, '2021-10-15 15:38:31'),
-(3, 'WSP003', NULL, 'WSK001', 'WSS002', 'Indomie Goreng Rendang', 1500, 2000, 'pcs', 20, 1, '2021-10-15 15:38:31'),
-(4, 'WSP004', NULL, 'WSK001', 'WSS003', 'Indomie Goreng Aceh', 1500, 2000, 'pcs', 107, 1, '2021-10-15 15:38:31'),
+(1, 'WSP001', '8886008101053', 'WSK001', 'WSS001', 'Indomie Goreng', 1750, 2500, 'pcs', 87, 1, '2021-10-15 15:38:31'),
+(2, 'WSP002', NULL, 'WSK001', 'WSS001', 'Indomie Goreng Ayam Bawang', 1500, 2000, 'pcs', 12, 0, '2021-10-15 15:38:31'),
+(3, 'WSP003', NULL, 'WSK001', 'WSS002', 'Indomie Goreng Rendang', 1500, 2000, 'pcs', 1, 1, '2021-10-15 15:38:31'),
+(4, 'WSP004', NULL, 'WSK001', 'WSS003', 'Indomie Goreng Aceh', 1500, 2000, 'pcs', 106, 1, '2021-10-15 15:38:31'),
 (5, 'WSP005', '8995102800448', 'WSK001', 'WSS001', 'Indomie Rebus', 1500, 2000, 'pcs', 0, 1, '2021-10-15 15:38:31'),
 (6, 'WSP006', NULL, 'WSK002', 'WSS004', 'teh sisri', 15000, 2000, 'kilo', 0, 1, '2021-10-16 16:02:42'),
 (7, 'WSP007', '007', 'WSK003', 'WSS001', 'Pulpen', 3000, 3500, 'pcs', 0, 1, '2021-11-16 14:29:13'),
@@ -3340,8 +3988,8 @@ CREATE TABLE `waserda_supplier` (
   `nama` varchar(255) DEFAULT NULL,
   `alamat` varchar(255) DEFAULT NULL,
   `no_telp` varchar(20) DEFAULT NULL,
-  `status` tinyint(4) DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+  `status` tinyint(4) DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -3550,6 +4198,12 @@ ALTER TABLE `kartu_stok_bp`
 --
 ALTER TABLE `kartu_stok_penj`
   ADD PRIMARY KEY (`no`);
+
+--
+-- Indexes for table `laporan_kartu_stock`
+--
+ALTER TABLE `laporan_kartu_stock`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `log_bayar_pinjaman`
@@ -3919,13 +4573,13 @@ ALTER TABLE `alokasi_shu`
 -- AUTO_INCREMENT for table `buku_kas_kecil`
 --
 ALTER TABLE `buku_kas_kecil`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
 -- AUTO_INCREMENT for table `buku_pembantu_kas`
 --
 ALTER TABLE `buku_pembantu_kas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `coa`
@@ -3961,7 +4615,7 @@ ALTER TABLE `detail_pembelian`
 -- AUTO_INCREMENT for table `detail_pembelian_bb`
 --
 ALTER TABLE `detail_pembelian_bb`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT for table `detail_pembelian_bp`
@@ -4003,7 +4657,7 @@ ALTER TABLE `detail_target_produksi`
 -- AUTO_INCREMENT for table `detail_transaksi_shu`
 --
 ALTER TABLE `detail_transaksi_shu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `jadwal_shift`
@@ -4021,7 +4675,7 @@ ALTER TABLE `jenis_penjualan`
 -- AUTO_INCREMENT for table `jurnal`
 --
 ALTER TABLE `jurnal`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `kartu_stok_bp`
@@ -4034,6 +4688,12 @@ ALTER TABLE `kartu_stok_bp`
 --
 ALTER TABLE `kartu_stok_penj`
   MODIFY `no` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `laporan_kartu_stock`
+--
+ALTER TABLE `laporan_kartu_stock`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `log_bayar_pinjaman`
@@ -4051,7 +4711,7 @@ ALTER TABLE `log_confirm_truck`
 -- AUTO_INCREMENT for table `log_pembayaran_susu`
 --
 ALTER TABLE `log_pembayaran_susu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `log_penyusutan`
@@ -4081,13 +4741,13 @@ ALTER TABLE `pegawai`
 -- AUTO_INCREMENT for table `pembagian_shu`
 --
 ALTER TABLE `pembagian_shu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pembelian_bb`
 --
 ALTER TABLE `pembelian_bb`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `penerimaan_kas`
@@ -4105,7 +4765,7 @@ ALTER TABLE `pengajuan_bonus`
 -- AUTO_INCREMENT for table `pengajuan_jurnal`
 --
 ALTER TABLE `pengajuan_jurnal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT for table `pengeluaran_kas`
@@ -4129,31 +4789,31 @@ ALTER TABLE `pinjaman`
 -- AUTO_INCREMENT for table `pnj_susu`
 --
 ALTER TABLE `pnj_susu`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `pos_detail_pembelian`
 --
 ALTER TABLE `pos_detail_pembelian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `pos_detail_penjualan`
 --
 ALTER TABLE `pos_detail_penjualan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `pos_pembelian`
 --
 ALTER TABLE `pos_pembelian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `pos_penjualan`
 --
 ALTER TABLE `pos_penjualan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `revaluasi`
@@ -4225,13 +4885,13 @@ ALTER TABLE `tps`
 -- AUTO_INCREMENT for table `transaksi_hpp`
 --
 ALTER TABLE `transaksi_hpp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `transaksi_shu`
 --
 ALTER TABLE `transaksi_shu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `trans_peny_rev`
@@ -4267,7 +4927,7 @@ ALTER TABLE `waserda_jenis_anggota`
 -- AUTO_INCREMENT for table `waserda_kartu_stok`
 --
 ALTER TABLE `waserda_kartu_stok`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=542;
 
 --
 -- AUTO_INCREMENT for table `waserda_kategori`
@@ -4279,19 +4939,19 @@ ALTER TABLE `waserda_kategori`
 -- AUTO_INCREMENT for table `waserda_log_transaksi`
 --
 ALTER TABLE `waserda_log_transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `waserda_pembayaran_kredit`
 --
 ALTER TABLE `waserda_pembayaran_kredit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `waserda_pengajuan_barang`
 --
 ALTER TABLE `waserda_pengajuan_barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `waserda_pengeluaran_beban`
