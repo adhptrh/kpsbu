@@ -18,6 +18,18 @@
                     <?php echo $this->session->flashdata('notif_ubah'); ?>
                 </div>
                 <div class="table-responsive">
+                    <form action="<?= base_url("c_transaksi/multiple_status_pengajuan") ?>" method="post">
+                    <?php
+                    foreach ($list as $k=>$v) {
+                        if ($v->status == "pending") {
+                        ?>
+                            <input type="hidden" id="kode_<?= $k ?>" name="kode[]" value="<?= $v->kode?>">
+                            <input type="hidden" id="tanggal_<?= $k ?>" name="tanggal[]" value="<?= $v->tanggal?>">
+                            <input type="hidden" id="nominal_<?= $k ?>" name="nominal[]" value="<?= $v->nominal?>">
+                        <?php
+                        }
+                    }
+                    ?>
                     <table class="table table-bordered" id="datatable">
                         <thead>
                             <tr>
@@ -39,7 +51,9 @@
                                         <?php
                                         if ($value->status == "pending") {
                                         ?>
-                                            <input type="checkbox" checked>
+                                            <input type="checkbox" id="kode_k_<?= $key ?>" onchange="if (document.getElementById('kode_k_<?= $key ?>').checked) {document.getElementById('kode_<?= $key ?>').name = 'kode[]';document.getElementById('tanggal_<?= $key ?>').name = 'tanggal[]';document.getElementById('nominal_<?= $key ?>').name = 'nominal[]';return} document.getElementById('kode_<?= $key ?>').name = ''; document.getElementById('tanggal_<?= $key ?>').name = ''; document.getElementById('nominal_<?= $key ?>').name = '' " checked>
+                                            <script>
+                                            </script>
                                         <?php
                                         }
                                         ?>
@@ -61,6 +75,7 @@
                         </tbody>
                     </table>
                     <button class="btn btn-primary">Verifikasi</button>
+                    </form>
                 </div>
             </div>
         </div>

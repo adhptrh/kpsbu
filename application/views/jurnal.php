@@ -66,10 +66,10 @@
 							echo "<tr>
 						<td class=text-center>$no</td>
 								";
-						}
-						if ($tgl_jurnal == $lastdate) {
-							echo "<td></td>";
-						} else {
+							}
+							if ($tgl_jurnal == $lastdate) {
+								echo "<td></td>";
+							} else {
 							echo "<td>$tgl_jurnal</td>";
 							$lastdate = $tgl_jurnal;
 						}

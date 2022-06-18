@@ -80,7 +80,7 @@ class m_keuangan extends CI_model
 		$this->db->select('a.no_coa, tgl_jurnal, nama_coa, a.posisi_dr_cr, nominal, id_jurnal, SUM(nominal) as sumnominal');
 		$this->db->from('jurnal a');
 		$this->db->join('coa b', 'b.no_coa = a.no_coa');
-		$this->db->order_by('no');
+		$this->db->order_by('tgl_jurnal');
 		$this->db->group_by('no_coa,tgl_jurnal,posisi_dr_cr');
 		$query = $this->db->get();
 		return $query->result_array();
