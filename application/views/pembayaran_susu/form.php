@@ -40,7 +40,7 @@
 					<div class="form-group row" id="simpanan_manasuka">
 						<label class="col-sm-1">Simpanan Masuka</label>	
 						<div class="col-sm-3">
-							<input type="text" name="manasuka" class="form-control" value="<?= $manasuka ?>" id="manasuka" readonly>
+							<input type="text" name="manasuka" class="form-control" value="<?= format_rp($manasuka) ?>" id="manasuka" readonly>
 						</div>
 					</div>
 
@@ -102,7 +102,22 @@
 			$("#id_peternak").change(function() {
 				var id_peternak = $("#id_peternak").val()
 				var notif = '';
-
+				function formatRupiah(angka, prefix){
+					var number_string = angka.replace(/[^,\d]/g, '').toString(),
+					split   		= number_string.split(','),
+					sisa     		= split[0].length % 3,
+					rupiah     		= split[0].substr(0, sisa),
+					ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+		
+					// tambahkan titik jika yang di input sudah menjadi angka ribuan
+					if(ribuan){
+						separator = sisa ? '.' : '';
+						rupiah += separator + ribuan.join('.');
+					}
+		
+					rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+					return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+				}
 				$.ajax({
 					url : "<?php echo site_url('c_transaksi/coba');?>",
 	                method : "POST",
@@ -205,10 +220,10 @@
 	                        } else {
 								// var rumus = 500000
 	                        	$("#susu").val(total);
-								$("#manasuka").val(manasuka);
-								$("#hasil_pembayaran").val(simpanan_wajib);
+								$("#manasuka").val(formatRupiah(manasuka,"Rp. "));
+								$("#hasil_pembayaran").val(formatRupiah(simpanan_wajib,"Rp. "));
 								$("#total_trans_susu").val(rumus);
-								$("#tot_sus").val(total_trans_susu);
+								$("#tot_sus").val(formatRupiah(total_trans_susu,"Rp. "));
 								
 								if (!sisa_pinjaman) {
 									$("#kalo_ngutang").hide();

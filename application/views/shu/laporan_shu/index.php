@@ -71,11 +71,11 @@
                             <th class="text-right"><?= format_rp($laba_kotor)?></th>
                             <td></td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <td>Pendapatan lain-lain</td>
                             <td class="text-right"><?= format_rp($pend_lain)?></td>
                             <td></td>
-                        </tr>
+                        </tr> -->
                         <tr>
                             <th>Total penjualan</th>
                             <td></td>

@@ -164,7 +164,7 @@
                         <li><a href="<?php echo site_url(); ?>c_transaksi/simpanan_hr">Simpanan Hari Raya</a></li>
                         <li><a href="<?php echo site_url(); ?>c_transaksi/pinjaman">Pinjaman</a></li>
                         <li><a href="<?= base_url('penjualan/susu')?>">Penjualan Susu</a></li>
-                        <li><a href="<?= base_url('penjualan/pakan_konsentrat')?>">Penjualan Pakan Konsentrat</a></li>
+                        <!-- <li><a href="<?= base_url('penjualan/pakan_konsentrat')?>">Penjualan Pakan Konsentrat</a></li> -->
                         <li><a href="<?= base_url('penjualan/pengolahan_susu')?>">Penjualan Pengolahan Susu</a></li>
 
                         <!-- sarah -->
@@ -247,13 +247,13 @@
                         <li><a href="<?php echo site_url(); ?>c_keuangan/lap_pembp">Laporan Pembelian Bahan Penolong</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/lap_pemby">Laporan Pembayaran Beban</a></li>
                         <li><a href="<?php echo site_url(); ?>Laporan/laporan_penjualan_shu">Laporan Penjualan SHU</a></li>
-                        <li><a href="<?= base_url('laporan_kartu_stock') ?>">Laporan Kartu Stock</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/lap_penjs">Laporan Penjualan IPS</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/lap_penjt">Laporan Penjualan Toko</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/lap_bp_ips">Laporan Harga Pokok Produksi IPS</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/lap_bp_olahan">Laporan Harga Pokok Produksi Olahan</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/hpp_ips">Laporan Harga Pokok Penjualan IPS</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/hpp_toko">Laporan Harga Pokok Penjualan Toko</a></li>
+                        <li><a href="<?= base_url('laporan_kartu_stock') ?>">Kartu Stock</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/lap_ks_bb">Kartu Persediaan Bahan Baku</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/lap_ks_bp">Kartu Persediaan Bahan Penolong</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/lap_ks_prod1">Kartu Persediaan Produk IPS</a></li>
@@ -282,18 +282,18 @@
                         <!-- <li><a href="<?php echo site_url(); ?>c_keuangan/lap_pembp">Laporan Pembelian Bahan Penolong</a></li> -->
                         <li><a href="<?php echo site_url(); ?>c_keuangan/lap_ks_bp">Kartu Persediaan Bahan Penolong</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/lap_bp_olahan">Laporan Harga Pokok Produksi Olahan</a></li>
-
-                    <?php
+                        
+                        <?php
                     elseif ($this->session->userdata('level') == "penjualan") :
-                    ?>
+                        ?>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/lap_penjs">Laporan Penjualan IPS</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/lap_penjt">Laporan Penjualan Toko</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/lap_pemby">Laporan Pembayaran Beban</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/lap_ks_prod1">Kartu Persediaan Produk IPS</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/lap_ks_prod">Kartu Persediaan Produk Toko</a></li>
-                    <?php
+                        <?php
                     elseif ($this->session->userdata('level') == "keuangan3") :
-                    ?>
+                        ?>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/view_jurnal">Jurnal</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/bukubesar">Buku Besar</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/lap_penjs">Laporan Penjualan IPS</a></li>
