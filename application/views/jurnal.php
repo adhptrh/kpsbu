@@ -55,17 +55,23 @@
 					$no = 0;
 					$total = 0;
 					$total2 = 0;
+					$lastdate = "";
 					foreach ($jurnal as $data) {
 						$no++;
 						$tgl_jurnal = substr($data['tgl_jurnal'], 0, 10);
 						if ($data['posisi_dr_cr'] == 'd') {
 							echo "<tr>
-						<td class=text-center>$no</td>
-						<td>" . $tgl_jurnal . "</td>";
+						<td class=text-center>$no</td>";
 						} else {
 							echo "<tr>
 						<td class=text-center>$no</td>
-								<td></td>";
+								";
+						}
+						if ($tgl_jurnal == $lastdate) {
+							echo "<td></td>";
+						} else {
+							echo "<td>$tgl_jurnal</td>";
+							$lastdate = $tgl_jurnal;
 						}
 						if ($data['posisi_dr_cr'] == 'd') {
 							echo "

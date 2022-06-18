@@ -267,7 +267,7 @@
                         <!-- laporan siti -->
                         <li><a href="<?= base_url('Laporan/laporan_penjualan_waserda')?>">Laporan Penjualan Waserda</a></li>
                         <li><a href="<?= base_url('Laporan/laporan_pmb_waserda')?>">Laporan Pembelian Waserda</a></li>
-                        <li><a href="<?= base_url('Laporan/kartu_stok')?>">Kartu Stok</a></li>
+                        <!-- <li><a href="<?= base_url('Laporan/kartu_stok')?>">Kartu Stok</a></li> -->
                         <li><a href="<?= base_url('Laporan/laba_rugi')?>">Laporan Laba Rugi</a></li>
 
                     <?php
