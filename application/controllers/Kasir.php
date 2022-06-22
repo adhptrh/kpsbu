@@ -64,7 +64,7 @@
         
         if (is_numeric($barang)) {
             # code...
-            $produk = $this->db->query("SELECT * FROM waserda_produk WHERE barcode_id = '$barang' ")->row();
+            $produk = $this->db->query("SELECT * FROM waserda_produk WHERE barcode_id = '$barang' AND jml > 0")->row();
             
             if(empty($produk->barcode_id)) 
             {
@@ -75,7 +75,7 @@
             }
         } else {
             # code...
-            $produk = $this->db->query("SELECT * FROM waserda_produk WHERE nama_produk = '$barang' ")->row();
+            $produk = $this->db->query("SELECT * FROM waserda_produk WHERE nama_produk = '$barang' AND jml > 0")->row();
             // print_r($produk);exit;
         }
 
@@ -218,7 +218,7 @@
             'ppn' => $ppn,
             'total_trans' => $total_trans,
             'id_detail_jenis_anggota' => $jenis,
-            'status' => $status
+            'status' => $status,
         ];
         // print_r($kode);exit;
         $this->db->where('invoice', $kode);
@@ -257,6 +257,7 @@
         $this->db->where('invoice', $kode);
         $this->db->where('id_produk !=', NULL);
         $cek_invoice = $this->db->get('pos_detail_penjualan')->result();
+        var_dump($cek_invoice);
 
         $where = [];
         $bb = [];
@@ -447,7 +448,10 @@
         }
 
         $this->session->set_flashdata('notif', '<div class="alert alert-success">Pembayaran berhasil.</div>');
-        $this->session->set_flashdata('invoice', $kode);
+        
+        if ($tipe != "kredit") {
+            $this->session->set_flashdata('invoice', $kode);
+        }
 
         redirect('Kasir');
     }

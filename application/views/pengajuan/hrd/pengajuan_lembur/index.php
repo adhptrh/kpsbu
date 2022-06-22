@@ -20,7 +20,7 @@
                 </div>
                 <div style="margin-bottom: 20px;">
                     <strong>Note :<br></strong>
-                    <p>*untuk lembur pegawai, maksimal 6 jam <br></p>
+                    <p>*untuk lembur pegawai, maksimal 6 jam<br></p>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="datatable">
@@ -48,11 +48,20 @@
                                 <td><?= $value->nama?></td>
                                 <td><?= $value->total_jam?></td>
                                 <td class="text-center">
-                                    <?= $value->status == 0 ? '<span class="label label-warning">Menunggu persetujuan</span>' : (($value->status == 1) ? '<span class="label label-success">Sudah disetujui</span>' : '<span class="label label-danger">Ditolak</span>'); ?>
+                                    <?= ($value->status == 0 && ($role != 'atasan')) ? '<span class="label label-warning">Menunggu persetujuan atasan</span>' : 
+                                    (($value->status == 0 && $role == "atasan") ? '<span class="label label-warning">Menunggu persetujuan</span>' : 
+                                    (($value->status == 1 && $role == 'atasan') ? '<span class="label label-warning">Menunggu persetujuan personalia</span>' : 
+                                    (($value->status == 1 && ($role == "admin" || $role == "personalia")) ? '<span class="label label-warning">Menunggu persetujuan</span>':
+                                    (($value->status == 1 && ($role != 'atasan')) ? '<span class="label label-warning">Menunggu persetujuan personalia</span>':
+                                    (($value->status == 2) ? '<span class="label label-danger">Ditolak</span>':'<span class="label label-success">Diterima</span>'))))); ?>
                                 </td>
                                 <?php if ($role != 'pegawai') { ?>
                                 <td class="text-center">
-                                    <?php if ($value->status == 0) { ?>
+                                    <?php if ($value->status == 0 && $role == "atasan") { ?>
+                                        <button type="button" class="btn btn-default btn-xs setuju" data-id="<?= $value->id_pengajuan?>" data-nominal="<?= $value->total_nominal_lembur?>" onclick="confirm('Anda yakin?')"><i class="fa fa-check"></i></button>
+                                        <button type="button" class="btn btn-default btn-xs tolak" data-id="<?= $value->id_pengajuan?>" onclick="confirm('Data yang ditolak tidak dapat dikembalikan, anda yakin?')"><i class="fa fa-times"></i></button>
+                                    <?php } ?>
+                                    <?php if ($value->status == 1 && ($role == "admin" || $role == 'personalia')) { ?>
                                         <button type="button" class="btn btn-default btn-xs setuju" data-id="<?= $value->id_pengajuan?>" data-nominal="<?= $value->total_nominal_lembur?>" onclick="confirm('Anda yakin?')"><i class="fa fa-check"></i></button>
                                         <button type="button" class="btn btn-default btn-xs tolak" data-id="<?= $value->id_pengajuan?>" onclick="confirm('Data yang ditolak tidak dapat dikembalikan, anda yakin?')"><i class="fa fa-times"></i></button>
                                     <?php } ?>

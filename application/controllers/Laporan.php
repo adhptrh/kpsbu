@@ -16,10 +16,20 @@ class Laporan extends CI_Controller
         $this->template->load('template', 'buku_pembantu_kas', $data);
     }
 
+    public function buku_pembantu_bank()
+    {
+        $list = $this->db->get('buku_pembantu_bank')->result();
+        $data = [
+            'list' => $list,
+        ];
+        $this->template->load('template', 'buku_pembantu_bank', $data);
+    }
+
     public function laporan_arus_kas()
     {
-        $total_d = $this->db->query("select sum(nominal) as total from buku_pembantu_kas where posisi_dr_cr = 'd' ")->row()->total;
-        $total_k = $this->db->query("select sum(nominal) as total from buku_pembantu_kas where posisi_dr_cr = 'k' ")->row()->total;
+        $bulantahun = $this->input->get("bulantahun") ?? date('Y-m');
+        $total_d = $this->db->query("select sum(nominal) as total from buku_pembantu_kas where posisi_dr_cr = 'd' AND tanggal LIKE '".$bulantahun."%' ")->row()->total;
+        $total_k = $this->db->query("select sum(nominal) as total from buku_pembantu_kas where posisi_dr_cr = 'k' AND tanggal LIKE '".$bulantahun."%' ")->row()->total;
         $kas_diterima = $total_d - $total_k;
 
         $pmb = $this->db->query("SELECT
@@ -42,6 +52,7 @@ class Laporan extends CI_Controller
             'kas_diterima' => $kas_diterima,
             'pmb' => $pmb,
             'beban' => $beban,
+            'bulantahun' => $bulantahun
         ];
         $this->template->load('template', 'arus_kas', $data);
     }

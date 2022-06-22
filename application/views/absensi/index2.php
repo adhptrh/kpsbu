@@ -35,6 +35,7 @@
             $.ajax({
                 url:"<?= base_url('Absensi/save/')?>"+rfid,
                 success:function(response){
+                    console.log(response)
                     data = JSON.parse(response);
                     console.log(custom_notification('success','Berhasil Absen'));
                     // console.log(data)

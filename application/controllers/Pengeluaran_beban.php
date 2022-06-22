@@ -42,6 +42,44 @@
         ];
         $this->db->insert("pengajuan_jurnal", $pengajuan);
 
+        $pengajuan_jurnal = [
+            'status' => 'selesai'
+         ];
+         $this->db->where('kode', $id_pengeluaran);
+         $this->db->update('pengajuan_jurnal', $pengajuan_jurnal);
+         
+         $this->db->where('id_pengeluaran', $id_pengeluaran);
+         $coa = $this->db->get('waserda_pengeluaran_beban')->row()->no_coa;
+         // jurnal
+         $beban = [
+            'id_jurnal' => $id_pengeluaran, 
+            'tgl_jurnal' => date("Y-m-d"), 
+            'no_coa' => $coa, 
+            'posisi_dr_cr' => 'd', 
+            'nominal' => $nominal, 
+         ];
+         $this->db->insert('jurnal', $beban);
+
+         $kas = [
+            'id_jurnal' => $id_pengeluaran, 
+            'tgl_jurnal' => date("Y-m-d"), 
+            'no_coa' => 1111, 
+            'posisi_dr_cr' => 'k', 
+            'nominal' => $nominal, 
+         ];
+         $this->db->insert('jurnal', $kas);
+
+         // buku pembantu kas
+         $bpk = [
+            'id_ref' => $id_pengeluaran, 
+            'tanggal' => date("Y-m-d"), 
+            'nominal' => $nominal, 
+            'kd_coa' => 1111, 
+            'posisi_dr_cr' => 'k', 
+            'keterangan' => 'Pengeluaran Beban', 
+         ];
+         $this->db->insert('buku_pembantu_kas', $bpk);
+
         redirect('Pengeluaran_beban');
     }
 

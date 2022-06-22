@@ -7,7 +7,7 @@ class Lembur extends CI_Controller
         $level = $this->session->userdata('level');
         $nip = $this->session->userdata('nip');
         $lembur = '';
-        if ($level == 'admin') {
+        if ($level == 'admin' || $level == 'atasan') {
             $lembur = $this->db->query("SELECT a.*, b.nama
             FROM tb_lembur a 
             left JOIN pegawai b ON b.nip = a.id_pegawai
@@ -56,19 +56,27 @@ class Lembur extends CI_Controller
     {
         $id_pengajuan = $this->input->post('id_pengajuan');
         $total = $this->input->post('nominal');
-        
-        $this->db->set('status', 1);
-        $this->db->where('id_pengajuan', $id_pengajuan);
-        $this->db->update('tb_lembur');
 
-        // kirim ke db pengajuan jurnal 
-        $pengajuan = [
-            'kode' => $id_pengajuan,
-            'tanggal' => date('Ymd'),
-            'nominal' => $total,
-            'jenis' => 'pengajuan lembur',
-        ];
-        $this->db->insert("pengajuan_jurnal", $pengajuan);
+        $level = $this->session->userdata('level');
+        
+        if ($level == 'atasan') {
+            $this->db->set('status', 1);
+            $this->db->where('id_pengajuan', $id_pengajuan);
+            $this->db->update('tb_lembur');
+        } elseif ($level == 'personalia' || $level == "admin") {
+            $this->db->set('status', 3);
+            $this->db->where('id_pengajuan', $id_pengajuan);
+            $this->db->update('tb_lembur');
+            // kirim ke db pengajuan jurnal 
+            $pengajuan = [
+                'kode' => $id_pengajuan,
+                'tanggal' => date('Ymd'),
+                'nominal' => $total,
+                'jenis' => 'pengajuan lembur',
+                'status' => '',
+            ];
+            $this->db->insert("pengajuan_jurnal", $pengajuan);
+        }
         
     }
 

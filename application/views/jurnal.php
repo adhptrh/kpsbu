@@ -25,18 +25,18 @@
 			</div>
 
 			<br>
-				<center>
-					<b>
-						<div style="font-size: 25px">KPSBU Lembang</div>
-						<div style="font-size: 20px">Jurnal</div>
-						<?php if (isset($awal, $akhir)) { ?>
-							<div style="font-size: 15px">
-								Periode <?php echo $awal ?> s/d <?php echo $akhir;
-								?> 
-								</div><?php
-															} ?>
-					</b>
-				</center>
+			<center>
+				<b>
+					<div style="font-size: 25px">KPSBU Lembang</div>
+					<div style="font-size: 20px">Jurnal</div>
+					<?php if (isset($awal, $akhir)) { ?>
+						<div style="font-size: 15px">
+							Periode <?php echo $awal ?> s/d <?php echo $akhir;
+															?>
+						</div><?php
+							} ?>
+				</b>
+			</center>
 
 			<table id="datatable" class="table table-striped table-bordered table-hover jambo_table">
 				<thead>
@@ -55,24 +55,41 @@
 					$no = 0;
 					$total = 0;
 					$total2 = 0;
-					$lastdate = "";
+
+					$stack = [];
+					$stackitem = [];
+					$kondisi = false;
+					$posisi_sebelumnya = '';
+					foreach ($jurnal as $data) {
+						$tgl_jurnal = substr($data['tgl_jurnal'], 0, 10);
+						if ($posisi_sebelumnya != 'd' && $data['posisi_dr_cr'] == 'd') {
+							$kondisi = !$kondisi;
+						}
+						if ($kondisi == 1) {
+							array_push($stackitem, $data);
+						} else {
+							array_push($stack,$stackitem);
+							$stackitem = [];
+							array_push($stackitem, $data);
+						}
+						$posisi_sebelumnya = $data['posisi_dr_cr'];
+
+					}
+
+						// sistem jurnal lama
 					foreach ($jurnal as $data) {
 						$no++;
 						$tgl_jurnal = substr($data['tgl_jurnal'], 0, 10);
 						if ($data['posisi_dr_cr'] == 'd') {
 							echo "<tr>
 						<td class=text-center>$no</td>";
+						echo "<td>$tgl_jurnal</td>";
 						} else {
 							echo "<tr>
 						<td class=text-center>$no</td>
+						<td></td>
 								";
 							}
-							if ($tgl_jurnal == $lastdate) {
-								echo "<td></td>";
-							} else {
-							echo "<td>$tgl_jurnal</td>";
-							$lastdate = $tgl_jurnal;
-						}
 						if ($data['posisi_dr_cr'] == 'd') {
 							echo "
 						<td>" . $data['nama_coa'] . "</td>
@@ -104,16 +121,16 @@
 
 			</table>
 		</div>
-				</div>
+	</div>
 
-				<div class="x_panel">
+	<div class="x_panel">
 		<div class="x_title">
 			<h3 class="panel-title"><b>HPP dan Persediaan Barang Harga Beli</b></h3>
 		</div>
 		<div class="x_content">
 
 		</div>
-				</div>
+	</div>
 
 </body>
 

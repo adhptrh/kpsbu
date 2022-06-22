@@ -14,6 +14,14 @@
                 </div>
             </div>
             <div class="x_content">
+                <form class="form-inline" style="margin-bottom:20px;" method="GET">
+                    <div class="form-group">
+                        <label>Bulan Tahun</label>
+                        <input name="bulantahun" class="form-control" type="month" value="<?= $bulantahun ?>">
+                        <button class="btn btn-primary">Filter</button>
+                    </div>
+                </form>
+
                 <div id="notif">
                     <?php echo $this->session->flashdata('notif_ubah'); ?>
                 </div>

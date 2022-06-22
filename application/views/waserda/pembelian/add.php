@@ -21,7 +21,7 @@
                         <div class="form-group row">
                             <label for="tanggal" class="col-sm-3 col-form-label">Tanggal</label>
                             <div class="col-sm-9">
-                            <input type="date" class="form-control" id="tanggal" value="<?= date('Y-m-d')?>" name="tanggal" required>
+                            <input type="date" readonly class="form-control" id="tanggal" value="<?= date('Y-m-d')?>" name="tanggal" required>
                             </div>
                         </div>
 

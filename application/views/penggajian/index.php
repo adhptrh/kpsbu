@@ -56,7 +56,7 @@
                                 <td class="text-center">
                                     <?php 
                                     $today = date('d'); 
-                                    $start = 25;
+                                    $start = 18;
                                     $end = 30;
                                     if (($today >= $start) && ($today <= $end)){ ?>
                                         <?php if ($value->total >= 0 AND is_null($value->tgl_gaji)) { ?>

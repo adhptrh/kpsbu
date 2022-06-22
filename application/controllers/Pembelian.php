@@ -35,14 +35,14 @@
     public function pdf($invoice)
     {
         $detail = $this->db->query('SELECT
-        b.*, c.nama_produk, c.harga_satuan, a.jml, a.id_supplier
+        b.*, c.nama_produk, c.harga_satuan, a.jml, a.id_supplier,a.tanggal_kadaluwarsa, d.nama as nama_supplier
         FROM pos_detail_pembelian a 
         JOIN pos_pembelian b ON a.invoice = b.invoice
         JOIN waserda_produk c ON c.kode = a.id_produk
+        JOIN waserda_supplier d ON d.kode = a.id_supplier
         WHERE b.invoice = "'.$invoice.'"
         ORDER BY id DESC')->result();
-        $nama_supplier = $this->db->query('SELECT nama FROM waserda_supplier WHERE kode = "'.$detail[0]->id_supplier.'"')->result();
-        $detail[0]->nama_supplier = $nama_supplier[0]->nama;
+        
         $data = [
             'title' => 'pdf', 
             'detail' => $detail,
@@ -52,7 +52,8 @@
         $this->load->library('pdf');
         $this->pdf->setPaper('a7', 'potrait');
         $this->pdf->filename = "struk-pembelian-'$date'.pdf";
-        $this->pdf->load_view('waserda/pembelian/laporan_pdf', $data);
+        //$this->pdf->load_view('waserda/pembelian/laporan_pdf', $data);
+        $this->load->view("waserda/pembelian/laporan_pdf", $data);
     }
 
     public function add()

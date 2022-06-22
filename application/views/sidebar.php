@@ -10,19 +10,39 @@
         </li>
         </ul> -->
         <?php if (!empty($this->session->userdata('level'))) : ?>
-            <?php if ($this->session->userdata('level') == "admin" or $this->session->userdata('level') == "produksi1" or $this->session->userdata('level') == "produksi2" or $this->session->userdata('level') == "penjualan" or $this->session->userdata('level') == "keuangan1" or $this->session->userdata('level') == "keuangan2" or $this->session->userdata('level') == "keuangan3") : ?>
+            <?php if (
+                $this->session->userdata('level') == "admin" or 
+                $this->session->userdata('level') == "produksi1" or 
+                $this->session->userdata('level') == "produksi2" or 
+                $this->session->userdata('level') == "penjualan" or 
+                $this->session->userdata('level') == "keuangan1" or 
+                $this->session->userdata('level') == "keuangan2" or 
+                $this->session->userdata('level') == "keuangan3" or
+                $this->session->userdata('level') == "atasan" 
+                ) : ?>
                 <ul class="nav side-menu">
                     <li>
                         <a>
                         <i class="fa fa-bar-chart-o"></i>HRD <span class="fa fa-chevron-down"></span>
                         </a>
                         <ul class="nav child_menu">
-                        <?php if ($this->session->userdata('level') == "hrd" or $this->session->userdata('level') == "admin") : ?>
+                        <?php if (
+                            $this->session->userdata('level') == "hrd" or 
+                            $this->session->userdata('level') == "admin"
+                            ) : ?>
                             <li><a href="<?= base_url('Penggajian')?>">Penggajian </a></li>
                             <li><a href="<?= base_url('Shift')?>">Jadwal Shift </a></li>
                             <li><a href="<?= base_url('Cuti')?>">Pengajuan Cuti </a></li>
                             <li><a href="<?= base_url('Lembur')?>">Pengajuan Lembur </a></li>
+                            <li><a href="<?= base_url('Lembur')?>">Tunjangan Hari Raya </a></li>
                             <li><a href="<?= base_url('Pengajuan/pengajuanBonus')?>">Pengajuan Bonus </a></li>
+                        <?php
+                        endif
+                        ?>
+                        <?php if (
+                            $this->session->userdata('level') == "atasan"
+                            ) : ?>
+                            <li><a href="<?= base_url('Lembur')?>">Pengajuan Lembur </a></li>
                         <?php
                         endif
                         ?>
@@ -74,6 +94,7 @@
                     <li><a href="<?php echo site_url(); ?>c_masterdata/lihat_ips">Konsumen IPS</a></li>
                     <li><a href="<?php echo site_url(); ?>c_masterdata/tps">TPS</a></li>
                     <li><a href="<?php echo site_url(); ?>c_masterdata/alokasi_shu">Alokasi SHU</a></li>
+                    <li><a href="<?php echo site_url(); ?>c_masterdata/bank">Bank</a></li>
 
                     <li><a href="<?= base_url('c_masterdata/pegawai')?>"> Pegawai </a></li>
                     <li><a href="<?= base_url('c_masterdata/ptkp')?>"> PTKP </a></li>
@@ -144,6 +165,7 @@
                     if ($this->session->userdata('level') == "admin") :
                     ?>
 
+                        <li><a href="<?php echo site_url(); ?>c_transaksi/transaksi_bank">Transaksi Bank</a></li>
                         <li><a href="<?php echo site_url(); ?>c_transaksi/lihat_pemb">Pembelian Bahan Baku</a></li>
                         <li><a href="<?php echo site_url(); ?>c_transaksi/pembelian_aset">Pembelian Aset</a></li>
                         <li><a href="<?php echo site_url(); ?>c_transaksi/penyusutan">Penyusutan</a></li>
@@ -176,7 +198,7 @@
                         <li><a href="<?= base_url('c_transaksi/pengajuan_jurnal')?>">Pengajuan Jurnal</a></li>
                         <li><a href="<?= base_url('Penerimaan_kas')?>">Penerimaan Kas</a></li>
                         <li><a href="<?= base_url('Pengeluaran_kas')?>">Pengeluaran Kas</a></li>
-
+                        <li><a href="<?= base_url('DaftarPenerimaanPengeluaranKas')?>">Daftar Penerimaan dan Pengeluaran Kas</a></li>
                     <?php
                     elseif ($this->session->userdata('level') == "produksi1") :
                     ?>
@@ -239,6 +261,7 @@
                         
                         <!-- start laporan salma -->
                         <li><a href="<?= base_url('Laporan/buku_pembantu_kas')?>">Buku Pembantu Kas</a></li>
+                        <li><a href="<?= base_url('Laporan/buku_pembantu_bank')?>">Buku Pembantu Bank</a></li>
                         <li><a href="<?= base_url('Laporan/laporan_arus_kas')?>">Laporan Arus Kas</a></li>
                         <li><a href="<?= base_url('Laporan/buku_kas_kecil')?>">Buku Kas Kecil</a></li>
                         <!-- end -->
@@ -253,7 +276,8 @@
                         <li><a href="<?php echo site_url(); ?>c_keuangan/lap_bp_olahan">Laporan Harga Pokok Produksi Olahan</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/hpp_ips">Laporan Harga Pokok Penjualan IPS</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/hpp_toko">Laporan Harga Pokok Penjualan Toko</a></li>
-                        <li><a href="<?= base_url('laporan_kartu_stock') ?>">Kartu Stock</a></li>
+                        <li><a href="<?php echo site_url(); ?>c_keuangan/ranking">Laporan Ranking</a></li>
+                        <li><a href="<?= base_url('laporan_kartu_stock') ?>">Laporan Kartu Stock Waserda</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/lap_ks_bb">Kartu Persediaan Bahan Baku</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/lap_ks_bp">Kartu Persediaan Bahan Penolong</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/lap_ks_prod1">Kartu Persediaan Produk IPS</a></li>

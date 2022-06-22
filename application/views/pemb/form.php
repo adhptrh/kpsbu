@@ -32,7 +32,7 @@
 			<div class="col-xs-6">
 				<div class="form-group">
 				<label>Tanggal Transaksi</label>
-				<input type="text" class="form-control"  value="<?php echo date('Y-m-d') ; ?>"readonly >
+				<input type="text" class="form-control" value="<?php echo date('Y-m-d') ; ?>"readonly >
 				</div>
 			</div>
 			

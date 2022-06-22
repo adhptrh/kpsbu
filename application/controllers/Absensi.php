@@ -27,17 +27,62 @@
 
         // $peg = $this->db->query("SELECT * FROM pegawai WHERE rfid = '$rfid'")->row();
         $peg = $this->db->query($q)->row();
-        
 
         if ($peg) {
             # code...
             $id_absensi = $this->Absensi_model->absensiID();
 
             $q = "SELECT COUNT(*) AS jml FROM detail_absen_rfid WHERE id_absensi = '$id_absensi' AND rfid = '$rfid'";
-
             $jml_absen = $this->db->query($q)->row();
+            if ($jml_absen->jml >= 2) {
+                $absen = array(
+                    'status' => false,
+                    'info' => 'Anda sudah absen ('.$peg->nama.')'
+                );
+            } elseif ($this->jam_sekarang >= $peg->time_out && $jml_absen->jml == 1) {
+                $data = array(
+                    'id_absensi' => $id_absensi,
+                    'status' => 'keluar',
+                    'rfid' => $rfid,
+                    'jam' => date("H:i:s"),
+                    'keterangan' => "Presensi Keluar"
+                );
+                $this->db->insert("detail_absen_rfid",$data);
+                $absen = array(
+                    'status' => true,
+                    'info' => 'Berhasil Melakukan Presensi Keluar ('.$peg->nama.')'
+                );
+            } elseif ($jml_absen->jml < 1 && $this->jam_sekarang >= date("H:i", strtotime($peg->time_in."+1 hours"))) {
+                $absen = array(
+                    'status' => false,
+                    'info' => 'Gagal Melaki Presensi Masuk, Telat ('.$peg->nama.')'
+                );
+            } elseif ($this->jam_sekarang >= $peg->time_in && $this->jam_sekarang <= date("H:i", strtotime($peg->time_in."+1 hours")) && $jml_absen->jml < 1) {
+                $data = array(
+                    'id_absensi' => $id_absensi,
+                    'status' => 'masuk',
+                    'rfid' => $rfid,
+                    'jam' => date("H:i:s"),
+                    'keterangan' => "Presensi Masuk"
+                );
+                $this->db->insert("detail_absen_rfid",$data);
+                $absen = array(
+                    'status' => true,
+                    'info' => 'Berhasil Melakukan Presensi Masuk ('.$peg->nama.')'
+                );
+            } elseif ($jml_absen->jml == 1 && $this->jam_sekarang < $peg->time_out ) {
+                $absen = array(
+                    'status' => true,
+                    'info' => 'Anda sudah melakukan presensi masuk sebelumnya ('.$peg->nama.')'
+                );
+            } else {
+                $absen = array(
+                    'status' => false,
+                    'info' => 'Shift belum terdaftar.'
+                );
+            }
 
-            if ($jml_absen->jml < 2) {
+            /* if ($jml_absen->jml < 2) {
                 # code...
                 $status = ($jml_absen->jml > 0) ? "Presensi Keluar" : "Presensi Masuk";
                 $data = array(
@@ -68,7 +113,10 @@
                     }
                 } else {
                     # code...
-                    if ($this->jam_sekarang <= $peg->time_out && $this->jam_sekarang >= $peg->time_in) {
+                    
+                    
+
+                    /* if ($this->jam_sekarang <= $peg->time_out && $this->jam_sekarang >= $peg->time_in) {
                         # code...
                         if($this->db->insert('detail_absen_rfid',$data)){
                             $absen = array(
@@ -85,14 +133,14 @@
                             'status' => false,
                             'info' => 'Shift belum terdaftar.'
                         );
-                    }
+                    } 
                 }
             } else {
                 $absen = array(
                     'status' => false,
                     'info' => 'Sudah melakukan absensi.'
                 );
-            }
+            } */
         } else {
             # code...
             $absen = array(

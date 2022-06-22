@@ -19,6 +19,12 @@
                 <div id="notif">
                     <?php echo $this->session->flashdata('notif_ubah'); ?>
                 </div>
+                <?php
+                $total = 0;
+                foreach ($list as $item) {
+                    $total += $item->sisa_hasil_usaha;
+                }
+                ?>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="datatable">
                         <thead>
@@ -30,22 +36,33 @@
                                 <th>Jasa Modal</th>
                                 <th>Jasa Anggota</th>
                                 <th>Sisa Hasil Usaha</th>
+                                <th>Pendekatan Kontribusi</th>
                             </tr>
                         </thead>
                         <tbody>
                         <?php 
                         $no = 1;
+                        $totalpersen = 0;
                         foreach ($list as $item) { ?>
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $item->id_trans ?></td>
                                 <td><?= $item->tanggal ?></td>
                                 <td><b><?= $item->id_anggota?></b> - <?= $item->nama_peternak ?></td>
-                                <td><?= format_rp($item->jasa_modal) ?></td>
-                                <td><?= format_rp($item->jasa_anggota) ?></td>
-                                <td><?= format_rp($item->sisa_hasil_usaha) ?></td>
+                                <td class="text-right"><?= format_rp($item->jasa_modal) ?></td>
+                                <td class="text-right"><?= format_rp($item->jasa_anggota) ?></td>
+                                <td class="text-right"><?= format_rp($item->sisa_hasil_usaha) ?></td>
+                                <td><?= $item->sisa_hasil_usaha/$total*100 ?>%</td>
                             </tr>
-                        <?php } ?>
+                            
+                        <?php 
+                        $totalpersen = $totalpersen + $item->sisa_hasil_usaha/$total*100;
+                        } ?>
+                        <tr>
+                            <th colspan="6" class="text-center"><b>Total SHU</b></th>
+                            <td class="text-right"><b><?= format_rp($total) ?></b></td>
+                            <td ><b><?= ($totalpersen) ?>%</b></td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

@@ -6,6 +6,9 @@ class c_masterdata extends CI_controller
    {
       parent::__construct();
       date_default_timezone_set('Asia/Jakarta');
+      $this->load->model(array(
+         "m_bank" => "M_bank",
+      ));
       if (empty($this->session->userdata('level'))) {
          redirect('c_login/home');
       }
@@ -256,6 +259,53 @@ class c_masterdata extends CI_controller
       $data['result'] = $this->db->get('bahan_dalam_proses')->result_array();
       $this->template->load('template', 'bdp/view', $data);
    }
+
+   public function bank()
+   {
+      $bank = $this->db->query("SELECT * FROM bank")->result();
+      $data = [
+         "bank"=>$bank
+      ];
+      $this->template->load("template", "bank/data/index", $data);
+   }
+
+   public function form_bank() {
+      $data = [
+         "id"=>$this->M_bank->kd_bank()
+      ];
+      $this->template->load("template", "bank/data/form",$data);
+   }
+
+   public function simpan_bank() {
+      $data = [
+         "id_bank"=>$this->input->post("id_bank"),
+         "nama_bank"=>$this->input->post("nama_bank"),
+      ];
+      $this->db->insert("bank",$data);
+      redirect("c_masterdata/bank");
+   }
+
+   public function hapusBank($id) {
+      $where = array("id" => $id);
+      $this->M_masterdata->hapus_data("bank", $where);
+      redirect("c_masterdata/bank");
+   }
+
+   public function isi_edit_bank($id) {
+      $data = [
+         "bank"=>$this->db->query("SELECT * FROM bank WHERE id = '$id'")->result()[0]
+      ];
+      $this->template->load("template", "bank/data/update", $data);
+   }
+
+   public function edit_bank() {
+      $this->db->update("bank", [
+         "nama_bank"=>$this->input->post("nama_bank")
+      ], ["id_bank"=>$this->input->post("id_bank")]);
+      redirect("c_masterdata/bank");
+   }
+
+
    public function form_bdp()
    {
 

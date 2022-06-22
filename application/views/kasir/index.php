@@ -121,9 +121,6 @@
 
 <?php $this->load->view('script'); ?>
 <?php $this->load->view("Kasir/struk"); ?>
-<?php if (!$this->session->flashdata('invoice')) {
-}
-?>
 <?php $this->load->view('Kasir/show'); ?>
 <?php $this->load->view('Kasir/bayar'); ?>
 <script>
@@ -138,7 +135,7 @@
             }
         })
     }
-
+/* 
     function print_checkout() {
         var win = window.open('http://localhost/kpsbu/Kasir', '_blank');
         if (win) {
@@ -148,7 +145,7 @@
             //Browser has blocked it
             alert('Please allow popups for this website');
         }
-    }
+    } */
 
     // function print() {
     //     var w = window.open()

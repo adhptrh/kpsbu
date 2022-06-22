@@ -15,7 +15,7 @@
                             
                             $tahun = date('Y');
                             //$format = $tahun.'-12-31';
-                            $format = '2022-06-18';
+                            $format = date("Y-m-d");
                             $cek = date('Y-m-d', strtotime($format));
                             if ($datenow == $cek) { ?>
                                 <button class="btn pull-right btn-primary" data-target="#add" data-toggle="modal">Tambah</button>

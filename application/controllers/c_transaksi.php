@@ -5032,6 +5032,31 @@ group by no_bbp";
          $this->template->load('template', 'laporan/pengajuan_jurnal', $data);
       }
 
+      public function bukti_pembayaran_pengajuan_jurnal()
+      {
+         
+         $config['upload_path']          = './uploads/';
+         $config['allowed_types']        = '*';
+         $config['file_name']            = $this->input->post("kode");
+         $config['overwrite']            = true;
+         $this->load->library('upload', $config);
+         $file = $this->upload->do_upload('buktipem');
+         if ($file) {
+            $this->db->where("kode", $this->input->post("kode"));
+            $this->db->update("pengajuan_jurnal", array("bukti_pembayaran" => $this->upload->file_name));
+            redirect('c_transaksi/pengajuan_jurnal');
+         } else {
+            echo $this->upload->display_errors();
+         }
+      }
+
+      public function input_bukti_pembayaran($kode) {
+         $data = [
+            'kode' => $kode,
+         ];
+         $this->template->load("template",'laporan/input_bukti_pembayaran',$data);
+      }
+
       public function status_pengajuan($kode, $tanggal, $nominal)
       {
          if (strpos($kode, 'GAJI-') !== false) {
@@ -5549,5 +5574,12 @@ group by no_bbp";
             $this->status_pengajuan_subm($kode[$i], $tanggal[$i], $nominal[$i]);
          }
          redirect('c_transaksi/pengajuan_jurnal');
+      }
+
+      public function transaksi_bank() {
+         $data = [
+            "bank" => $this->db->get('bank')->result(),
+         ];
+         $this->template->load("template","bank/transaksi/index",$data);
       }
    }//end
