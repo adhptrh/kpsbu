@@ -60,17 +60,32 @@
 					$stacks = [];
 					$id_jurnal = "";
 					foreach ($jurnal as $data) {
-						if ($id_jurnal != $data["id_jurnal"]) {
+						
+						if ($id_jurnal != $data["id_jurnal"] || substr($data["id_jurnal"], 0, 4) == "GAJI") {
 							$id_jurnal = $data["id_jurnal"];
 							if (count($stack) > 0) {
 								array_push($stacks, $stack);
 							}
 							$stack = [];
 							array_push($stack, $data);
+						} elseif (count($stack) == 5) {
+							if (
+								$stack[0]["no_coa"] == "1111"  &&
+								$stack[1]["no_coa"] == "2140"  &&
+								$stack[2]["no_coa"] == "4116"  &&
+								$stack[3]["no_coa"] == "6113"  &&
+								$stack[4]["no_coa"] == "1414" 
+								) {
+									array_push($stacks, $stack);
+									$id_jurnal = "";
+									$stack = [];
+								}
+							array_push($stack, $data);
 						} else {
 							array_push($stack, $data);
 						}
 					}
+					array_push($stacks, $stack);
 
 					$result = [];
 
@@ -92,14 +107,9 @@
 							array_push($result[$id]["data"], $data);
 						}
 					}
-					/* echo "<pre>";
-					echo var_export($result);
-					echo "</pre>"; */
+
 					foreach ($result as $key=>$data) {
 						?>
-						<tr>
-							<td colspan="7"><?= $key ?></td>
-						</tr>
 						<?php
 						foreach ($data["totaldata"] as $k=>$v) {
 							$no++;
@@ -163,15 +173,6 @@
 				</tr>
 
 			</table>
-		</div>
-	</div>
-
-	<div class="x_panel">
-		<div class="x_title">
-			<h3 class="panel-title"><b>HPP dan Persediaan Barang Harga Beli</b></h3>
-		</div>
-		<div class="x_content">
-
 		</div>
 	</div>
 

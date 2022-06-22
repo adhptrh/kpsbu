@@ -164,7 +164,6 @@
         $('.anggota').hide()
         // $('.pembeli').hide()
 
-
         $("#prnt").click(()=>{
             window.open("<?= base_url('Kasir/pdf/'.$this->session->flashdata("invoice"))?>",'_blank')
         })
