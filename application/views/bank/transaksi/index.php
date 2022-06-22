@@ -3,10 +3,10 @@
         <h3>Transaksi Bank</h3>
     </div>
     <div class="x_content">
-        <form>
+        <form method="post" action="<?= base_url("c_transaksi/transaksi_bank_submit") ?>">
             <div class="form-group">
                 <label>Tanggal</label>
-                <input class="form-control" type="month" name="tanggal" value="<?= date('Y-m')?>" required>
+                <input class="form-control" type="date" name="tanggal" value="<?= date('Y-m-d')?>" required>
             </div>
             <div class="form-group">
                 <label>Nama Bank</label>
@@ -27,28 +27,35 @@
                 <input class="form-control" type="text" name="uraian" required>
             </div>
             <div class="form-group">
-                <label>Tanggal</label>
-                <input class="form-control" type="date" name="uraian" value="<?= date("Y-m-d") ?>" required>
-            </div>
-            <div class="form-group">
                 <label>Bukti Transaksi</label>
                 <input class="form-control" type="text" name="bukti_transaksi" required>
             </div>
             <div class="form-group">
-                <label>Pemasukan</label>
-                <input class="form-control" type="text" name="bukti_transaksi" required>
+                <label>Nominal</label>
+                <input class="form-control" type="text" name="nominal" required>
             </div>
-        </form>
             <div class="form-group">
-                <label>Pengeluaran</label>
-                <input class="form-control" type="text" name="bukti_transaksi" required>
+                <label>Bunga Bank</label>
+                <input class="form-control" type="text" name="bunga" required>
             </div>
-        </form>
             <div class="form-group">
-                <label>Input Salo</label>
-                <input class="form-control" type="text" name="bukti_transaksi" required>
+                <label>Pajak</label>
+                <input class="form-control" type="text" name="pajak" required>
             </div>
-        </form>
+            <div class="form-group">
+                <label>Biaya Admin</label>
+                <input class="form-control" type="text" name="biaya_admin" required>
+            </div>
+            <div class="form-group">
+                <label>Jenis Transaksi</label>
+                <select class="form-control" name="jenis_transaksi">
+                    <option value="debit">Debit</option>
+                    <option value="kredit">Kredit</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Simpan</button>
+            </div>
         </form>
     </div>
 </div>

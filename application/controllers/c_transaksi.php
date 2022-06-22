@@ -5582,4 +5582,57 @@ group by no_bbp";
          ];
          $this->template->load("template","bank/transaksi/index",$data);
       }
+      
+
+    public function id_ref_bank($mode)
+    {
+        $query1   = "SELECT MAX(RIGHT(id_ref,3)) as kode FROM buku_pembantu_bank ";
+        $abc      = $this->db->query($query1);
+        $kode = "";
+        if ($abc->num_rows() > 0) {
+            foreach ($abc->result() as $k) {
+                $tmp = ((int) $k->kode) + 1;
+                $kd  = sprintf("%03s", $tmp);
+            }
+        } else {
+            $kd = "001";
+        }
+        $kode = $mode.date('Ymd').$kd;
+        return $kode;
+    }
+
+      public function transaksi_bank_submit() {
+         if ($this->input->post("jenis_transaksi") == "debit") {
+            $id_ref = $this->id_ref_bank("BPNRM");
+         } else {
+            $id_ref = $this->id_ref_bank("BPNG");
+         }
+         $data = [
+            "kd_coa"=>1116,
+            "id_ref"=>$id_ref,
+            "bukti_transaksi"=>$this->input->post("bukti_transaksi"),
+            "bunga"=>$this->input->post("bunga"),
+            "pajak"=>$this->input->post("pajak"),
+            "biaya_admin"=>$this->input->post("biaya_admin"),
+            "posisi_dr_cr"=>($this->input->post("jenis_transaksi") == "debit") ? "d":"k",
+            "nominal"=>$this->input->post("nominal"),
+            "keterangan"=>$this->input->post("uraian"),
+            "tanggal"=>date("Y-m-d")
+         ];
+
+         $this->db->insert("buku_pembantu_bank", $data);
+
+         $this->db->insert("jurnal",[
+            "no_coa"=>1116,
+            "nominal"=>$this->input->post("nominal"),
+            "posisi_dr_cr"=>($this->input->post("jenis_transaksi") == "debit") ? "d":"k",
+            "tgl_jurnal"=>date("Y-m-d"),
+            "id_jurnal"=>$id_ref
+         ]);
+
+         $this->session->set_flashdata("berhasil", "Data berhasil ditambahkan");
+         redirect("c_transaksi/transaksi_bank");
+      }
+
+
    }//end

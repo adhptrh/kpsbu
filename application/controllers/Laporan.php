@@ -9,18 +9,22 @@ class Laporan extends CI_Controller
 
     public function buku_pembantu_kas()
     {
-        $list = $this->db->get('buku_pembantu_kas')->result();
+        $bulantahun = $this->input->get("bulantahun") ?? date("Y-m");
+        $list = $this->db->query('SELECT * FROM buku_pembantu_kas WHERE tanggal LIKE "'.$bulantahun.'%"')->result();
         $data = [
             'list' => $list,
+            "bulantahun" => $bulantahun
         ];
         $this->template->load('template', 'buku_pembantu_kas', $data);
     }
 
     public function buku_pembantu_bank()
     {
-        $list = $this->db->get('buku_pembantu_bank')->result();
+        $bulantahun = $this->input->get("bulantahun") ?? date("Y-m");
+        $list = $this->db->query("SELECT * FROM buku_pembantu_bank WHERE tanggal LIKE '".$bulantahun."%'")->result();
         $data = [
             'list' => $list,
+            "bulantahun"=>$bulantahun,
         ];
         $this->template->load('template', 'buku_pembantu_bank', $data);
     }
@@ -48,12 +52,20 @@ class Laporan extends CI_Controller
         AND is_arus_kas = 1
         GROUP BY a.no_coa")->result();
         // print_r($kas_diterima);exit;
+
+        $kasbank = $this->db->query("SELECT * FROM buku_pembantu_bank WHERE tanggal LIKE '".$bulantahun."%'")->result();
+
+
         $data = [
             'kas_diterima' => $kas_diterima,
             'pmb' => $pmb,
             'beban' => $beban,
-            'bulantahun' => $bulantahun
+            'bulantahun' => $bulantahun,
+            'kaskecil'=>0,
+            'kasbank'=>0,
+            'pengeluaranbeban'=>0,
         ];
+
         $this->template->load('template', 'arus_kas', $data);
     }
 
@@ -216,8 +228,12 @@ class Laporan extends CI_Controller
     public function buku_kas_kecil()
     {
         $this->db->order_by('tgl_transaksi', 'desc');
-        $list = $this->db->get('buku_kas_kecil')->result();
-        $data = ['list' => $list];
+        $kaskecil = $this->db->query("SELECT * FROM jurnal JOIN penerimaan_pengeluaran_kas a ON a.no_dokumen = id_jurnal WHERE no_coa = '1117'")->result()[0];
+        $list = $this->db->query("SELECT * FROM jurnal JOIN penerimaan_pengeluaran_kas a ON a.no_dokumen = id_jurnal WHERE no_coa = '1117'")->result();
+        $data = [
+            'list' => $list,
+            'kaskecil' => $kaskecil,
+        ];
         $this->template->load('template', 'laporan/buku_kas_kecil', $data);
     }
 }

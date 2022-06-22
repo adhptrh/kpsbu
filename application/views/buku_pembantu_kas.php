@@ -8,6 +8,11 @@
 
         <div class="x_content">
             <div class="row">
+            <form class="form-inline" method="get">
+                <label>Bulan Tahun</label>
+                <input name="bulantahun" class="form-control" value="<?= $bulantahun ?>" type="month">
+                <button class="btn btn-primary">Filter</button>
+            </form>
                 <div class="col-sm-7">
                     <!-- <form method="post" action="<?php echo site_url() . 'c_transaksi/buku_pinjaman' ?> " class="form-inline">
                         <label>Pilih anggota</label>

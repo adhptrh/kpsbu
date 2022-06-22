@@ -38,6 +38,11 @@
                         $arus_kas_bersih_pendanaan = 0;
                         ?>
                         <tr>
+                            <th>#</th>
+                            <th>Masuk</th>
+                            <th>Keluar</th>
+                        </tr>
+                        <tr>
                             <th colspan="3">Arus Kas dari Aktivitas Operasi</th>
                         </tr>
                         <tr>
@@ -46,9 +51,24 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <td>Pembelian</td>
+                            <td>Kas Bank</td>
                             <td class="text-right"><?= format_rp($pembelian)?></td>
                             <td></td>
+                        </tr>
+                        <tr>
+                            <td>Kas Kecil</td>
+                            <td class="text-right"><?= format_rp($pembelian)?></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Pembelian</td>
+                            <td></td>
+                            <td class="text-right"><?= format_rp($pembelian)?></td>
+                        </tr>
+                        <tr>
+                            <td>Pengeluaran Beban</td>
+                            <td></td>
+                            <td class="text-right"><?= format_rp($pembelian)?></td>
                         </tr>
                         <?php foreach ($beban as $key => $value) { ?>
                         <?php $t_beban += $value->total?>
@@ -60,16 +80,44 @@
                         <?php } ?>
                         <tr>
                             <th>Arus kas bersih dari kegiatan operasional</th>
-                            <td></td>
-                            <th class="text-right"><?= format_rp($arus_kas_bersih_keg_operasional = $sebelum_beban - $t_beban)?></th>
+                            <th class="text-right">
+                                <?php if ($kas > $pembelian || $kas - $pembelian == 0) {
+                                    echo format_rp($arus_kas_bersih_keg_operasional = $sebelum_beban - $t_beban);
+                                } ?>
+                            </td>
+                            <th class="text-right">
+                                <?php if ($kas < $pembelian) {
+                                    echo format_rp($arus_kas_bersih_keg_operasional = $sebelum_beban - $t_beban);
+                                } ?>
+                            </th>
                         </tr>
                         <tr>
                             <th colspan="3">Arus kas dari aktivitas investasi</th>
                         </tr>
+
+                        <tr>
+                            <td>Penjualan aktiva tetap</td>
+                            <td class="text-right"><?= format_rp(0)?></td>
+                            <td></td>
+                        </tr>
                         <tr>
                             <td>Pembelian aktiva tetap</td>
-                            <td class="text-right"><?= format_rp($pmb_aktiva)?></td>
                             <td></td>
+                            <td class="text-right"><?= format_rp($pmb_aktiva)?></td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Arus kas bersih dari kegiatan Investasi</th>
+                            <th class="text-right">
+                                <?php if (0 > $pmb_aktiva || 0 - $pmb_aktiva == 0) {
+                                    echo format_rp($arus_kas_bersih_keg_investasi = $arus_kas_bersih_keg_operasional + 0 - $pmb_aktiva);
+                                } ?>
+                            </td>
+                            <th class="text-right">
+                                <?php if ($kas < $pembelian) {
+                                    echo format_rp($arus_kas_bersih_keg_investasi = $arus_kas_bersih_keg_operasional + 0 - $pmb_aktiva);
+                                } ?>
+                            </th>
                         </tr>
                         <tr>
                             <th colspan="3">Arus kas dari aktivitas pendanaan</th>
@@ -81,18 +129,45 @@
                         </tr>
                         <tr>
                             <td>Prive</td>
+                            <td></td>
                             <td class="text-right"><?= format_rp($prive)?></td>
+                        </tr>
+                        <tr>
+                            <td>Pinjaman Bank</td>
+                            <td class="text-right"><?= format_rp(0)?></td>
                             <td></td>
                         </tr>
                         <tr>
-                            <th>Arus kas bersih dari aktivitas pendanaan</th>
+                            <td>Angsuran Pinjaman</td>
                             <td></td>
-                            <th class="text-right"><?= format_rp($arus_kas_bersih_pendanaan = $modal - $prive) ?></th>
+                            <td class="text-right"><?= format_rp(0)?></td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Arus kas bersih dari kegiatan Pendanaan</th>
+                            <th class="text-right">
+                                <?php if ($modal+0 >= $prive+0 || $modal+0 - $prive+0 == 0) {
+                                    echo format_rp($arus_kas_bersih_keg_pendanaan = $arus_kas_bersih_keg_investasi+$modal-$prive+0-0);
+                                } ?>
+                            </td>
+                            <th class="text-right">
+                                <?php if ($modal+0 < $prive+0) {
+                                    echo format_rp($arus_kas_bersih_keg_pendanaan = $arus_kas_bersih_keg_investasi+$modal-$prive+0-0);
+                                } ?>
+                            </th>
                         </tr>
                         <tr>
-                            <th>Saldo Kas</th>
-                            <td></td>
-                            <th class="text-right"><?= format_rp(($arus_kas_bersih_keg_operasional - $pmb_aktiva) + $arus_kas_bersih_pendanaan) ?></th>
+                            <th>Ending Cash Flow</th>
+                            <th class="text-right">
+                                <?php if ($modal+0 >= $prive+0 || $modal+0 - $prive+0 == 0) {
+                                    echo format_rp($arus_kas_bersih_keg_pendanaan = $arus_kas_bersih_keg_investasi+$modal-$prive+0-0);
+                                } ?>
+                            </td>
+                            <th class="text-right">
+                                <?php if ($modal+0 < $prive+0) {
+                                    echo format_rp($arus_kas_bersih_keg_pendanaan = $arus_kas_bersih_keg_investasi+$modal-$prive+0-0);
+                                } ?>
+                            </th>
                         </tr>
                     </table>
                 </div>

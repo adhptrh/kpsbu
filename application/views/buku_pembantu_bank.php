@@ -7,9 +7,9 @@
         </div>
 
         <div class="x_content">
-            <form class="form-inline">
+            <form class="form-inline" method="get">
                 <label>Bulan Tahun</label>
-                <input class="form-control" type="month">
+                <input name="bulantahun" class="form-control" value="<?= $bulantahun ?>" type="month">
                 <button class="btn btn-primary">Filter</button>
             </form>
             <div class="row">
@@ -55,7 +55,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    <?php 
+                    $saldo = 0;
+                    foreach ($list as $k=>$v):
+                    if ($v->posisi_dr_cr == "d") {
+                        $saldo += $v->nominal;
+                    } else {
+                        $saldo -= $v->nominal;
+                    }
+                    ?>
+                        <tr>
+                            <td><?= $k+1?></td>
+                            <td><?= $v->tanggal?></td>
+                            <td><?= $v->keterangan?></td>
+                            <td><?= $v->bukti_transaksi?></td>
+                            <td class="text-right"><?= ($v->posisi_dr_cr == "d") ? format_rp($v->nominal):"-" ?></td>
+                            <td class="text-right"><?= format_rp($v->bunga) ?></td>
+                            <td class="text-right"><?= ($v->posisi_dr_cr == "k") ? format_rp($v->nominal):"-" ?></td>
+                            <td class="text-right"><?= format_rp($v->pajak) ?></td>
+                            <td class="text-right"><?= format_rp($v->biaya_admin) ?></td>
+                            <td class="text-right"><?= format_rp($saldo) ?></td>
+                        </tr>
+                    <?php endforeach ?>
+
                 </tbody>
             </table>
         </div>
