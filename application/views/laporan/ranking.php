@@ -29,8 +29,8 @@
                     <tr>
                         <td><?= $k+1 ?></td>
                         <td><?= $v->nama_pembeli ?></td>
-                        <td><?= $v->jumlah_transaksi ?></td>
-                        <td><?= $v->total_pembelian ?></td>
+                        <td class="text-right"><?= $v->jumlah_transaksi ?></td>
+                        <td class="text-right"><?= format_rp($v->total_pembelian) ?></td>
                     </tr>
                     <?php
                 }

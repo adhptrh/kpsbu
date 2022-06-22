@@ -27,7 +27,8 @@ class c_keuangan extends CI_Controller
 	public function ranking()
 	{
 		$data = [
-			'ranking' => $this->db->query("SELECT nama_pembeli, SUM(total_trans) as total_pembelian,COUNT(*) as jumlah_transaksi FROM `pos_penjualan` GROUP BY nama_pembeli ORDER BY total_pembelian desc")->result(),
+			'ranking' => $this->db->query("SELECT a.nama_pembeli, SUM(a.total_trans) as total_pembelian, COUNT(*) as jumlah_transaksi FROM peternak JOIN pos_penjualan a ON a.nama_pembeli = nama_peternak GROUP BY a.nama_pembeli ORDER BY total_pembelian DESC ")->result(),
+			'ranking_' => $this->db->query("SELECT nama_pembeli, SUM(total_trans) as total_pembelian,COUNT(*) as jumlah_transaksi FROM `pos_penjualan`  GROUP BY nama_pembeli ORDER BY total_pembelian desc")->result(),
 		];
 		$this->template->load('template', 'laporan/ranking',$data);
 	}

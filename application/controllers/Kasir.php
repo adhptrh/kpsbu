@@ -251,7 +251,7 @@
             ];
             $this->db->insert('waserda_pembayaran_kredit', $tb_kredit);
         } else {
-            $this->M_keuangan->pengajuanJurnal($kode, $pembayaran, 'Penjualan Barang Tunai Waserda');
+            $this->M_keuangan->pengajuanJurnal($kode, $total, 'Penjualan Barang Tunai Waserda');
         }
 
         $this->db->where('invoice', $kode);
