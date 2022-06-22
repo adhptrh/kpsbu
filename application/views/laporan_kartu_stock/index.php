@@ -101,9 +101,9 @@
                         <td class="text-right"><?= ($vv->unit - $decr < 0) ? 0:$vv->unit-$decr ?></td>
                         <td class="text-right"><?= format_rp($v->harga_satuan) ?></td>
                         <td class="text-right"><?= format_rp((($vv->unit - $decr < 0) ? 0:$vv->unit - $decr)*$v->harga_satuan) ?></td>
-                        </tr>
+                    </tr>
                         <?php
-                        $unitakhir += ($vv->unit - $decr < 0) ? 0:$vv->unit-$decr;
+                        $unitakhir = ($vv->unit - $decr < 0) ? 0:$vv->unit-$decr;
                         $kk = $decr;
                         $decr = ($vv->unit - $decr < 0) ? abs($vv->unit - $decr):0;
                         $vv->unit = ($vv->unit - $kk < 0) ? 0:$vv->unit-$kk;

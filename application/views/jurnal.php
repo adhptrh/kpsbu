@@ -57,27 +57,70 @@
 					$total2 = 0;
 
 					$stack = [];
-					$stackitem = [];
-					$kondisi = false;
-					$posisi_sebelumnya = '';
+					$stacks = [];
+					$id_jurnal = "";
 					foreach ($jurnal as $data) {
-						$tgl_jurnal = substr($data['tgl_jurnal'], 0, 10);
-						if ($posisi_sebelumnya != 'd' && $data['posisi_dr_cr'] == 'd') {
-							$kondisi = !$kondisi;
-						}
-						if ($kondisi == 1) {
-							array_push($stackitem, $data);
+						if ($id_jurnal != $data["id_jurnal"]) {
+							$id_jurnal = $data["id_jurnal"];
+							if (count($stack) > 0) {
+								array_push($stacks, $stack);
+							}
+							$stack = [];
+							array_push($stack, $data);
 						} else {
-							array_push($stack,$stackitem);
-							$stackitem = [];
-							array_push($stackitem, $data);
+							array_push($stack, $data);
 						}
-						$posisi_sebelumnya = $data['posisi_dr_cr'];
-
 					}
 
-						// sistem jurnal lama
-					foreach ($jurnal as $data) {
+					$result = [];
+
+					foreach ($stacks as $data) {
+						$id = "";
+						foreach ($data as $d) {
+							$id .= $d["tgl_jurnal"] . $d["no_coa"] . $d["posisi_dr_cr"];
+						}
+						//$id = md5($id);
+						if (!isset($result[$id])) {
+							$result[$id]["jumlah_paket"] = 1;
+							$result[$id]["data"] = [$data];
+							$result[$id]["totaldata"] = $data;
+						} else {
+							$result[$id]["jumlah_paket"]++;
+							foreach ($data as $k => $d) {
+								$result[$id]["totaldata"][$k]["nominal"] += $data[$k]["nominal"];
+							}
+							array_push($result[$id]["data"], $data);
+						}
+					}
+					/* echo "<pre>";
+					echo var_export($result);
+					echo "</pre>"; */
+					foreach ($result as $key=>$data) {
+						?>
+						<tr>
+							<td colspan="7"><?= $key ?></td>
+						</tr>
+						<?php
+						foreach ($data["totaldata"] as $k=>$v) {
+							$no++;
+					?>
+							<tr>
+								<td><?= $no ?></td>
+								<td><?= $v["tgl_jurnal"] ?></td>
+								<td>
+									<?= $v["posisi_dr_cr"] == "k" ? "<span style='margin-left:15px;'>":"<span>" ?>
+									<?= $v["nama_coa"]."</span>" ?></td>
+								<td class="text-right"><?= $v["no_coa"] ?></td>
+								<td>-</td>
+								<td class="text-right"><?= $v["posisi_dr_cr"] == "d" ? format_rp($v["nominal"]):"-" ?></td>
+								<td class="text-right"><?= $v["posisi_dr_cr"] == "k" ? format_rp($v["nominal"]):"-" ?></td>
+							</tr>
+					<?php
+						}
+					}
+
+					// sistem jurnal lama
+					/* foreach ($jurnal as $data) {
 						$no++;
 						$tgl_jurnal = substr($data['tgl_jurnal'], 0, 10);
 						if ($data['posisi_dr_cr'] == 'd') {
@@ -110,7 +153,7 @@
 				";
 							$total2 = $total2 + $data['nominal'];
 						}
-					}
+					} */
 					?>
 				</tbody>
 				<tr>

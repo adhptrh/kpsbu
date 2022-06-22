@@ -77,7 +77,7 @@ class m_keuangan extends CI_model
 			$this->db->where('tgl_jurnal >=', $_POST['tgl_awal']);
 			$this->db->where('tgl_jurnal <=', $_POST['tgl_akhir']);
 		}
-		$this->db->select('a.no_coa, tgl_jurnal, nama_coa, a.posisi_dr_cr, nominal, id_jurnal');
+		$this->db->select('a.no_coa, tgl_jurnal, nama_coa, a.posisi_dr_cr, nominal, a.id_jurnal');
 		$this->db->from('jurnal a');
 		$this->db->join('coa b', 'b.no_coa = a.no_coa');
 		$this->db->order_by('no');
