@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 22, 2022 at 02:56 AM
+-- Generation Time: Jun 22, 2022 at 03:51 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -209,7 +209,9 @@ CREATE TABLE `bank` (
 --
 
 INSERT INTO `bank` (`id`, `id_bank`, `nama_bank`) VALUES
-(3, 'BNK-202206210001', 'BCA');
+(3, 'BNK-202206210001', 'BCA'),
+(4, 'BNK-202206220002', 'Mandiri'),
+(5, 'BNK-202206220003', 'BNI');
 
 -- --------------------------------------------------------
 
@@ -358,159 +360,6 @@ CREATE TABLE `buku_kas_kecil` (
   `posisi_d_c` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `buku_kas_kecil`
---
-
-INSERT INTO `buku_kas_kecil` (`id`, `id_ref`, `tgl_transaksi`, `nominal`, `keterangan`, `posisi_d_c`) VALUES
-(1, 'KPSBU210322050', '2022-03-21', 4000, 'Penjualan', 'd'),
-(2, 'KPSBU210322051', '2022-03-21', 4000, 'Penjualan', 'd'),
-(3, 'KPSBU060422052', '2022-04-06', 2000, 'Penjualan', 'd'),
-(4, 'KPSBU070522053', '2022-05-07', 2000, 'Penjualan', 'd'),
-(5, 'KPSBU070522054', '2022-05-07', 10000, 'Penjualan', 'd'),
-(6, 'KPSBU070522055', '2022-05-07', 2000, 'Penjualan', 'd'),
-(7, 'KPSBU070522056', '2022-05-07', 2000, 'Penjualan', 'd'),
-(8, 'KPSBU150522057', '2022-05-15', 2000, 'Penjualan', 'd'),
-(9, 'KPSBU150522058', '2022-05-15', 2000, 'Penjualan', 'd'),
-(10, 'KPSBU150522059', '2022-05-15', 8000, 'Penjualan', 'd'),
-(11, 'KPSBU150522060', '2022-05-15', 2000, 'Penjualan', 'd'),
-(12, 'KPSBU150522061', '2022-05-15', 8000, 'Penjualan', 'd'),
-(13, 'KPSBU150522062', '2022-05-15', 8000, 'Penjualan', 'd'),
-(14, 'KPSBU150522063', '2022-05-15', 8000, 'Penjualan', 'd'),
-(15, 'KPSBU150522064', '2022-05-15', 8000, 'Penjualan', 'd'),
-(16, 'KPSBU150522065', '2022-05-15', 8000, 'Penjualan', 'd'),
-(17, 'KPSBU150522066', '2022-05-15', 8000, 'Penjualan', 'd'),
-(18, 'KPSBU150522067', '2022-05-15', 8000, 'Penjualan', 'd'),
-(19, 'KPSBU200522070', '2022-05-20', 12000, 'Penjualan', 'd'),
-(20, 'KPSBU200522071', '2022-05-20', 10000, 'Penjualan', 'd'),
-(21, 'KPSBU200522072', '2022-05-20', 10000, 'Penjualan', 'd'),
-(22, 'KPSBU200522073', '2022-05-20', 6000, 'Penjualan', 'd'),
-(23, 'KPSBU200522074', '2022-05-20', 8000, 'Penjualan', 'd'),
-(24, 'KPSBU200522075', '2022-05-20', 8000, 'Penjualan', 'd'),
-(25, 'KPSBU200522076', '2022-05-20', 2000, 'Penjualan', 'd'),
-(26, 'KPSBU200522077', '2022-05-20', 10000, 'Penjualan', 'd'),
-(27, 'KPSBU200522078', '2022-05-20', 10000, 'Penjualan', 'd'),
-(28, 'KPSBU200522078', '2022-05-20', 10000, 'Penjualan', 'd'),
-(29, 'KPSBU200522078', '2022-05-20', 10000, 'Penjualan', 'd'),
-(30, 'KPSBU200522079', '2022-05-20', 2000, 'Penjualan', 'd'),
-(31, 'KPSBU200522080', '2022-05-20', 10000, 'Penjualan', 'd'),
-(32, 'KPSBU200522081', '2022-05-20', 4000, 'Penjualan', 'd'),
-(33, 'KPSBU200522082', '2022-05-20', 4000, 'Penjualan', 'd'),
-(34, 'KPSBU200522083', '2022-05-20', 10000, 'Penjualan', 'd'),
-(35, 'KPSBU200522084', '2022-05-20', 4000, 'Penjualan', 'd'),
-(36, 'KPSBU200522085', '2022-05-20', 8000, 'Penjualan', 'd'),
-(37, 'KPSBU200522086', '2022-05-20', 2000, 'Penjualan', 'd'),
-(38, 'KPSBU200522087', '2022-05-20', 2000, 'Penjualan', 'd'),
-(39, 'KPSBU200522088', '2022-05-20', 16000, 'Penjualan', 'd'),
-(40, 'KPSBU200522089', '2022-05-20', 10000, 'Penjualan', 'd'),
-(41, 'KPSBU200522090', '2022-05-20', 10000, 'Penjualan', 'd'),
-(42, 'KPSBU210522091', '2022-05-21', 10000, 'Penjualan', 'd'),
-(43, 'KPSBU210522091', '2022-05-21', 10000, 'Penjualan', 'd'),
-(44, 'KPSBU210522091', '2022-05-21', 10000, 'Penjualan', 'd'),
-(45, 'KPSBU210522091', '2022-05-21', 10000, 'Penjualan', 'd'),
-(46, 'KPSBU210522091', '2022-05-21', 2000, 'Penjualan', 'd'),
-(47, 'KPSBU210522092', '2022-05-21', 8000, 'Penjualan', 'd'),
-(48, 'KPSBU210522093', '2022-05-21', 2000, 'Penjualan', 'd'),
-(49, 'KPSBU210522094', '2022-05-21', 2000, 'Penjualan', 'd'),
-(50, 'KPSBU210522091', '2022-05-21', 8000, 'Penjualan', 'd'),
-(51, 'KPSBU210522092', '2022-05-21', 14000, 'Penjualan', 'd'),
-(52, 'KPSBU210522091', '2022-05-21', 10000, 'Penjualan', 'd'),
-(53, 'KPSBU210522092', '2022-05-21', 12000, 'Penjualan', 'd'),
-(54, 'KPSBU210522092', '2022-05-21', 12000, 'Penjualan', 'd'),
-(55, 'KPSBU210522092', '2022-05-21', 12000, 'Penjualan', 'd'),
-(56, 'KPSBU210522092', '2022-05-21', 12000, 'Penjualan', 'd'),
-(57, 'KPSBU210522092', '2022-05-21', 12000, 'Penjualan', 'd'),
-(58, 'KPSBU210522092', '2022-05-21', 12000, 'Penjualan', 'd'),
-(59, 'KPSBU210522092', '2022-05-21', 12000, 'Penjualan', 'd'),
-(60, 'KPSBU210522093', '2022-05-21', 4000, 'Penjualan', 'd'),
-(61, 'KPSBU210522094', '2022-05-21', 4000, 'Penjualan', 'd'),
-(62, 'KPSBU210522094', '2022-05-21', 4000, 'Penjualan', 'd'),
-(63, 'KPSBU210522094', '2022-05-21', 4000, 'Penjualan', 'd'),
-(64, 'KPSBU210522094', '2022-05-21', 4000, 'Penjualan', 'd'),
-(65, 'KPSBU210522095', '2022-05-21', 16000, 'Penjualan', 'd'),
-(66, 'KPSBU210522096', '2022-05-21', 120000, 'Penjualan', 'd'),
-(67, 'KPSBU210522096', '2022-05-21', 24000, 'Penjualan', 'd'),
-(68, 'KPSBU210522096', '2022-05-21', 24000, 'Penjualan', 'd'),
-(69, 'KPSBU210522096', '2022-05-21', 24000, 'Penjualan', 'd'),
-(70, 'KPSBU210522096', '2022-05-21', 4000, 'Penjualan', 'd'),
-(71, 'KPSBU210522096', '2022-05-21', 4000, 'Penjualan', 'd'),
-(72, 'KPSBU210522096', '2022-05-21', 4000, 'Penjualan', 'd'),
-(73, 'KPSBU210522096', '2022-05-21', 4000, 'Penjualan', 'd'),
-(74, 'KPSBU210522096', '2022-05-21', 4000, 'Penjualan', 'd'),
-(75, 'KPSBU210522097', '2022-05-21', 20000, 'Penjualan', 'd'),
-(76, 'KPSBU210522098', '2022-05-21', 40000, 'Penjualan', 'd'),
-(77, 'KPSBU240522099', '2022-05-24', 20000, 'Penjualan', 'd'),
-(78, 'KPSBU270522001', '2022-05-27', 10000, 'Penjualan', 'd'),
-(79, 'KPSBU270522001', '2022-05-27', 10000, 'Penjualan', 'd'),
-(80, 'KPSBU270522002', '2022-05-27', 10000, 'Penjualan', 'd'),
-(81, 'PNJWASERDA010622003', '2022-06-01', 20000, 'Penjualan', 'd'),
-(82, 'PNJWASERDA010622003', '2022-06-01', 20000, 'Penjualan', 'd'),
-(83, 'PNJWASERDA010622004', '2022-06-01', 10000, 'Penjualan', 'd'),
-(84, 'PNJWASERDA010622005', '2022-06-01', 50000, 'Penjualan', 'd'),
-(85, 'PNJWASERDA010622006', '2022-06-01', 55000, 'Penjualan', 'd'),
-(86, 'PNJWASERDA010622007', '2022-06-01', 35000, 'Penjualan', 'd'),
-(87, 'PNJWASERDA010622008', '2022-06-01', 2500, 'Penjualan', 'd'),
-(88, 'PNJWASERDA010622009', '2022-06-01', 29500, 'Penjualan', 'd'),
-(89, 'PNJWASERDA010622010', '2022-06-01', 35000, 'Penjualan', 'd'),
-(90, 'PNJWASERDA010622011', '2022-06-01', 20000, 'Penjualan', 'd'),
-(91, 'PNJWASERDA140622012', '2022-06-14', 2500, 'Penjualan', 'd'),
-(92, 'PNJWASERDA140622013', '2022-06-14', 5000, 'Penjualan', 'd'),
-(93, 'PNJWASERDA140622014', '2022-06-14', 2500, 'Penjualan', 'd'),
-(94, 'PNJWASERDA140622015', '2022-06-14', 6000, 'Penjualan', 'd'),
-(95, 'PNJWASERDA140622016', '2022-06-14', 2500, 'Penjualan', 'd'),
-(96, 'PNJWASERDA140622017', '2022-06-14', 10000, 'Penjualan', 'd'),
-(97, 'PNJWASERDA140622018', '2022-06-14', 2500, 'Penjualan', 'd'),
-(98, 'PNJWASERDA140622019', '2022-06-14', 2000, 'Penjualan', 'd'),
-(99, 'PNJWASERDA150622020', '2022-06-15', 2000, 'Penjualan', 'd'),
-(100, 'PNJWASERDA150622021', '2022-06-15', 2000, 'Penjualan', 'd'),
-(101, 'PNJWASERDA150622022', '2022-06-15', 2000, 'Penjualan', 'd'),
-(102, 'PNJWASERDA150622023', '2022-06-15', 2000, 'Penjualan', 'd'),
-(103, 'PNJWASERDA150622024', '2022-06-15', 2500, 'Penjualan', 'd'),
-(104, 'PNJWASERDA150622025', '2022-06-15', 4500, 'Penjualan', 'd'),
-(105, 'PNJWASERDA150622026', '2022-06-15', 12500, 'Penjualan', 'd'),
-(106, 'PNJWASERDA160622027', '2022-06-16', 2500, 'Penjualan', 'd'),
-(107, 'PNJWASERDA160622027', '2022-06-16', 2500, 'Penjualan', 'd'),
-(108, 'PNJWASERDA160622027', '2022-06-16', 4000, 'Penjualan', 'd'),
-(109, 'PNJWASERDA160622027', '2022-06-16', 4000, 'Penjualan', 'd'),
-(110, 'PNJWASERDA160622027', '2022-06-16', 4000, 'Penjualan', 'd'),
-(111, 'PNJWASERDA160622027', '2022-06-16', 4000, 'Penjualan', 'd'),
-(112, 'PNJWASERDA160622027', '2022-06-16', 6000, 'Penjualan', 'd'),
-(113, 'PNJWASERDA160622028', '2022-06-16', 2500, 'Penjualan', 'd'),
-(114, 'PNJWASERDA160622029', '2022-06-16', 25000, 'Penjualan', 'd'),
-(115, 'PNJWASERDA160622030', '2022-06-16', 2500, 'Penjualan', 'd'),
-(116, 'PNJWASERDA170622031', '2022-06-17', 5000, 'Penjualan', 'd'),
-(117, 'PNJWASERDA170622032', '2022-06-17', 2500, 'Penjualan', 'd'),
-(118, 'PNJWASERDA170622033', '2022-06-17', 22500, 'Penjualan', 'd'),
-(119, 'PNJWASERDA180622034', '2022-06-18', 12500, 'Penjualan', 'd'),
-(120, 'PNJWASERDA190622035', '2022-06-19', 2500, 'Penjualan', 'd'),
-(121, 'PNJWASERDA190622036', '2022-06-19', 2500, 'Penjualan', 'd'),
-(122, 'PNJWASERDA190622037', '2022-06-19', 2500, 'Penjualan', 'd'),
-(123, 'PNJWASERDA190622038', '2022-06-19', 2500, 'Penjualan', 'd'),
-(124, 'PNJWASERDA200622039', '2022-06-20', 2500, 'Penjualan', 'd'),
-(125, 'PNJWASERDA200622039', '2022-06-20', 2500, 'Penjualan', 'd'),
-(126, 'PNJWASERDA200622039', '2022-06-20', 2500, 'Penjualan', 'd'),
-(127, 'PNJWASERDA200622039', '2022-06-20', 2500, 'Penjualan', 'd'),
-(128, 'PNJWASERDA200622039', '2022-06-20', 2500, 'Penjualan', 'd'),
-(129, 'PNJWASERDA200622039', '2022-06-20', 2500, 'Penjualan', 'd'),
-(130, 'PNJWASERDA200622039', '2022-06-20', 2500, 'Penjualan', 'd'),
-(131, 'PNJWASERDA200622039', '2022-06-20', 2500, 'Penjualan', 'd'),
-(132, 'PNJWASERDA200622039', '2022-06-20', 2500, 'Penjualan', 'd'),
-(133, 'PNJWASERDA200622039', '2022-06-20', 2500, 'Penjualan', 'd'),
-(134, 'PNJWASERDA200622039', '2022-06-20', 2500, 'Penjualan', 'd'),
-(135, 'PNJWASERDA200622039', '2022-06-20', 2500, 'Penjualan', 'd'),
-(136, 'PNJWASERDA200622039', '2022-06-20', 2500, 'Penjualan', 'd'),
-(137, 'PNJWASERDA200622039', '2022-06-20', 2500, 'Penjualan', 'd'),
-(138, 'PNJWASERDA200622039', '2022-06-20', 2500, 'Penjualan', 'd'),
-(139, 'PNJWASERDA200622040', '2022-06-20', 2500, 'Penjualan', 'd'),
-(140, 'PNJWASERDA200622041', '2022-06-20', 2500, 'Penjualan', 'd'),
-(141, 'PNJWASERDA200622042', '2022-06-20', 2500, 'Penjualan', 'd'),
-(142, 'PNJWASERDA200622043', '2022-06-20', 2500, 'Penjualan', 'd'),
-(143, 'PNJWASERDA200622044', '2022-06-20', 2500, 'Penjualan', 'd'),
-(144, 'PNJWASERDA220622045', '2022-06-22', 6000, 'Penjualan', 'd'),
-(145, 'PNJWASERDA220622046', '2022-06-22', 4000, 'Penjualan', 'd'),
-(146, 'PNJWASERDA220622047', '2022-06-22', 24000, 'Penjualan', 'd'),
-(147, 'PNJWASERDA220622048', '2022-06-22', 2000, 'Penjualan', 'd');
-
 -- --------------------------------------------------------
 
 --
@@ -520,12 +369,27 @@ INSERT INTO `buku_kas_kecil` (`id`, `id_ref`, `tgl_transaksi`, `nominal`, `keter
 CREATE TABLE `buku_pembantu_bank` (
   `id` int(11) NOT NULL,
   `id_ref` varchar(50) DEFAULT NULL,
+  `bukti_transaksi` varchar(255) DEFAULT NULL,
   `tanggal` date DEFAULT NULL,
   `nominal` varchar(255) DEFAULT NULL,
   `kd_coa` int(11) DEFAULT NULL,
   `posisi_dr_cr` varchar(50) DEFAULT NULL,
-  `keterangan` varchar(50) DEFAULT NULL
+  `keterangan` varchar(50) DEFAULT NULL,
+  `bunga` int(11) NOT NULL DEFAULT 0,
+  `pajak` int(11) NOT NULL DEFAULT 0,
+  `biaya_admin` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `buku_pembantu_bank`
+--
+
+INSERT INTO `buku_pembantu_bank` (`id`, `id_ref`, `bukti_transaksi`, `tanggal`, `nominal`, `kd_coa`, `posisi_dr_cr`, `keterangan`, `bunga`, `pajak`, `biaya_admin`) VALUES
+(3, 'BPNRM20220622001', NULL, '2022-06-22', '10000000', 1116, 'd', 'aaaa', 0, 0, 0),
+(4, 'BPNG20220622002', NULL, '2022-06-22', '5000000', 1116, 'k', 'aaaa', 0, 0, 0),
+(5, 'BPNRM20220622003', 'awdawd', '2022-06-22', '10000000', 1116, 'd', 'aaaa', 2000, 1000, 3000),
+(6, 'BPNRM20220622004', 'awdawd', '2022-06-22', '10000000', 1116, 'd', 'aaaa', 2000, 1000, 3000),
+(7, 'BPNG20220622005', 'awdawd', '2022-06-22', '5000000', 1116, 'k', 'aaaa', 2000, 1000, 3000);
 
 -- --------------------------------------------------------
 
@@ -758,7 +622,8 @@ INSERT INTO `coa` (`id`, `no_coa`, `nama_coa`, `jenis_coa`, `saldo_awal`, `heade
 (52, 1414, 'Pers. Barang Dagang', '', 0, 1, 'd', 0, 0, 0, 0),
 (53, 2130, 'PPN Masukan', '', 0, 2, 'd', 0, 0, 0, 0),
 (54, 2140, 'PPN Keluaran', '', 0, 2, 'd', 0, 0, 0, 0),
-(55, 1116, 'Bank', '', 0, 1, 'd', 0, 0, 0, 0);
+(55, 1116, 'Bank', '', 0, 1, 'd', 0, 0, 0, 0),
+(56, 1117, 'Kas Kecil', '', 0, 1, 'd', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1117,7 +982,14 @@ INSERT INTO `detail_penerimaan_pengeluaran_kas` (`id`, `no_dokumen`, `no_coa`, `
 (4, 'testing dokumen 2', '1112', 'Persediaan Bahan Baku', 'Aaaa', 500000, 'k'),
 (6, 'testing jurnal', '1111', 'Kas', 'Penerimaan Kas', 500000, 'd'),
 (7, 'testing jurnal', '1312', 'Persediaan Produk Jadi Toko', 'Aaaa', 500000, 'k'),
-(0, '123', '5111', 'Produk Dalam Proses - BBB', 'test', 1000, 'd');
+(0, '123', '5111', 'Produk Dalam Proses - BBB', 'test', 1000, 'd'),
+(0, '111', '1117', 'Kas Kecil', 'Penerimaan Kas', 10000000, 'd'),
+(0, '111', '1111', 'Kas', 'Penerimaan Kas', 10000000, 'k'),
+(0, '414', '5221', 'Beban Listrik, Air dan Telepon', 'Pengeluaran Kas', 500000, 'd'),
+(0, '414', '1117', 'Kas Kecil', 'Pengeluaran Kas', 500000, 'k'),
+(0, '4232', '5221', 'Beban Listrik, Air dan Telepon', 'Pengeluaran Kas', 300000, 'd'),
+(0, '2314', '5221', 'Beban Listrik, Air dan Telepon', 'Pengeluaran Kas', 300000, 'd'),
+(0, '2314', '1117', 'Kas Kecil', 'Pengeluaran Kas', 300000, 'k');
 
 -- --------------------------------------------------------
 
@@ -1808,7 +1680,17 @@ INSERT INTO `jurnal` (`no`, `id_jurnal`, `tgl_jurnal`, `no_coa`, `posisi_dr_cr`,
 (442, 'PNJWASERDA200622039', '2022-06-21', 4116, 'k', 2775),
 (443, 'PNJWASERDA200622039', '2022-06-21', 6113, 'd', 1750),
 (444, 'PNJWASERDA200622039', '2022-06-21', 1414, 'k', 1750),
-(445, '123', '2022-06-22', 5111, 'd', 1000);
+(445, '123', '2022-06-22', 5111, 'd', 1000),
+(446, 'BPNRM20220622003', '2022-06-22', 116, 'd', 10000000),
+(447, 'BPNRM20220622004', '2022-06-22', 1116, 'd', 10000000),
+(448, 'BPNG20220622005', '2022-06-22', 1116, 'k', 5000000),
+(449, '111', '2022-06-22', 1117, 'd', 10000000),
+(450, '111', '2022-06-22', 1111, 'k', 10000000),
+(451, '414', '2022-06-22', 5221, 'd', 500000),
+(452, '414', '2022-06-22', 1117, 'k', 500000),
+(453, '4232', '2022-06-22', 5221, 'd', 300000),
+(454, '2314', '2022-06-22', 5221, 'd', 300000),
+(455, '2314', '2022-06-22', 1117, 'k', 300000);
 
 -- --------------------------------------------------------
 
@@ -2600,7 +2482,11 @@ INSERT INTO `penerimaan_pengeluaran_kas` (`id`, `periode`, `tanggal`, `no_dokume
 (1, '202206', '2022-06-15', 'TESTING DOKUMEN SALMA', '', '', '', ''),
 (2, '202206', '2022-06-15', 'testing dokumen 2', 'pengeluaran kas', 'tunai', 'test', ''),
 (3, '202206', '2022-06-15', 'testing jurnal', 'pengeluaran kas', 'tunai', 'testing untuk insert ke jurnal', ''),
-(0, '202206', '2022-06-22', '123', 'pengeluaran kas', 'tunai', 'owno', 'av.png');
+(0, '202206', '2022-06-22', '123', 'pengeluaran kas', 'tunai', 'owno', 'av.png'),
+(0, '202206', '2022-06-22', '111', 'penerimaan kas', 'tunai', 'kas kecil', ''),
+(0, '202206', '2022-06-22', '414', 'pengeluaran kas', 'tunai', 'biaya listrik', ''),
+(0, '202206', '2022-06-22', '4232', 'pengeluaran kas', 'tunai', 'biaya listrik ', ''),
+(0, '202206', '2022-06-22', '2314', 'pengeluaran kas', 'tunai', 'biaya listrik', '');
 
 -- --------------------------------------------------------
 
@@ -4877,19 +4763,19 @@ ALTER TABLE `alokasi_shu`
 -- AUTO_INCREMENT for table `bank`
 --
 ALTER TABLE `bank`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `buku_kas_kecil`
 --
 ALTER TABLE `buku_kas_kecil`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `buku_pembantu_bank`
 --
 ALTER TABLE `buku_pembantu_bank`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `buku_pembantu_kas`
@@ -4901,7 +4787,7 @@ ALTER TABLE `buku_pembantu_kas`
 -- AUTO_INCREMENT for table `coa`
 --
 ALTER TABLE `coa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `detail_absen_rfid`
@@ -4991,7 +4877,7 @@ ALTER TABLE `jenis_penjualan`
 -- AUTO_INCREMENT for table `jurnal`
 --
 ALTER TABLE `jurnal`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=446;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=456;
 
 --
 -- AUTO_INCREMENT for table `kartu_stok_bp`
