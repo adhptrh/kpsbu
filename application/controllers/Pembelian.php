@@ -52,8 +52,8 @@
         $this->load->library('pdf');
         $this->pdf->setPaper('a7', 'potrait');
         $this->pdf->filename = "struk-pembelian-'$date'.pdf";
-        //$this->pdf->load_view('waserda/pembelian/laporan_pdf', $data);
-        $this->load->view("waserda/pembelian/laporan_pdf", $data);
+        $this->pdf->load_view('waserda/pembelian/laporan_pdf', $data);
+        //$this->load->view("waserda/pembelian/laporan_pdf", $data);
     }
 
     public function add()
