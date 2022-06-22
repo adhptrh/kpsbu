@@ -227,12 +227,15 @@ class Laporan extends CI_Controller
     // salma 
     public function buku_kas_kecil()
     {
+        $bulantahun = $this->input->get('bulantahun') ?? date("Y-m");
+        
         $this->db->order_by('tgl_transaksi', 'desc');
-        $kaskecil = $this->db->query("SELECT * FROM jurnal JOIN penerimaan_pengeluaran_kas a ON a.no_dokumen = id_jurnal WHERE no_coa = '1117'")->result()[0];
-        $list = $this->db->query("SELECT * FROM jurnal JOIN penerimaan_pengeluaran_kas a ON a.no_dokumen = id_jurnal WHERE no_coa = '1117'")->result();
+        $kaskecil = $this->db->query("SELECT * FROM jurnal JOIN penerimaan_pengeluaran_kas a ON a.no_dokumen = id_jurnal WHERE no_coa = '1117' AND tgl_jurnal LIKE '".$bulantahun."%'")->result()[0] ?? null;
+        $list = $this->db->query("SELECT * FROM jurnal JOIN penerimaan_pengeluaran_kas a ON a.no_dokumen = id_jurnal WHERE no_coa = '1117' AND tgl_jurnal LIKE '".$bulantahun."%'")->result();
         $data = [
             'list' => $list,
             'kaskecil' => $kaskecil,
+            "bulantahun"=>$bulantahun,
         ];
         $this->template->load('template', 'laporan/buku_kas_kecil', $data);
     }

@@ -5,6 +5,13 @@
 				<h3 class="panel-title"><b>Buku Kas Kacil</b></h3>
 			</div>
 			<div class="x_content">
+                <form class="form-inline" style="margin-bottom:20px;" method="GET">
+                    <div class="form-group">
+                        <label>Bulan Tahun</label>
+                        <input name="bulantahun" class="form-control" type="month" value="<?= $bulantahun ?>">
+                        <button class="btn btn-primary">Filter</button>
+                    </div>
+                </form>
 				<center>
 					<h3>Buku Kas Kecil</h3>
 				</center>
@@ -34,12 +41,16 @@
                         <?php 
                         $no = 1;
                         $saldo = 0;
+                        $jumlahdebit = 0;
+                        $jumlahkredit = 0;
                         foreach ($list as $key => $value) { ?>
                         <?php
                             if ($value->posisi_dr_cr == 'd') {
                                 $saldo += $value->nominal;
+                                $jumlahdebit += $value->nominal;
                             } else {
                                 $saldo -= $value->nominal;
+                                $jumlahkredit += $value->nominal;
                             }
                         ?>
                         <tr>
@@ -57,6 +68,24 @@
                             <td class="text-right"><?= format_rp($saldo) ?></td>
                         </tr>
                         <?php } ?>
+                        <tr>
+                            <td colspan="4">Jumlah</td>
+                            <td class="text-right"><?= format_rp($jumlahdebit) ?></td>
+                            <td class="text-right"><?= format_rp($jumlahkredit) ?></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Terpakai</td>
+                            <td colspan="6" class="text-right"><?= format_rp($jumlahkredit) ?></td>
+                        </tr>
+                        <tr>
+                            <td>Saldo</td>
+                            <td colspan="6" class="text-right"><?= format_rp($jumlahdebit-$jumlahkredit) ?></td>
+                        </tr>
+                        <tr>
+                            <td>Pengisian Kembali</td>
+                            <td colspan="6"class="text-right"><?= format_rp($jumlahkredit) ?></td>
+                        </tr>
                     </tbody>
 				</table>
 			</div>
