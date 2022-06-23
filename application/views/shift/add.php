@@ -20,6 +20,11 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <p>
+                        <input type="checkbox">
+                    </p>
+                </div>
+                <div class="form-group row">
                     <label for="shift" class="col-sm-2 col-form-label">Shift</label>
                     <div class="col-sm-10">
                         <select name="shift" class="form-control" required>

@@ -52,7 +52,7 @@
 				</thead>
 				<tbody>
 					<?php
-					$no = 0;
+					$no = 1;
 					$total = 0;
 					$total2 = 0;
 
@@ -111,12 +111,17 @@
 					foreach ($result as $key=>$data) {
 						?>
 						<?php
+						$databaru = true;
 						foreach ($data["totaldata"] as $k=>$v) {
-							$no++;
+							if ( $v["posisi_dr_cr"] == "d") {
+								$total += $v["nominal"];
+							} else {
+								$total2 += $v["nominal"];
+							}
 					?>
 							<tr>
-								<td><?= $no ?></td>
-								<td><?= $v["tgl_jurnal"] ?></td>
+								<td><p style="<?= ($databaru == false) ? 'display:none':'' ?>"><?= $no ?></p></td>
+								<td><?= ($databaru == true) ? $v["tgl_jurnal"]:"" ?></td>
 								<td>
 									<?= $v["posisi_dr_cr"] == "k" ? "<span style='margin-left:15px;'>":"<span>" ?>
 									<?= $v["nama_coa"]."</span>" ?></td>
@@ -126,6 +131,11 @@
 								<td class="text-right"><?= $v["posisi_dr_cr"] == "k" ? format_rp($v["nominal"]):"-" ?></td>
 							</tr>
 					<?php
+					
+							if ($databaru == true) {
+								$databaru = false;
+								$no++;
+							}
 						}
 					}
 

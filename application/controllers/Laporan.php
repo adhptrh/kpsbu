@@ -186,6 +186,7 @@ class Laporan extends CI_Controller
         WHERE header = 5
         AND is_waserda = 1 
         AND posisi_dr_cr = "d"
+        AND is_beban = 1
         GROUP BY nama_coa')->result();
         $data = [
             'pendapatan' => $listPendapatan,

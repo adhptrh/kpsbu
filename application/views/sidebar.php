@@ -34,7 +34,7 @@
                             <li><a href="<?= base_url('Shift')?>">Jadwal Shift </a></li>
                             <li><a href="<?= base_url('Cuti')?>">Pengajuan Cuti </a></li>
                             <li><a href="<?= base_url('Lembur')?>">Pengajuan Lembur </a></li>
-                            <li><a href="<?= base_url('Lembur')?>">Tunjangan Hari Raya </a></li>
+                            <li><a href="<?= base_url('Penggajian/tunjanganhariraya')?>">Tunjangan Hari Raya </a></li>
                             <li><a href="<?= base_url('Pengajuan/pengajuanBonus')?>">Pengajuan Bonus </a></li>
                         <?php
                         endif

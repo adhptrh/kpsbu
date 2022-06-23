@@ -106,6 +106,12 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="jurusan_pendidikan" class="col-sm-3 col-form-label">Jurusan Pendidikan</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="jurusan_pendidikan" class="form-control" id="jurusan_pendidikan" placeholder="Jurusan Pendidikan" required>
+                            </div>
+                        </div>
                         <div id="hide_ptkp">
                         <div class="form-group row">
                             <label for="desc" class="col-sm-3 col-form-label">PTKP</label>

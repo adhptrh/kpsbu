@@ -76,6 +76,7 @@
 <script>
     $(document).ready(function() {
         $("#hide_ptkp").hide()
+        
         $('#jp').on('change', function () {
             $("#hide_ptkp").hide()
             var val = $(this).val()

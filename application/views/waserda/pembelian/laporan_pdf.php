@@ -108,7 +108,7 @@ function terbilang($nilai) {
         <p>KWITANSI</p>
         <p>Invoice No: <?= $detail[0]->invoice ?></p>
     </center>
-    <p>Telah diterima dari: <?= $detail[0]->nama_supplier ?> </p>
+    <p>Telah diterima dari: Waserda KPSBU </p>
     <p>Banyaknya uang: <?= terbilang($detail[0]->grandtotal) ?> rupiah </p>
     <p>Untuk pembayaran: Pembayaran barang ke supplier</p>
     <p>Jumlah <?= format_rp($detail[0]->grandtotal) ?>

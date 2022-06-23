@@ -3,7 +3,7 @@
     public function index()
     {
         $kode = $this->kode();
-        $beban = $this->db->query("SELECT * FROM coa WHERE is_waserda = 1")->result();
+        $beban = $this->db->query("SELECT * FROM coa WHERE is_waserda = 1 AND is_beban = 1")->result();
         $list = $this->db->query("SELECT a.*, b.nama_coa 
         FROM waserda_pengeluaran_beban a 
         JOIN coa b ON a.no_coa = b.no_coa")->result();

@@ -10,7 +10,51 @@ class Penggajian extends CI_Controller
         $this->template->load('template', 'penggajian/index', $data);
     }
 
-    public function slip_gaji($nip)
+    /* public function slip_gaji()
+    {
+        $nips = $this->input->post("nip");
+        foreach ($nips as $value) {
+            $this->slip_gaji_go($value);
+        }
+    } */
+
+    public function slip_gaji($nip) {
+
+        $pegawai = $this->db->query("SELECT * FROM pegawai WHERE nip = '$nip'")->result()[0];
+        $ketptkp = $pegawai->id_jenis_pegawai == "Kontrak" ? "Tidak Kena Pajak" : "Kena Pejak";
+        $tunjanganjabatan = $this->db->query("SELECT * FROM tb_jabatan WHERE desc = '".$pegawai->id_jabatan."'")->result()[0];
+        var_dump($tunjanganjabatan);
+        return;
+        $pegawai = $this->db->query("SELECT c.nominal as nominal_ptkp, b.tunjangan_jabatan, a.gaji_pokok, nama, id_jabatan, id_jenis_pegawai, npwp, nip, rfid, z.pendidikan FROM pegawai z
+        JOIN tb_ptkp c ON c.desc = id_ptkp 
+        JOIN tb_jabatan b ON b.desc = id_jabatan 
+        JOIN tb_jenis_pegawai a ON a.desc = id_jenis_pegawai 
+        WHERE nip = '$nip' ")->result();
+
+        var_dump($pegawai);
+        return;
+
+        $gajipokok = $pegawai->gaji_pokok;
+        $ketptkp = $pegawai->id_jenis_pegawai == "Kontrak" ? "Tidak Kena Pajak" : "Kena Pejak";
+        $tunjanganjabatan = $pegawai->tunjangan_jabatan;
+        $tunjangankesehatan = $pegawai->tunjang_kesehatan;
+        $bonus = 0;
+        $totalbruto = $gajipokok+$tunjangankesehatan+$tunjanganjabatan+$bonus;
+        $biaya_jabatan = $totalbruto*0.5;
+        $totalnetto = $totalbruto-$biaya_jabatan;
+        $ptkp = $pegawai->nominal_ptkp;
+        $penghasiltidakkenapajak = $totalbruto-$ptkp;
+        $pph21 = $penghasiltidakkenapajak*0.5;
+
+        $gaji = $totalbruto;
+        $gajibersih = $gaji-$pph21;
+
+
+        var_dump($gajipokok);
+        
+    }
+
+    public function slip_gaji2($nip)
     {
         $this->db->where('nip', $nip);
         $peg = $this->db->get('pegawai')->row();
@@ -28,10 +72,10 @@ class Penggajian extends CI_Controller
         foreach ($result as $data) {
             $month = date('Y-m');
             // $tbBonus = $this->db->query("select sum(nominal) as nominal, nip, periode from pengajuan_bonus where periode = '$month' and nip ='$data->nip'")->row();
-            $tbBonus = $this->db->query("select sum(nominal) as nominal, nip, periode 
+            $tbBonus = $this->db->query("select sum(a.nominal) as nominal, a.nip, a.periode 
             from pengajuan_bonus a
             JOIN tb_detail_pengajuan_bonus b ON a.id_pengajuan = b.id_pengajuan
-            where periode = '$month' and nip ='$data->nip'")->row();
+            where periode = '$month' and a.nip ='$data->nip'")->row();
             if (is_null($tbBonus->nominal)) {
                 $bonus = 0;
             } else {
@@ -103,6 +147,101 @@ class Penggajian extends CI_Controller
                 'lembur' => $lemburfix
             ];
             $this->template->load('template', 'penggajian/sip_gaji', $data);
+        }
+    }
+    public function slip_gaji_go($nip)
+    {
+        $this->db->where('nip', $nip);
+        $peg = $this->db->get('pegawai')->row();
+        $detilPeg = $this->Absensi_model->getDetailPegawai($nip)->row();
+        // print_r($peg);exit;
+        $q = "SELECT a.*, gaji_pokok, tunjangan_jabatan, tunjangan_kesehatan, b.desc, b.nominal
+        FROM pegawai a
+        LEFT JOIN tb_jenis_pegawai c ON c.desc = a.id_jenis_pegawai
+        LEFT JOIN tb_jabatan d ON d.desc = a.id_jabatan
+        LEFT JOIN tb_ptkp b ON a.id_ptkp = b.desc
+        WHERE nip = '$nip'
+        ORDER BY a.id ASC
+        ";
+        $result = $this->db->query($q)->result();
+        foreach ($result as $data) {
+            $month = date('Y-m');
+            // $tbBonus = $this->db->query("select sum(nominal) as nominal, nip, periode from pengajuan_bonus where periode = '$month' and nip ='$data->nip'")->row();
+            $tbBonus = $this->db->query("select sum(a.nominal) as nominal, a.nip, a.periode 
+            from pengajuan_bonus a
+            JOIN tb_detail_pengajuan_bonus b ON a.id_pengajuan = b.id_pengajuan
+            where periode = '$month' and a.nip ='$data->nip'")->row();
+            if (is_null($tbBonus->nominal)) {
+                $bonus = 0;
+            } else {
+                $bonus = $tbBonus->nominal;
+            }
+            $lembur = 0;
+            // $tbLembur = $this->db->query("select sum(total_nominal_lembur) as total from tb_lembur where left(tgl_pengajuan, 7) = '2022-05' and id_pegawai = '111'")->row();
+            // if (is_null($tbLembur->total)) {
+            //     $lembur = 0;
+            // } else {
+            //     $lembur = $tbLembur->total;
+            // }
+            $ptkp1 = $data->nominal;
+            $tambah = $data->gaji_pokok + $data->tunjangan_jabatan + $data->tunjangan_kesehatan;
+            $pengurang = (5/100 * $tambah);
+            $penghasilan_perbulan = ($tambah - $pengurang);
+
+            $atuatu = 50000000/12;
+            $duadua = 250000000/12;
+            $tigatiga = 500000000/12;
+
+            if($penghasilan_perbulan > $ptkp1){
+                $hasilptkp = $penghasilan_perbulan - $ptkp1;
+                if($hasilptkp < $atuatu){
+                    $satu = $hasilptkp * 5/100;
+                    $akhir = round($satu);
+                }
+                elseif($hasilptkp > $atuatu AND $hasilptkp < $duadua){
+                    $satu = $atuatu *5/100;
+                    $dua = ($hasilptkp - $atuatu) * 15/100;
+                    $akhir = round($satu + $dua);
+                }
+                elseif($hasilptkp > $duadua AND $hasilptkp < $tigatiga){
+                    $satu = $atuatu *5/100;
+                    $dua = $duadua * 15/100;
+                    $tiga = ($hasilptkp - $atuatu - $duadua) * 25/100;
+                    $akhir = round($satu + $dua + $tiga);
+                }
+                else{
+                    $satu = $atuatu *5/100;
+                    $dua = $duadua * 15/100;
+                    $tiga = $tigatiga * 25/100;
+                    $empat = ($hasilptkp - $satu - $dua - $tiga) * 30/100;
+                    $akhir = round($satu + $dua + $tiga + $empat);
+                }
+            }else{
+                $akhir = 0;
+            }
+
+            if (!empty($data->id_ptkp)) {
+                # code...
+                $hasil_ptkp = $akhir;
+            } else {
+                # code...
+                $hasil_ptkp = 0;
+            }
+            
+            
+            $bonus = $bonus;
+            $lemburfix = $lembur;
+            $total = ($tambah + $bonus + $lembur) - ($hasil_ptkp);
+            $data = [
+                'peg' => $peg,
+                'detil' => $detilPeg,
+                'ptkp' => $hasil_ptkp,
+                'detail2' => $result,
+                'total' => $total,
+                'bonus' => $bonus, 
+                'lembur' => $lemburfix
+            ];
+            return $data;
         }
     }
 
@@ -177,6 +316,22 @@ class Penggajian extends CI_Controller
             ];
             $this->template->load('template', 'penggajian/laporan_penggajian', $data);
         }
+    }
+
+    public function tunjanganhariraya() {
+        
+        $nips = $this->db->query("SELECT nip FROM pegawai")->result();
+        $pegawais = [];
+        /* echo "<pre>";
+        var_dump($nips);
+        echo "</pre>"; */
+        foreach ($nips as $k=>$v) {
+            array_push($pegawais,($this->slip_gaji_go($v->nip)));
+        }
+        $data = [
+            "pegawai"=>$pegawais
+        ];
+        $this->template->load("template","penggajian/tunjanganhariraya",$data);
     }
 }
 ?>
