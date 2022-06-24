@@ -22,17 +22,8 @@ class Penggajian extends CI_Controller
 
         $pegawai = $this->db->query("SELECT * FROM pegawai WHERE nip = '$nip'")->result()[0];
         $ketptkp = $pegawai->id_jenis_pegawai == "Kontrak" ? "Tidak Kena Pajak" : "Kena Pejak";
-        $tunjanganjabatan = $this->db->query("SELECT * FROM tb_jabatan WHERE desc = '".$pegawai->id_jabatan."'")->result()[0];
-        var_dump($tunjanganjabatan);
-        return;
-        $pegawai = $this->db->query("SELECT c.nominal as nominal_ptkp, b.tunjangan_jabatan, a.gaji_pokok, nama, id_jabatan, id_jenis_pegawai, npwp, nip, rfid, z.pendidikan FROM pegawai z
-        JOIN tb_ptkp c ON c.desc = id_ptkp 
-        JOIN tb_jabatan b ON b.desc = id_jabatan 
-        JOIN tb_jenis_pegawai a ON a.desc = id_jenis_pegawai 
-        WHERE nip = '$nip' ")->result();
-
-        var_dump($pegawai);
-        return;
+        $tunjanganjabatan = $this->db->query("SELECT * FROM tb_jabatan WHERE `desc` LIKE '".$pegawai->id_jabatan."'")->result()[0];
+        $pegawai = $this->db->query("SELECT * FROM pegawai a JOIN tb_jenis_pegawai b ON a.id_jenis_pegawai = b.desc WHERE a.nip = '$nip' ")->result()[0];
 
         $gajipokok = $pegawai->gaji_pokok;
         $ketptkp = $pegawai->id_jenis_pegawai == "Kontrak" ? "Tidak Kena Pajak" : "Kena Pejak";

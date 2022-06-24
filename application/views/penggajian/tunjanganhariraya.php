@@ -33,6 +33,7 @@
                             <tr>
                                 <th>Nama Pegawai</th>
                                 <th>Gaji Bersih</th>
+                                <th>Nominal</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,6 +42,9 @@
                                 <tr>
                                     <td><?= $v["peg"]->nama?></td>
                                     <td class="text-right"><?= format_rp($v["total"])?></td>
+                                    <td class="text-right">
+                                        <input class="form-control">
+                                    </td>
                                 </tr>
                                 <?php endforeach ?>
                         </tbody>
