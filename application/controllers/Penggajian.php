@@ -60,6 +60,7 @@ class Penggajian extends CI_Controller
             "pph21" => $pph21,
             "gajibersih"=>$gajibersih,
             "bonus"=>$bonus,
+            "nip"=>$nip,
         ];
 
 
@@ -256,6 +257,71 @@ class Penggajian extends CI_Controller
             ];
             return $data;
         }
+    }
+
+    public function bayar_semua_gaji() {
+        $nips = $this->input->post("nip");
+        foreach ($nips as $nip) {
+            $data = $this->slip_gaji($nip);
+            $this->bayar_gaji2($data);
+        }
+    }
+
+    public function bayar_gaji2($data)
+    {
+
+        $nip = $data["nip"];
+        $gaji_pokok = $data["gajipokok"];
+        $tunjangan_jabatan = $data["tunjanganjabatan"];
+        $tunjangan_kesehatan = $data["tunjangankesehatan"];
+        $bonus_kerja = $data["bonus"];
+        $ptkp = $data["ptkp"];
+        $tot_penghasilan = $data["totalbruto"];
+        $tot_pengurang = $data["ptkp"];
+        $total = $data["gajibersih"];
+        $tanggal = date('Y-m-d');
+
+        $id_gaji = $this->Absensi_model->id_gaji();
+        $this->db->where('nip', $nip);
+        $pegawai = $this->db->get('pegawai')->row();
+        
+        $tb_penggajian = [
+            'id_penggajian' => $id_gaji,
+            'tanggal' => date('Y-m-d'),
+            'nm_pegawai' => $pegawai->nama,
+            'nominal' => $total,
+        ];
+        $this->db->insert('tb_penggajian', $tb_penggajian);
+
+        $tb_detail_penggajian = [
+            "id_penggajian" => $id_gaji,
+            "gaji_pokok" => $gaji_pokok,
+            "tunjangan_jabatan" => $tunjangan_jabatan,
+            "tunjangan_kesehatan" => $tunjangan_kesehatan,
+            "bonus_kerja" => $bonus_kerja,
+            "ptkp" => $ptkp,
+            "tot_penghasilan" => $tot_penghasilan,
+            "tot_pengurang" => $tot_pengurang,
+            "total" => $total,
+        ];
+        $this->db->insert('tb_detail_penggajian', $tb_detail_penggajian);
+
+        // kirim ke db pengajuan jurnal 
+        $pengajuan = [
+            'kode' => $id_gaji,
+            'tanggal' => $tanggal,
+            'nominal' => $total,
+            'jenis' => 'penggajian',
+        ];
+        $this->db->insert("pengajuan_jurnal", $pengajuan);
+
+        // redirect('Penggajian');
+        // $response = [
+        //     'msg' => 'success', 
+        //     'url' => redirect('Penggajian')
+        // ];
+        // echo json_encode('Sukses');
+        redirect('Penggajian');
     }
 
     public function bayar_gaji()

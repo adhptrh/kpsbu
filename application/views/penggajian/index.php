@@ -19,7 +19,7 @@
                     <?php echo $this->session->flashdata('notif_ubah'); ?>
                 </div>
                 <div class="table-responsive">
-                    <form action="<?= base_url("Penggajian/slip_gaji/")?>" method="post">
+                    <form action="<?= base_url("Penggajian/bayar_semua_gaji")?>" method="post">
                         <table class="table table-bordered" id="datatable">
                             <thead>
                                 <tr>
