@@ -9,7 +9,7 @@
         </div>
         <form action="<?= base_url('Shift/add')?>" method="POST">
             <div class="modal-body">
-                <!-- <div class="form-group row">
+                <div class="form-group row">
                     <label for="pegawai" class="col-sm-2 col-form-label">Pegawai</label>
                     <div class="col-sm-10">
                         <select style="width: 100% !important;" name="pegawai[]" multiple="multiple" id="" class="form-control js-example-basic-multiple" required>
@@ -18,33 +18,11 @@
                             <?php } ?>
                         </select>
                     </div>
-                </div> -->
-                <div class="form-group row table-responsive" style="padding-left:10px;padding-right:10px;">
-                    <table id="datatableyes" class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Nama</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                    <?php foreach ($pegawai as $key => $value) { ?>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" name="pegawai[]" value="<?= $value->nip?>">
-                                </td>
-                                <td><?= $value->nama?></td>
-                            </tr>
-                    <?php } ?>
-
-                            
-                            </tbody>
-                    </table>
-                    <script>
-                        $(document).ready(function() {
-                            $('#datatableyes').DataTable();
-                        } );
-                        </script>
+                </div>
+                <div class="form-group row">
+                    <p>
+                        <input type="checkbox">
+                    </p>
                 </div>
                 <div class="form-group row">
                     <label for="shift" class="col-sm-2 col-form-label">Shift</label>
