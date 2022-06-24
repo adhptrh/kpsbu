@@ -265,6 +265,7 @@ class Penggajian extends CI_Controller
             $data = $this->slip_gaji($nip);
             $this->bayar_gaji2($data);
         }
+        redirect('Penggajian');
     }
 
     public function bayar_gaji2($data)
@@ -321,7 +322,6 @@ class Penggajian extends CI_Controller
         //     'url' => redirect('Penggajian')
         // ];
         // echo json_encode('Sukses');
-        redirect('Penggajian');
     }
 
     public function bayar_gaji()
