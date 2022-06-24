@@ -27,19 +27,25 @@
                 </select>
             </div>
             <div>
-                <table class="table table-bordered">
-                    <tr>
-                        <th>Nama Pegawai</th>
-                        <th>Gaji Bersih</th>
-                    </tr>
-                <?php foreach ($pegawai as $k=>$v): 
-                    ;?>
-                    <tr>
-                        <td><?= $v["peg"]->nama?></td>
-                        <td><?= $v["total"]?></td>
-                    </tr>
-                    <?php endforeach ?>
-                </table>
+                <div class="table-responsive">
+                    <table id="datatable" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Nama Pegawai</th>
+                                <th>Gaji Bersih</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($pegawai as $k=>$v): 
+                                ;?>
+                                <tr>
+                                    <td><?= $v["peg"]->nama?></td>
+                                    <td class="text-right"><?= format_rp($v["total"])?></td>
+                                </tr>
+                                <?php endforeach ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </form>
     </div>
