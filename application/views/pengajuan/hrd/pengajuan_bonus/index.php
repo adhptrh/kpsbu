@@ -29,7 +29,6 @@
                                 <th style="width: 5%;">#</th>
                                 <th>ID Pengajuan</th>
                                 <th>Tanggal Pengajuan</th>
-                                <th>Keterangan</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -41,7 +40,6 @@
                                 <td><?= $no++ ?></td>
                                 <td><?= $item->id_pengajuan?></td>
                                 <td><?= $item->periode?></td>
-                                <td><?= $item->keterangan?></td>
                                 <td class="text-center">
                                     <button type="button" data-toggle="modal" data-target="detail" class="btn btn-default btn-xs detailtransaksi" data-id="<?= $item->id_pengajuan?>">Detail Transaksi</button>
                                 </td>
@@ -60,6 +58,22 @@
     function rupiah(input) {
         return (input/1000).toFixed(3);
     }
+    function formatRupiah(angka, prefix){
+	var number_string = angka.replace(/[^,\d]/g, '').toString(),
+	split   		= number_string.split(','),
+	sisa     		= split[0].length % 3,
+	rupiah     		= split[0].substr(0, sisa),
+	ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+ 
+	// tambahkan titik jika yang di input sudah menjadi angka ribuan
+	if(ribuan){
+		separator = sisa ? '.' : '';
+		rupiah += separator + ribuan.join('.');
+	}
+ 
+	rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+	return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+}
     $(document).ready(function() {
         $('.js-example-basic-multiple').select2();
     });
@@ -80,7 +94,8 @@
                     tableRow += `<tr>
                             <td>${element.id_pengajuan}</td>
                             <td>${element.nama}</td>
-                            <td>${'Rp. ' + rupiah(element.nominal)}</td>
+                            <td>${'Rp. ' + formatRupiah(element.nominal,"Rp. ")}</td>
+                            <td>${element.keterangan}</td>
                         </tr>`;
                 });
                 $("#myTable tbody").html(tableRow);

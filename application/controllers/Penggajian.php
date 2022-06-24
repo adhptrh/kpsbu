@@ -4,8 +4,13 @@ class Penggajian extends CI_Controller
     public function index()
     {
         $pegawai = $this->Absensi_model->detailPegawai()->result();
+        $pegawais = [];
+        foreach ($pegawai as $pgw) {
+            $pegawais[$pgw->nip] = $this->slip_gaji($pgw->nip);
+        }
         $data = [
             'pegawai' => $pegawai,
+            'pegawaidetail' => $pegawais
         ];
         $this->template->load('template', 'penggajian/index', $data);
     }
@@ -23,25 +28,42 @@ class Penggajian extends CI_Controller
         $pegawai = $this->db->query("SELECT * FROM pegawai WHERE nip = '$nip'")->result()[0];
         $ketptkp = $pegawai->id_jenis_pegawai == "Kontrak" ? "Tidak Kena Pajak" : "Kena Pejak";
         $tunjanganjabatan = $this->db->query("SELECT * FROM tb_jabatan WHERE `desc` LIKE '".$pegawai->id_jabatan."'")->result()[0];
-        $pegawai = $this->db->query("SELECT * FROM pegawai a JOIN tb_jenis_pegawai b ON a.id_jenis_pegawai = b.desc WHERE a.nip = '$nip' ")->result()[0];
-
+        $pegawai = $this->db->query("SELECT a.id_jenis_pegawai, c.tunjangan_jabatan, c.tunjangan_kesehatan, b.gaji_pokok FROM pegawai a JOIN tb_jenis_pegawai b ON a.id_jenis_pegawai = b.desc JOIN tb_jabatan c ON a.id_jabatan = c.desc WHERE a.nip = '$nip' ")->result()[0];
+        $nominal_ptkp = $this->db->query("SELECT * FROM tb_ptkp a JOIN pegawai b ON b.id_ptkp = a.desc WHERE b.nip = '$nip'")->result()[0]->nominal ?? 0;
+        $tunjanganhariraya = $this->db->query("SELECT * FROM tunjangan_hari_raya WHERE tanggal LIKE '".date('Y-m')."%' AND nip = '$nip'")->result()[0]->nominal ?? 0;
+        $bonus = $this->db->query("SELECT a.nominal FROM tb_detail_pengajuan_bonus a JOIN pengajuan_bonus b ON a.id_pengajuan = b.id_pengajuan WHERE a.nip = '$nip' AND b.periode LIKE '".date("Y-m")."%'")->result()[0]->nominal ?? 0;
         $gajipokok = $pegawai->gaji_pokok;
         $ketptkp = $pegawai->id_jenis_pegawai == "Kontrak" ? "Tidak Kena Pajak" : "Kena Pejak";
         $tunjanganjabatan = $pegawai->tunjangan_jabatan;
-        $tunjangankesehatan = $pegawai->tunjang_kesehatan;
-        $bonus = 0;
-        $totalbruto = $gajipokok+$tunjangankesehatan+$tunjanganjabatan+$bonus;
-        $biaya_jabatan = $totalbruto*0.5;
-        $totalnetto = $totalbruto-$biaya_jabatan;
-        $ptkp = $pegawai->nominal_ptkp;
+        $tunjangankesehatan = $pegawai->tunjangan_kesehatan;
+        $totalbruto = $gajipokok+$tunjangankesehatan+$tunjanganjabatan+$bonus+$tunjanganhariraya;
+        $biayajabatan = $totalbruto*0.5;
+        $totalnetto = $totalbruto-$biayajabatan;
+        $ptkp = $nominal_ptkp;
         $penghasiltidakkenapajak = $totalbruto-$ptkp;
-        $pph21 = $penghasiltidakkenapajak*0.5;
+        $pph21 = $pegawai->id_jenis_pegawai == "Kontrak" ? 0:$penghasiltidakkenapajak*0.5;
+        
 
         $gaji = $totalbruto;
         $gajibersih = $gaji-$pph21;
 
+        $data = [
+            "gajipokok" => $gajipokok,
+            "tunjangankesehatan" => $tunjangankesehatan,
+            "tunjanganjabatan" => $tunjanganjabatan,
+            "tunjanganhariraya" => $tunjanganhariraya,
+            "totalbruto" => $totalbruto,
+            "biayajabatan" => $biayajabatan,
+            "totalnetto" => $totalnetto,
+            "ptkp" => $nominal_ptkp,
+            "penghasiltidakkenapajak" => $penghasiltidakkenapajak,
+            "pph21" => $pph21,
+            "gajibersih"=>$gajibersih,
+            "bonus"=>$bonus,
+        ];
 
-        var_dump($gajipokok);
+
+        return $data;
         
     }
 
@@ -310,19 +332,65 @@ class Penggajian extends CI_Controller
     }
 
     public function tunjanganhariraya() {
-        
-        $nips = $this->db->query("SELECT nip FROM pegawai")->result();
+        $date = date("Y")."-".$this->input->get("bulan") ?? date('Y-m');
+        $pegawai = $this->db->query("SELECT a.nama,a.nip,b.nominal,b.tanggal FROM pegawai a LEFT JOIN tunjangan_hari_raya b ON a.nip = b.nip WHERE b.tanggal IS NULL OR b.tanggal NOT LIKE '$date%'")->result();
         $pegawais = [];
-        /* echo "<pre>";
-        var_dump($nips);
-        echo "</pre>"; */
-        foreach ($nips as $k=>$v) {
-            array_push($pegawais,($this->slip_gaji_go($v->nip)));
+        $thr = [];
+        $dateApplied = $this->db->query("SELECT * FROM tunjangan_hari_raya WHERE tanggal LIKE '".date("Y")."%'")->result()[0] ?? false;
+        foreach ($pegawai as $pgw) {
+            $slipgaji = $this->slip_gaji($pgw->nip);
+            $thr[$pgw->nip] = $slipgaji["gajipokok"]+$slipgaji["tunjanganjabatan"]+$slipgaji["tunjangankesehatan"];
+            $pegawais[$pgw->nip] = $this->slip_gaji($pgw->nip);
         }
+        $namabulan = [
+            "01"=>"Januari",
+            "02"=>"Februari",
+            "03"=>"Maret",
+            "04"=>"April",
+            "05"=>"Mei",
+            "06"=>"Juni",
+            "07"=>"Juli",
+            "08"=>"Agustus",
+            "09"=>"September",
+            "10"=>"Oktober",
+            "11"=>"November",
+            "12"=>"Desember"
+        ];
         $data = [
-            "pegawai"=>$pegawais
+            "pegawai"=>$pegawai,
+            "pegawaidetail"=>$pegawais,
+            "date"=>date("m"),
+            "dateApplied"=>$dateApplied,
+            "namabulan"=>$namabulan,
+            "thr"=>$thr,
         ];
         $this->template->load("template","penggajian/tunjanganhariraya",$data);
+    }
+
+    public function simpan_tunjangan_hari_raya()
+    {
+        $dateApplied = $this->db->query("SELECT * FROM tunjangan_hari_raya WHERE tanggal LIKE '".date("Y")."%'")->result()[0] ?? false;
+        $pegawai = $this->Absensi_model->detailPegawai()->result();
+        foreach ($pegawai as $pgw) {
+            if ($this->input->post($pgw->nip)) {
+                $data = [
+                    "nip" => $pgw->nip,
+                    "tanggal" => $dateApplied->tanggal ?? date("Y")."-".$this->input->post("bulan")."-1",
+                    "nominal" => $this->input->post($pgw->nip),
+                    "nama" => $pgw->nama,
+                ];
+                $this->db->insert("tunjangan_hari_raya", $data);
+            }
+        }
+        redirect("Penggajian/tunjanganhariraya");
+
+    }
+    
+    public function liat_tunjangan_hari_raya()
+    {
+        $yes = $this->db->query("SELECT a.nama,a.nip,b.nominal FROM pegawai a JOIN tunjangan_hari_raya b ON b.nip = a.nip")->result();
+        var_dump($yes);
+
     }
 }
 ?>

@@ -16,6 +16,7 @@
                             <th>ID Pengajuan</th>
                             <th>Nama Pegawai</th>
                             <th>Nominal</th>
+                            <th>Keterangan</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,6 +25,7 @@
                             <td><?= $item->id_pengajuan?></td>
                             <td><?= $item->id_pengajuan?></td>
                             <td><?= $item->id_pengajuan?></td>
+                            <td><?= $item->keterangan?></td>
                         </tr>
                         <?php } ?>
                     </tbody>

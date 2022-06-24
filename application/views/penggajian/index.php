@@ -26,10 +26,18 @@
                                     <th style="width: 4%;">#</th>
                                     <th>NIP</th>
                                     <th>NPWP</th>
+                                    <th>RFID</th>
                                     <th>Nama Pegawai</th>
-                                    <th>Jumlah Presensi</th>
+                                    <!-- <th>Jumlah Presensi</th> -->
+                                    <th>Gaji</th>
+                                    <th>PPH21</th>
+                                    <th>Tunjangan Kesehatan</th>
+                                    <th>Tunjangan Jabatan</th>
+                                    <th>Tunjangan Hari Raya</th>
+                                    <th>Bonus</th>
+                                    <th>PTKP</th>
                                     <th style="width: 15%;" class="text-center">Status</th>
-                                    <th style="width: 15%;" class="text-center">Action</th>
+                                    <!-- <th style="width: 15%;" class="text-center">Action</th> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -50,8 +58,16 @@
                                 </td>
                                     <td style="text-align:right;"><?= $value->nip ?></td>
                                     <td style="text-align:right;"><?= $value->npwp ?></td>
-                                    <td><b><?= $value->rfid ?></b>-<?= $value->nama ?></td>
-                                    <td><?= $value->total ?? '0' ?></td>
+                                    <td style="text-align:right;"><?= $value->rfid ?></td>
+                                    <td><?= $value->nama ?></td>
+                                    <!-- <td><?= $value->total ?? '0' ?></td> -->
+                                    <td class="text-right"><?= format_rp($pegawaidetail[$value->nip]["totalbruto"]) ?></td>
+                                    <td class="text-right"><?= format_rp($pegawaidetail[$value->nip]["pph21"]) ?></td>
+                                    <td class="text-right"><?= format_rp($pegawaidetail[$value->nip]["tunjangankesehatan"]) ?></td>
+                                    <td class="text-right"><?= format_rp($pegawaidetail[$value->nip]["tunjanganjabatan"]) ?></td>
+                                    <td class="text-right"><?= format_rp($pegawaidetail[$value->nip]["tunjanganhariraya"]) ?></td>
+                                    <td class="text-right"><?= format_rp($pegawaidetail[$value->nip]["bonus"]) ?></td>
+                                    <td class="text-right"><?= format_rp($pegawaidetail[$value->nip]["ptkp"]) ?></td>
                                     <td class="text-center">
                                         <?php if (!is_null($value->tgl_gaji)) { ?>
                                             <a href="#" class="btn btn-xs btn-success">Sudah melakukan penggajian</a>
@@ -66,7 +82,7 @@
                                         $end = 30;
                                         if (($today >= $start) && ($today <= $end)){ ?>
                                             <?php if ($value->total >= 0 AND is_null($value->tgl_gaji)) { ?>
-                                                <a href="<?= base_url('Penggajian/slip_gaji/'.$value->nip)?>" class="btn btn-xs btn-primary">Pembayaran Gaji</a>
+                                               <!--  <a href="<?= base_url('Penggajian/slip_gaji/'.$value->nip)?>" class="btn btn-xs btn-primary">Pembayaran Gaji</a> -->
                                             <?php } ?>
                                         <?php } ?>
                                     </td>

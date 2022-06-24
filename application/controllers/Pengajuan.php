@@ -61,7 +61,8 @@
     public function pengajuanBonus()
     {
         $kode = $this->M_masterdata->id_pengajuan_bonus();
-        $pegawai = $this->db->query("select * from pegawai where status = '1'")->result();
+        $pegawai = $this->db->query("select a.* from pegawai a LEFT JOIN tb_detail_pengajuan_bonus b ON a.nip = b.nip WHERE b.tanggal NOT LIKE '".date("Y-m")."%' OR tanggal IS NULL")->result();
+       
         // $detail = $this->db->query("SELECT b.*, c.nama          
         // FROM pengajuan_bonus a      
         // JOIN tb_detail_pengajuan_bonus b
@@ -106,6 +107,38 @@
         $this->db->insert("pengajuan_bonus", $pengajuan_bonus);
 
         Redirect("Pengajuan/pengajuanBonus");
+    }
+
+    public function savePengajuanBonus2() {
+        $id_pengajuan = $this->input->post('id_pengajuan');
+        $periode = $this->input->post('tgl');
+        $getperiodeudahadasebelumnya = $this->db->query("SELECT * FROM pengajuan_bonus WHERE periode LIKE '".$periode."%'")->result();
+        if (count($getperiodeudahadasebelumnya) > 0 ) {
+            $id_pengajuan = $getperiodeudahadasebelumnya[0]->id_pengajuan;
+        } else {
+            $pengajuan_bonus = [
+                'id_pengajuan' => $id_pengajuan, 
+                'periode' => $periode,
+                'keterangan' => "", 
+            ];
+    
+            $this->db->insert("pengajuan_bonus", $pengajuan_bonus);
+        }
+        $nips = $this->input->post("nip");
+        foreach ($nips as $v) {
+            if ($this->input->post("nominal_$v") != "0") {
+                $data = [
+                    'id_pengajuan' => $id_pengajuan,
+                    'nip' => $v,
+                    'nominal' => $this->input->post("nominal_$v"),
+                    'keterangan' => $this->input->post("keterangan_$v"),
+                ];
+                $this->db->insert('tb_detail_pengajuan_bonus', $data);
+            }
+        }
+
+        redirect("Pengajuan/pengajuanBonus");
+        
     }
 
     public function detail_bonus()
