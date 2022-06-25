@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2022 at 02:32 AM
+-- Generation Time: Jun 25, 2022 at 11:06 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -31,21 +31,6 @@ CREATE TABLE `absensi` (
   `id` int(11) NOT NULL,
   `tanggal` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `absensi`
---
-
-INSERT INTO `absensi` (`id`, `tanggal`) VALUES
-(1, '2021-10-26'),
-(2, '2021-11-02'),
-(3, '2021-11-21'),
-(4, '2021-12-05'),
-(5, '2021-12-08'),
-(6, '2021-12-30'),
-(7, '2022-05-08'),
-(8, '2022-06-18'),
-(9, '2022-06-21');
 
 -- --------------------------------------------------------
 
@@ -396,11 +381,8 @@ CREATE TABLE `buku_pembantu_bank` (
 --
 
 INSERT INTO `buku_pembantu_bank` (`id`, `id_ref`, `bukti_transaksi`, `tanggal`, `nominal`, `kd_coa`, `posisi_dr_cr`, `keterangan`, `bunga`, `pajak`, `biaya_admin`) VALUES
-(3, 'BPNRM20220622001', NULL, '2022-06-22', '10000000', 1116, 'd', 'aaaa', 0, 0, 0),
-(4, 'BPNG20220622002', NULL, '2022-06-22', '5000000', 1116, 'k', 'aaaa', 0, 0, 0),
-(5, 'BPNRM20220622003', 'awdawd', '2022-06-22', '10000000', 1116, 'd', 'aaaa', 2000, 1000, 3000),
-(6, 'BPNRM20220622004', 'awdawd', '2022-06-22', '10000000', 1116, 'd', 'aaaa', 2000, 1000, 3000),
-(7, 'BPNG20220622005', 'awdawd', '2022-06-22', '5000000', 1116, 'k', 'aaaa', 2000, 1000, 3000);
+(9, 'BPNRM20220625001', 'awdawd', '2022-06-25', '10000000', 1116, 'd', 'aaaa', 2000, 1000, 3000),
+(10, 'BPNG20220625002', 'awdawd', '2022-06-25', '5000000', 1116, 'k', 'aaaa', 2000, 1000, 3000);
 
 -- --------------------------------------------------------
 
@@ -543,7 +525,20 @@ INSERT INTO `buku_pembantu_kas` (`id`, `id_ref`, `tanggal`, `nominal`, `kd_coa`,
 (123, 'PNJWASERDA200622039', '2022-06-20', '2500', 1111, 'd', 'Penjualan Tunai'),
 (124, 'PNJWASERDA230622051', '2022-06-23', '7500', 1111, 'd', 'Penjualan Tunai'),
 (125, 'PNJWASERDA230622052', '2022-06-23', '2500', 1111, 'd', 'Penjualan Tunai'),
-(126, 'PNJWASERDA230622053', '2022-06-23', '2500', 1111, 'd', 'Penjualan Tunai');
+(126, 'PNJWASERDA230622053', '2022-06-23', '2500', 1111, 'd', 'Penjualan Tunai'),
+(127, 'GAJI-004', '2022-06-25', '5600000', 1111, 'k', 'Pembayaran Gaji'),
+(128, 'GAJI-001', '2022-06-25', '5600000', 1111, 'k', 'Pembayaran Gaji'),
+(129, 'GAJI-002', '2022-06-25', '6450000', 1111, 'k', 'Pembayaran Gaji'),
+(130, 'GAJI-001', '2022-06-25', '5600000', 1111, 'k', 'Pembayaran Gaji'),
+(131, 'GAJI-001', '2022-06-25', '5600000', 1111, 'k', 'Pembayaran Gaji'),
+(132, 'GAJI-005', '2022-06-25', '6450000', 1111, 'k', 'Pembayaran Gaji'),
+(133, 'GAJI-002', '2022-06-25', '6450000', 1111, 'k', 'Pembayaran Gaji'),
+(134, 'PNJWASERDA220622046', '2022-06-22', '4000', 1111, 'd', 'Penjualan Tunai'),
+(135, 'PMBWASERDA220622024', '2022-06-22', '16650', 1111, 'k', 'Pembelian Barang Waserda'),
+(136, 'PNJWASERDA220622047', '2022-06-22', '24000', 1111, 'd', 'Penjualan Tunai'),
+(137, 'PNJWASERDA220622048', '2022-06-22', '2000', 1111, 'd', 'Penjualan Tunai'),
+(138, 'PNJWASERDA220622045', '2022-06-22', '6000', 1111, 'd', 'Penjualan Tunai'),
+(139, 'PNJWASERDA220622049', '2022-06-22', '5000', 1111, 'd', 'Penjualan Tunai');
 
 -- --------------------------------------------------------
 
@@ -655,27 +650,6 @@ CREATE TABLE `detail_absen_rfid` (
   `jam` time DEFAULT NULL,
   `keterangan` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `detail_absen_rfid`
---
-
-INSERT INTO `detail_absen_rfid` (`id`, `id_absensi`, `rfid`, `status`, `jam`, `keterangan`) VALUES
-(1, 1, '2', 'masuk', '15:11:05', 'Presensi Masuk'),
-(2, 1, '4', 'masuk', '15:11:38', 'Presensi Masuk'),
-(3, 1, '2', 'masuk', '15:13:48', 'Presensi Keluar'),
-(4, 1, '4', 'masuk', '15:13:55', 'Presensi Keluar'),
-(5, 2, '2635346361', 'masuk', '22:31:43', 'Presensi Masuk'),
-(6, 2, '2635346361', 'masuk', '22:31:48', 'Presensi Keluar'),
-(7, 3, '44', 'masuk', '13:12:27', 'Presensi Masuk'),
-(8, 3, '44', 'masuk', '13:14:24', 'Presensi Keluar'),
-(9, 4, '44', 'masuk', '10:43:13', 'Presensi Masuk'),
-(10, 5, '44', 'masuk', '10:14:55', 'Presensi Masuk'),
-(11, 5, '44', 'masuk', '10:14:58', 'Presensi Keluar'),
-(12, 6, '1029384756', 'masuk', '11:02:28', 'Presensi Masuk'),
-(13, 6, '1029384756', 'masuk', '11:03:51', 'Presensi Keluar'),
-(14, 7, '111', 'masuk', '13:05:37', 'Presensi Masuk'),
-(15, 7, '111', 'masuk', '13:05:41', 'Presensi Keluar');
 
 -- --------------------------------------------------------
 
@@ -1699,9 +1673,6 @@ INSERT INTO `jurnal` (`no`, `id_jurnal`, `tgl_jurnal`, `no_coa`, `posisi_dr_cr`,
 (443, 'PNJWASERDA200622039', '2022-06-21', 6113, 'd', 1750),
 (444, 'PNJWASERDA200622039', '2022-06-21', 1414, 'k', 1750),
 (445, '123', '2022-06-22', 5111, 'd', 1000),
-(446, 'BPNRM20220622003', '2022-06-22', 116, 'd', 10000000),
-(447, 'BPNRM20220622004', '2022-06-22', 1116, 'd', 10000000),
-(448, 'BPNG20220622005', '2022-06-22', 1116, 'k', 5000000),
 (449, '111', '2022-06-22', 1117, 'd', 10000000),
 (450, '111', '2022-06-22', 1111, 'k', 10000000),
 (451, '414', '2022-06-22', 5221, 'd', 500000),
@@ -1723,7 +1694,53 @@ INSERT INTO `jurnal` (`no`, `id_jurnal`, `tgl_jurnal`, `no_coa`, `posisi_dr_cr`,
 (467, 'PNJWASERDA230622053', '2022-06-23', 2140, 'k', 275),
 (468, 'PNJWASERDA230622053', '2022-06-23', 4116, 'k', 2775),
 (469, 'PNJWASERDA230622053', '2022-06-23', 6113, 'd', 1750),
-(470, 'PNJWASERDA230622053', '2022-06-23', 1414, 'k', 1750);
+(470, 'PNJWASERDA230622053', '2022-06-23', 1414, 'k', 1750),
+(472, 'BPNRM20220625001', '2022-06-25', 1116, 'd', 10000000),
+(473, 'BPNG20220625002', '2022-06-25', 1116, 'k', 5000000),
+(474, 'GAJI-004', '2022-06-25', 5311, 'd', 5600000),
+(475, 'GAJI-004', '2022-06-25', 1111, 'k', 5600000),
+(476, 'GAJI-001', '2022-06-25', 5311, 'd', 5600000),
+(477, 'GAJI-001', '2022-06-25', 1111, 'k', 5600000),
+(478, 'GAJI-002', '2022-06-25', 5311, 'd', 6450000),
+(479, 'GAJI-002', '2022-06-25', 1111, 'k', 6450000),
+(480, 'GAJI-001', '2022-06-25', 5311, 'd', 5600000),
+(481, 'GAJI-001', '2022-06-25', 1111, 'k', 5600000),
+(482, 'GAJI-001', '2022-06-25', 5311, 'd', 5600000),
+(483, 'GAJI-001', '2022-06-25', 1111, 'k', 5600000),
+(484, 'GAJI-005', '2022-06-25', 5311, 'd', 6450000),
+(485, 'GAJI-005', '2022-06-25', 1111, 'k', 6450000),
+(486, 'GAJI-002', '2022-06-25', 5311, 'd', 6450000),
+(487, 'GAJI-002', '2022-06-25', 1111, 'k', 6450000),
+(488, 'PNJWASERDA220622046', '2022-06-25', 1111, 'd', 4000),
+(489, 'PNJWASERDA220622046', '2022-06-25', 2140, 'k', 440),
+(490, 'PNJWASERDA220622046', '2022-06-25', 4116, 'k', 4440),
+(491, 'PNJWASERDA220622046', '2022-06-25', 6113, 'd', 3000),
+(492, 'PNJWASERDA220622046', '2022-06-25', 1414, 'k', 3000),
+(493, 'PMBWASERDA220622024', '2022-06-25', 1414, 'd', 15000),
+(494, 'PMBWASERDA220622024', '2022-06-25', 2130, 'd', 1650),
+(495, 'PMBWASERDA220622024', '2022-06-25', 1111, 'k', 16650),
+(496, 'PNJWASERDA220622047', '2022-06-25', 1111, 'd', 24000),
+(497, 'PNJWASERDA220622047', '2022-06-25', 2140, 'k', 2640),
+(498, 'PNJWASERDA220622047', '2022-06-25', 4116, 'k', 26640),
+(499, 'PNJWASERDA220622047', '2022-06-25', 6113, 'd', 18000),
+(500, 'PNJWASERDA220622047', '2022-06-25', 1414, 'k', 18000),
+(501, 'PNJWASERDA220622048', '2022-06-25', 1111, 'd', 2000),
+(502, 'PNJWASERDA220622048', '2022-06-25', 2140, 'k', 220),
+(503, 'PNJWASERDA220622048', '2022-06-25', 4116, 'k', 2220),
+(504, 'PNJWASERDA220622048', '2022-06-25', 6113, 'd', 1500),
+(505, 'PNJWASERDA220622048', '2022-06-25', 1414, 'k', 1500),
+(506, 'PNJWASERDA220622045', '2022-06-25', 1111, 'd', 6000),
+(507, 'PNJWASERDA220622045', '2022-06-25', 2140, 'k', 660),
+(508, 'PNJWASERDA220622045', '2022-06-25', 4116, 'k', 6660),
+(509, 'PNJWASERDA220622045', '2022-06-25', 6113, 'd', 4500),
+(510, 'PNJWASERDA220622045', '2022-06-25', 1414, 'k', 4500),
+(511, 'PNJWASERDA220622049', '2022-06-25', 1111, 'd', 5000),
+(512, 'PNJWASERDA220622049', '2022-06-25', 2140, 'k', 550),
+(513, 'PNJWASERDA220622049', '2022-06-25', 4116, 'k', 5550),
+(514, 'PNJWASERDA220622049', '2022-06-25', 6113, 'd', 3500),
+(515, 'PNJWASERDA220622049', '2022-06-25', 1414, 'k', 3500),
+(516, 'LMBR20220625007', '2022-06-25', 5400, 'd', 60000),
+(517, 'LMBR20220625007', '2022-06-25', 1111, 'k', 60000);
 
 -- --------------------------------------------------------
 
@@ -2146,16 +2163,19 @@ CREATE TABLE `pegawai` (
   `no_rek` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT '1',
   `status_kredit` tinyint(1) DEFAULT 0,
-  `created_at` timestamp NULL DEFAULT current_timestamp()
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `riwayat_pendidikan` varchar(255) NOT NULL,
+  `jurusan_pendidikan` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pegawai`
 --
 
-INSERT INTO `pegawai` (`id`, `id_jabatan`, `id_ptkp`, `id_jenis_pegawai`, `pendidikan`, `rfid`, `nip`, `npwp`, `nama`, `alamat`, `no_telp`, `tempat_lahir`, `tgl_lahir`, `nama_bank`, `no_rek`, `status`, `status_kredit`, `created_at`) VALUES
-(8, 'Staff', '', 'Kontrak', NULL, '111', '111', '111111', 'Heni', 'Bandung', '0898998989', 'Bandung', '1998-03-01', 'Mandiri', '11223321', '1', 1, '2021-12-04 11:17:34'),
-(9, 'Staff', 'TK0', 'Tetap', NULL, '1029384756', '1029384756', '1029384756', 'Jadi andri aja namanya', 'bandung', '1029384756', 'bandung', '1991-03-03', 'BCA', '123123123', '1', 1, '2021-12-15 07:10:28');
+INSERT INTO `pegawai` (`id`, `id_jabatan`, `id_ptkp`, `id_jenis_pegawai`, `pendidikan`, `rfid`, `nip`, `npwp`, `nama`, `alamat`, `no_telp`, `tempat_lahir`, `tgl_lahir`, `nama_bank`, `no_rek`, `status`, `status_kredit`, `created_at`, `riwayat_pendidikan`, `jurusan_pendidikan`) VALUES
+(8, 'Staff', '', 'Kontrak', 'sma', '111', '111', '111111', 'Heni', 'Bandung', '0898998989', 'Bandung', '1998-03-01', 'Mandiri', '11223321', '1', 1, '2021-12-04 11:17:34', '', ''),
+(9, 'Staff', 'TK0', 'Tetap', 's1', '1029384756', '1029384756', '1029384756', 'Jadi andri aja namanya', 'bandung', '1029384756', 'bandung', '1991-03-03', 'BCA', '123123123', '1', 1, '2021-12-15 07:10:28', '', ''),
+(11, 'Staff', '', 'Kontrak', 's2', '323123', '8003250622757', '123142', 'ela', 'aawd', '213213', 'awdsdad', '2003-02-02', 'BCA', '232323232323', '1', 0, '2022-06-25 16:20:07', 'sma, s1', 'rpl');
 
 -- --------------------------------------------------------
 
@@ -2539,7 +2559,7 @@ CREATE TABLE `pengajuan_bonus` (
 --
 
 INSERT INTO `pengajuan_bonus` (`id`, `id_pengajuan`, `periode`, `nip`, `nominal`, `keterangan`, `status`) VALUES
-(10, 'PENGAJUANBONUS250622001', '2022-06', 0, 0, '', 0);
+(11, 'PENGAJUANBONUS260622001', '2022-06', 0, 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -2683,21 +2703,35 @@ INSERT INTO `pengajuan_jurnal` (`id`, `kode`, `tanggal`, `nominal`, `status`, `j
 (124, 'LMBR20220621004', '2022-06-21', 20000, 'selesai', 'pengajuan lembur', NULL),
 (125, 'LMBR20220621006', '2022-06-21', 20000, 'selesai', 'pengajuan lembur', NULL),
 (126, 'PMBWASERDA220622023', '2022-06-22', 24975, 'pending', 'Pembelian Barang Waserda', 'PMBWASERDA220622023.pdf'),
-(127, 'PNJWASERDA220622045', '2022-06-22', 10000, 'pending', 'Penjualan Barang Tunai Waserda', NULL),
-(128, 'PNJWASERDA220622046', '2022-06-22', 5000, 'pending', 'Penjualan Barang Tunai Waserda', NULL),
-(129, 'PMBWASERDA220622024', '2022-06-22', 16650, 'pending', 'Pembelian Barang Waserda', NULL),
-(130, 'PNJWASERDA220622047', '2022-06-22', 30000, 'pending', 'Penjualan Barang Tunai Waserda', NULL),
-(131, 'PNJWASERDA220622048', '2022-06-22', 3000, 'pending', 'Penjualan Barang Tunai Waserda', NULL),
-(132, 'PNJWASERDA220622049', '2022-06-22', 10000, 'pending', 'Penjualan Barang Tunai Waserda', NULL),
+(127, 'PNJWASERDA220622045', '2022-06-22', 10000, 'selesai', 'Penjualan Barang Tunai Waserda', NULL),
+(128, 'PNJWASERDA220622046', '2022-06-22', 5000, 'selesai', 'Penjualan Barang Tunai Waserda', NULL),
+(129, 'PMBWASERDA220622024', '2022-06-22', 16650, 'selesai', 'Pembelian Barang Waserda', NULL),
+(130, 'PNJWASERDA220622047', '2022-06-22', 30000, 'selesai', 'Penjualan Barang Tunai Waserda', NULL),
+(131, 'PNJWASERDA220622048', '2022-06-22', 3000, 'selesai', 'Penjualan Barang Tunai Waserda', NULL),
+(132, 'PNJWASERDA220622049', '2022-06-22', 10000, 'selesai', 'Penjualan Barang Tunai Waserda', NULL),
 (133, 'PNJWASERDA220622050', '2022-06-22', 5550, 'pending', 'Penjualan Barang Tunai Waserda', 'PNJWASERDA220622050.pdf'),
 (134, 'PNJWASERDA230622051', '2022-06-23', 8325, 'selesai', 'Penjualan Barang Tunai Waserda', NULL),
 (135, 'PNJWASERDA230622052', '2022-06-23', 2775, 'selesai', 'Penjualan Barang Tunai Waserda', NULL),
 (136, 'PNJWASERDA230622053', '2022-06-23', 2775, 'selesai', 'Penjualan Barang Tunai Waserda', NULL),
-(137, 'GAJI-004', '2022-06-25', 5600000, 'pending', 'penggajian', NULL),
-(138, 'GAJI-005', '2022-06-25', 6450000, 'pending', 'penggajian', NULL),
-(139, 'GAJI-001', '2022-06-25', 5600000, 'pending', 'penggajian', NULL),
-(140, 'GAJI-001', '2022-06-25', 5600000, 'pending', 'penggajian', NULL),
-(141, 'GAJI-002', '2022-06-25', 6450000, 'pending', 'penggajian', NULL);
+(137, 'GAJI-004', '2022-06-25', 5600000, 'selesai', 'penggajian', NULL),
+(138, 'GAJI-005', '2022-06-25', 6450000, 'selesai', 'penggajian', NULL),
+(139, 'GAJI-001', '2022-06-25', 5600000, 'selesai', 'penggajian', NULL),
+(140, 'GAJI-001', '2022-06-25', 5600000, 'selesai', 'penggajian', NULL),
+(141, 'GAJI-002', '2022-06-25', 6450000, 'selesai', 'penggajian', NULL),
+(142, 'GAJI-001', '2022-06-25', 5600000, 'selesai', 'penggajian', NULL),
+(143, 'GAJI-002', '2022-06-25', 6450000, 'selesai', 'penggajian', NULL),
+(144, 'LMBR20220625007', '2022-06-25', 60000, 'selesai', 'pengajuan lembur', NULL),
+(145, 'GAJI-003', '2022-06-26', 7600000, 'pending', 'penggajian', NULL),
+(146, 'GAJI-004', '2022-06-26', 7600000, 'pending', 'penggajian', NULL),
+(147, 'GAJI-005', '2022-06-26', 7600000, 'pending', 'penggajian', NULL),
+(148, 'GAJI-006', '2022-06-26', 7600000, 'pending', 'penggajian', NULL),
+(149, 'GAJI-003', '2022-06-26', 7600000, 'pending', 'penggajian', NULL),
+(150, 'GAJI-001', '2022-06-26', 7600000, 'pending', 'penggajian', NULL),
+(151, 'GAJI-002', '2022-06-26', 5100000, 'pending', 'penggajian', NULL),
+(152, 'GAJI-003', '2022-06-26', 4950000, 'pending', 'penggajian', NULL),
+(153, 'GAJI-001', '2022-06-26', 7600000, 'pending', 'penggajian', NULL),
+(154, 'GAJI-002', '2022-06-26', 5100000, 'pending', 'penggajian', NULL),
+(155, 'GAJI-003', '2022-06-26', 4950000, 'pending', 'penggajian', NULL);
 
 -- --------------------------------------------------------
 
@@ -3085,7 +3119,8 @@ INSERT INTO `pos_detail_penjualan` (`id`, `invoice`, `id_produk`, `jml`, `harga`
 (74, 'PNJWASERDA220622050', 'WSP001', '2', 2500, 'dalam proses'),
 (75, 'PNJWASERDA230622051', 'WSP001', '3', 2500, 'dalam proses'),
 (76, 'PNJWASERDA230622052', 'WSP001', '1', 2500, 'dalam proses'),
-(77, 'PNJWASERDA230622053', 'WSP001', '1', 2500, 'dalam proses');
+(77, 'PNJWASERDA230622053', 'WSP001', '1', 2500, 'dalam proses'),
+(79, 'PNJWASERDA250622054', 'WSP001', '1', 2500, 'dalam proses');
 
 -- --------------------------------------------------------
 
@@ -3467,8 +3502,8 @@ CREATE TABLE `tb_detail_pengajuan_bonus` (
 --
 
 INSERT INTO `tb_detail_pengajuan_bonus` (`id`, `id_pengajuan`, `nip`, `nominal`, `keterangan`, `tanggal`) VALUES
-(14, 'PENGAJUANBONUS250622001', '111', 2000000, 'oke', '2022-06-25'),
-(15, 'PENGAJUANBONUS250622001', '1029384756', 3000000, 'aaa', '2022-06-25');
+(16, 'PENGAJUANBONUS260622001', '111', 1500000, 'ok', '2022-06-26'),
+(17, 'PENGAJUANBONUS260622001', '8003250622757', 1000000, 'ya', '2022-06-26');
 
 -- --------------------------------------------------------
 
@@ -3488,6 +3523,15 @@ CREATE TABLE `tb_detail_penggajian` (
   `tot_pengurang` int(20) DEFAULT NULL,
   `total` int(20) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_detail_penggajian`
+--
+
+INSERT INTO `tb_detail_penggajian` (`id`, `id_penggajian`, `gaji_pokok`, `tunjangan_jabatan`, `tunjangan_kesehatan`, `bonus_kerja`, `ptkp`, `tot_penghasilan`, `tot_pengurang`, `total`) VALUES
+(44, 'GAJI-001', 6000000, 300000, 300000, 1000000, 0, 7600000, 0, 7600000),
+(45, 'GAJI-002', 3000000, 300000, 300000, 1500000, 0, 5100000, 0, 5100000),
+(46, 'GAJI-003', 4800000, 300000, 300000, 0, 4500000, 5400000, 4500000, 4950000);
 
 -- --------------------------------------------------------
 
@@ -3530,7 +3574,8 @@ CREATE TABLE `tb_jenis_pegawai` (
 INSERT INTO `tb_jenis_pegawai` (`id`, `desc`, `pendidikan`, `gaji_pokok`) VALUES
 (1, 'Kontrak', 'sma', 3000000),
 (2, 'Tetap', 's1', 4800000),
-(3, 'Kontrak', 's1', 3500000);
+(3, 'Kontrak', 's1', 3500000),
+(4, 'Kontrak', 's2', 6000000);
 
 -- --------------------------------------------------------
 
@@ -3559,7 +3604,8 @@ INSERT INTO `tb_lembur` (`id`, `id_pengajuan`, `tgl_pengajuan`, `id_pegawai`, `t
 (6, 'LMBR20220618003', '2022-06-18', '1029384756', 1, 2, 20000, 20000),
 (7, 'LMBR20220621004', '2022-06-21', '1029384756', 1, 3, 20000, 20000),
 (8, 'LMBR20220621005', '2022-06-21', '1029384756', 1, 2, 20000, 20000),
-(9, 'LMBR20220621006', '2022-06-21', '1029384756', 1, 3, 20000, 20000);
+(9, 'LMBR20220621006', '2022-06-21', '1029384756', 1, 3, 20000, 20000),
+(10, 'LMBR20220625007', '2022-06-25', '1029384756', 3, 3, 20000, 60000);
 
 -- --------------------------------------------------------
 
@@ -3575,6 +3621,15 @@ CREATE TABLE `tb_penggajian` (
   `nominal` int(11) DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_penggajian`
+--
+
+INSERT INTO `tb_penggajian` (`id`, `id_penggajian`, `tanggal`, `nm_pegawai`, `nominal`, `status`) VALUES
+(46, 'GAJI-001', '2022-06-26', 'ela', 7600000, NULL),
+(47, 'GAJI-002', '2022-06-26', 'Heni', 5100000, NULL),
+(48, 'GAJI-003', '2022-06-26', 'Jadi andri aja namanya', 4950000, NULL);
 
 -- --------------------------------------------------------
 
@@ -3798,7 +3853,8 @@ INSERT INTO `user` (`id`, `nama_lengkap`, `username`, `password`, `level`, `nip`
 (14, 'Produksi', 'produksi1', 'produksi1', 'produksi1', NULL),
 (15, 'Produksi', 'produksi2', 'produksi2', 'produksi2', NULL),
 (16, 'Izmi', 'staffsimpanpinjam', '123', 'staffadministrasisimpanpinjam', NULL),
-(17, 'bos', 'bos', 'bos123', 'atasan', 'd3dd1');
+(17, 'bos', 'bos', 'bos123', 'atasan', 'd3dd1'),
+(18, 'ela', 'ela', '123', 'pegawai', '8003250622757');
 
 -- --------------------------------------------------------
 
@@ -4922,13 +4978,13 @@ ALTER TABLE `buku_kas_kecil`
 -- AUTO_INCREMENT for table `buku_pembantu_bank`
 --
 ALTER TABLE `buku_pembantu_bank`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `buku_pembantu_kas`
 --
 ALTER TABLE `buku_pembantu_kas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
 
 --
 -- AUTO_INCREMENT for table `coa`
@@ -5030,7 +5086,7 @@ ALTER TABLE `jenis_penjualan`
 -- AUTO_INCREMENT for table `jurnal`
 --
 ALTER TABLE `jurnal`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=471;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=518;
 
 --
 -- AUTO_INCREMENT for table `kartu_stok_bp`
@@ -5090,7 +5146,7 @@ ALTER TABLE `log_simpanan_hr`
 -- AUTO_INCREMENT for table `pegawai`
 --
 ALTER TABLE `pegawai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `pembagian_shu`
@@ -5120,13 +5176,13 @@ ALTER TABLE `penerimaan_pengeluaran_kas`
 -- AUTO_INCREMENT for table `pengajuan_bonus`
 --
 ALTER TABLE `pengajuan_bonus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `pengajuan_jurnal`
 --
 ALTER TABLE `pengajuan_jurnal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
 
 --
 -- AUTO_INCREMENT for table `pengeluaran_kas`
@@ -5162,7 +5218,7 @@ ALTER TABLE `pos_detail_pembelian`
 -- AUTO_INCREMENT for table `pos_detail_penjualan`
 --
 ALTER TABLE `pos_detail_penjualan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT for table `pos_pembelian`
@@ -5204,13 +5260,13 @@ ALTER TABLE `tb_cuti`
 -- AUTO_INCREMENT for table `tb_detail_pengajuan_bonus`
 --
 ALTER TABLE `tb_detail_pengajuan_bonus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tb_detail_penggajian`
 --
 ALTER TABLE `tb_detail_penggajian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `tb_jabatan`
@@ -5222,19 +5278,19 @@ ALTER TABLE `tb_jabatan`
 -- AUTO_INCREMENT for table `tb_jenis_pegawai`
 --
 ALTER TABLE `tb_jenis_pegawai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tb_lembur`
 --
 ALTER TABLE `tb_lembur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tb_penggajian`
 --
 ALTER TABLE `tb_penggajian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `tb_ptkp`
@@ -5288,7 +5344,7 @@ ALTER TABLE `update_stok_penj`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `waserda_jenis_anggota`

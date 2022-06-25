@@ -22,6 +22,7 @@
                         <thead>
                             <tr>
                                 <th style="width: 5%;">No</th>
+                                <th style="width: 5%;">#</th>
                                 <th>Tanggal Pembayaran</th>
                                 <th>Kode Pembayaran</th>
                                 <th>Invoice</th>
@@ -33,9 +34,19 @@
                         <tbody>
                         <?php
                         $no = 1;
+                        $day = '26';
                         foreach ($list as $key => $value) { ?>
                             <tr>
                                 <td><?= $no++ ?></td>
+                                <td>
+                                    <?php if (date('d') == $day AND is_null($value->id_pembayaran) AND $value->status == 0) { ?>
+                                    <input type="checkbox">
+                                    <?php } elseif (!is_null($value->id_pembayaran)) { ?>
+                                    <input type="checkbox" disabled>
+                                    <?php } else { ?>
+                                    <input type="checkbox" disabled>
+                                    <?php } ?>
+                                </td>
                                 <td><?= $value->tanggal ?? '-' ?></td>
                                 <td><?= $value->id_pembayaran ?? '-' ?></td>
                                 <td><?= $value->invoice ?></td>
@@ -43,7 +54,7 @@
                                 <td class="text-right"><?= format_rp($value->nominal) ?></td>
                                 <td class="text-center">
                                     <?php if ($value->status == 2) { ?>
-                                    <?php } else if (date('d') == '25' AND is_null($value->id_pembayaran) AND $value->status == 0) { ?>
+                                    <?php } else if (date('d') == $day AND is_null($value->id_pembayaran) AND $value->status == 0) { ?>
                                         <a href="#bayar" data-toggle="modal" class="btn btn-xs btn-primary bayar" 
                                         data-invoice="<?= $value->invoice?>"
                                         data-pembeli="<?= $value->nama?>"
