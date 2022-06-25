@@ -6,7 +6,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h5 class="modal-title" id="exampleModalLabel">Struk</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
                 </div>
                 <div class="modal-body">
                     <table class="table table-bordered">
