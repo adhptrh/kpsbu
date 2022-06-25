@@ -18,6 +18,8 @@
                                 <th>Jabatan</th>
                                 <th>Status PTKP</th>
                                 <th>Jenis Pegawai</th>
+                                <th>Pendidikan</th>
+                                <th>Riwayat Pendidikan</th>
                             </tr>
                             <tr>
                                 <td><?= $item->tempat_lahir?></td>
@@ -25,6 +27,8 @@
                                 <td><?= $item->id_jabatan?></td>
                                 <td><?= $item->id_ptkp ? $item->id_ptkp : '-'?></td>
                                 <td><?= $item->id_jenis_pegawai?></td>
+                                <td><?= $item->pendidikan?></td>
+                                <td><?= $item->riwayat_pendidikan?></td>
                             </tr>
                         </table>
                     </div>

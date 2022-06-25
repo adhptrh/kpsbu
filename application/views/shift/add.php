@@ -31,7 +31,7 @@
                     <?php foreach ($pegawai as $key => $value) { ?>
                             <tr>
                                 <td>
-                                    <input type="checkbox" name="pegawai[]" value="<?= $value->nip?>">
+                                    <input type="checkbox" name="pegawai[]" value="<?= $value->nip?>" checked>
                                 </td>
                                 <td><?= $value->nama?></td>
                             </tr>

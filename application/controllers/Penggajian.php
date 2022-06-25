@@ -3,14 +3,16 @@ class Penggajian extends CI_Controller
 {
     public function index()
     {
-        $pegawai = $this->Absensi_model->detailPegawai()->result();
+        $bulantahun = $this->input->get("bulantahun") ?? date("Y-m");
+        $pegawai = $this->db->query("SELECT a.*, b.tanggal as tgl_gaji FROM pegawai a LEFT JOIN tb_penggajian b ON b.nm_pegawai = a.nama AND tanggal LIKE '$bulantahun%' GROUP BY a.nama")->result();
         $pegawais = [];
         foreach ($pegawai as $pgw) {
-            $pegawais[$pgw->nip] = $this->slip_gaji($pgw->nip);
+            $pegawais[$pgw->nip] = $this->slip_gaji($pgw->nip,$bulantahun);
         }
         $data = [
             'pegawai' => $pegawai,
-            'pegawaidetail' => $pegawais
+            'pegawaidetail' => $pegawais,
+            "bulantahun" => $bulantahun,
         ];
         $this->template->load('template', 'penggajian/index', $data);
     }
@@ -23,16 +25,21 @@ class Penggajian extends CI_Controller
         }
     } */
 
-    public function slip_gaji($nip) {
+    public function slip_gaji($nip, $periode) {
 
         $pegawai = $this->db->query("SELECT * FROM pegawai WHERE nip = '$nip'")->result()[0];
         $ketptkp = $pegawai->id_jenis_pegawai == "Kontrak" ? "Tidak Kena Pajak" : "Kena Pejak";
         $tunjanganjabatan = $this->db->query("SELECT * FROM tb_jabatan WHERE `desc` LIKE '".$pegawai->id_jabatan."'")->result()[0];
-        $pegawai = $this->db->query("SELECT a.id_jenis_pegawai, c.tunjangan_jabatan, c.tunjangan_kesehatan, b.gaji_pokok FROM pegawai a JOIN tb_jenis_pegawai b ON a.id_jenis_pegawai = b.desc JOIN tb_jabatan c ON a.id_jabatan = c.desc WHERE a.nip = '$nip' ")->result()[0];
+        $pegawai = $this->db->query("SELECT a.id_jenis_pegawai, a.pendidikan, c.tunjangan_jabatan, c.tunjangan_kesehatan, b.gaji_pokok FROM pegawai a JOIN tb_jenis_pegawai b ON a.id_jenis_pegawai = b.desc JOIN tb_jabatan c ON a.id_jabatan = c.desc WHERE a.nip = '$nip' ")->result()[0];
         $nominal_ptkp = $this->db->query("SELECT * FROM tb_ptkp a JOIN pegawai b ON b.id_ptkp = a.desc WHERE b.nip = '$nip'")->result()[0]->nominal ?? 0;
-        $tunjanganhariraya = $this->db->query("SELECT * FROM tunjangan_hari_raya WHERE tanggal LIKE '".date('Y-m')."%' AND nip = '$nip'")->result()[0]->nominal ?? 0;
-        $bonus = $this->db->query("SELECT a.nominal FROM tb_detail_pengajuan_bonus a JOIN pengajuan_bonus b ON a.id_pengajuan = b.id_pengajuan WHERE a.nip = '$nip' AND b.periode LIKE '".date("Y-m")."%'")->result()[0]->nominal ?? 0;
-        $gajipokok = $pegawai->gaji_pokok;
+        $tunjanganhariraya = $this->db->query("SELECT * FROM tunjangan_hari_raya WHERE tanggal LIKE '".$periode."%' AND nip = '$nip'")->result()[0]->nominal ?? 0;
+        $bonus = $this->db->query("SELECT a.nominal FROM tb_detail_pengajuan_bonus a JOIN pengajuan_bonus b ON a.id_pengajuan = b.id_pengajuan WHERE a.nip = '$nip' AND b.periode LIKE '".$periode."%'")->result()[0]->nominal ?? 0;
+        $gajipokok = $this->db->query("SELECT * FROM tb_jenis_pegawai a WHERE a.desc LIKE '".$pegawai->id_jenis_pegawai."' AND a.pendidikan LIKE '".$pegawai->pendidikan."'")->result();
+        if (count($gajipokok) > 0) {
+            $gajipokok = $gajipokok[0]->gaji_pokok;
+        } else {
+            $gajipokok = 0;
+        }
         $ketptkp = $pegawai->id_jenis_pegawai == "Kontrak" ? "Tidak Kena Pajak" : "Kena Pejak";
         $tunjanganjabatan = $pegawai->tunjangan_jabatan;
         $tunjangankesehatan = $pegawai->tunjangan_kesehatan;
@@ -261,8 +268,9 @@ class Penggajian extends CI_Controller
 
     public function bayar_semua_gaji() {
         $nips = $this->input->post("nip");
+        $bulantahun = $this->input->post("bulantahun");
         foreach ($nips as $nip) {
-            $data = $this->slip_gaji($nip);
+            $data = $this->slip_gaji($nip,$bulantahun);
             $this->bayar_gaji2($data);
         }
         redirect('Penggajian');
@@ -404,9 +412,9 @@ class Penggajian extends CI_Controller
         $thr = [];
         $dateApplied = $this->db->query("SELECT * FROM tunjangan_hari_raya WHERE tanggal LIKE '".date("Y")."%'")->result()[0] ?? false;
         foreach ($pegawai as $pgw) {
-            $slipgaji = $this->slip_gaji($pgw->nip);
+            $slipgaji = $this->slip_gaji($pgw->nip,$date);
             $thr[$pgw->nip] = $slipgaji["gajipokok"]+$slipgaji["tunjanganjabatan"]+$slipgaji["tunjangankesehatan"];
-            $pegawais[$pgw->nip] = $this->slip_gaji($pgw->nip);
+            $pegawais[$pgw->nip] = $this->slip_gaji($pgw->nip,$date);
         }
         $namabulan = [
             "01"=>"Januari",

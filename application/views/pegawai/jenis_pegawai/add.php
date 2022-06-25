@@ -25,6 +25,8 @@
                             <option value="sma">SMA</option>
                             <option value="d3">D3</option>
                             <option value="s1">S1</option>
+                            <option value="s2">S2</option>
+                            <option value="s3">S3</option>
                         </select>
                     </div>
                 </div>

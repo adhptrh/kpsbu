@@ -66,9 +66,13 @@
         return $this->db->query($q);
     }
 
-    public function detailPegawai()
+    public function detailPegawai($bulantahun = "null")
     {
-        $month = date('m');
+        if ($bulantahun == "null") {
+            $month = date('Y-m');
+        } else {
+            $month = $bulantahun;
+        }
         // query baru
         // $q = "SELECT a.id, nip, npwp, a.rfid, nama, b.total, k.tanggal AS tgl_gaji
         // FROM pegawai a
@@ -95,7 +99,7 @@
            LEFT JOIN absensi s ON s.id = z.id_absensi
            LEFT JOIN tb_penggajian v ON v.nm_pegawai = x.nama
            WHERE keterangan LIKE '%Masuk%'
-           AND MONTH(v.tanggal) = '$month'
+           AND v.tanggal LIKE '$month%'
            GROUP BY x.nama
       	) as b ON b.rfid = a.rfid
         WHERE a.status = 1

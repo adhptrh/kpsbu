@@ -106,6 +106,19 @@
                                     <input type="text" name="no_rek" class="form-control" id="no_rek" placeholder="No Rekening" value="<?= $item->no_rek?>" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="no_rek" class="col-sm-3 col-form-label">Pendidikan</label>
+                                <div class="col-sm-9">
+                                    <select name="pendidikan" class="form-control">
+                                        <option value="">-</option>
+                                        <?php foreach ($jp as $k=>$v) { 
+                                            if ($v->desc == $item->id_jenis_pegawai) { ?>
+                                            <option value="<?= $v->pendidikan ?>" <?= ($item->pendidikan == $v->pendidikan) ? "selected":"" ?>><?= $v->pendidikan ?></option>
+                                        <?php } } ?>
+                                    </select>
+                                    <!-- <input type="text" name="pendidikan" class="form-control" id="pendidikan" placeholder="Pendidikan" value="<?= $item->pendidikan?>"  required> -->
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

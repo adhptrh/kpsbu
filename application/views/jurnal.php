@@ -68,13 +68,25 @@
 							}
 							$stack = [];
 							array_push($stack, $data);
+						} elseif (count($stack) == 3)  {
+							if (
+								$stack[0]["no_coa"] == "1414"  &&
+								$stack[1]["no_coa"] == "2130"  &&
+								$stack[2]["no_coa"] == "1111" 
+								) {
+									array_push($stacks, $stack);
+									$id_jurnal = "";
+									$stack = [];
+								}
+							array_push($stack, $data);
 						} elseif (count($stack) == 5) {
 							if (
 								$stack[0]["no_coa"] == "1111"  &&
 								$stack[1]["no_coa"] == "2140"  &&
 								$stack[2]["no_coa"] == "4116"  &&
 								$stack[3]["no_coa"] == "6113"  &&
-								$stack[4]["no_coa"] == "1414" 
+								$stack[4]["no_coa"] == "1414"
+
 								) {
 									array_push($stacks, $stack);
 									$id_jurnal = "";

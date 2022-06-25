@@ -2591,7 +2591,6 @@ class c_masterdata extends CI_controller
    {
       $jabatan = $this->db->get('tb_jabatan')->result();
       $ptkp = $this->db->get('tb_ptkp')->result();
-      $this->db->group_by('desc');
       $jp = $this->db->get('tb_jenis_pegawai')->result();
       $list = $this->db->get('pegawai')->result();
       $nip = $this->M_masterdata->nip_otomatis();
@@ -2625,6 +2624,7 @@ class c_masterdata extends CI_controller
          'tempat_lahir' => $this->input->post('tempat_lahir'),
          'tgl_lahir' => $this->input->post('ttl'),
          'no_rek' => $this->input->post('no_rek'),
+         'jurusan_pendidikan' => $this->input->post('jurusan_pendidikan'),
       ];
       $this->db->insert('pegawai', $data);
 
@@ -2653,6 +2653,8 @@ class c_masterdata extends CI_controller
       $jp = $this->input->post('jp');
       $ptkp = $this->input->post('ptkp');
       $no_rek = $this->input->post('no_rek');
+      $pendidikan = $this->input->post('pendidikan');
+      $datapeg = $this->db->query("SELECT pendidikan, riwayat_pendidikan FROM pegawai WHERE nip = '$nip'")->result()[0];
 
       $data = [
          'id_jabatan' => $jabatan, 
@@ -2664,6 +2666,8 @@ class c_masterdata extends CI_controller
          'tempat_lahir' => $tempat_lahir, 
          'tgl_lahir' => $ttl, 
          'no_rek' => $no_rek, 
+         'riwayat_pendidikan' => (strlen($datapeg->riwayat_pendidikan) > 0) ? ($datapeg->riwayat_pendidikan.", ".$datapeg->pendidikan): $datapeg->pendidikan,
+         'pendidikan' => $pendidikan,
       ];
 
       $this->db->where('id', $id);

@@ -73,7 +73,7 @@ class Lembur extends CI_Controller
                 'tanggal' => date('Ymd'),
                 'nominal' => $total,
                 'jenis' => 'pengajuan lembur',
-                'status' => '',
+                'status' => 'pending',
             ];
             $this->db->insert("pengajuan_jurnal", $pengajuan);
         }

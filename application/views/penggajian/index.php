@@ -2,6 +2,13 @@
     <div class="col-sm-12">
         <div class="x_panel">
             <div class="x_title">
+            <form class="form-inline" style="margin-bottom:20px;" method="GET">
+                    <div class="form-group">
+                        <label>Bulan Tahun</label>
+                        <input name="bulantahun" class="form-control" type="month" value="<?= $bulantahun ?? "" ?>">
+                        <button class="btn btn-primary">Filter</button>
+                    </div>
+                </form>
                 <div class="row">
                     <div class="col-sm-10 col-12">
                         <h3 id="quote">Penggajian</h3>
@@ -42,7 +49,7 @@
                             </thead>
                             <tbody>
                             <?php 
-                            $no = 1;
+                            $no = 1;    
                             foreach ($pegawai as $key => $value) { ?>
                             <?php 
                             $this->db->where('nm_pegawai', $value->nama);
@@ -75,29 +82,16 @@
                                             <a href="#" class="btn btn-xs btn-warning">Belum melakukan penggajian</a>
                                         <?php } ?>
                                     </td>
-                                    <td class="text-center">
-                                        <?php 
-                                        $today = date('d'); 
-                                        $start = 18;
-                                        $end = 30;
-                                        if (($today >= $start) && ($today <= $end)){ ?>
-                                            <?php if ($value->total >= 0 AND is_null($value->tgl_gaji)) { ?>
-                                               <!--  <a href="<?= base_url('Penggajian/slip_gaji/'.$value->nip)?>" class="btn btn-xs btn-primary">Pembayaran Gaji</a> -->
-                                            <?php } ?>
-                                        <?php } ?>
-                                    </td>
                                 </tr>
                             <?php } ?>
                             </tbody>
                         </table>
                         <?php 
-                            $today = date('d'); 
-                            $start = 18;
-                            $end = 30;
-                            if (($today >= $start) && ($today <= $end)){ ?>
-                                <?php if ($value->total >= 0 AND is_null($value->tgl_gaji)) { ?>
+                            $check = date('d') >= 26 && date("Y-m") == $bulantahun; 
+                            if ($check){ ?>
                                     <button class="btn btn-primary">Pembayaran Gaji</button>
-                                    <?php } ?>
+                                <!-- <?php if ($value->total >= 0 AND is_null($value->tgl_gaji)) { ?> -->
+                                   <!--  <?php } ?> -->
                             <?php } ?>
                     </form>
                 </div>
