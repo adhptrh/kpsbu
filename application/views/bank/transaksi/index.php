@@ -3,6 +3,13 @@
         <h3>Transaksi Bank</h3>
     </div>
     <div class="x_content">
+        <div class="form-group">
+            <form class="form-inline" method="get">
+               <label>Bulan Tahun</label>
+               <input name="bulantahun" class="form-control" value="<?= $bulantahun ?>" type="month">
+               <button class="btn btn-primary">Filter</button>
+           </form>
+        </div>
         <a href="add_transaksi_bank" class="btn btn-primary">Tambah Transaksi</a>
         <table id="datatable" class="table table-striped table-bordered table-hover jambo_table">
             <thead>

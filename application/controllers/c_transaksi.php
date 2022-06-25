@@ -5577,9 +5577,11 @@ group by no_bbp";
       }
 
       public function transaksi_bank() {
+         $bulantahun = $this->input->get("bulantahun") ?? "asdawd";
          $data = [
             "bank" => $this->db->get('bank')->result(),
-            "transaksi" => $this->db->query("SELECT * FROM buku_pembantu_bank")->result(),
+            "transaksi" => $this->db->query("SELECT * FROM buku_pembantu_bank WHERE tanggal LIKE '$bulantahun%'")->result(),
+            "bulantahun"=>$bulantahun
          ];
          $this->template->load("template","bank/transaksi/index",$data);
       }
