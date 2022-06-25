@@ -85,7 +85,7 @@
                                 <td><?= $item->deskripsi == '' ? '-' : $item->deskripsi?></td>
                                 <td><?= $item->file == '' ? '-' : $item->file ?></td>
                                 <td>
-                                    <button>Detail Transaksi</button>
+                                    <button class="btn btn-default"><i class="fa fa-clipboard"></i></button>
                                 </td>
                             </tr>
                             <?php } ?>

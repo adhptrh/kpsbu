@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 24, 2022 at 12:53 AM
+-- Generation Time: Jun 25, 2022 at 02:32 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -978,7 +978,7 @@ CREATE TABLE `detail_pembelian_bp` (
 --
 
 CREATE TABLE `detail_penerimaan_pengeluaran_kas` (
-  `id` int(20) NOT NULL,
+  `id` int(11) NOT NULL,
   `no_dokumen` varchar(255) NOT NULL DEFAULT '0',
   `no_coa` varchar(255) DEFAULT NULL,
   `nama_coa` varchar(255) DEFAULT NULL,
@@ -996,16 +996,16 @@ INSERT INTO `detail_penerimaan_pengeluaran_kas` (`id`, `no_dokumen`, `no_coa`, `
 (2, 'TESTING DOKUMEN SALMA', '1114', 'Persediaan Produk Dalam Proses', 'Aaaa', 500000, 'k'),
 (3, 'testing dokumen 2', '1111', 'Kas', 'Testing', 500000, 'd'),
 (4, 'testing dokumen 2', '1112', 'Persediaan Bahan Baku', 'Aaaa', 500000, 'k'),
-(6, 'testing jurnal', '1111', 'Kas', 'Penerimaan Kas', 500000, 'd'),
-(7, 'testing jurnal', '1312', 'Persediaan Produk Jadi Toko', 'Aaaa', 500000, 'k'),
-(0, '123', '5111', 'Produk Dalam Proses - BBB', 'test', 1000, 'd'),
-(0, '111', '1117', 'Kas Kecil', 'Penerimaan Kas', 10000000, 'd'),
-(0, '111', '1111', 'Kas', 'Penerimaan Kas', 10000000, 'k'),
-(0, '414', '5221', 'Beban Listrik, Air dan Telepon', 'Pengeluaran Kas', 500000, 'd'),
-(0, '414', '1117', 'Kas Kecil', 'Pengeluaran Kas', 500000, 'k'),
-(0, '4232', '5221', 'Beban Listrik, Air dan Telepon', 'Pengeluaran Kas', 300000, 'd'),
-(0, '2314', '5221', 'Beban Listrik, Air dan Telepon', 'Pengeluaran Kas', 300000, 'd'),
-(0, '2314', '1117', 'Kas Kecil', 'Pengeluaran Kas', 300000, 'k');
+(5, 'testing jurnal', '1111', 'Kas', 'Penerimaan Kas', 500000, 'd'),
+(6, 'testing jurnal', '1312', 'Persediaan Produk Jadi Toko', 'Aaaa', 500000, 'k'),
+(7, '123', '5111', 'Produk Dalam Proses - BBB', 'test', 1000, 'd'),
+(8, '111', '1117', 'Kas Kecil', 'Penerimaan Kas', 10000000, 'd'),
+(9, '111', '1111', 'Kas', 'Penerimaan Kas', 10000000, 'k'),
+(10, '414', '5221', 'Beban Listrik, Air dan Telepon', 'Pengeluaran Kas', 500000, 'd'),
+(11, '414', '1117', 'Kas Kecil', 'Pengeluaran Kas', 500000, 'k'),
+(12, '4232', '5221', 'Beban Listrik, Air dan Telepon', 'Pengeluaran Kas', 300000, 'd'),
+(13, '2314', '5221', 'Beban Listrik, Air dan Telepon', 'Pengeluaran Kas', 300000, 'd'),
+(14, '2314', '1117', 'Kas Kecil', 'Pengeluaran Kas', 300000, 'k');
 
 -- --------------------------------------------------------
 
@@ -1193,7 +1193,9 @@ INSERT INTO `jadwal_shift` (`id`, `id_pegawai`, `id_shift`, `tgl_awal`, `tgl_akh
 (9, '44', '1', '2021-12-08', '2021-12-08', 'asd', 'admin', 1),
 (10, '1029384756', '1', '2021-12-30', '2021-12-31', 'test', 'admin', 1),
 (11, '111', '1', '2022-05-08', '2022-05-08', '', NULL, 1),
-(20, '111', '1', '2022-06-21', '2022-06-21', 'aa', 'admin', 0);
+(20, '111', '1', '2022-06-21', '2022-06-21', 'aa', 'admin', 0),
+(21, '111', '1', '2022-06-25', '2022-06-25', 'ok', 'admin', 0),
+(22, '1029384756', '1', '2022-06-25', '2022-06-25', 'ok', 'admin', 0);
 
 -- --------------------------------------------------------
 
@@ -2510,11 +2512,11 @@ INSERT INTO `penerimaan_pengeluaran_kas` (`id`, `periode`, `tanggal`, `no_dokume
 (1, '202206', '2022-06-15', 'TESTING DOKUMEN SALMA', '', '', '', ''),
 (2, '202206', '2022-06-15', 'testing dokumen 2', 'pengeluaran kas', 'tunai', 'test', ''),
 (3, '202206', '2022-06-15', 'testing jurnal', 'pengeluaran kas', 'tunai', 'testing untuk insert ke jurnal', ''),
-(0, '202206', '2022-06-22', '123', 'pengeluaran kas', 'tunai', 'owno', 'av.png'),
-(0, '202206', '2022-06-22', '111', 'penerimaan kas', 'tunai', 'kas kecil', ''),
-(0, '202206', '2022-06-22', '414', 'pengeluaran kas', 'tunai', 'biaya listrik', ''),
-(0, '202206', '2022-06-22', '4232', 'pengeluaran kas', 'tunai', 'biaya listrik ', ''),
-(0, '202206', '2022-06-22', '2314', 'pengeluaran kas', 'tunai', 'biaya listrik', '');
+(4, '202206', '2022-06-22', '123', 'pengeluaran kas', 'tunai', 'owno', 'av.png'),
+(5, '202206', '2022-06-22', '111', 'penerimaan kas', 'tunai', 'kas kecil', ''),
+(6, '202206', '2022-06-22', '414', 'pengeluaran kas', 'tunai', 'biaya listrik', ''),
+(7, '202206', '2022-06-22', '4232', 'pengeluaran kas', 'tunai', 'biaya listrik ', ''),
+(8, '202206', '2022-06-22', '2314', 'pengeluaran kas', 'tunai', 'biaya listrik', '');
 
 -- --------------------------------------------------------
 
@@ -2537,8 +2539,7 @@ CREATE TABLE `pengajuan_bonus` (
 --
 
 INSERT INTO `pengajuan_bonus` (`id`, `id_pengajuan`, `periode`, `nip`, `nominal`, `keterangan`, `status`) VALUES
-(1, 'PENGAJUANBONUS1', '2022-05', 111, 1500000, 'Bonus lebaran', 0),
-(2, 'PENGAJUANBONUS2', '2022-05', 111, 2500000, 'BONUSKERJA', 0);
+(10, 'PENGAJUANBONUS250622001', '2022-06', 0, 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -2691,7 +2692,12 @@ INSERT INTO `pengajuan_jurnal` (`id`, `kode`, `tanggal`, `nominal`, `status`, `j
 (133, 'PNJWASERDA220622050', '2022-06-22', 5550, 'pending', 'Penjualan Barang Tunai Waserda', 'PNJWASERDA220622050.pdf'),
 (134, 'PNJWASERDA230622051', '2022-06-23', 8325, 'selesai', 'Penjualan Barang Tunai Waserda', NULL),
 (135, 'PNJWASERDA230622052', '2022-06-23', 2775, 'selesai', 'Penjualan Barang Tunai Waserda', NULL),
-(136, 'PNJWASERDA230622053', '2022-06-23', 2775, 'selesai', 'Penjualan Barang Tunai Waserda', NULL);
+(136, 'PNJWASERDA230622053', '2022-06-23', 2775, 'selesai', 'Penjualan Barang Tunai Waserda', NULL),
+(137, 'GAJI-004', '2022-06-25', 5600000, 'pending', 'penggajian', NULL),
+(138, 'GAJI-005', '2022-06-25', 6450000, 'pending', 'penggajian', NULL),
+(139, 'GAJI-001', '2022-06-25', 5600000, 'pending', 'penggajian', NULL),
+(140, 'GAJI-001', '2022-06-25', 5600000, 'pending', 'penggajian', NULL),
+(141, 'GAJI-002', '2022-06-25', 6450000, 'pending', 'penggajian', NULL);
 
 -- --------------------------------------------------------
 
@@ -3206,7 +3212,8 @@ INSERT INTO `pos_penjualan` (`id`, `invoice`, `total`, `status`, `tanggal`, `nam
 (54, 'PNJWASERDA220622050', 5550, 'terbayar', '2022-06-22', 'Budi', 'tunai', 4450, 10000, 550, 5000, 1, '2022-06-22 15:27:53', NULL),
 (55, 'PNJWASERDA230622051', 8325, 'terbayar', '2022-06-23', 'Guest', '', 1675, 10000, 825, 7500, 2, '2022-06-22 22:40:26', NULL),
 (56, 'PNJWASERDA230622052', 2775, 'terbayar', '2022-06-23', 'Guest', '', 7225, 10000, 275, 2500, 2, '2022-06-22 22:49:52', NULL),
-(57, 'PNJWASERDA230622053', 2775, 'terbayar', '2022-06-23', 'ela', '', 7225, 10000, 275, 2500, 2, '2022-06-23 12:44:49', NULL);
+(57, 'PNJWASERDA230622053', 2775, 'terbayar', '2022-06-23', 'ela', '', 7225, 10000, 275, 2500, 2, '2022-06-23 12:44:49', NULL),
+(58, 'PNJWASERDA250622054', NULL, 'dalam proses', '2022-06-25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-06-24 17:44:34', NULL);
 
 -- --------------------------------------------------------
 
@@ -3447,19 +3454,21 @@ INSERT INTO `tb_cuti` (`id`, `id_pengajuan`, `tgl_pengajuan`, `nip`, `jumlah_har
 --
 
 CREATE TABLE `tb_detail_pengajuan_bonus` (
+  `id` int(11) NOT NULL,
   `id_pengajuan` varchar(255) DEFAULT NULL,
   `nip` varchar(50) DEFAULT NULL,
-  `nominal` int(50) DEFAULT NULL
+  `nominal` int(50) DEFAULT NULL,
+  `keterangan` varchar(255) NOT NULL,
+  `tanggal` date DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_detail_pengajuan_bonus`
 --
 
-INSERT INTO `tb_detail_pengajuan_bonus` (`id_pengajuan`, `nip`, `nominal`) VALUES
-('PENGAJUANBONUS050622002', '111', 150000),
-('PENGAJUANBONUS050622002', '1029384756', 150000),
-('PENGAJUANBONUS050622003', '111', 500000);
+INSERT INTO `tb_detail_pengajuan_bonus` (`id`, `id_pengajuan`, `nip`, `nominal`, `keterangan`, `tanggal`) VALUES
+(14, 'PENGAJUANBONUS250622001', '111', 2000000, 'oke', '2022-06-25'),
+(15, 'PENGAJUANBONUS250622001', '1029384756', 3000000, 'aaa', '2022-06-25');
 
 -- --------------------------------------------------------
 
@@ -3479,13 +3488,6 @@ CREATE TABLE `tb_detail_penggajian` (
   `tot_pengurang` int(20) DEFAULT NULL,
   `total` int(20) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tb_detail_penggajian`
---
-
-INSERT INTO `tb_detail_penggajian` (`id`, `id_penggajian`, `gaji_pokok`, `tunjangan_jabatan`, `tunjangan_kesehatan`, `bonus_kerja`, `ptkp`, `tot_penghasilan`, `tot_pengurang`, `total`) VALUES
-(28, 'GAJI-003', 3000000, 300000, 300000, 4000000, 0, 7600000, 0, 7600000);
 
 -- --------------------------------------------------------
 
@@ -3573,15 +3575,6 @@ CREATE TABLE `tb_penggajian` (
   `nominal` int(11) DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tb_penggajian`
---
-
-INSERT INTO `tb_penggajian` (`id`, `id_penggajian`, `tanggal`, `nm_pegawai`, `nominal`, `status`) VALUES
-(1, 'GAJI-001', '2021-12-10', 'Ale', 5368500, NULL),
-(2, 'GAJI-002', '2022-01-07', 'Heni', 3429000, NULL),
-(30, 'GAJI-003', '2022-05-28', 'Heni', 7600000, NULL);
 
 -- --------------------------------------------------------
 
@@ -3740,6 +3733,20 @@ INSERT INTO `truck_information` (`id`, `id_pembelian`, `id_aset`, `nama_aset`, `
 (14, 'PMB_017', '30', 'Truck - IDA-018', 'IDA-018', 0, 1),
 (15, 'PMB_026', '18', 'Truck B - IDA-010', 'IDA-010', 0, 1),
 (16, 'PMB_001', '19', 'Truck B - IDA-011', 'IDA-011', 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tunjangan_hari_raya`
+--
+
+CREATE TABLE `tunjangan_hari_raya` (
+  `id` int(11) NOT NULL,
+  `nip` varchar(255) NOT NULL,
+  `nama` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `nominal` int(11) NOT NULL,
+  `tanggal` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -4440,6 +4447,12 @@ ALTER TABLE `detail_pembelian_bp`
   ADD PRIMARY KEY (`no`);
 
 --
+-- Indexes for table `detail_penerimaan_pengeluaran_kas`
+--
+ALTER TABLE `detail_penerimaan_pengeluaran_kas`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `detail_penjualan_ips`
 --
 ALTER TABLE `detail_penjualan_ips`
@@ -4602,6 +4615,12 @@ ALTER TABLE `penerimaan_kas`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `penerimaan_pengeluaran_kas`
+--
+ALTER TABLE `penerimaan_pengeluaran_kas`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `pengajuan_bonus`
 --
 ALTER TABLE `pengajuan_bonus`
@@ -4728,6 +4747,12 @@ ALTER TABLE `tb_cuti`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tb_detail_pengajuan_bonus`
+--
+ALTER TABLE `tb_detail_pengajuan_bonus`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tb_detail_penggajian`
 --
 ALTER TABLE `tb_detail_penggajian`
@@ -4791,6 +4816,12 @@ ALTER TABLE `trans_peny_rev`
 -- Indexes for table `truck_information`
 --
 ALTER TABLE `truck_information`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tunjangan_hari_raya`
+--
+ALTER TABLE `tunjangan_hari_raya`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -4942,6 +4973,12 @@ ALTER TABLE `detail_pembelian_bp`
   MODIFY `no` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `detail_penerimaan_pengeluaran_kas`
+--
+ALTER TABLE `detail_penerimaan_pengeluaran_kas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
 -- AUTO_INCREMENT for table `detail_penjualan_ips`
 --
 ALTER TABLE `detail_penjualan_ips`
@@ -4981,7 +5018,7 @@ ALTER TABLE `detail_transaksi_shu`
 -- AUTO_INCREMENT for table `jadwal_shift`
 --
 ALTER TABLE `jadwal_shift`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `jenis_penjualan`
@@ -5074,16 +5111,22 @@ ALTER TABLE `penerimaan_kas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `penerimaan_pengeluaran_kas`
+--
+ALTER TABLE `penerimaan_pengeluaran_kas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `pengajuan_bonus`
 --
 ALTER TABLE `pengajuan_bonus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `pengajuan_jurnal`
 --
 ALTER TABLE `pengajuan_jurnal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT for table `pengeluaran_kas`
@@ -5119,7 +5162,7 @@ ALTER TABLE `pos_detail_pembelian`
 -- AUTO_INCREMENT for table `pos_detail_penjualan`
 --
 ALTER TABLE `pos_detail_penjualan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `pos_pembelian`
@@ -5131,7 +5174,7 @@ ALTER TABLE `pos_pembelian`
 -- AUTO_INCREMENT for table `pos_penjualan`
 --
 ALTER TABLE `pos_penjualan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `revaluasi`
@@ -5158,10 +5201,16 @@ ALTER TABLE `tb_cuti`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `tb_detail_pengajuan_bonus`
+--
+ALTER TABLE `tb_detail_pengajuan_bonus`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT for table `tb_detail_penggajian`
 --
 ALTER TABLE `tb_detail_penggajian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `tb_jabatan`
@@ -5185,7 +5234,7 @@ ALTER TABLE `tb_lembur`
 -- AUTO_INCREMENT for table `tb_penggajian`
 --
 ALTER TABLE `tb_penggajian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `tb_ptkp`
@@ -5222,6 +5271,12 @@ ALTER TABLE `trans_peny_rev`
 --
 ALTER TABLE `truck_information`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `tunjangan_hari_raya`
+--
+ALTER TABLE `tunjangan_hari_raya`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `update_stok_penj`

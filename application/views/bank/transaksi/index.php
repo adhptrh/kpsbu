@@ -3,59 +3,41 @@
         <h3>Transaksi Bank</h3>
     </div>
     <div class="x_content">
-        <form method="post" action="<?= base_url("c_transaksi/transaksi_bank_submit") ?>">
-            <div class="form-group">
-                <label>Tanggal</label>
-                <input class="form-control" type="date" name="tanggal" value="<?= date('Y-m-d')?>" required>
-            </div>
-            <div class="form-group">
-                <label>Nama Bank</label>
-                <select name="nama_bank" class="form-control">
-                    <?php
-                    foreach ($bank as $b) {
-                        echo '<option value="'.$b->id_bank.'">'.$b->nama_bank.'</option>';
-                    }
-                    ?>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>No rekening</label>
-                <input class="form-control" type="text" name="no_rek" required>
-            </div>
-            <div class="form-group">
-                <label>Uraian</label>
-                <input class="form-control" type="text" name="uraian" required>
-            </div>
-            <div class="form-group">
-                <label>Bukti Transaksi</label>
-                <input class="form-control" type="text" name="bukti_transaksi" required>
-            </div>
-            <div class="form-group">
-                <label>Nominal</label>
-                <input class="form-control" type="text" name="nominal" required>
-            </div>
-            <div class="form-group">
-                <label>Bunga Bank</label>
-                <input class="form-control" type="text" name="bunga" required>
-            </div>
-            <div class="form-group">
-                <label>Pajak</label>
-                <input class="form-control" type="text" name="pajak" required>
-            </div>
-            <div class="form-group">
-                <label>Biaya Admin</label>
-                <input class="form-control" type="text" name="biaya_admin" required>
-            </div>
-            <div class="form-group">
-                <label>Jenis Transaksi</label>
-                <select class="form-control" name="jenis_transaksi">
-                    <option value="debit">Debit</option>
-                    <option value="kredit">Kredit</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-primary" type="submit">Simpan</button>
-            </div>
-        </form>
+        <a href="add_transaksi_bank" class="btn btn-primary">Tambah Transaksi</a>
+        <table id="datatable" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Uraian</th>
+                    <th>Bukti Transaksi</th>
+                    <th>Nominal</th>
+                    <th>Bunga Bank</th>
+                    <th>Pajak</th>
+                    <th>Biaya Admin</th>
+                    <th>Jenis Transaksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($transaksi as $k=>$d) { ?>
+                    <tr>
+                        <td><?=$k+1?></td>
+                        <td><?=$d->tanggal?></td>
+                        <td><?=$d->keterangan?></td>
+                        <td><?=$d->bukti_transaksi?></td>
+                        <td class="text-right"><?= format_rp($d->nominal)?></td>
+                        <td class="text-right"><?= format_rp($d->bunga)?></td>
+                        <td class="text-right"><?= format_rp($d->pajak)?></td>
+                        <td class="text-right"><?= format_rp($d->biaya_admin)?></td>
+                        <td><?= $d->posisi_dr_cr == "d" ? "Pemasukan":"Pengeluaran" ?></td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+        <script>
+            $(document).ready(()=>{
+                $("#datatable").DataTable()
+            })
+            </script>
     </div>
 </div>

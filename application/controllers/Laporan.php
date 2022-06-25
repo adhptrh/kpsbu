@@ -9,8 +9,12 @@ class Laporan extends CI_Controller
 
     public function buku_pembantu_kas()
     {
-        $bulantahun = $this->input->get("bulantahun") ?? date("Y-m");
-        $list = $this->db->query('SELECT * FROM buku_pembantu_kas WHERE tanggal LIKE "'.$bulantahun.'%"')->result();
+        $bulantahun = $this->input->get("bulantahun") ?? "";
+        if ($bulantahun != "") {
+            $list = $this->db->query('SELECT * FROM buku_pembantu_kas WHERE tanggal LIKE "'.$bulantahun.'%"')->result();
+        } else {
+            $list = $this->db->query('SELECT * FROM buku_pembantu_kas WHERE tanggal LIKE "sawdojaw"')->result();
+        }
         $data = [
             'list' => $list,
             "bulantahun" => $bulantahun

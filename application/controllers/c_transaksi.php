@@ -5579,8 +5579,16 @@ group by no_bbp";
       public function transaksi_bank() {
          $data = [
             "bank" => $this->db->get('bank')->result(),
+            "transaksi" => $this->db->query("SELECT * FROM buku_pembantu_bank")->result(),
          ];
          $this->template->load("template","bank/transaksi/index",$data);
+      }
+
+      public function add_transaksi_bank() {
+         $data = [
+            "bank" => $this->db->get('bank')->result(),
+         ];
+         $this->template->load("template","bank/transaksi/add",$data);
       }
       
 
