@@ -4,7 +4,7 @@
     </div>
     <div class="x_content">
         <a href="add_transaksi_bank" class="btn btn-primary">Tambah Transaksi</a>
-        <table id="datatable" class="table table-bordered">
+        <table id="datatable" class="table table-striped table-bordered table-hover jambo_table">
             <thead>
                 <tr>
                     <th>No</th>
