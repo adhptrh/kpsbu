@@ -85,7 +85,9 @@
                                 <td><?= $item->deskripsi == '' ? '-' : $item->deskripsi?></td>
                                 <td><?= $item->file == '' ? '-' : $item->file ?></td>
                                 <td>
-                                    <button class="btn btn-default"><i class="fa fa-clipboard"></i></button>
+                                    <button onclick="
+                                    $('#mdl_<?= md5($item->no_dokumen) ?>').modal('show');
+                                    " class="btn btn-default"><i class="fa fa-clipboard"></i></button>
                                 </td>
                             </tr>
                             <?php } ?>
@@ -97,3 +99,4 @@
     </div>
 </div>
 <?php $this->load->view('daftar_penerimaan_pengeluaran/add'); ?>
+<?php $this->load->view('daftar_penerimaan_pengeluaran/modal'); ?>
