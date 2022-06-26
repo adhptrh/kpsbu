@@ -5632,13 +5632,39 @@ group by no_bbp";
 
          $this->db->insert("buku_pembantu_bank", $data);
 
-         $this->db->insert("jurnal",[
-            "no_coa"=>1116,
-            "nominal"=>$this->input->post("nominal"),
-            "posisi_dr_cr"=>($this->input->post("jenis_transaksi") == "debit") ? "d":"k",
-            "tgl_jurnal"=>date("Y-m-d"),
-            "id_jurnal"=>$id_ref
-         ]);
+         if ($this->input->post("jenis_transaksi") == "debit") {
+
+            $this->db->insert("jurnal",[
+               "no_coa"=>1116,
+               "nominal"=>$this->input->post("nominal"),
+               "posisi_dr_cr"=>"d",
+               "tgl_jurnal"=>date("Y-m-d"),
+               "id_jurnal"=>$id_ref
+            ]);
+            $this->db->insert("jurnal",[
+               "no_coa"=>4212,
+               "nominal"=>$this->input->post("nominal"),
+               "posisi_dr_cr"=>"k",
+               "tgl_jurnal"=>date("Y-m-d"),
+               "id_jurnal"=>$id_ref
+            ]);
+         } else {
+            $this->db->insert("jurnal",[
+               "no_coa"=>2113,
+               "nominal"=>$this->input->post("nominal"),
+               "posisi_dr_cr"=>"d",
+               "tgl_jurnal"=>date("Y-m-d"),
+               "id_jurnal"=>$id_ref
+            ]);
+            $this->db->insert("jurnal",[
+               "no_coa"=>1116,
+               "nominal"=>$this->input->post("nominal"),
+               "posisi_dr_cr"=>"k",
+               "tgl_jurnal"=>date("Y-m-d"),
+               "id_jurnal"=>$id_ref
+            ]);
+         }
+
 
          $this->session->set_flashdata("berhasil", "Data berhasil ditambahkan");
          redirect("c_transaksi/transaksi_bank");

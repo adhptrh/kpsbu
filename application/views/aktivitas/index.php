@@ -18,7 +18,7 @@
                     <?php echo $this->session->flashdata('notif_ubah'); ?>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="datatable">
+                    <table class="table table-striped table-bordered table-hover jambo_table dataTable no-footer" id="datatable">
                         <thead>
                             <tr>
                                 <th style="width: 5%;">#</th>

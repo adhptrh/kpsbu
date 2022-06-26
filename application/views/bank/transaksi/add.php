@@ -19,7 +19,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>No rekening</label>
+                <label>No Transaksi</label>
                 <input class="form-control" type="text" name="no_rek" required>
             </div>
             <div class="form-group">

@@ -30,17 +30,17 @@
                             }
                         }
                         ?>
-                        <table class="table table-bordered" id="datatable">
+                        <table class="table table-striped table-bordered table-hover jambo_table" id="datatable">
                             <thead>
                                 <tr>
                                     <th style="width:2%"></th>
-                                    <th style="width: 5%;">#</th>
-                                    <th>Kode</th>
-                                    <th>Tanggal</th>
-                                    <th>Nominal</th>
-                                    <th>Status</th>
-                                    <th>Bukti Pembayaran</th>
-                                    <th>Aksi</th>
+                                    <th style="width: 5%;" class="text-center">#</th>
+                                    <th class="text-center">Kode</th>
+                                    <th class="text-center">Tanggal</th>
+                                    <th class="text-center">Nominal</th>
+                                    <th class="text-center">Bukti Pembayaran</th>
+                                    <th class="text-center">Aksi</th>
+                                    <th class="text-center">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,6 +56,10 @@
                                                 <script>
                                                 </script>
                                             <?php
+                                            } else {
+                                               ?>
+                                               <input type="checkbox" disabled>
+                                               <?php
                                             }
                                             ?>
                                         </td>
@@ -63,13 +67,7 @@
                                         <td><?= $value->kode ?></td>
                                         <td><?= $value->tanggal ?></td>
                                         <td style="text-align:right;"><?= format_rp($value->nominal) ?></td>
-                                        <td>
-                                            <?php if ($value->status == 'pending') { ?>
-                                                <a href="<?= base_url('c_transaksi/status_pengajuan/' . $value->kode . '/' . $value->tanggal . '/' . $value->nominal) ?>" onclick="return confirm('Anda yakin?')" class="btn btn-xs btn-warning"><?= $value->status ?></a>
-                                            <?php } else { ?>
-                                                <a href="#" class="btn btn-xs btn-success"><?= $value->status ?></a>
-                                            <?php } ?>
-                                        </td>
+                                       
                                         <td>
                                             <?php if ($value->bukti_pembayaran) : ?>
                                                 <a target=”_blank” href="<?= base_url("uploads/".$value->bukti_pembayaran) ?>">
@@ -88,7 +86,15 @@
                                                 </a>
                                             <?php } ?>
                                         </td>
+                                        <td >
+                                            <?php if ($value->status == 'pending') { ?>
+                                                <a href="<?= base_url('c_transaksi/status_pengajuan/' . $value->kode . '/' . $value->tanggal . '/' . $value->nominal) ?>" onclick="return confirm('Anda yakin?')" class="btn btn-xs btn-warning"><?= $value->status ?></a>
+                                            <?php } else { ?>
+                                                <a href="#" class="btn btn-xs btn-success"><?= $value->status ?></a>
+                                            <?php } ?>
+                                        </td>
                                     </tr>
+                                    
                                 <?php } ?>
                             </tbody>
                         </table>

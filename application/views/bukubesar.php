@@ -44,10 +44,10 @@
 				<table class="table table-striped table-bordered table-hover jambo_table">
 					<thead>
 						<tr>
-							<th rowspan="2">Tanggal</th>
-							<th rowspan="2">Nama Akun</th>
+							<th rowspan="2"class="text-center">Tanggal</th>
+							<th rowspan="2"class="text-center">Nama Akun</th>
 							
-							<th rowspan="2">Reff</th>
+							<th rowspan="2" class="text-center">Reff</th>
 							<th rowspan="2" class="text-center">Debet</th>
 							<th rowspan="2" class="text-center">Kredit</th>
 							<th colspan="2" class="text-center">Saldo </th>

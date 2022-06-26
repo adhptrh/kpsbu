@@ -19,13 +19,13 @@
 				<table id="datatable" class="table table-striped table-bordered table-hover jambo_table">
 					<thead>
 						<tr class="headings">
-							<th>#</th>
-							<th>Tanggal Transaksi</th>
-							<th>ID Ref</th>
-							<th>Uraian</th>
-							<th>Debet</th>
-							<th>Kredit</th>
-							<th>Saldo</th>
+							<th class="text-center">#</th>
+							<th class="text-center">Tanggal Transaksi</th>
+							<th class="text-center">ID Ref</th>
+							<th class="text-center">Uraian</th>
+							<th class="text-center">Debet</th>
+							<th class="text-center">Kredit</th>
+							<th class="text-center">Saldo</th>
 						</tr>
 					</thead>
 					<tbody>

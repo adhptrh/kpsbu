@@ -47,11 +47,11 @@
                         <th rowspan="2" class="text-center">Saldo</th>
                     </tr>
                     <tr>
-                        <th>Setoran</th>
-                        <th>Bunga Bank</th>
-                        <th>Penarikan</th>
-                        <th>Pajak</th>
-                        <th>B. Admin</th>
+                        <th class="text-center">Setoran</th>
+                        <th class="text-center">Bunga Bank</th>
+                        <th class="text-center">Penarikan</th>
+                        <th class="text-center">Pajak</th>
+                        <th class="text-center">B. Admin</th>
                     </tr>
                 </thead>
                 <tbody>
