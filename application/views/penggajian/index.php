@@ -25,8 +25,8 @@
                 <div id="notif">
                     <?php echo $this->session->flashdata('notif_ubah'); ?>
                 </div>
+                <form action="<?= base_url("Penggajian/bayar_semua_gaji")?>" method="post">
                 <div class="table-responsive">
-                    <form action="<?= base_url("Penggajian/bayar_semua_gaji")?>" method="post">
                         <table class="table table-bordered" id="datatable">
                             <thead>
                                 <tr>
@@ -68,7 +68,7 @@
                                     <td style="text-align:right;"><?= $value->rfid ?></td>
                                     <td><?= $value->nama ?></td>
                                     <!-- <td><?= $value->total ?? '0' ?></td> -->
-                                    <td class="text-right"><?= format_rp($pegawaidetail[$value->nip]["totalbruto"]) ?></td>
+                                    <td class="text-right"><?= format_rp($pegawaidetail[$value->nip]["gajipokok"]) ?></td>
                                     <td class="text-right"><?= format_rp($pegawaidetail[$value->nip]["pph21"]) ?></td>
                                     <td class="text-right"><?= format_rp($pegawaidetail[$value->nip]["tunjangankesehatan"]) ?></td>
                                     <td class="text-right"><?= format_rp($pegawaidetail[$value->nip]["tunjanganjabatan"]) ?></td>
@@ -93,8 +93,8 @@
                                 <!-- <?php if ($value->total >= 0 AND is_null($value->tgl_gaji)) { ?> -->
                                    <!--  <?php } ?> -->
                             <?php } ?>
+                        </div>
                     </form>
-                </div>
             </div>
         </div>
     </div>

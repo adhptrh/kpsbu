@@ -44,11 +44,14 @@ class Penggajian extends CI_Controller
         $tunjanganjabatan = $pegawai->tunjangan_jabatan;
         $tunjangankesehatan = $pegawai->tunjangan_kesehatan;
         $totalbruto = $gajipokok+$tunjangankesehatan+$tunjanganjabatan+$bonus+$tunjanganhariraya;
-        $biayajabatan = $totalbruto*0.5;
+        $biayajabatan = $totalbruto*0.05;
         $totalnetto = $totalbruto-$biayajabatan;
         $ptkp = $nominal_ptkp;
-        $penghasiltidakkenapajak = $totalbruto-$ptkp;
-        $pph21 = $pegawai->id_jenis_pegawai == "Kontrak" ? 0:$penghasiltidakkenapajak*0.5;
+        $penghasiltidakkenapajak = $totalnetto-$ptkp;
+        $pph21 = $pegawai->id_jenis_pegawai == "Kontrak" ? 0:$penghasiltidakkenapajak*0.05;
+        if ($totalnetto < $ptkp) {
+            $pph21 = 0;
+        }
         
 
         $gaji = $totalbruto;
@@ -69,8 +72,6 @@ class Penggajian extends CI_Controller
             "bonus"=>$bonus,
             "nip"=>$nip,
         ];
-
-
         return $data;
         
     }
