@@ -17,60 +17,75 @@
                 <div id="notif">
                     <?php echo $this->session->flashdata('notif_ubah'); ?>
                 </div>
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="datatable">
-                        <thead>
-                            <tr>
-                                <th style="width: 5%;">No</th>
-                                <th style="width: 5%;">#</th>
-                                <th>Tanggal Pembayaran</th>
-                                <th>Kode Pembayaran</th>
-                                <th>Invoice</th>
-                                <th>Nama Pembeli</th>
-                                <th>Total</th>
-                                <th style="width: 15%;" class="text-center">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                <form method="post" action="save_many_pmb_kredit">
+                <?php foreach ($list as $key => $value) { 
+                    if (is_null($value->id_pembayaran) AND $value->status == 0) {
+                        ?>
+                        <input type="hidden" name="invoice[]" value="<?= $value->invoice ?>">
+                        <input type="hidden" id="nama_<?= $value->invoice ?>" name="nama_<?=$value->invoice?>" value="<?= $value->nama ?>">
+                        <input type="hidden" name="anggota_<?=$value->invoice?>" value="<?= $value->jenis_anggota ?>">
+                        <input type="hidden" name="nominal_<?=$value->invoice?>" value="<?= $value->nominal ?>">
                         <?php
-                        $no = 1;
-                        $day = '26';
-                        foreach ($list as $key => $value) { ?>
-                            <tr>
-                                <td><?= $no++ ?></td>
-                                <td>
-                                    <?php if (date('d') == $day AND is_null($value->id_pembayaran) AND $value->status == 0) { ?>
-                                    <input type="checkbox">
-                                    <?php } elseif (!is_null($value->id_pembayaran)) { ?>
-                                    <input type="checkbox" disabled>
-                                    <?php } else { ?>
-                                    <input type="checkbox" disabled>
-                                    <?php } ?>
-                                </td>
-                                <td><?= $value->tanggal ?? '-' ?></td>
-                                <td><?= $value->id_pembayaran ?? '-' ?></td>
-                                <td><?= $value->invoice ?></td>
-                                <td><?= $value->nama ?></td>
-                                <td class="text-right"><?= format_rp($value->nominal) ?></td>
-                                <td class="text-center">
-                                    <?php if ($value->status == 2) { ?>
-                                    <?php } else if (date('d') == $day AND is_null($value->id_pembayaran) AND $value->status == 0) { ?>
-                                        <a href="#bayar" data-toggle="modal" class="btn btn-xs btn-primary bayar" 
-                                        data-invoice="<?= $value->invoice?>"
-                                        data-pembeli="<?= $value->nama?>"
-                                        data-anggota="<?= $value->jenis_anggota?>"
-                                        data-total="<?= $value->nominal?>"
-                                        >Bayar</a>
-                                    <?php } ?>
-                                    <?php if (!is_null($value->id_pembayaran)) { ?>
-                                        <span class="label label-success">Pembayaran Selesai (<?= date('d-m-Y', strtotime($value->tanggal))?>)</span>
-                                    <?php } ?>
-                                </td>
-                            </tr>
-                        <?php } ?>
-                        </tbody>
-                    </table>
-                </div>
+                    } 
+                } ?>
+                <div class="table-responsive">
+                        <table class="table table-bordered" id="datatable">
+                            <thead>
+                                <tr>
+                                    <th style="width: 5%;">No</th>
+                                    <th style="width: 5%;">#</th>
+                                    <th>Tanggal Pembayaran</th>
+                                    <th>Kode Pembayaran</th>
+                                    <th>Invoice</th>
+                                    <th>Nama Pembeli</th>
+                                    <th>Total</th>
+                                    <th style="width: 15%;" class="text-center">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            $no = 1;
+                            $day = '26';
+                            foreach ($list as $key => $value) { ?>
+                                <tr>
+                                    <td><?= $no++ ?></td>
+                                    <td>
+                                        <?php if (date('d') == $day AND is_null($value->id_pembayaran) AND $value->status == 0) { ?>
+                                        <input id="cb_<?=$value->invoice?>" type="checkbox" onchange="
+                                        let nminv = document.getElementById('nama_<?=$value->invoice?>').name = this.checked ? 'nama_<?= $value->invoice ?>' : '';
+                                        " checked>
+                                        <?php } elseif (!is_null($value->id_pembayaran)) { ?>
+                                        <input type="checkbox" disabled>
+                                        <?php } else { ?>
+                                        <input type="checkbox" disabled>
+                                        <?php } ?>
+                                    </td>
+                                    <td><?= $value->tanggal ?? '-' ?></td>
+                                    <td><?= $value->id_pembayaran ?? '-' ?></td>
+                                    <td><?= $value->invoice ?></td>
+                                    <td><?= $value->nama ?></td>
+                                    <td class="text-right"><?= format_rp($value->nominal) ?></td>
+                                    <td class="text-center">
+                                        <?php if ($value->status == 2) { ?>
+                                        <?php } else if (date('d') == $day AND is_null($value->id_pembayaran) AND $value->status == 0) { ?>
+                                            <a href="#bayar" data-toggle="modal" class="btn btn-xs btn-primary bayar" 
+                                            data-invoice="<?= $value->invoice?>"
+                                            data-pembeli="<?= $value->nama?>"
+                                            data-anggota="<?= $value->jenis_anggota?>"
+                                            data-total="<?= $value->nominal?>"
+                                            >Bayar</a>
+                                        <?php } ?>
+                                        <?php if (!is_null($value->id_pembayaran)) { ?>
+                                            <span class="label label-success">Pembayaran Selesai (<?= date('d-m-Y', strtotime($value->tanggal))?>)</span>
+                                        <?php } ?>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                            </tbody>
+                        </table>
+                        <button class="btn btn-primary" id="btn-bayar">Bayar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

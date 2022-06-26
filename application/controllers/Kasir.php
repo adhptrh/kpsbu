@@ -481,6 +481,74 @@
         $this->template->load('template', 'waserda/pmb_kredit/index', $data);
     }
 
+    public function save_many_pmb_kredit()
+    {
+        $invoices = $this->input->post("invoice");
+        foreach ($invoices as $invoice) {
+            $kode = $this->produk->kd_pembayaran_kredit();
+            if ($this->input->post("nama_".$invoice)) {
+                $this->save_pmb_kredit2(
+                    $kode, 
+                    date('Y-m-d'), 
+                    $invoice, 
+                    $this->input->post("nama_".$invoice),
+                    $this->input->post("total_".$invoice),
+                    $this->input->post("anggota_".$invoice),
+                );
+            }
+        }
+        redirect('Kasir/pmb_kredit');
+    }
+
+    public function save_pmb_kredit2($kd_pembayaran, $tgl_pembayaran, $invoice, $nm_pembeli, $total, $anggota)
+    {
+        
+        // kirim ke db pengajuan jurnal 
+        $pengajuan = [
+            'kode' => $kd_pembayaran,
+            'tanggal' => $tgl_pembayaran,
+            'nominal' => $total,
+            'jenis' => $anggota,
+        ];
+        $this->db->insert("pengajuan_jurnal", $pengajuan);
+
+        // ubah status pembayaran kredit 
+        $status = [
+            'status' => 2
+        ];
+        $this->db->where('invoice', $invoice);
+        $this->db->update('waserda_pembayaran_kredit', $status);
+
+        
+        if ($anggota == 'pegawai') {
+            $status_kredit = [
+                'status_kredit' => 0
+            ];
+            $this->db->where('nama', $nm_pembeli);
+            $this->db->update('pegawai', $status_kredit);
+        } else {
+            $status_kredit = [
+                'status_kredit' => 0
+            ];
+            $this->db->where('nama_peternak', $nm_pembeli);
+            $this->db->update('peternak', $status_kredit);
+        }
+
+        $data = [
+            'id_pembayaran' => $kd_pembayaran, 
+            'tanggal' => $tgl_pembayaran, 
+        ];
+        $this->db->where('invoice', $invoice);
+        $this->db->update('waserda_pembayaran_kredit', $data);
+
+        $status = [
+            'status_kredit' => 'lunas',
+        ];
+        $this->db->where('invoice', $invoice);
+        $this->db->update('pos_penjualan', $status);
+
+    }
+
     /** pembayaran kredit */
     public function save_pmb_kredit()
     {
