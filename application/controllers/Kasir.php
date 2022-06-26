@@ -492,7 +492,7 @@
                     date('Y-m-d'), 
                     $invoice, 
                     $this->input->post("nama_".$invoice),
-                    $this->input->post("total_".$invoice),
+                    $this->input->post("nominal_".$invoice),
                     $this->input->post("anggota_".$invoice),
                 );
             }

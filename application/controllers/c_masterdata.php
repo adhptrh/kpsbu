@@ -2591,7 +2591,7 @@ class c_masterdata extends CI_controller
    {
       $jabatan = $this->db->get('tb_jabatan')->result();
       $ptkp = $this->db->get('tb_ptkp')->result();
-      $jp = $this->db->get('tb_jenis_pegawai')->result();
+      $jp = $this->db->query("SELECT * FROM tb_jenis_pegawai a GROUP BY a.desc")->result();
       $list = $this->db->get('pegawai')->result();
       $nip = $this->M_masterdata->nip_otomatis();
       // print_r($nip);exit;
