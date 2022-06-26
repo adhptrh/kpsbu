@@ -57,9 +57,62 @@ class Laporan extends CI_Controller
         GROUP BY a.no_coa")->result();
         // print_r($kas_diterima);exit;
 
-        $kasbank = $this->db->query("SELECT * as saldo FROM buku_pembantu_bank WHERE tanggal LIKE '".$bulantahun."%'")->result()[0];
+        $kasbank = $this->db->query("SELECT * FROM buku_pembantu_bank WHERE tanggal LIKE '".$bulantahun."%'")->result();
         $saldobank = 0;
         foreach ($kasbank as $kas) {
+            if ($kas->posisi_dr_cr == "k") {
+                $saldobank -= $kas->nominal;
+            } else {
+                $saldobank += $kas->nominal;
+            }
+        }
+
+        $bebanlist = $this->db->query("SELECT * FROM jurnal WHERE tgl_jurnal LIKE '$bulantahun%' AND no_coa LIKE '5%' AND no_coa NOT LIKE '50%'")->result();
+        $beban_total = 0;
+        foreach ($bebanlist as $bebanz) {
+            $beban_total += $bebanz->nominal;
+        }
+
+        $pembelianlist = $this->db->query("SELECT * FROM jurnal WHERE tgl_jurnal LIKE '$bulantahun%' AND no_coa LIKE '5000'")->result();
+        $pembelian_total = 0;
+        foreach ($pembelianlist as $pembelian) {
+            $pembelian_total += $pembelian->nominal;
+        }
+
+        $pnjaktivalist = $this->db->query("SELECT * FROM jurnal WHERE tgl_jurnal LIKE '$bulantahun%' AND no_coa = '4117'")->result();
+        $pnjaktiva_total = 0;
+        foreach ($pnjaktivalist as $pnjaktiva) {
+            $pnjaktiva_total += $pnjaktiva->nominal;
+        }
+
+        $pmbaktivalist = $this->db->query("SELECT * FROM jurnal WHERE tgl_jurnal LIKE '$bulantahun%' AND no_coa = '5100'")->result();
+        $pmbaktiva_total = 0;
+        foreach ($pmbaktivalist as $pmbaktiva) {
+            $pmbaktiva_total += $pmbaktiva->nominal;
+        }
+
+        $modallist = $this->db->query("SELECT * FROM jurnal WHERE tgl_jurnal LIKE '$bulantahun%' AND no_coa = '3000'")->result();
+        $modal_total = 0;
+        foreach ($modallist as $modal) {
+            $modal_total += $modal->nominal;
+        }
+
+        $privelist = $this->db->query("SELECT * FROM jurnal WHERE tgl_jurnal LIKE '$bulantahun%' AND no_coa = '3100'")->result();
+        $prive_total = 0;
+        foreach ($privelist as $prive) {
+            $prive_total += $prive->nominal;
+        }
+
+        $pinjamanbanklist = $this->db->query("SELECT * FROM jurnal WHERE tgl_jurnal LIKE '$bulantahun%' AND no_coa = '4212'")->result();
+        $pinjamanbank_total = 0;
+        foreach ($pinjamanbanklist as $pinjamanbank) {
+            $pinjamanbank_total += $pinjamanbank->nominal;
+        }
+
+        $angsuranpinjamanlist = $this->db->query("SELECT * FROM jurnal WHERE tgl_jurnal LIKE '$bulantahun%' AND no_coa = '2113'")->result();
+        $angsuranpinjaman_total = 0;
+        foreach ($angsuranpinjamanlist as $angsuranpinjaman) {
+            $angsuranpinjaman_total += $angsuranpinjaman->nominal;
         }
 
         $data = [
@@ -68,8 +121,15 @@ class Laporan extends CI_Controller
             'beban' => $beban,
             'bulantahun' => $bulantahun,
             'kaskecil'=>10000000,
-            'kasbank'=>$kasbank->saldo,
-            'pengeluaranbeban'=>0,
+            'kasbank'=>$saldobank,
+            'pengeluaranbeban'=>$beban_total,
+            'pembelian'=>$pembelian_total,
+            'pnj_aktiva'=>$pnjaktiva_total,
+            'pmb_aktiva'=>$pmbaktiva_total,
+            'modal'=>$modal_total,
+            'prive'=>$prive_total,
+            'pinjamanbank'=>$pinjamanbank_total,
+            'angsuranpinjaman'=>$angsuranpinjaman_total,
         ];
 
         $this->template->load('template', 'arus_kas', $data);
