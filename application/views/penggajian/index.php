@@ -43,6 +43,7 @@
                                     <th>Tunjangan Hari Raya</th>
                                     <th>Bonus</th>
                                     <th>PTKP</th>
+                                    <th>Gaji Bersih</th>
                                     <th style="width: 15%;" class="text-center">Status</th>
                                     <!-- <th style="width: 15%;" class="text-center">Action</th> -->
                                 </tr>
@@ -75,6 +76,7 @@
                                     <td class="text-right"><?= format_rp($pegawaidetail[$value->nip]["tunjanganhariraya"]) ?></td>
                                     <td class="text-right"><?= format_rp($pegawaidetail[$value->nip]["bonus"]) ?></td>
                                     <td class="text-right"><?= format_rp($pegawaidetail[$value->nip]["ptkp"]) ?></td>
+                                    <td class="text-right"><?= format_rp($pegawaidetail[$value->nip]["gajibersih"]) ?></td>
                                     <td class="text-center">
                                         <?php if (!is_null($value->tgl_gaji)) { ?>
                                             <a href="#" class="btn btn-xs btn-success">Sudah melakukan penggajian</a>

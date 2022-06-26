@@ -52,12 +52,12 @@
                         </tr>
                         <tr>
                             <td>Kas Bank</td>
-                            <td class="text-right"><?= format_rp($pembelian)?></td>
+                            <td class="text-right"><?= format_rp($kasbank)?></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td>Kas Kecil</td>
-                            <td class="text-right"><?= format_rp($pembelian)?></td>
+                            <td class="text-right"><?= format_rp($kaskecil)?></td>
                             <td></td>
                         </tr>
                         <tr>
@@ -82,12 +82,12 @@
                             <th>Arus kas bersih dari kegiatan operasional</th>
                             <th class="text-right">
                                 <?php if ($kas > $pembelian || $kas - $pembelian == 0) {
-                                    echo format_rp($arus_kas_bersih_keg_operasional = $sebelum_beban - $t_beban);
+                                    echo format_rp($arus_kas_bersih_keg_operasional = $sebelum_beban - $t_beban + $kaskecil + $kasbank);
                                 } ?>
                             </td>
                             <th class="text-right">
                                 <?php if ($kas < $pembelian) {
-                                    echo format_rp($arus_kas_bersih_keg_operasional = $sebelum_beban - $t_beban);
+                                    echo format_rp($arus_kas_bersih_keg_operasional = $sebelum_beban - $t_beban + $kaskecil + $kasbank);
                                 } ?>
                             </th>
                         </tr>

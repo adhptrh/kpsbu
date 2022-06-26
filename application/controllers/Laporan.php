@@ -57,16 +57,18 @@ class Laporan extends CI_Controller
         GROUP BY a.no_coa")->result();
         // print_r($kas_diterima);exit;
 
-        $kasbank = $this->db->query("SELECT * FROM buku_pembantu_bank WHERE tanggal LIKE '".$bulantahun."%'")->result();
-
+        $kasbank = $this->db->query("SELECT * as saldo FROM buku_pembantu_bank WHERE tanggal LIKE '".$bulantahun."%'")->result()[0];
+        $saldobank = 0;
+        foreach ($kasbank as $kas) {
+        }
 
         $data = [
             'kas_diterima' => $kas_diterima,
             'pmb' => $pmb,
             'beban' => $beban,
             'bulantahun' => $bulantahun,
-            'kaskecil'=>0,
-            'kasbank'=>0,
+            'kaskecil'=>10000000,
+            'kasbank'=>$kasbank->saldo,
             'pengeluaranbeban'=>0,
         ];
 
