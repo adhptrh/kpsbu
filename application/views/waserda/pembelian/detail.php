@@ -62,7 +62,7 @@
                     </table>
                 </div>
                 <a href="<?= base_url('Pembelian') ?>" class="btn btn-default">Kembali</a>
-                <button type="button" data-id="<?= $value->invoice?>" class="btn btn-primary" id="printPdf">Print</button>
+                <!-- <button type="button" data-id="<?= $value->invoice?>" class="btn btn-primary" id="printPdf">Print</button> -->
             </div>
         </div>
     </div>

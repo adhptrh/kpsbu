@@ -28,7 +28,7 @@
                                 <th>Jenis Pembayaran</th>
                                 <th>Jumlah Pembayaran</th>
                                 <th>Total Transaksi</th>
-                                <th>PPN</th>
+                                <th style="width: 10%;">PPN</th>
                                 <th>Grand Total</th>
                                 <th>Kembalian</th>
                                 <th class="text-center">Aksi</th>

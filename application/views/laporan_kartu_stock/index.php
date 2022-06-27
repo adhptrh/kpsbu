@@ -41,15 +41,37 @@
                 </tr>
             </thead>
             <tbody>
+                <?php 
+                $aaa = 0;
+                foreach (array_reverse($lap_ks_in) as $k=>$v) {
+                    if ($v->tanggal == "Saldo Awal") { 
+                        $aaa = $v->unit;
+                        ?>
+                    <tr>
+                        <td colspan="2">Saldo Awal</td>
+                        <td class="text-right"><?= $v->unit ?></td>
+                        <td class="text-right"><?= format_rp($v->harga_satuan) ?></td>
+                        <td class="text-right"><?= format_rp($v->harga_satuan*$v->unit)?></td>
+                        <td class="text-right">-</td>
+                        <td class="text-right">-</td>
+                        <td class="text-right">-</td>
+                        <td class="text-right"><?= $v->unit ?></td>
+                        <td class="text-right"><?= format_rp($v->harga_satuan) ?></td>
+                        <td class="text-right"><?= format_rp($v->harga_satuan*$v->unit)?></td>
+                    </tr>
+                <?php } } ?>
                 <tr>
                     <td colspan="11">Saldo In</td>
                 </tr>
                 <?php
+                $nos = 0;
                 foreach (array_reverse($lap_ks_in) as $k=>$v) {
-                $unit = $v->unit;
+                    if ($v->tanggal == "Saldo Awal") continue;
+                    $unit = $v->unit;
+                    $nos++;
                 ?>
                     <tr>
-                        <td><?= $k+1 ?></td>
+                        <td><?= $nos ?></td>
                         <td><?= $v->tanggal ?></td>
                         <td class="text-right"><?= $v->unit ?></td>
                         <td class="text-right"><?= format_rp($v->harga_satuan) ?></td>
@@ -58,8 +80,8 @@
                         <td class="text-right">-</td>
                         <td class="text-right">-</td>
                         <td class="text-right"><?= $v->unit ?></td>
-                        <td class="text-right"></td>
-                        <td class="text-right"></td>
+                        <td class="text-right"><?= format_rp($v->harga_satuan) ?></td>
+                        <td class="text-right"><?= format_rp($v->harga_satuan*$v->unit)?></td>
                     </tr>
                 <?php
                 }
@@ -68,9 +90,7 @@
                     <td colspan="11">Saldo Out</td>
                 </tr>
                 <?php
-                $unitakhir = 0;
                 foreach (array_reverse($lap_ks_out) as $k=>$v) {
-                    $unitakhir = 0;
                     $decr = $v->unit;
                 ?>
                     <tr>
@@ -123,7 +143,16 @@
                     <td></td>
                     <td></td>
                     <?php 
-                    if (count($lap_ks_in) > 0 && count($lap_ks_out) > 0) {
+                    $unitakhir = 0;
+                    foreach (array_reverse($lap_ks_in) as $k=>$v) { 
+                        if ($v->mode == "in") {
+                            $unitakhir += $v->unit;
+                        } else {
+                            $unitakhir -= $v->unit;
+                        }
+                    }
+
+                    if (isset($unitakhir) && $unitakhir > 0) {    
                         ?>
                         <td class="text-right"><?= $unitakhir ?></td>
                         <td class="text-right"><?= format_rp($v->harga_satuan) ?></td>
@@ -131,7 +160,7 @@
                         <?php
                     } else {
                         ?>
-                        <td class="text-right">-</td>
+                        <td class="text-right">0</td>
                         <td class="text-right">-</td>
                         <td class="text-right">-</td>
                         <?php

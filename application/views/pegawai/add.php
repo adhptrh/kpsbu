@@ -73,6 +73,30 @@
                                 <input type="date" name="ttl" class="form-control" id="ttl" required>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="tempat_lahir" class="col-sm-4 col-form-label">Agama</label>
+                            <div class="col-sm-8">
+                                <select name="agama" required class="form-control">
+                                    <option value="">Pilih Agama</option>
+                                    <option value="Islam">Islam</option>
+                                    <option value="Kristen">Kristen</option>
+                                    <option value="Katholik">Katholik</option>
+                                    <option value="Hindu">Hindu</option>
+                                    <option value="Budha">Budha</option>
+                                    <option value="Konghucu">Konghucu</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="tempat_lahir" class="col-sm-4 col-form-label">Jenis Kelamin</label>
+                            <div class="col-sm-8">
+                                <select name="jenis_kelamin" required class="form-control">
+                                    <option value="">Pilih Jenis Kelamin</option>
+                                    <option value="L">Laki-Laki</option>
+                                    <option value="P">Perempuan</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- kanan -->

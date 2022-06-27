@@ -5311,7 +5311,7 @@ group by no_bbp";
          redirect('c_transaksi/pengajuan_jurnal');
       }
 
-      public function status_pengajuan_subm($kode, $tanggal, $nominal)
+      public function status_pengajuan_subm($kode, $tanggal, $nominal, $redir = false)
       {
          if (strpos($kode, 'GAJI-') !== false) {
             /** transaksi gaji */
@@ -5322,21 +5322,79 @@ group by no_bbp";
             $this->db->where('kode', $kode);
             $this->db->update('pengajuan_jurnal', $pengajuan_jurnal);
 
+            $detail_penggajian = $this->db->query("SELECT SUM(tunjangan_hari_raya) as tunjangan_hari_raya_total,SUM(pph21) as pph21_total, SUM(gaji_pokok) as gaji_pokok_total, SUM(tunjangan_jabatan) as tunjangan_jabatan_total, SUM(tunjangan_kesehatan) as tunjangan_kesehatan_total, SUM(bonus_kerja) as bonus_kerja_total FROM tb_detail_penggajian WHERE id_penggajian = '$kode'")->result()[0];
+            
+            $totalkas = $detail_penggajian->gaji_pokok_total+
+            $detail_penggajian->tunjangan_hari_raya_total+
+            $detail_penggajian->tunjangan_jabatan_total+
+            $detail_penggajian->tunjangan_kesehatan_total+
+            $detail_penggajian->bonus_kerja_total;
             $debit = [
                'id_jurnal' => $kode,
                'tgl_jurnal' => $tanggal,
                'no_coa' => 5311,
                'posisi_dr_cr' => 'd',
-               'nominal' => $nominal,
+               'nominal' => $detail_penggajian->gaji_pokok_total,
             ];
             $this->db->insert('jurnal', $debit);
+            
+            $debit = [
+               'id_jurnal' => $kode,
+               'tgl_jurnal' => $tanggal,
+               'no_coa' => 5316,
+               'posisi_dr_cr' => 'd',
+               'nominal' => $detail_penggajian->tunjangan_jabatan_total,
+            ];
+            $this->db->insert('jurnal', $debit);
+            if ($detail_penggajian->tunjangan_jabatan_total > 0) {
+            }
+            
+            $debit = [
+               'id_jurnal' => $kode,
+               'tgl_jurnal' => $tanggal,
+               'no_coa' => 5315,
+               'posisi_dr_cr' => 'd',
+               'nominal' => $detail_penggajian->tunjangan_kesehatan_total,
+            ];
+            $this->db->insert('jurnal', $debit);
+            if ($detail_penggajian->tunjangan_kesehatan_total > 0) {
+            }
+            
+            $debit = [
+               'id_jurnal' => $kode,
+               'tgl_jurnal' => $tanggal,
+               'no_coa' => 5317,
+               'posisi_dr_cr' => 'd',
+               'nominal' => $detail_penggajian->bonus_kerja_total,
+            ];
+            $this->db->insert('jurnal', $debit);
+            if ($detail_penggajian->bonus_kerja_total > 0) {
+            }
+
+            $debit = [
+               'id_jurnal' => $kode,
+               'tgl_jurnal' => $tanggal,
+               'no_coa' => 5318,
+               'posisi_dr_cr' => 'd',
+               'nominal' => $detail_penggajian->tunjangan_hari_raya_total,
+            ];
+            $this->db->insert('jurnal', $debit);
+            
+            $kredit = [
+               'id_jurnal' => $kode,
+               'tgl_jurnal' => $tanggal,
+               'no_coa' => 2114,
+               'posisi_dr_cr' => 'k',
+               'nominal' => $detail_penggajian->pph21_total,
+            ];
+            $this->db->insert('jurnal', $kredit);
 
             $kredit = [
                'id_jurnal' => $kode,
                'tgl_jurnal' => $tanggal,
                'no_coa' => 1111,
                'posisi_dr_cr' => 'k',
-               'nominal' => $nominal,
+               'nominal' => $totalkas,
             ];
             $this->db->insert('jurnal', $kredit);
 
@@ -5561,6 +5619,10 @@ group by no_bbp";
             $this->M_keuangan->GenerateJurnal('1111', $kode, 'k', $grandtotal);
             /** generate ke bpk */
             $this->M_keuangan->GenerateLaporanBPK($kode, $tanggal, $grandtotal, '1111', 'k', 'Pembelian Barang Waserda');
+         }
+
+         if ($redir != false) {
+            redirect("c_transaksi/pengajuan_jurnal");
          }
       }
       

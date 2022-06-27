@@ -51,7 +51,7 @@
                                         <?php } ?>
                                     </td>
                                     <td>
-                                        <a href="<?= base_url('Pembelian/detail_print/'. $value->invoice ) ?>" class="btn btn-default"><i class="fa fa-print"></i></a>
+                                        <a href="<?= base_url('Pembelian/detail_print/'. $value->invoice ) ?>" class="btn btn-default"><i class="fa fa-info-circle"></i></a>
                                     </td>
                                 </tr>
                             <?php } ?>

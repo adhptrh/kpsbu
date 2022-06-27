@@ -19,45 +19,29 @@
                             $laba_kotor = 0;
                         ?>
                         <thead>
-                            <tr>
-                                <th>Pendapatan</th>
-                                <td>Keterangan</td>
-                                <td>Debit</td>
-                                <td>Kredit</td>
-                            </tr>
                             <?php 
                             foreach ($pendapatan as $item) { ?>
                             <?php $total_pendapatan += $item->nominal ?>
                             <tr>
-                                <td><?= '&nbsp;&nbsp;&nbsp;&nbsp;' . $item->nama_coa?></td>
+                                <td><?= $item->nama_coa?></td>
                                 <td></td>
                                 <td class="text-right"><?= format_rp($item->nominal) ?></td>
-                                <td></td>
                             </tr>
                             <?php } ?>
                             <tr>
-                                <th>Total Pendapatan</th>
-                                <td></td>
-                                <td ></td>
-                                <td class="text-right"><?= format_rp($total_pendapatan)?></td>
-                            </tr>
-                            <tr>
                                 <td>Harga Pokok Penjualan</td>
-                                <td></td>
-                                <td></td>
                                 <td class="text-right"><?= format_rp($hpp[0]->nominal)?></td>
+                                <td></td>
                             </tr>
                             <?php $laba_kotor = $total_pendapatan - $hpp[0]->nominal; ?>
                             <tr>
                                 <th>Laba Kotor</th>
                                 <td></td>
-                                <td></td>
                                 <td class="text-right"><?= format_rp($laba_kotor)?></td>
                             </tr>
                             <tr>
                                 <th>Beban Usaha</th>
-                                <td></td>
-                                <td></td>
+                                <td></td> <!-- DEBIT -->
                                 <td></td>
                             </tr>
                             <?php foreach ($beban as $item) { ?>
@@ -66,18 +50,15 @@
                                 <td><?= '&nbsp;&nbsp;&nbsp;&nbsp;' . $item->nama_coa?></td>
                                 <td class="text-right"><?= format_rp($item->nominal) ?></td>
                                 <td></td>
-                                <td></td>
                             </tr>
                             <?php } ?>
                             <tr>
                                 <th>Total Beban</th>
-                                <td></td>
-                                <td></td>
                                 <td class="text-right"><?= format_rp($total_beban)?></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <th>Laba Bersih</th>
-                                <td></td>
                                 <td></td>
                                 <td class="text-right"><?= format_rp($laba_kotor - $total_beban)?></td>
                             </tr>

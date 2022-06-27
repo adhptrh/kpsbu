@@ -270,14 +270,25 @@ class Penggajian extends CI_Controller
     public function bayar_semua_gaji() {
         $nips = $this->input->post("nip");
         $bulantahun = $this->input->post("bulantahun");
+        $id_gaji = $this->Absensi_model->id_gaji();
+        $total = 0;
         foreach ($nips as $nip) {
             $data = $this->slip_gaji($nip,$bulantahun);
-            $this->bayar_gaji2($data);
+            $this->bayar_gaji2($data,$id_gaji);
+            $total += $data["gajibersih"];
         }
+        $tanggal = date('Y-m-d');
+        $pengajuan = [
+            'kode' => $id_gaji,
+            'tanggal' => $tanggal,
+            'nominal' => $total,
+            'jenis' => 'penggajian',
+        ];
+        $this->db->insert("pengajuan_jurnal", $pengajuan);
         redirect('Penggajian');
     }
 
-    public function bayar_gaji2($data)
+    public function bayar_gaji2($data, $id_gaji)
     {
 
         $nip = $data["nip"];
@@ -289,9 +300,11 @@ class Penggajian extends CI_Controller
         $tot_penghasilan = $data["totalbruto"];
         $tot_pengurang = $data["ptkp"];
         $total = $data["gajibersih"];
+        $pph21 = $data["pph21"];
+        $tunjangan_hari_raya = $data["tunjanganhariraya"];
         $tanggal = date('Y-m-d');
 
-        $id_gaji = $this->Absensi_model->id_gaji();
+        /* $id_gaji = $this->Absensi_model->id_gaji(); */
         $this->db->where('nip', $nip);
         $pegawai = $this->db->get('pegawai')->row();
         
@@ -313,17 +326,19 @@ class Penggajian extends CI_Controller
             "tot_penghasilan" => $tot_penghasilan,
             "tot_pengurang" => $tot_pengurang,
             "total" => $total,
+            "pph21" => $pph21,
+            "tunjangan_hari_raya" => $tunjangan_hari_raya,
         ];
         $this->db->insert('tb_detail_penggajian', $tb_detail_penggajian);
 
         // kirim ke db pengajuan jurnal 
-        $pengajuan = [
+        /* $pengajuan = [
             'kode' => $id_gaji,
             'tanggal' => $tanggal,
             'nominal' => $total,
             'jenis' => 'penggajian',
         ];
-        $this->db->insert("pengajuan_jurnal", $pengajuan);
+        $this->db->insert("pengajuan_jurnal", $pengajuan); */
 
         // redirect('Penggajian');
         // $response = [

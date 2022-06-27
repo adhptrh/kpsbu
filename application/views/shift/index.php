@@ -23,6 +23,7 @@
                             <tr>
                                 <th style="width: 5%;">No</th>
                                 <th>Nama Pegawai</th>
+                                <th>NIP</th>
                                 <th>Detail Shift</th>
                                 <th>Tanggal Awal</th>
                                 <th>Tanggal Akhir</th>
@@ -37,6 +38,7 @@
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $value->nama ?></td>
+                                <td><?= $value->nip ?></td>
                                 <td><?= $value->shift ?></td>
                                 <td><?= $value->tgl_awal ?></td>
                                 <td><?= $value->tgl_akhir ?></td>

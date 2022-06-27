@@ -37,12 +37,12 @@ function encode_img_base64($img_path = false): string
 <p><strong>Pembeli </strong> : <?= $penjualan->nama_pembeli?></p>
 <br>
 </center>
-<table class="table">
+<table class="table" style="width:100%">
     <tr>
-        <th>no</th>
-        <th>item</th>
-        <th>qty</th>
-        <th>subtotal</th>
+        <th style="text-align:left;">no</th>
+        <th style="text-align:left;">item</th>
+        <th style="text-align:left;">qty</th>
+        <th style="text-align:left;">subtotal</th>
     </tr>
     <?php 
     $no =1;
@@ -57,14 +57,14 @@ function encode_img_base64($img_path = false): string
     </tr>
     <?php } ?>
 </table>
-<center>
-======================================
+<div style="text-align:right">
+<hr>
 <p><strong>Penjualan</strong> : <?= format_rp($penjualan->total_trans) ?></p>
 <p><strong>PPN (11%)</strong> : <?= format_rp($penjualan->ppn) ?></p>
-======================================
+<hr>
 <p><strong>Pembayaran</strong> : <?= format_rp($penjualan->pembayaran) ?></p>
 <p><strong>Total</strong> : <?= format_rp($penjualan->total) ?></p>
 <p><strong>Kembalian</strong> : <?= format_rp($penjualan->kembalian) ?></p>
 <br>
 <p>Terimakasih :) </p>
-</center>
+</div>

@@ -2625,6 +2625,8 @@ class c_masterdata extends CI_controller
          'tgl_lahir' => $this->input->post('ttl'),
          'no_rek' => $this->input->post('no_rek'),
          'jurusan_pendidikan' => $this->input->post('jurusan_pendidikan'),
+         'agama' => $this->input->post('agama'),
+         'jenis_kelamin' => $this->input->post('jenis_kelamin'),
       ];
       $this->db->insert('pegawai', $data);
 

@@ -60,7 +60,7 @@
                                 
                                 <tr>
                                     <td><?= $no++ ?>
-                                    <?php if (is_null($value->tgl_gaji)) : ?>
+                                    <?php if (is_null($value->tgl_gaji) && $value->created_at < date("Y-m") ) : ?>
                                         <input type="hidden" name="nip[]" value="<?=$value->nip?>">
                                     <?php endif ?>
                                 </td>
@@ -80,6 +80,8 @@
                                     <td class="text-center">
                                         <?php if (!is_null($value->tgl_gaji)) { ?>
                                             <a href="#" class="btn btn-xs btn-success">Sudah melakukan penggajian</a>
+                                        <?php } elseif (substr($value->created_at,0,7) == date("Y-m")) { ?>
+                                            <a href="#" class="btn btn-xs btn-warning">Pegawai baru penggajian dibulan berikutnya</a>
                                         <?php } else { ?>
                                             <a href="#" class="btn btn-xs btn-warning">Belum melakukan penggajian</a>
                                         <?php } ?>

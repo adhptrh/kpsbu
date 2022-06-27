@@ -88,7 +88,7 @@
                                         </td>
                                         <td >
                                             <?php if ($value->status == 'pending') { ?>
-                                                <a href="<?= base_url('c_transaksi/status_pengajuan/' . $value->kode . '/' . $value->tanggal . '/' . $value->nominal) ?>" onclick="return confirm('Anda yakin?')" class="btn btn-xs btn-warning"><?= $value->status ?></a>
+                                                <a href="<?= base_url('c_transaksi/status_pengajuan_subm/' . $value->kode . '/' . $value->tanggal . '/' . $value->nominal.'/true') ?>" onclick="return confirm('Anda yakin?')" class="btn btn-xs btn-warning"><?= $value->status ?></a>
                                             <?php } else { ?>
                                                 <a href="#" class="btn btn-xs btn-success"><?= $value->status ?></a>
                                             <?php } ?>

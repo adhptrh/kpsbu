@@ -41,6 +41,12 @@
                         <input type="text" readonly class="form-control" id="total" name="total" value="">
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="total" class="col-sm-4 col-form-label">Input Pembayaran</label>
+                        <div class="col-sm-6">
+                        <input id="inpemb" type="number" class="form-control" min="1" max="" name="inpemb" required>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
