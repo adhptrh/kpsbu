@@ -32,11 +32,12 @@
                             </select>
                         </div>
                         <div class="col-sm-4 anggota">
-                            <select name="anggota" id="anggota" class="form-control">
+                            <input name="anggota_pilih" id="anggota_pilih" type="text" class="form-control" placeholder="Kode Anggota">
+                            <!-- <select name="anggota" id="anggota" class="form-control">
                                 <option value="">-</option>
                                 <option value="pegawai">Pegawai</option>
                                 <option value="peternak">Peternak</option>
-                            </select>
+                            </select> -->
                         </div>
                     </div>
                     <div class="form-group row" id="div-pembeli">
@@ -44,6 +45,12 @@
                         <div class="col-sm-9" id="pembeli">
                             <select name="pembeli" class="form-control pilih_pembeli">
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-group row" id="jenis_pem">
+                        <label for="pembeli" class="col-sm-3 col-form-label">Jenis Pembeli</label>
+                        <div class="col-sm-9" id="pembeli">
+                            <input id="anggota" name="anggota" required readonly class="form-control">
                         </div>
                     </div>
                     <hr>

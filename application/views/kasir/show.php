@@ -27,7 +27,7 @@
                                 <td><?= $value->jml?></td>
                                 <td><?= format_rp($value->harga_jual) ?></td>
                                 <td class="text-center">
-                                    <button class="btn btn-primary btn-xs btn-select" style="width: 50%;">Select</button>
+                                    <button data-nama="<?= $value->nama_produk ?>" class="btn btn-primary btn-xs btn-select" style="width: 50%;">Select</button>
                                 </td>
                             </tr>
                         <?php } ?>

@@ -83,7 +83,7 @@
                                 <td><?= $item->jenis_transaksi ?></td>
                                 <td><?= $item->tipe_pembayaran ?></td>
                                 <td><?= $item->deskripsi == '' ? '-' : $item->deskripsi?></td>
-                                <td><?= $item->file == '' ? '-' : $item->file ?></td>
+                                <td><a href="<?= base_url("uploads/".$item->file) ?>" target="_blank"><?= $item->file == '' ? '-' : $item->file ?></a></td>
                                 <td>
                                     <button onclick="
                                     $('#mdl_<?= md5($item->no_dokumen) ?>').modal('show');

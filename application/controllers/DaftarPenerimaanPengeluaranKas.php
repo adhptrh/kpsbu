@@ -23,7 +23,7 @@
         if (isset($periode)) {
             $list = $this->db->query("select * from penerimaan_pengeluaran_kas where periode = '$periode'")->result();
             $data = [
-                'list' => $list, 
+                'list' => array_reverse($list), 
                 'periode' => $periode,
                 'detail' =>$detail
             ];
@@ -31,7 +31,7 @@
         } else {
             $list = $this->db->query("select * from penerimaan_pengeluaran_kas where periode = ''")->result();
             $data = [
-                'list' => $list, 
+                'list' => array_reverse($list), 
                 'periode' => '',
                 'detail' =>$detail
             ];
@@ -73,6 +73,19 @@
         $nama_aktivitas = $this->input->post('nama_aktivitas');
         $nominal = $this->input->post('nominal');
         $posisi_dc = $this->input->post('posisi_dc');
+
+        $config['upload_path']          = './uploads/';
+        $config['allowed_types']        = '*';
+        $config['file_name']            = "PenerimaanPengeluaranKas_".$this->input->post("no_dokumen");
+        $config['overwrite']            = true;
+        $this->load->library('upload', $config);
+        $file = $this->upload->do_upload('upload_file');
+        $namafile = "PenerimaanPengeluaranKas_".$this->input->post("no_dokumen").$this->upload->file_ext;
+        if ($file) {
+        } else {
+        echo $this->upload->display_errors();
+        $namafile = "-";
+        }
         
         /** INSERT KE TABEL DETAIL */
         foreach ($no_coa as $key => $value) {
@@ -107,7 +120,7 @@
             'jenis_transaksi' => $jenis_transaksi,
             'tipe_pembayaran' => $tipe_pembayaran,
             'deskripsi' => $deskripsi,
-            'file' => $upload_file,
+            'file' =>  $namafile,
         ];
         $this->db->insert('penerimaan_pengeluaran_kas', $data);
 

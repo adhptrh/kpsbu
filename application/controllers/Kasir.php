@@ -682,5 +682,31 @@
             echo json_encode($data);
         }
     }
+
+    public function getanggota($anggota_id) {
+        $qptrnk = $this->db->query("SELECT * FROM peternak WHERE no_anggota = '$anggota_id'")->result();
+        if (count($qptrnk) > 0) {
+            echo json_encode([
+                'status' => 'success',
+                'data' => $qptrnk[0]
+            ]);
+            return;
+        }
+
+        $qpegawai = $this->db->query("SELECT * FROM pegawai WHERE no_anggota = '$anggota_id'")->result();
+        if (count($qpegawai) > 0) {
+            echo json_encode([
+                'status' => 'success',
+                'data' => $qpegawai[0]
+            ]);
+            return;
+        } else {
+            echo json_encode([
+                'status' => 'error',
+                'data' => 'Data tidak ditemukan'
+            ]);
+            return;
+        }
+    }
 }
 ?>

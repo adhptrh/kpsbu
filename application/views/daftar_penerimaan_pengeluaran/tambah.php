@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="x_content">
-                <form action="<?= base_url('DaftarPenerimaanPengeluaranKas/simpan')?>" method="POST">
+                <form action="<?= base_url('DaftarPenerimaanPengeluaranKas/simpan')?>" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="form-group row">
                             <label for="periode" class="col-sm-2 col-form-label">Peridoe</label>
@@ -79,7 +79,7 @@
                                         <select name="no_coa[]" id="no_coa1" onchange="getCoa(1)" class="form-control" required>
                                             <option value="">-</option>
                                             <?php foreach ($coa as $item) { ?>
-                                            <option value="<?= $item->no_coa?>"><?= $item->no_coa?></option>
+                                            <option value="<?= $item->no_coa?>"><?= $item->no_coa?> - <?= $item->nama_coa?></option>
                                             <?php } ?>
                                         </select>
                                     </td>

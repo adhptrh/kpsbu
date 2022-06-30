@@ -38,7 +38,9 @@ class Laporan extends CI_Controller
         $bulantahun = $this->input->get("bulantahun") ?? date('Y-m');
         $total_d = $this->db->query("select sum(nominal) as total from buku_pembantu_kas where posisi_dr_cr = 'd' AND tanggal LIKE '".$bulantahun."%' ")->row()->total;
         $total_k = $this->db->query("select sum(nominal) as total from buku_pembantu_kas where posisi_dr_cr = 'k' AND tanggal LIKE '".$bulantahun."%' ")->row()->total;
-        $kas_diterima = $total_d - $total_k;
+        $kas_debit = $this->db->query("SELECT SUM(nominal) as nominal_total FROM jurnal WHERE no_coa = '1111' AND posisi_dr_cr = 'd' AND tgl_jurnal LIKE '".$bulantahun."%'")->result()[0]->nominal_total;
+        $kas_kredit = $this->db->query("SELECT SUM(nominal) as nominal_total FROM jurnal WHERE no_coa = '1111' AND posisi_dr_cr = 'k' AND tgl_jurnal LIKE '".$bulantahun."%'")->result()[0]->nominal_total;
+        $kas_diterima = $kas_debit - $kas_kredit;
 
         $pmb = $this->db->query("SELECT
         SUM(nominal) as total
@@ -291,20 +293,93 @@ class Laporan extends CI_Controller
         
     }
 
+    public function saldo_kas_kecil_lalu($bulantahun) {
+        // check if bulantahun is less than this year
+        if ($bulantahun < date("Y")) {
+            return 0;
+        }
+        $list = $this->db->query("SELECT * FROM jurnal JOIN penerimaan_pengeluaran_kas a ON a.no_dokumen = id_jurnal WHERE no_coa = '1117' AND tgl_jurnal LIKE '".$bulantahun."%'")->result();
+        $bulantahunb4 = date("Y-m", strtotime("-1 month", strtotime($bulantahun)));
+        array_unshift($list, (object)[
+            "no" => "",
+            "id_jurnal" => "Saldo Awal",
+            "tgl_jurnal" => "-",
+            "no_coa" => "",
+            "nominal"  => $this->saldo_kas_kecil_lalu($bulantahunb4),
+            "posisi_dr_cr"=> "d",
+            "deskripsi"=>"Saldo Awal"
+        ]);
+        $total = 0;
+        foreach ($list as $v) {
+            if ($v->posisi_dr_cr == "d") {
+                $total += $v->nominal;
+            } else {
+                $total -= $v->nominal;
+            }
+        }
+        return $total;
+    }
+
     // salma 
     public function buku_kas_kecil()
     {
         $bulantahun = $this->input->get('bulantahun') ?? date("Y-m");
+        //bulan tahun decrease 1 month
+        $bulan_tahun_decrease = date("Y-m", strtotime("-1 month", strtotime($bulantahun)));
         
         $this->db->order_by('tgl_transaksi', 'desc');
         $kaskecil = $this->db->query("SELECT * FROM jurnal JOIN penerimaan_pengeluaran_kas a ON a.no_dokumen = id_jurnal WHERE no_coa = '1117' AND tgl_jurnal LIKE '".$bulantahun."%'")->result()[0] ?? null;
         $list = $this->db->query("SELECT * FROM jurnal JOIN penerimaan_pengeluaran_kas a ON a.no_dokumen = id_jurnal WHERE no_coa = '1117' AND tgl_jurnal LIKE '".$bulantahun."%'")->result();
+        $list_b4 = $this->db->query("SELECT * FROM jurnal JOIN penerimaan_pengeluaran_kas a ON a.no_dokumen = id_jurnal WHERE no_coa = '1117' AND tgl_jurnal LIKE '".$bulan_tahun_decrease."%'")->result();
+        
+        $total = 0;
+        foreach ($list_b4 as $v) {
+            if ($v->posisi_dr_cr == "d") {
+                $total += $v->nominal;
+            } else {
+                $total -= $v->nominal;
+            }
+        }
+
+        array_unshift($list, (object)[
+            "no" => "",
+            "id_jurnal" => "",
+            "tgl_jurnal" => "",
+            "nominal" => $this->saldo_kas_kecil_lalu($bulan_tahun_decrease),
+            "no_coa" => "",
+            "posisi_dr_cr"=> "d",
+            "deskripsi"=>"Saldo Awal"
+        ]);
+
         $data = [
             'list' => $list,
             'kaskecil' => $kaskecil,
             "bulantahun"=>$bulantahun,
         ];
         $this->template->load('template', 'laporan/buku_kas_kecil', $data);
+    }
+
+    public function tes() {
+        $ptrnk = $this->db->query("SELECT * FROM peternak")->result();
+        $pgw = $this->db->query("SELECT * FROM pegawai")->result();
+        $id = "ANGGT_0001";
+        $no = 0;
+        foreach ($ptrnk as $v) {
+            $no++;
+            $this->db->update("peternak", [
+                "no_anggota"=>"ANGGT_".sprintf("%04d", $no)
+            ],[
+                "no_peternak"=>$v->no_peternak
+            ]);
+        }
+        foreach ($pgw as $v) {
+            $no++;
+            $this->db->update("pegawai", [
+                "no_anggota"=>"ANGGT_".sprintf("%04d", $no)
+            ],[
+                "nip"=>$v->nip
+            ]);
+        }
     }
 }
 ?>

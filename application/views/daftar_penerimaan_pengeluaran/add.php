@@ -7,7 +7,7 @@
             </button>
             <h5 class="modal-title" id="exampleModalLabel">Penerimaan & Pengeluaran Kas</h5>
         </div>
-        <form action="#" method="POST">
+        <form action="#" method="POST" >
             <div class="modal-body">
                 <div class="form-group row">
                     <label for="periode" class="col-sm-3 col-form-label">Peridoe</label>

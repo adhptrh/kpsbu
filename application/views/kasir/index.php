@@ -215,21 +215,48 @@
                     $('#selain-umum').hide()
                     $('.anggota').hide()
                     var coba = '<input type="text" class="form-control" name="pembeli" value="Guest">';
+                    $("#jenis_pem").hide()
                     $('#pembeli').html(coba)
                 } else {
                     // anggota
                     $('#umum').hide()
                     $('#selain-umum').show()
                     $('.anggota').show()
-                    var coba = '<select name="pembeli" class="form-control pilih_pembeli">' +
-                        '</select>';
+                    var coba = '<input name="pembeli" id="pembeli_" readonly class="form-control pilih_pembeli" required> ';
+                    $("#jenis_pem").show()
                     $('#pembeli').html(coba)
                 }
             }
         })
 
+        $('#anggota_pilih').on('keyup', function() {
+            var val = $(this).val()
 
-        $('#anggota').on('change', function() {
+            if (val != '') {
+                $.ajax({
+                    url: "<?= base_url('Kasir/getanggota/') ?>" + val,
+                    method: "get",
+                    success: function(e) {
+                        // var obj = JSON.parse(e)
+                        // console.log(obj)
+                        if (JSON.parse(e)["status"] == "error") {
+                            $("#pembeli_").val("")
+                            $("#anggota").val("")
+                            return
+                        }
+                        if (JSON.parse(e)["data"]["nama_peternak"]) {
+                            $("#pembeli_").val(JSON.parse(e)["data"]["nama_peternak"])
+                            $("#anggota").val("peternak")
+                        } else {
+                            $("#pembeli_").val(JSON.parse(e)["data"]["nama"])
+                            $("#anggota").val("pegawai")
+                        }
+                        $('.pilih_pembeli').html(e)
+                    }
+                })
+            }
+        })
+        /* $('#anggota').on('change', function() {
             var val = $(this).val()
 
             if (val != '') {
@@ -246,7 +273,7 @@
                     }
                 })
             }
-        })
+        }) */
 
 
         $("#tipe").on('change', function() {
@@ -408,10 +435,11 @@
     }
 
     $(function() {
-        $('.btn-select').on('click', function() {
+        $('.btn-select').on('click', function(sender) {
             // INSERT DATA DISINI
-
-            alert('asdasdasASDASD')
+            
+           $("#barang").val($(sender.target).data("nama"))
+           $("#show").modal("hide")
         })
     })
 </script>

@@ -3460,6 +3460,7 @@ group by no_bbp";
 
          $q1 = "SELECT ifnull(sum(total2),0) as hpp FROM kartu_stok_penj WHERE no_trans ='$id'";
          $fix_total = $this->db->query($q1)->row_array()['hpp'];
+
          $this->M_keuangan->GenerateJurnal('1111', $id, 'd', $total);
          $this->M_keuangan->GenerateJurnal('4112', $id, 'k', $total);
          $this->M_keuangan->GenerateJurnal('6112', $id, 'd', $fix_total);

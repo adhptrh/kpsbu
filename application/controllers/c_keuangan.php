@@ -104,7 +104,7 @@ class c_keuangan extends CI_Controller
 			AND LEFT(a.tgl_jurnal, 7) = '$periode'
 			ORDER BY tgl_jurnal ASC");
 
-			$listBB = $query2->result();
+			$listBB = array_reverse($query2->result());
 			$getSaldo = $query2->row()->saldo_awal ?? 0 ;
 
 			$data = [
@@ -151,7 +151,7 @@ class c_keuangan extends CI_Controller
 			AND LEFT(a.tgl_jurnal, 7) = '$periode'
 			ORDER BY tgl_jurnal ASC");
 
-			$listBB = $query2->result();
+			$listBB = array_reverse($query2->result());
 			$getSaldo = $query2->row()->saldo_awal ?? 0 ;
 
 			$data = [

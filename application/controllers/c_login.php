@@ -11,6 +11,10 @@ class c_login extends CI_Controller{
                 $data_session = array('status'=>"login");
                 foreach($query->result_array() as $data)
                 {
+                    $pgw = $this->db->query("SELECT * FROM pegawai WHERE nip = '".$data['nip']."'")->result();
+                    if (count($pgw) > 0) {
+                        $sess_data["jenis_kelamin"] = $pgw[0]->jenis_kelamin;
+                    }
                     $sess_data['id'] = $data['id'];
                     $sess_data['username'] = $data['username'];
                     $sess_data['password'] = $data['password'];

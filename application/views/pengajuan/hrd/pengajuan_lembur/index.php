@@ -31,6 +31,7 @@
                                 <th>Tanggal Pengajuan</th>
                                 <th>Nama Pegawai</th>
                                 <th>Jumlah Pengajuan (jam lembur)</th>
+                                <th class="">Nominal Lembur</th>
                                 <th class="text-center">Status</th>
                                 <?php if ($role != 'pegawai') { ?>
                                 <th style="width: 12%;" class="text-center">Aksi</th>
@@ -47,6 +48,7 @@
                                 <td><?= $value->tgl_pengajuan?></td>
                                 <td><?= $value->nama?></td>
                                 <td><?= $value->total_jam?></td>
+                                <td class="text-right"><?= format_rp($value->total_nominal_lembur)?></td>
                                 <td class="text-center">
                                     <?= ($value->status == 0 && ($role != 'atasan')) ? '<span class="label label-warning">Menunggu persetujuan atasan</span>' : 
                                     (($value->status == 0 && $role == "atasan") ? '<span class="label label-warning">Menunggu persetujuan</span>' : 

@@ -25,6 +25,7 @@
                             <tr>
                                 <th></th>
                                 <th>Nama</th>
+                                <th>NIP</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,6 +35,7 @@
                                     <input type="checkbox" name="pegawai[]" value="<?= $value->nip?>" checked>
                                 </td>
                                 <td><?= $value->nama?></td>
+                                <td><?= $value->nip?></td>
                             </tr>
                     <?php } ?>
 

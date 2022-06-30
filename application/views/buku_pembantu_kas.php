@@ -62,7 +62,7 @@
                         <td><?= $value->keterangan ?></td>
 
                         <?php if ($value->posisi_dr_cr == 'd') { ?>
-                            <?php $saldo += $value->nominal ?>
+                            <?php $saldo += intval($value->nominal) ?>
                             <td class="text-right"><?= format_rp($value->nominal)?></td>
                             <td></td>
                         <?php } else { ?>

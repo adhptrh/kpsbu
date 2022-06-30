@@ -33,6 +33,7 @@
                         <?php } ?>
                         <table id="datatableyes" class="table table-bordered">
                             <thead>
+                                <th>NIP</th>
                                 <th>Nama</th>
                                 <th>Nominal</th>
                                 <th>Keterangan</th>
@@ -40,6 +41,7 @@
                             <tbody>
                             <?php foreach ($pegawai as $k=>$item) { ?>
                                 <tr>
+                                    <td><?= $item->nip ?></td>
                                     <td><?= $item->nama ?></td>
                                     <td>
                                         <input onchange="

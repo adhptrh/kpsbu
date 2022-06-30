@@ -36,6 +36,7 @@
                             <li><a href="<?= base_url('Lembur')?>">Pengajuan Lembur </a></li>
                             <li><a href="<?= base_url('Penggajian/tunjanganhariraya')?>">Tunjangan Hari Raya </a></li>
                             <li><a href="<?= base_url('Pengajuan/pengajuanBonus')?>">Pengajuan Bonus </a></li>
+                            <li><a href="<?= base_url('Cuti/melahirkan')?>">Cuti Melahirkan</a></li>
                         <?php
                         endif
                         ?>
@@ -424,6 +425,9 @@
                     <ul class="nav child_menu">
                         <li><a href="<?= base_url('Lembur')?>">Lembur</a></li>
                         <li><a href="<?= base_url('Cuti')?>">Cuti</a></li>
+                        <?php if ($this->session->userdata('jenis_kelamin') == "P") : ?>
+                        <li><a href="<?= base_url('Cuti/melahirkan')?>">Cuti Melahirkan</a></li>
+                        <?php endif ?>
                     </ul>
                 </li>
             </ul>

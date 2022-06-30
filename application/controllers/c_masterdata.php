@@ -13,6 +13,7 @@ class c_masterdata extends CI_controller
          redirect('c_login/home');
       }
    }
+
    public function beranda()
    {
 
