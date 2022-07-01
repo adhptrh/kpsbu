@@ -12,7 +12,7 @@
                 <form action="<?= base_url('DaftarPenerimaanPengeluaranKas/simpan')?>" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="form-group row">
-                            <label for="periode" class="col-sm-2 col-form-label">Peridoe</label>
+                            <label for="periode" class="col-sm-2 col-form-label">Periode</label>
                             <div class="col-sm-5">
                                 <input type="text" class="form-control" id="periode" name="periode" value="<?= date('Ym')?>" readonly>
                             </div>
@@ -33,8 +33,8 @@
                             <label for="jenis_transaksi" class="col-sm-2 col-form-label">Jenis Transaksi</label>
                             <div class="col-sm-5">
                                 <select name="jenis_transaksi" id="jenis_transaksi" class="form-control">
-                                    <option value="pengeluaran kas">Pengeluaran Kas</option>
                                     <option value="penerimaan kas">Penerimaan Kas</option>
+                                    <option value="pengeluaran kas">Pengeluaran Kas</option>
                                 </select>
                             </div>
                         </div>
@@ -62,14 +62,14 @@
                         <hr>
                         <button style="margin-bottom: 1rem" type="button" class="btn btn-default add-row">Tambah Baris</button>
                         <div class="table-responsive">
-                        <table class="table table-bordered table-striped" style="overflow: scroll;" id="mytable">
+                        <table class="table table-striped table-bordered table-hover jambo_table dataTable no-footer" style="overflow: scroll;" id="mytable">
                             <thead>
                                 <tr>
-                                    <th>No. Akun</th>
-                                    <th>Nama Akun</th>
-                                    <th>Aktivitas</th>
-                                    <th>Nominal</th>
-                                    <th>Posisi Debit/Kredit</th>
+                                    <th class="text-center">No. Akun</th>
+                                    <th class="text-center">Nama Akun</th>
+                                    <th class="text-center">Aktivitas</th>
+                                    <th class="text-center">Nominal</th>
+                                    <th class="text-center">Posisi Debit/Kredit</th>
                                     <th>#</th>
                                 </tr>
                             </thead>
@@ -138,7 +138,7 @@
                                 <select name="no_coa[]" onchange="getCoa('${i}')" id="no_coa${i}" class="form-control" required>
                                     <option value="">-</option>
                                     <?php foreach ($coa as $item) { ?>
-                                    <option value="<?= $item->no_coa?>"><?= $item->no_coa?></option>
+                                    <option value="<?= $item->no_coa?>"><?= $item->no_coa?> - <?= $item->nama_coa?></option>
                                     <?php } ?>
                                 </select>
                             </td>

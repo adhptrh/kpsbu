@@ -61,14 +61,14 @@
                         <thead>
                             <tr>
                                 <th style="width: 5%;">#</th>
-                                <th>Periode</th>
-                                <th>Tanggal Transaksi</th>
-                                <th>No. Dokumen</th>
-                                <th>Jenis Transaksi</th>
-                                <th>Tipe Pembayaran</th>
-                                <th>Deskripsi</th>
-                                <th>Bukti Upload</th>
-                                <th>#</th>
+                                <th class="text-center">Periode</th>
+                                <th class="text-center">Tanggal Transaksi</th>
+                                <th class="text-center">No. Dokumen</th>
+                                <th class="text-center">Jenis Transaksi</th>
+                                <th class="text-center">Tipe Pembayaran</th>
+                                <th class="text-center">Deskripsi</th>
+                                <th class="text-center">Bukti Upload</th>
+                                <th class="text-center">Detail</th>
                             </tr>
                         </thead>
                         <tbody>

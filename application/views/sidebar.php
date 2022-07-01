@@ -197,8 +197,8 @@
 
                         <!-- trans salma -->
                         <li><a href="<?= base_url('c_transaksi/pengajuan_jurnal')?>">Pengajuan Jurnal</a></li>
-                        <li><a href="<?= base_url('Penerimaan_kas')?>">Penerimaan Kas</a></li>
-                        <li><a href="<?= base_url('Pengeluaran_kas')?>">Pengeluaran Kas</a></li>
+                        <!-- <li><a href="<?= base_url('Penerimaan_kas')?>">Penerimaan Kas</a></li>
+                        <li><a href="<?= base_url('Pengeluaran_kas')?>">Pengeluaran Kas</a></li> -->
                         <li><a href="<?= base_url('DaftarPenerimaanPengeluaranKas')?>">Daftar Penerimaan dan Pengeluaran Kas</a></li>
                     <?php
                     elseif ($this->session->userdata('level') == "produksi1") :
