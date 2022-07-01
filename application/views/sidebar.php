@@ -249,7 +249,7 @@
                         <li><a href="<?php echo site_url(); ?>c_keuangan/bukubesar">Buku Besar</a></li>
 
                         <li><a href="<?php echo site_url(); ?>Laporan/neraca_saldo">Neraca Saldo</a></li>
-                        <li><a href="#">Laporan Neraca</a></li>
+                        <li><a href="<?= base_url('Laporan/laporan_neraca')?>">Laporan Neraca</a></li>
 
                         <!-- laporan sarah -->
                         <li><a href="<?php echo site_url(); ?>laporan/laporan_simpanan">Laporan Simpanan</a></li>

@@ -381,5 +381,30 @@ class Laporan extends CI_Controller
             ]);
         }
     }
+    
+
+    public function laporan_neraca()
+    {
+        $query = $this->db->query("SELECT 
+        SUM(nominal) AS debit, 
+        (
+            SELECT sum(nominal) 
+            FROM jurnal 
+            WHERE no_coa = '1111'
+            and left(tgl_jurnal, 7) = '2022-06'
+            and posisi_dr_cr = 'k' 
+        ) AS kredit
+        FROM jurnal
+        WHERE no_coa = '1111'
+        and left(tgl_jurnal, 7) = '2022-06'
+        AND posisi_dr_cr = 'd'")->row();
+        $total_kas = $query->debit - $query->kredit;
+
+        $data = [
+            'kas' => $total_kas
+        ];
+        
+        $this->template->load('template', 'laporan/laporan_neraca', $data);
+    }
 }
 ?>
