@@ -25,7 +25,7 @@
                         <input type="text" value="s/d" class="form-control text-center" readonly>
                     </div>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" id="end" name="end" placeholder="Tgl. Selesai" required>
+                        <input type="text" class="form-control" id="end" name="end" readonly placeholder="Tgl. Selesai" required>
                     </div>
                 </div>
                 <div class="form-group row">

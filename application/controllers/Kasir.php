@@ -684,7 +684,7 @@
     }
 
     public function getanggota($anggota_id) {
-        $qptrnk = $this->db->query("SELECT * FROM peternak WHERE no_anggota = '$anggota_id'")->result();
+        $qptrnk = $this->db->query("SELECT * FROM peternak WHERE no_anggota = '$anggota_id' AND status_kredit = 0")->result();
         if (count($qptrnk) > 0) {
             echo json_encode([
                 'status' => 'success',
@@ -693,7 +693,7 @@
             return;
         }
 
-        $qpegawai = $this->db->query("SELECT * FROM pegawai WHERE no_anggota = '$anggota_id'")->result();
+        $qpegawai = $this->db->query("SELECT * FROM pegawai WHERE no_anggota = '$anggota_id' AND status_kredit = 0")->result();
         if (count($qpegawai) > 0) {
             echo json_encode([
                 'status' => 'success',

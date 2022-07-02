@@ -106,5 +106,20 @@ class Lembur extends CI_Controller
         $kode   = "LMBR".date('Ymd').$kd;
         return $kode;
     }
+    
+    public function laporan() 
+    {
+        $id_pegawai = $this->input->get("id_pegawai") ?? "semua";
+        $periode = $this->input->get("periode") ?? date("Y-m");
+        $query = "SELECT * FROM tb_lembur a LEFT JOIN pegawai b ON a.id_pegawai = b.nip WHERE a.id_pegawai = '$id_pegawai' AND a.status = 3";
+        if ($id_pegawai == "semua") {
+            $query = "SELECT * FROM tb_lembur a LEFT JOIN pegawai b ON a.id_pegawai = b.nip WHERE a.status = 3";
+        }
+		$data = [
+			"parapegawai"=>$this->db->query("SELECT * FROM pegawai")->result(),
+            "data_lembur"=>$this->db->query($query)->result()
+        ];
+		$this->template->load('template', 'laporan/lembur',$data);
+    }
 }
 ?>

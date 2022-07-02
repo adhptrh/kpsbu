@@ -14,11 +14,16 @@
             $listCuti = $this->db->query("select a.*, b.nama, b.status as status_pegawai from tb_cuti a join pegawai b on a.nip = b.nip where b.status = 1 and b.nip ='$nip'")->result();
         }
         $pegawai = $this->db->query("select * from pegawai where status = 1 and nip = '$nip'")->row();
+        $total_cuti_tahun_ini = $this->db->query("SELECT SUM(jumlah_hari) as total_hari FROM tb_cuti WHERE tgl_pengajuan LIKE '".date("Y")."%' AND status = 1")->result();
+        if (count($total_cuti_tahun_ini) > 0) {
+            $total_cuti_tahun_ini = $total_cuti_tahun_ini[0]->total_hari;
+        }
         $data = [
             'kode' => $kode,
             'role' => $level,
             'pegawai' => $pegawai,
-            'list' => $listCuti
+            'list' => $listCuti,
+            'total_cuti_tahun_ini'=>$total_cuti_tahun_ini,
         ];
         $this->template->load('template', 'pengajuan/hrd/cuti/index', $data);
     }
@@ -37,11 +42,13 @@
             $listCuti = $this->db->query("select a.*, b.nama, b.status as status_pegawai from tb_cuti_melahirkan a join pegawai b on a.nip = b.nip where b.status = 1 and b.nip ='$nip'")->result();
         }
         $pegawai = $this->db->query("select * from pegawai where status = 1 and nip = '$nip'")->row();
+        $bisaTambahCuti = !(count($this->db->query("SELECT * FROM tb_cuti_melahirkan WHERE status = 1 AND tgl_mulai LIKE '".date("Y")."%'")->result()) > 0);
         $data = [
             'kode' => $kode,
             'role' => $level,
             'pegawai' => $pegawai,
-            'list' => $listCuti
+            'list' => $listCuti,
+            'bisaTambahCuti'=>$bisaTambahCuti,
         ];
         $this->template->load('template', 'pengajuan/hrd/cuti_melahirkan/index', $data);
     }
@@ -89,7 +96,7 @@
         ];
         $this->db->insert('tb_cuti_melahirkan', $data);
 
-        redirect('Cuti');
+        redirect('Cuti/melahirkan');
     }
 
     public function accept()
@@ -162,6 +169,36 @@
         }
         $kode   = "CUTIMLHRKN".date('Ymd').$kd;
         return $kode;
+    }
+
+    public function laporan() 
+    {
+        $id_pegawai = $this->input->get("id_pegawai") ?? "semua";
+        $periode = $this->input->get("periode") ?? date("Y-m");
+        $query = "SELECT * FROM tb_cuti a LEFT JOIN pegawai b ON a.nip = b.nip WHERE a.nip = '$id_pegawai' AND tgl_mulai LIKE '$periode%'";
+        if ($id_pegawai == "semua") {
+            $query = "SELECT * FROM tb_cuti a LEFT JOIN pegawai b ON a.nip = b.nip WHERE tgl_mulai LIKE '$periode%'";
+        }
+		$data = [
+			"parapegawai"=>$this->db->query("SELECT * FROM pegawai")->result(),
+            "data_cuti"=>$this->db->query($query)->result()
+        ];
+		$this->template->load('template', 'laporan/cuti',$data);
+    }
+
+    public function laporan_melahirkan() 
+    {
+        $id_pegawai = $this->input->get("id_pegawai") ?? "semua";
+        $periode = $this->input->get("periode") ?? date("Y-m");
+        $query = "SELECT * FROM tb_cuti_melahirkan a LEFT JOIN pegawai b ON a.nip = b.nip WHERE a.nip = '$id_pegawai' AND tgl_mulai LIKE '$periode%'";
+        if ($id_pegawai == "semua") {
+            $query = "SELECT * FROM tb_cuti_melahirkan a LEFT JOIN pegawai b ON a.nip = b.nip WHERE tgl_mulai LIKE '$periode%'";
+        }
+		$data = [
+			"parapegawai"=>$this->db->query("SELECT * FROM pegawai")->result(),
+            "data_cuti"=>$this->db->query($query)->result()
+        ];
+		$this->template->load('template', 'laporan/cuti_melahirkan',$data);
     }
 }
 ?>

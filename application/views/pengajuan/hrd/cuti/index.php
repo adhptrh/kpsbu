@@ -70,6 +70,8 @@
 </div>
 <?php $this->load->view('pengajuan/hrd/cuti/add'); ?>
 <script>
+    let cuti_tahun_ini = <?= $total_cuti_tahun_ini ?>
+    
     $(document).ready(function() {
         $("#info").hide()
         var todaydt = new Date();
@@ -77,9 +79,12 @@
             autoclose: true,
             dateFormat: "yy-mm-dd",
             endDate: todaydt,
+            minDate: new Date(),
             onSelect: function (date) {
                 var date2 = $('#start').datepicker('getDate');
                 $('#end').datepicker('option', 'minDate', date2);
+                $('#end').datepicker('option', 'maxDate', new Date(new Date(date2).setDate(new Date(date2).getDate()+12-cuti_tahun_ini)));
+                
             }
         });
         $('#end').datepicker({

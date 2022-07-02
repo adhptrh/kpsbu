@@ -8,7 +8,10 @@
                     </div>
                     <div class="col-sm-2 col-12">
                         <h3 id="quote">
-                            <?= $role == 'pegawai' ? '<a href="#add" data-toggle="modal" class="btn pull-right btn-primary">Tambah</a>' : '' ?>
+                            <?php if ($role == "pegawai") { ?> 
+                                
+                                <a href="#add" data-toggle="modal" class="btn pull-right btn-primary">Tambah</a>
+                            <?php } ?>
                         </h3>
                     </div>
                 </div>
@@ -77,33 +80,36 @@
             autoclose: true,
             dateFormat: "yy-mm-dd",
             endDate: todaydt,
+            minDate: 0,
             onSelect: function (date) {
                 var date2 = $('#start').datepicker('getDate');
                 $('#end').datepicker('option', 'minDate', date2);
+                $("#end").datepicker('setDate',new Date(new Date(date2).setDate(new Date(date2).getDate()+(30*3))))
+                diff()
             }
         });
         $('#end').datepicker({
             dateFormat: "yy-mm-dd", 
         });
-        
-        $("#start, #end").on("change", function() {
+        function diff() {
             const startDate  = $("#start").val();
             const endDate    = $("#end").val();
 
             const diffInMs   = new Date(endDate) - new Date(startDate)
             const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
-            if (diffInDays <= 12) {
+            $("#jml_hari_cuti").val(diffInDays);
+            /* if (diffInDays <= 12) {
                 $("#jml_hari_cuti").val(diffInDays);
                 $("#info").hide();
             } else {
-                $("#jml_hari_cuti").val(12);
 
                 var info = `<p style="margin-top: 2%;">Jumlah Maksimal Cuti = 12 Hari/Tahun.</p>`;
                 // console.log(info)
                 $("#info").html(info);
                 $("#info").show();
-            }
-        });
+            } */
+        }
+        $("#start, #end").on("change", diff);
 
         $(".setuju").on('click', function() {
             var id_pengajuan = $(this).data("id");

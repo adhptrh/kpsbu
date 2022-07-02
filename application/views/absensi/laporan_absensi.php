@@ -40,7 +40,7 @@
                                 <td><?= $value->nama ?></td>
                                 <td><?= $value->rfid ?></td>
                                 <td class="text-center">
-                                    <?= $value->keterangan =='Presensi Keluar' ? '<button class="btn btn-sm btn-default">Presensi Keluar</button>' : '<button class="btn btn-sm btn-primary">Presensi Masuk</button>';  ?>
+                                    <?= $value->keterangan == 'Presensi Keluar' ? '<button class="btn btn-sm btn-default">'.$value->keterangan.'</button>' : '<button class="btn btn-sm btn-primary">'.$value->keterangan.'</button>';  ?>
                                 </td>
                             </tr>
                         <?php } ?>

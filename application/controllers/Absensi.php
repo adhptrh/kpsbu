@@ -55,9 +55,9 @@
             } elseif ($jml_absen->jml < 1 && $this->jam_sekarang >= date("H:i", strtotime($peg->time_in."+1 hours"))) {
                 $absen = array(
                     'status' => false,
-                    'info' => 'Gagal Melaki Presensi Masuk, Telat ('.$peg->nama.')'
+                    'info' => 'Gagal Melakukan Presensi Masuk, Telat ('.$peg->nama.')'
                 );
-            } elseif ($this->jam_sekarang >= $peg->time_in && $this->jam_sekarang <= date("H:i", strtotime($peg->time_in."+1 hours")) && $jml_absen->jml < 1) {
+            } elseif ($this->jam_sekarang >= $peg->time_in && $this->jam_sekarang <= date("H:i", strtotime($peg->time_in."+15 minutes")) && $jml_absen->jml < 1) {
                 $data = array(
                     'id_absensi' => $id_absensi,
                     'status' => 'masuk',
@@ -69,6 +69,19 @@
                 $absen = array(
                     'status' => true,
                     'info' => 'Berhasil Melakukan Presensi Masuk ('.$peg->nama.')'
+                );
+            } elseif ($this->jam_sekarang >= $peg->time_in && $this->jam_sekarang <= date("H:i", strtotime($peg->time_in."+1 hours")) && $this->jam_sekarang > date("H:i", strtotime($peg->time_in."+15 minutes")) && $jml_absen->jml < 1) {
+                $data = array(
+                    'id_absensi' => $id_absensi,
+                    'status' => 'masuk',
+                    'rfid' => $rfid,
+                    'jam' => date("H:i:s"),
+                    'keterangan' => "Presensi Masuk, Telat"
+                );
+                $this->db->insert("detail_absen_rfid",$data);
+                $absen = array(
+                    'status' => true,
+                    'info' => 'Berhasil Melakukan Presensi Masuk, Telat ('.$peg->nama.')'
                 );
             } elseif ($jml_absen->jml == 1 && $this->jam_sekarang < $peg->time_out ) {
                 $absen = array(

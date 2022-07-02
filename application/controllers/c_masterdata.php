@@ -8,6 +8,7 @@ class c_masterdata extends CI_controller
       date_default_timezone_set('Asia/Jakarta');
       $this->load->model(array(
          "m_bank" => "M_bank",
+         "m_anggota" => "M_anggota",
       ));
       if (empty($this->session->userdata('level'))) {
          redirect('c_login/home');
@@ -770,6 +771,7 @@ class c_masterdata extends CI_controller
             'deposit' => $_POST['deposit'],
             'kd_tps' => $_POST['tps'],
             'nm_peternakan' => $_POST['nm_peternakan'],
+            'no_anggota' => $this->M_anggota->kd_anggota(),
          );
          // print_r($data);exit;
          $this->db->insert('peternak', $data);
@@ -2628,6 +2630,7 @@ class c_masterdata extends CI_controller
          'jurusan_pendidikan' => $this->input->post('jurusan_pendidikan'),
          'agama' => $this->input->post('agama'),
          'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+         'no_anggota' => $this->M_anggota->kd_anggota()
       ];
       $this->db->insert('pegawai', $data);
 

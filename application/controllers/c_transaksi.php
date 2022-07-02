@@ -5256,9 +5256,9 @@ group by no_bbp";
                $harga_beli += $row->jml * $row->harga_beli;
             }
             $jenis_pmb = $penjualan->row()->jenis_pembayaran;
-            $kasPnj = $penjualan->row()->total_trans;
+            $penjualanWaserda = $penjualan->row()->total_trans;
             $ppnKeluar = $penjualan->row()->ppn;
-            $penjualanWaserda = $penjualan->row()->total;
+            $kasPnj = $penjualan->row()->total;
             $hpp_persbrg = $harga_beli;
             /** penjualan tunai */
             $pengajuan_jurnal = [
@@ -5568,9 +5568,9 @@ group by no_bbp";
                $harga_beli += $row->jml * $row->harga_beli;
             }
             $jenis_pmb = $penjualan->row()->jenis_pembayaran;
-            $kasPnj = $penjualan->row()->total_trans;
+            $penjualanWaserda = $penjualan->row()->total_trans;
             $ppnKeluar = $penjualan->row()->ppn;
-            $penjualanWaserda = $penjualan->row()->total;
+            $kasPnj = $penjualan->row()->total;
             $hpp_persbrg = $harga_beli;
             /** penjualan tunai */
             $pengajuan_jurnal = [

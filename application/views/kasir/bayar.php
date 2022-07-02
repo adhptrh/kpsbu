@@ -32,7 +32,7 @@
                             </select>
                         </div>
                         <div class="col-sm-4 anggota">
-                            <input name="anggota_pilih" id="anggota_pilih" type="text" class="form-control" placeholder="Kode Anggota">
+                            <input name="anggota_pilih" id="anggota_pilih" type="text" class="form-control" placeholder="Kode Anggota" autocomplete="off">
                             <!-- <select name="anggota" id="anggota" class="form-control">
                                 <option value="">-</option>
                                 <option value="pegawai">Pegawai</option>

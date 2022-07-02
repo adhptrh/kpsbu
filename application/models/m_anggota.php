@@ -2,7 +2,7 @@
 
 class m_anggota extends CI_Model {
     public function kd_anggota() {
-        $query1   = "SELECT MAX(RIGHT(no_anggota,4)) FROM (SELECT no_anggota FROM `peternak` UNION SELECT no_anggota FROM `pegawai`) a;";
+        $query1   = "SELECT MAX(RIGHT(no_anggota,4)) as kode FROM (SELECT no_anggota FROM `peternak` UNION SELECT no_anggota FROM `pegawai`) a;";
         $abc      = $this->db->query($query1);
         $kode = "";
         if ($abc->num_rows() > 0) {

@@ -278,6 +278,9 @@
                         <li><a href="<?php echo site_url(); ?>c_keuangan/hpp_ips">Laporan Harga Pokok Penjualan IPS</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/hpp_toko">Laporan Harga Pokok Penjualan Toko</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/ranking">Laporan Ranking</a></li>
+                        <li><a href="<?php echo site_url(); ?>Cuti/laporan">Laporan Cuti</a></li>
+                        <li><a href="<?php echo site_url(); ?>Cuti/laporan_melahirkan">Laporan Cuti Melahirkan</a></li>
+                        <li><a href="<?php echo site_url(); ?>Lembur/laporan">Laporan Lembur</a></li>
                         <li><a href="<?= base_url('laporan_kartu_stock') ?>">Laporan Kartu Stock Waserda</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/lap_ks_bb">Kartu Persediaan Bahan Baku</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/lap_ks_bp">Kartu Persediaan Bahan Penolong</a></li>

@@ -10,7 +10,7 @@ class Shift extends CI_Controller
     public function index()
     {
         $data = [
-            'pegawai' => $this->master->cek_pegawai()->result(),
+            'pegawai' => $this->db->query("SELECT * FROM pegawai a LEFT JOIN jadwal_shift b ON a.nip = b.id_pegawai WHERE b.tgl_awal IS NULL OR b.tgl_awal < '".date("Y-m")."' AND b.tgl_akhir < '".date("Y-m")."';")->result(),//$this->master->cek_pegawai()->result(),
             'shift' => $this->db->get('shift')->result(),
             'list' => $this->master->shift()->result(),
         ];
