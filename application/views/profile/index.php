@@ -32,10 +32,13 @@
               </li>
               <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Slip Gaji</a>
               </li>
+              <li role="presentation" class=""><a href="#tab_content4" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Slip Lembur</a>
+              </li>
             </ul>
             <div id="myTabContent" class="tab-content">
               <?php $this->load->view('profile/lembur_detail');?>
               <?php $this->load->view('profile/slipgaji');?>
+              <?php $this->load->view('profile/sliplembur');?>
             </div>
           </div>
         </div>
@@ -74,6 +77,21 @@
     });
   });
 
+  $(document).on("click", "#filer2", function() {
+    var bulan = $("#bulan2").val();
+    var tahun = $("#tahun2").val();
+    let params = {
+      bulan : bulan, 
+      tahun : tahun
+    };
+    if (bulan.length < 1 || tahun.length < 1) {
+      alert("Input tahun dan bulan")
+      return
+    }
+  var win = window.open('<?= base_url('Profile/sliplembur/')?>' + tahun + "-" +bulan, '_blank');
+    
+  });
+
   $(document).on("click", ".slipgaji", function() {
     var id = $(this).data("id")
     var win = window.open('<?= base_url('Profile/slipgaji/')?>' + id, '_blank');
@@ -86,4 +104,5 @@
     }
 
   })
+
 </script>

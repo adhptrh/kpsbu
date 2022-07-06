@@ -8,7 +8,9 @@
                     </div>
                     <div class="col-sm-2 col-12">
                         <h3 id="quote">
-                            <button class="btn pull-right btn-primary" data-target="#add" data-toggle="modal">Tambah Jadwal Shift</button>
+                            <?php if ($this->session->userdata('level') != "pegawai") { ?>
+                                <button class="btn pull-right btn-primary" data-target="#add" data-toggle="modal">Tambah Jadwal Shift</button>
+                            <?php } ?>
                         </h3>
                     </div>
                 </div>
@@ -28,13 +30,18 @@
                                 <th>Tanggal Awal</th>
                                 <th>Tanggal Akhir</th>
                                 <th>Deskripsi</th>
+                                
+                            <?php if ($this->session->userdata('level') != "pegawai") { ?>
                                 <th style="width: 7%;" class="text-center">Aksi</th>
+                                <?php } ?>
                             </tr>
                         </thead>
                         <tbody>
                         <?php 
                         $no = 1;
-                        foreach ($list as $value) { ?>
+                        foreach ($list as $value) { 
+                            
+                            if ($this->session->userdata('level') == "pegawai" && $value->nip != $this->session->userdata('nip')) continue;?>
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $value->nama ?></td>
@@ -43,6 +50,8 @@
                                 <td><?= $value->tgl_awal ?></td>
                                 <td><?= $value->tgl_akhir ?></td>
                                 <td><?= $value->desc ?></td>
+                                
+                            <?php if ($this->session->userdata('level') != "pegawai") { ?>
                                 <td class="text-center">
                                     <?php if ($value->is_complete == 0) { ?>
                                         <button class="btn btn-sm btn-secondary" onclick="set_done(<?= $value->id_pegawai ?>)"> Set done</button>
@@ -50,6 +59,7 @@
                                         <button class="btn btn-sm btn-success"><i class="fa fa-check"></i> Done</button>
                                     <?php } ?>
                                 </td>
+                                <?php } ?>
                             </tr>
                         <?php } ?>
                         </tbody>

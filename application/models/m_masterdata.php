@@ -39,7 +39,7 @@ class m_masterdata extends CI_Model {
 
     public function shift()
     {
-        $q = "SELECT a.*, b.nip, b.nama, c.desc as shift FROM jadwal_shift a
+        $q = "SELECT a.*, b.nip, b.nama, c.desc as shift, b.created_at FROM jadwal_shift a
         JOIN pegawai b ON a.id_pegawai = b.nip
         JOIN shift c ON a.id_shift = c.id
         ORDER BY a.id desc

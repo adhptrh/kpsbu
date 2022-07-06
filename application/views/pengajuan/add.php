@@ -13,7 +13,7 @@
                 <div class="form-group row">
                     <label for="tgl" class="col-sm-4 col-form-label">Tanggal Pengajuan</label>
                     <div class="col-sm-8">
-                    <input type="datetime-local" class="form-control" id="tgl" name="tgl" placeholder="Tanggal" value="<?= date('Y-m-d')?>">
+                    <input type="date" class="form-control" id="tgl" name="tgl" placeholder="Tanggal" value="<?= date('Y-m-d')?>">
                     </div>
                 </div>
                 <hr>

@@ -53,18 +53,18 @@ function encode_img_base64($img_path = false): string
 </head>
 <body>
 <img height="<?php echo 35/2 ?>px" width="<?php echo 150/2 ?>px" src="<?php echo encode_img_base64("assets/images/brandlogo.jpg"); ?>">"
-    <p style="text-align: center; font-size:30px;">SLIP GAJI KPSBU</p>
+    <p style="text-align: center; font-size:30px;">SLIP LEMBUR KPSBU</p>
     <br><br>
     <table>
         <tr>
             <td>Periode</td>
             <td>:</td>
-            <td><?= date('F Y', strtotime($pegawai->tanggal))?></td>
+            <td><?= date('F Y', strtotime($bulantahun))?></td>
         </tr>
         <tr>
             <td>Nama Pegawai</td>
             <td>:</td>
-            <td><?= $pegawai->nm_pegawai?></td>
+            <td><?= $pegawai->nama?></td>
         </tr>
         <tr>
             <td>NIP</td>
@@ -80,56 +80,34 @@ function encode_img_base64($img_path = false): string
     <br><br>
     <table class="table">
         <tr>
-            <td>Pendapatan</td>
-            <td></td>
-            <td></td>
+            <td>Tanggal</td>
+            <td>Waktu</td>
+            <td>Nominal</td>
         </tr>
+        <?php 
+        $total_jam_total = 0;
+        $total_nominal_lembur_total = 0;
+        foreach ($data as $v) { 
+            $total_jam_total += $v->total_jam;
+            $total_nominal_lembur_total += $v->total_nominal_lembur;
+            ?>
+            <tr>
+                <td><?= $v->tgl_pengajuan ?></td>
+                <td class="text-right"><?= $v->total_jam ?></td>
+                <td class="text-right"><?= format_rp($v->total_nominal_lembur) ?></td>
+            </tr>
+        <?php } ?>       
         <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp; Gaji Pokok</td>
-            <td></td>
-            <td style="text-align:right"><?= format_rp($pegawai->gaji_pokok)?></td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp; Tunjangan Jabatan</td>
-            <td></td>
-            <td style="text-align:right"><?= format_rp($pegawai->tunjangan_jabatan)?></td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp; Tunjangan Kesehatan</td>
-            <td></td>
-            <td style="text-align:right"><?= format_rp($pegawai->tunjangan_kesehatan)?></td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp; Tunjangan Hari Raya</td>
-            <td></td>
-            <td style="text-align:right"><?= format_rp($pegawai->tunjangan_hari_raya)?></td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp; Bonus Kerja</td>
-            <td></td>
-            <td style="text-align:right"><?= format_rp($pegawai->bonus_kerja)?></td>
-        </tr>
-        <tr>
-            <td>Pengurang</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp; Pajak PPH 21</td>
-            <td style="text-align:right"><?= format_rp($pegawai->pph21)?></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Total Pendapatan Bersih</td>
-            <td></td>
-            <td style="text-align:right"><?= format_rp($pegawai->total)?></td>
+            <td>Total</td>
+            <td class="text-right"><?= $total_jam_total ?></td>
+            <td class="text-right"><?= format_rp($total_nominal_lembur_total) ?></td>
         </tr>
     </table>
     <br><br>
     <p style="font-size: 15px;">
         <strong>
             <i>
-                <?= 'Telah dibayarkan sejumlah ' . number_to_words($pegawai->total) . ', dan telah dibayarkan kebank yang terdaftar.' ?></strong>
+                <?= 'Telah dibayarkan sejumlah ' . number_to_words(0) . ', dan telah dibayarkan kebank yang terdaftar.' ?></strong>
             </i>
     </p>
     <p style="font-size: 12px;">

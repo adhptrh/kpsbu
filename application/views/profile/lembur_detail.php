@@ -19,7 +19,7 @@
             <td><?= $item->tgl_pengajuan ?></td>
             <td><?= $item->total_jam ?></td>
             <td>
-                <?= $item->status == 0 ? '<span class="label label-warning">Menunggu persetujuan</span>' : (($item->status == 1) ? '<span class="label label-success">Sudah disetujui</span>' : '<span class="label label-danger">Ditolak</span>'); ?>
+                <?= $item->status == 1 ? '<span class="label label-warning">Menunggu persetujuan</span>' : (($item->status == 2) ? '<span class="label label-danger">Ditolak</span>':'<span class="label label-success">Sudah disetujui</span>'); ?>
             </td>
         </tr>
         <?php }?>

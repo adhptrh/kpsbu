@@ -53,6 +53,7 @@
                             $no = 1;    
                             foreach ($pegawai as $key => $value) { ?>
                             <?php 
+                            if ($bulantahun < $value->created_at ) continue;
                             $this->db->where('nm_pegawai', $value->nama);
                             $detail = $this->db->get('tb_penggajian')->result();
                             // print_r($detail);exit;
@@ -81,7 +82,7 @@
                                         <?php if (!is_null($value->tgl_gaji)) { ?>
                                             <a href="#" class="btn btn-xs btn-success">Sudah melakukan penggajian</a>
                                         <?php } elseif (substr($value->created_at,0,7) == date("Y-m")) { ?>
-                                            <a href="#" class="btn btn-xs btn-warning">Pegawai baru penggajian dibulan berikutnya</a>
+                                            <a href="#" class="btn btn-xs btn-warning">Belum melakukan penggajian</a>
                                         <?php } else { ?>
                                             <a href="#" class="btn btn-xs btn-warning">Belum melakukan penggajian</a>
                                         <?php } ?>
@@ -91,7 +92,7 @@
                             </tbody>
                         </table>
                         <?php 
-                            $check = date('d') >= 26 && date("Y-m") == $bulantahun; 
+                            $check = date('d') >= 3 && date("Y-m") == $bulantahun; 
                             if ($check){ ?>
                                     <button class="btn btn-primary">Pembayaran Gaji</button>
                                 <!-- <?php if ($value->total >= 0 AND is_null($value->tgl_gaji)) { ?> -->

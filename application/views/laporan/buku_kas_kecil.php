@@ -2,7 +2,7 @@
 	<body>
 		<div class="x_panel">
 			<div class="x_title">
-				<h3 class="panel-title"><b>Buku Kas Kacil</b></h3>
+				<h3 class="panel-title"><b>Buku Kas Kecil</b></h3>
 			</div>
 			<div class="x_content">
                 <form class="form-inline" style="margin-bottom:20px;" method="GET">

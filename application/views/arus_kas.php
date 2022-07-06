@@ -26,7 +26,7 @@
                     <?php echo $this->session->flashdata('notif_ubah'); ?>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table table-striped table-bordered table-hover jambo_table dataTable no-footer">
                         <?php
                         $kas = $kas_diterima ?? 0;
                         $pembelian = $pmb ?? 0;
@@ -34,11 +34,13 @@
                         $t_beban = 0;
                         $arus_kas_bersih_pendanaan = 0;
                         ?>
-                        <tr>
-                            <th>#</th>
-                            <th>Masuk</th>
-                            <th>Keluar</th>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th class="text-center">Penerimaan</th>
+                                <th class="text-center">Pengeluaran</th>
+                            </tr>
+                        </thead>
                         <tr>
                             <th colspan="3">Arus Kas dari Aktivitas Operasi</th>
                         </tr>

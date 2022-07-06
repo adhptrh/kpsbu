@@ -32,7 +32,9 @@
                         <tbody>
                         <?php 
                         $no = 1; 
-                        foreach ($list as $key => $value) { ?>
+                        foreach ($list as $key => $value) { 
+                            if ($this->session->userdata("level") == "pegawai" && $this->session->userdata("nama_lengkap") != $value->nama ) continue;
+                            ?>
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= date('d-m-Y', strtotime($value->tanggal)) ?></td>

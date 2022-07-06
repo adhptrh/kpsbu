@@ -417,6 +417,8 @@
                     </a>
                     <ul class="nav child_menu">
                         <li><a href="<?= base_url('Profile')?>">Informasi Pegawai</a></li>
+                        <li><a href="<?= base_url('Shift')?>">Jadwal Shift </a></li>
+                        <li><a href="<?= base_url('Absensi/laporan_kehadiran')?>">Laporan Kehadiran</a></li>
                     </ul>
                 </li>
             </ul>

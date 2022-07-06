@@ -43,19 +43,31 @@ class Penggajian extends CI_Controller
         $ketptkp = $pegawai->id_jenis_pegawai == "Kontrak" ? "Tidak Kena Pajak" : "Kena Pejak";
         $tunjanganjabatan = $pegawai->tunjangan_jabatan;
         $tunjangankesehatan = $pegawai->tunjangan_kesehatan;
-        $totalbruto = $gajipokok+$tunjangankesehatan+$tunjanganjabatan+$bonus+$tunjanganhariraya;
+        $totalbruto = $gajipokok+$tunjangankesehatan+$tunjanganjabatan+$bonus;
         $biayajabatan = $totalbruto*0.05;
+        if ($biayajabatan > 500000) $biayajabatan = 500000;
         $totalnetto = $totalbruto-$biayajabatan;
+        $totalnettosetahun = ($totalnetto*12)+$tunjanganhariraya;
         $ptkp = $nominal_ptkp;
-        $penghasiltidakkenapajak = $totalnetto-$ptkp;
-        $pph21 = $pegawai->id_jenis_pegawai == "Kontrak" ? 0:$penghasiltidakkenapajak*0.05;
-        if ($totalnetto < $ptkp) {
+        $pkp = $totalnettosetahun-$ptkp;
+        $pph21 = 0;
+        if ($pkp < 50000000) {
+            $pph21 = $pkp*0.05;
+        } elseif ($pkp >= 50000000 && $pkp < 250000000) {
+            $pph21 = 2500000+(($pkp-50000000)*0.15);
+        }  elseif ($pkp >= 250000000 && $pkp < 500000000) {
+            $pph21 = 32500000+(($pkp-250000000)*0.25);
+        }  elseif ($pkp >= 500000000) {
+            $pph21 = 95000000+(($pkp-500000000)*0.35);
+        }
+        $pph21 = $pph21/12;
+        $pph21 = $pegawai->id_jenis_pegawai == "Kontrak" ? 0:$pph21;
+        if ($totalnettosetahun < $ptkp) {
             $pph21 = 0;
         }
-        
 
         $gaji = $totalbruto;
-        $gajibersih = $gaji-$pph21;
+        $gajibersih = $gaji+$tunjanganhariraya-$pph21;
 
         $data = [
             "gajipokok" => $gajipokok,
@@ -66,7 +78,7 @@ class Penggajian extends CI_Controller
             "biayajabatan" => $biayajabatan,
             "totalnetto" => $totalnetto,
             "ptkp" => $nominal_ptkp,
-            "penghasiltidakkenapajak" => $penghasiltidakkenapajak,
+            "penghasiltidakkenapajak" => $pkp,
             "pph21" => $pph21,
             "gajibersih"=>$gajibersih,
             "bonus"=>$bonus,
@@ -273,9 +285,9 @@ class Penggajian extends CI_Controller
         $id_gaji = $this->Absensi_model->id_gaji();
         $total = 0;
         foreach ($nips as $nip) {
-            $data = $this->slip_gaji($nip,$bulantahun);
-            $this->bayar_gaji2($data,$id_gaji);
+            $data = $this->slip_gaji($nip,date("Y-m"));
             $total += $data["gajibersih"];
+            $this->bayar_gaji2($data,$id_gaji);
         }
         $tanggal = date('Y-m-d');
         $pengajuan = [

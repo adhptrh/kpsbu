@@ -53,7 +53,7 @@
          // jurnal
          $beban = [
             'id_jurnal' => $id_pengeluaran, 
-            'tgl_jurnal' => date("Y-m-d"), 
+            'tgl_jurnal' => $tgl, 
             'no_coa' => $coa, 
             'posisi_dr_cr' => 'd', 
             'nominal' => $nominal, 

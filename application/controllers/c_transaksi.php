@@ -5062,7 +5062,6 @@ group by no_bbp";
       {
          if (strpos($kode, 'GAJI-') !== false) {
             /** transaksi gaji */
-
             $pengajuan_jurnal = [
                'status' => 'selesai'
             ];
@@ -5395,10 +5394,9 @@ group by no_bbp";
                'tgl_jurnal' => $tanggal,
                'no_coa' => 1111,
                'posisi_dr_cr' => 'k',
-               'nominal' => $totalkas,
+               'nominal' => $nominal,
             ];
             $this->db->insert('jurnal', $kredit);
-
             // buku pembantu kas
             $bpk = [
                'id_ref' => $kode, 
@@ -5632,7 +5630,7 @@ group by no_bbp";
          $kode = $this->input->post('kode');
          $tanggal = $this->input->post('tanggal');
          $nominal = $this->input->post('nominal');
-
+         
          for ($i = 0; $i < count($kode); $i++) {
             $this->status_pengajuan_subm($kode[$i], $tanggal[$i], $nominal[$i]);
          }
