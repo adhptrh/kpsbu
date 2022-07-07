@@ -23,7 +23,49 @@
                             <td>Kas</td>
                             <td><?= format_rp($kas) ?></td>
                             <td>Utang</td>
-                            <td>123</td>
+                            <td><?= format_rp($utang) ?></td>
+                        </tr>
+                        <tr>
+                            <td>Persediaan Bahan Baku</td>
+                            <td><?= format_rp($persediaanbahanbaku) ?></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Aktifa Tetap</th>
+                            <td></td>
+                            <th>Modal</th>
+                            <td><?= format_rp($modal) ?></td>
+                        </tr>
+                        <tr>
+                            <td>Akumulasi Penyusutan Kendaraan</td>
+                            <td><?= format_rp($akumulasipenyusutankendaraan) ?></td>
+                            <td>Simpanan Pokok</td>
+                            <td><?= format_rp($simpananpokok) ?></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Simpanan Wajib</td>
+                            <td><?= format_rp($simpananwajib) ?></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Simpanan Masuka</td>
+                            <td><?= format_rp($simpananmasuka) ?></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>SHU Ditahan</td>
+                            <td><?= format_rp($shuditahan) ?></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <th><?= format_rp($total_aktifa) ?></th>
+                            <td></td>
+                            <th><?= format_rp($total_pasiva) ?></th>
                         </tr>
                     </table>
                 </div>

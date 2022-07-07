@@ -1904,4 +1904,208 @@ ORDER BY a.no ASC";
 
 		$this->template->load('template', 'hpp/view_toko', $data);
 	}
+	public function laporan_shu()
+    {
+        $tahun = date('Y');
+        $pnj = $this->db->query("SELECT
+        SUM(nominal) AS total
+        FROM jurnal a
+        LEFT JOIN (
+            SELECT id, no_coa, nama_coa, header, is_shu
+            FROM coa
+        ) AS b ON a.no_coa = b.no_coa
+        WHERE b.is_shu = 1
+        AND b.header = 4
+        AND YEAR(tgl_jurnal) = '$tahun'
+        AND posisi_dr_cr = 'k'")->row()->total;
+
+        $beban = $this->db->query("SELECT
+        SUM(nominal) AS total, b.nama_coa, a.no_coa, tgl_jurnal
+        FROM jurnal a
+        LEFT JOIN (
+            SELECT id, no_coa, nama_coa, is_shu, header
+            FROM coa
+        ) AS b ON a.no_coa = b.no_coa
+        WHERE b.is_shu = 1
+        AND b.header = 5
+        AND YEAR(tgl_jurnal) = '$tahun'
+        AND posisi_dr_cr = 'd'
+        GROUP BY nama_coa")->result();
+
+        $penjualan_ips = $this->db->query("SELECT SUM(total) as total_penjualan FROM penjualan_ips WHERE YEAR(tgl_trans) = '$tahun'")->result()[0]->total_penjualan;
+        $hpp_ips = $this->db->query("SELECT ifnull(sum(nominal),0) as hpp
+        FROM jurnal
+        WHERE posisi_dr_cr = 'd' AND no_coa = '6111' AND id_jurnal LIKE 'PENJS%' AND YEAR(tgl_jurnal) = '$tahun'")->result()[0]->hpp;
+
+        $penjualan_toko = $this->db->query("SELECT SUM(total) as total_penjualan FROM penjualan_toko WHERE YEAR(tgl_trans) = '$tahun'")->result()[0]->total_penjualan;
+        $hpp_toko = $this->db->query("SELECT ifnull(sum(nominal),0) as hpp
+        FROM jurnal
+        WHERE posisi_dr_cr = 'd' AND no_coa = '6112' AND id_jurnal LIKE 'PENJS%' AND YEAR(tgl_jurnal) = '$tahun'")->result()[0]->hpp;
+
+        $penjualan_waserda = $this->db->query("SELECT SUM(nominal) as total_nominal FROM jurnal WHERE no_coa = '4116' AND YEAR(tgl_jurnal) = '$tahun'")->result()[0]->total_nominal;
+        $hpp_waserda = $this->db->query("SELECT SUM(nominal) AS nominal, b.nama_coa, a.posisi_dr_cr
+        from jurnal a
+        JOIN coa b ON a.no_coa = b.no_coa
+        WHERE header = 6
+        AND is_waserda = 1 AND YEAR(tgl_jurnal) = '$tahun'")->result()[0]->nominal;
+
+        $totalhpp = $hpp_ips + $hpp_waserda + $hpp_toko;
+
+        $hpp = $this->M_transaksi->t_hpp()->result();
+        $t_hpp = 0;
+        foreach ($hpp as $key => $value) {
+            $t_hpp += $value->hpp;
+        }
+
+        $total_penjualan = $penjualan_ips + $penjualan_toko + $penjualan_waserda;
+
+        $labakotor = $total_penjualan - $totalhpp;
+
+        $data = [
+            'beban' => $beban,
+            'pnj' => $pnj,
+            't_hpp' => $t_hpp,
+            'penjualan_ips' => $penjualan_ips,
+            'penjualan_toko' => $penjualan_toko,
+            'penjualan_waserda' => $penjualan_waserda,
+            'total_penjualan' => $total_penjualan,
+            'totalhpp' => $totalhpp,
+            'labakotor' => $labakotor,
+        ];
+        // print_r($data);exit;
+		return $data;
+}
+
+	public function view_jurnal_penutup() {
+		$laporan_shu = $this->laporan_shu();
+		
+		$totalbeban = 0;
+		foreach ($laporan_shu["beban"] as $k=>$v) {
+			echo "<br>";
+			$totalbeban += intval($v->total);
+		}
+
+		$statusditahandebit = $this->db->query("SELECT SUM(nominal) as total_nominal FROM jurnal WHERE no_coa = '3200' AND posisi_dr_cr = 'd'")->row()->total_nominal;
+		$shuberjalan = $this->db->query("SELECT SUM(nominal) as total_nominal FROM jurnal WHERE no_coa = '3300' AND posisi_dr_cr = 'd'")->row()->total_nominal;
+
+		$jurnalpenutup = [];
+		$totalkredit = 0;
+		$totaldebit = 0;
+		
+		array_push($jurnalpenutup, [
+			"tanggal"=>date("Y-m-d"),
+			"no_coa"=>4111,
+			"keterangan"=>$this->db->query("SELECT * FROM coa WHERE no_coa = '4111'")->row()->nama_coa,
+			"debit"=>$laporan_shu["penjualan_ips"],
+			"kredit"=>null,
+		]);
+		$totaldebit += $laporan_shu["penjualan_ips"];
+
+		array_push($jurnalpenutup, [
+			"tanggal"=>null,
+			"no_coa"=>1300,
+			"keterangan"=>$this->db->query("SELECT * FROM coa WHERE no_coa = '1300'")->row()->nama_coa,
+			"debit"=>null,
+			"kredit"=>$laporan_shu["penjualan_ips"],
+		]);
+		$totalkredit += $laporan_shu["penjualan_ips"];
+
+		array_push($jurnalpenutup, [
+			"tanggal"=>date("Y-m-d"),
+			"no_coa"=>4112,
+			"keterangan"=>$this->db->query("SELECT * FROM coa WHERE no_coa = '4112'")->row()->nama_coa,
+			"debit"=>$laporan_shu["penjualan_toko"],
+			"kredit"=>null,
+		]);
+		$totaldebit += $laporan_shu["penjualan_toko"];
+
+		array_push($jurnalpenutup, [
+			"tanggal"=>null,
+			"no_coa"=>1300,
+			"keterangan"=>$this->db->query("SELECT * FROM coa WHERE no_coa = '1300'")->row()->nama_coa,
+			"debit"=>null,
+			"kredit"=>$laporan_shu["penjualan_toko"],
+		]);
+		$totalkredit += $laporan_shu["penjualan_toko"];
+
+		array_push($jurnalpenutup, [
+			"tanggal"=>date("Y-m-d"),
+			"no_coa"=>4116,
+			"keterangan"=>$this->db->query("SELECT * FROM coa WHERE no_coa = '4116'")->row()->nama_coa,
+			"debit"=>$laporan_shu["penjualan_waserda"],
+			"kredit"=>null,
+		]);
+		$totaldebit += $laporan_shu["penjualan_waserda"];
+
+		array_push($jurnalpenutup, [
+			"tanggal"=>null,
+			"no_coa"=>1300,
+			"keterangan"=>$this->db->query("SELECT * FROM coa WHERE no_coa = '1300'")->row()->nama_coa,
+			"debit"=>null,
+			"kredit"=>$laporan_shu["penjualan_waserda"] ?? "0",
+		]);
+		$totalkredit += $laporan_shu["penjualan_waserda"];
+
+		array_push($jurnalpenutup, [
+			"tanggal"=>date("Y-m-d"),
+			"no_coa"=>1300,
+			"keterangan"=>$this->db->query("SELECT * FROM coa WHERE no_coa = '1300'")->row()->nama_coa,
+			"debit"=>$totalbeban,
+			"kredit"=>null,
+		]);
+		$totaldebit += $totalbeban;
+
+		foreach ($laporan_shu["beban"] as $k=>$v) {
+			array_push($jurnalpenutup, [
+				"tanggal"=>null,
+				"no_coa"=>$v->no_coa,
+				"keterangan"=>$v->nama_coa,
+				"debit"=>null,
+				"kredit"=>$v->total,
+			]);
+			$totalkredit += $v->total;
+		}
+		array_push($jurnalpenutup, [
+			"tanggal"=>date("Y-m-d"),
+			"no_coa"=>3200,
+			"keterangan"=>$this->db->query("SELECT * FROM coa WHERE no_coa = '3200'")->row()->nama_coa,
+			"debit"=>$statusditahandebit,
+			"kredit"=>null,
+		]);
+		$totaldebit += $statusditahandebit;
+
+		array_push($jurnalpenutup, [
+			"tanggal"=>null,
+			"no_coa"=>3100,
+			"keterangan"=>$this->db->query("SELECT * FROM coa WHERE no_coa = '3100'")->row()->nama_coa,
+			"debit"=>null,
+			"kredit"=>$statusditahandebit,
+		]);
+		$totalkredit += $statusditahandebit;
+		array_push($jurnalpenutup, [
+			"tanggal"=>date("Y-m-d"),
+			"no_coa"=>3300,
+			"keterangan"=>$this->db->query("SELECT * FROM coa WHERE no_coa = '3300'")->row()->nama_coa,
+			"debit"=>$shuberjalan,
+			"kredit"=>null,
+		]);
+		$totaldebit += $shuberjalan;
+
+		array_push($jurnalpenutup, [
+			"tanggal"=>null,
+			"no_coa"=>1111,
+			"keterangan"=>$this->db->query("SELECT * FROM coa WHERE no_coa = '1111'")->row()->nama_coa,
+			"debit"=>null,
+			"kredit"=>$shuberjalan,
+		]);
+		$totalkredit += $shuberjalan;
+
+		$data = [
+			"jurnalpenutup"=>$jurnalpenutup,
+			"totalkredit"=>$totalkredit,
+			"totaldebit"=>$totaldebit,
+		];
+
+		$this->template->load('template', 'jurnal_penutup', $data);
+	}
 }

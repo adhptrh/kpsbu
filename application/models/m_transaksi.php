@@ -540,6 +540,26 @@ class m_transaksi extends CI_Model
 		return $kodejadi;
 	}
 
+	public function pembagian_kode_total()
+	{
+		$this->db->select('MAX(RIGHT(pembagian_shu_total.id_trans,  4)) as kode', FALSE);
+		$this->db->order_by('id_trans', 'DESC');
+		$this->db->limit(1);
+		$query = $this->db->get('pembagian_shu_total'); //cek dulu apakah ada sudah ada kode di tabel.    
+		if ($query->num_rows() <> 0) {
+			//jika kode ternyata sudah ada.      
+			$data = $query->row();
+			$kode = intval($data->kode) + 1;
+		} else {
+			//jika kode belum ada      
+			$kode = 1;
+		}
+
+		$datenow = date('Y');
+		$kodemax = str_pad($kode, 4, "0", STR_PAD_LEFT); // angka 4 menunjukkan jumlah digit angka 0
+		$kodejadi = "PMBGSHU.TOTAL".$datenow.$kodemax;    // hasilnya tgl sekarang + kode dst.
+		return $kodejadi;
+	}
 	public function pembagian_kode()
 	{
 		$this->db->select('MAX(RIGHT(pembagian_shu.id_trans,  4)) as kode', FALSE);

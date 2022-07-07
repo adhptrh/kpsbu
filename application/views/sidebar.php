@@ -246,10 +246,12 @@
                     <ul class="nav child_menu">
                     <?php if ($this->session->userdata('level') == "keuangan" or $this->session->userdata('level') == "admin") : ?>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/view_jurnal">Jurnal</a></li>
+                        <li><a href="<?php echo site_url(); ?>c_keuangan/view_jurnal_penutup">Jurnal Penutup</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/bukubesar">Buku Besar</a></li>
 
                         <li><a href="<?php echo site_url(); ?>Laporan/neraca_saldo">Neraca Saldo</a></li>
                         <li><a href="<?= base_url('Laporan/laporan_neraca')?>">Laporan Neraca</a></li>
+                        <li><a href="<?= base_url('Perubahan_modal/laporan')?>">Laporan Perubahan Modal</a></li>
 
                         <!-- laporan sarah -->
                         <li><a href="<?php echo site_url(); ?>laporan/laporan_simpanan">Laporan Simpanan</a></li>

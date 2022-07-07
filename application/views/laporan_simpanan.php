@@ -38,6 +38,7 @@
                             foreach ($list as $item) { ?>
                             <?php 
                             $subtotal = ($item->deposit + $item->total_simpanan_wajib + $item->total_masuka);
+                            if ( $item->total_simpanan_wajib + $item->total_masuka <= 0) continue;
                             $total += $subtotal;
                             ?>
                             <tr>

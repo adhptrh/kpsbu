@@ -1,10 +1,10 @@
 <?php 
 class Laporan extends CI_Controller
 {
-
     public function __construct() {
         parent::__construct();
         $this->load->model('Produk_model', 'produk');
+        $this->load->model('Laporan_model', 'laporan');
     }
 
     public function buku_pembantu_kas()
@@ -156,7 +156,51 @@ class Laporan extends CI_Controller
 
     public function neraca_saldo()
     {
-        $this->template->load('template', 'laporan/neraca_saldo');
+       
+        $bulan = $this->input->post('bulan');
+        $tahun = $this->input->post('tahun');
+        $periode = $tahun.'-'.$bulan;
+        $saldo_awal = $this->db->query("SELECT * FROM coa WHERE no_coa = '1111'")->result()[0]->saldo_awal;
+
+        if (isset($periode)) {
+            $list = [];
+            $qgetcoa = "SELECT * FROM coa WHERE is_neraca = 1";
+            $coas = $this->db->query($qgetcoa)->result();
+            foreach ($coas as $coa) {
+                $data = [
+                    "no_coa"=>$coa->no_coa,
+                    "nama_coa"=>$coa->nama_coa,
+                    "header"=>$coa->header,
+                    "saldo_normal"=>$coa->saldo_normal,
+                    "nominal"=>0,
+                ];
+                $qgetjurnalitem = "SELECT a.no_coa, b.nama_coa, a.posisi_dr_cr, b.header, a.nominal FROM jurnal a LEFT JOIN coa b ON b.no_coa = a.no_coa WHERE b.is_neraca = 1 AND a.no_coa = '".$coa->no_coa."' ORDER BY a.nominal DESC";
+                $jurnalItems = $this->db->query($qgetjurnalitem)->result();
+                foreach ($jurnalItems as $k=>$jurnal) {
+                    if ($jurnal->posisi_dr_cr == "k") {
+                        $data["nominal"] -= $jurnal->nominal;
+                    } else {
+                        $data["nominal"] += $jurnal->nominal;
+                    }
+                }
+                if ($coa->saldo_normal == "k") {
+                    $data["nominal"] = 0 - $data["nominal"];
+                }
+                /* if ($coa->no_coa == '1312') {
+                    echo $coa->no_coa;
+                    $data["nominal"] = 0-$data["nominal"];
+                } */
+                array_push($list, (object)$data);
+            }
+            $q = "SELECT a.no_coa, b.nama_coa, a.posisi_dr_cr, b.header, a.nominal FROM jurnal a LEFT JOIN coa b ON b.no_coa = a.no_coa WHERE b.is_neraca = 1 AND a.no_coa = '1312'";
+            $data = [
+                'list' => $list,
+                'periode' => $periode,
+                'saldo_awal' => $saldo_awal,
+            ];
+            $this->template->load('template', 'laporan/neraca_saldo', $data);
+        } 
+    
     }
 
     public function laporan_simpanan()
@@ -385,25 +429,7 @@ class Laporan extends CI_Controller
 
     public function laporan_neraca()
     {
-        $query = $this->db->query("SELECT 
-        SUM(nominal) AS debit, 
-        (
-            SELECT sum(nominal) 
-            FROM jurnal 
-            WHERE no_coa = '1111'
-            and left(tgl_jurnal, 7) = '2022-06'
-            and posisi_dr_cr = 'k' 
-        ) AS kredit
-        FROM jurnal
-        WHERE no_coa = '1111'
-        and left(tgl_jurnal, 7) = '2022-06'
-        AND posisi_dr_cr = 'd'")->row();
-        $total_kas = $query->debit - $query->kredit;
-
-        $data = [
-            'kas' => $total_kas
-        ];
-        
+        $data = $this->laporan->getLaporanNeraca();
         $this->template->load('template', 'laporan/laporan_neraca', $data);
     }
 }

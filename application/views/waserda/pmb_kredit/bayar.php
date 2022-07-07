@@ -50,9 +50,20 @@
                 </div>
                 <div class="modal-footer">
                     <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-                    <button type="submit" class="btn btn-primary">Bayar</button>
+                    <button id="bayarbtn" type="submit" class="btn btn-primary">Bayar</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+<script>
+    $(document).on("ready",()=>{
+        $("#inpemb").on("keyup",()=>{
+            if (parseInt($("#inpemb").val()) <= parseInt($("#inpemb").attr("max")) && parseInt($("#inpemb").val()) > 0) {
+                $("#bayarbtn").prop('disabled', false)
+            } else {
+                $("#bayarbtn").prop('disabled', true)
+            }
+        })
+    })
+</script>
