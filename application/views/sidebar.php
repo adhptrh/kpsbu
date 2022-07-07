@@ -166,7 +166,7 @@
                     if ($this->session->userdata('level') == "admin") :
                     ?>
 
-                        <li><a href="<?php echo site_url(); ?>c_transaksi/transaksi_bank">Transaksi Bank</a></li>
+                        <li><a href="<?php echo site_url(); ?>c_transaksi/transaksi_bank">Kas & Bank</a></li>
                         <li><a href="<?php echo site_url(); ?>c_transaksi/lihat_pemb">Pembelian Bahan Baku</a></li>
                         <li><a href="<?php echo site_url(); ?>c_transaksi/pembelian_aset">Pembelian Aset</a></li>
                         <li><a href="<?php echo site_url(); ?>c_transaksi/penyusutan">Penyusutan</a></li>

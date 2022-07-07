@@ -14,9 +14,11 @@
                 </div>
             </div>
             <div class="x_content">
-                <div id="notif">
+                <?php if ($this->session->flashdata("notif_ubah")) { ?> 
+                <div id="notif" class="alert alert-danger">
                     <?php echo $this->session->flashdata('notif_ubah'); ?>
                 </div>
+                <?php } ?>
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover jambo_table dataTable no-footer" id="datatable">
                         <thead>

@@ -1,6 +1,6 @@
 <div class="x_panel">
     <div class="x_title">
-        <h3>Transaksi Bank</h3>
+        <h3>Kas & Bank</h3>
     </div>
     <div class="x_content">
         <div class="form-group">
@@ -10,7 +10,10 @@
                <button class="btn btn-primary">Filter</button>
            </form>
         </div>
-        <a href="add_transaksi_bank" class="btn btn-primary">Tambah Transaksi</a>
+        <div class="row">
+            <a href="add_transaksi_bank" class="btn btn-primary pull-right">Tambah Transaksi</a>
+        </div>
+        
         <table id="datatable" class="table table-striped table-bordered table-hover jambo_table">
             <thead>
                 <tr>

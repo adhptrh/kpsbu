@@ -2921,7 +2921,7 @@ class c_masterdata extends CI_controller
       $this->form_validation->set_rules($config);
 
       if ($this->form_validation->run() == FALSE) {
-         $this->session->set_flashdata("gagal","Tidak boleh berupa angka");
+         $this->session->set_flashdata("notif_ubah","Nama aktivitas tidak boleh berupa angka");
          redirect("c_masterdata/aktivitas");
       } else {
          // $this->load->view('formsuccess');

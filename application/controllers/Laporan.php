@@ -41,6 +41,7 @@ class Laporan extends CI_Controller
         $kas_debit = $this->db->query("SELECT SUM(nominal) as nominal_total FROM jurnal WHERE no_coa = '1111' AND posisi_dr_cr = 'd' AND tgl_jurnal LIKE '".$bulantahun."%'")->result()[0]->nominal_total;
         $kas_kredit = $this->db->query("SELECT SUM(nominal) as nominal_total FROM jurnal WHERE no_coa = '1111' AND posisi_dr_cr = 'k' AND tgl_jurnal LIKE '".$bulantahun."%'")->result()[0]->nominal_total;
         $kas_diterima = $kas_debit - $kas_kredit;
+        $laporanNeraca = $this->laporan->getLaporanNeraca();
 
         $pmb = $this->db->query("SELECT
         SUM(nominal) as total
@@ -99,7 +100,7 @@ class Laporan extends CI_Controller
             $modal_total += $modal->nominal;
         }
 
-        $privelist = $this->db->query("SELECT * FROM jurnal WHERE tgl_jurnal LIKE '$bulantahun%' AND no_coa = '3100'")->result();
+        $privelist = $this->db->query("SELECT * FROM jurnal WHERE tgl_jurnal LIKE '$bulantahun%' AND no_coa = '3101'")->result();
         $prive_total = 0;
         foreach ($privelist as $prive) {
             $prive_total += $prive->nominal;
@@ -128,7 +129,7 @@ class Laporan extends CI_Controller
             'pembelian'=>$pembelian_total,
             'pnj_aktiva'=>$pnjaktiva_total,
             'pmb_aktiva'=>$pmbaktiva_total,
-            'modal'=>$modal_total,
+            'modal'=>$laporanNeraca["modal"],
             'prive'=>$prive_total,
             'pinjamanbank'=>$pinjamanbank_total,
             'angsuranpinjaman'=>$angsuranpinjaman_total,
