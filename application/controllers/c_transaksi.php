@@ -2538,6 +2538,17 @@ group by no_bbp";
       public function selesai_produksi_ke2($bbb, $btk, $bop, $bp, $id, $no_tp, $no_prod, $jumlah)
       {
          date_default_timezone_set('Asia/Jakarta');
+         /* $bbop = $bop + $bp;
+         $pbj = $bbb + $btk + $bbop;
+         echo "<pre>";
+         var_dump([
+            "pbj" => $pbj,
+            "bbb" => $bbb,
+            "btk" => $btk,
+            "bbop" => $bbop,
+         ]);
+         echo "</pre>";
+         return; */
          //update stok bahan penolong
          $query1 =   "
                   SELECT nama_bp, sum(a.jumlah) * c.jumlah as jumlah_bom, no_bbp
@@ -2755,10 +2766,14 @@ group by no_bbp";
 
 
          //jurnal persediaan jadi
-         $this->M_keuangan->GenerateJurnal('1312', $id, 'd', $pbj);
-         $this->M_keuangan->GenerateJurnal('1114', $id, 'k', $bbb);
-         $this->M_keuangan->GenerateJurnal('5112', $id, 'k', $btk);
-         $this->M_keuangan->GenerateJurnal('5113', $id, 'k', $bbop);
+         $this->M_keuangan->GenerateJurnal('1312', $id, 'd', strval(round($pbj)));
+         $this->M_keuangan->GenerateJurnal('1114', $id, 'k', strval(round($bbb)));
+         $this->M_keuangan->GenerateJurnal('5112', $id, 'k', strval(round($btk)));
+         $this->M_keuangan->GenerateJurnal('5113', $id, 'k', strval(round($bbop)));
+         var_dump(strval(round($pbj)));
+         var_dump(strval(round($bbb)));
+         var_dump(strval(round($btk)));
+         var_dump(strval(round($bbop)));
 
 
          //update harga jual produk
@@ -3074,8 +3089,6 @@ group by no_bbp";
 
          $this->M_keuangan->GenerateJurnal('6111', $id, 'd', $hpp);
          $this->M_keuangan->GenerateJurnal('1311', $id, 'k', $hpp);
-
-
 
          $data = array(
             'no_trans' => $id,
@@ -3457,9 +3470,17 @@ group by no_bbp";
             'status' => '1'
          );
          $this->db->insert('penjualan_toko', $data);
-
+         var_dump($id);
          $q1 = "SELECT ifnull(sum(total2),0) as hpp FROM kartu_stok_penj WHERE no_trans ='$id'";
-         $fix_total = $this->db->query($q1)->row_array()['hpp'];
+         $fix_total = $this->db->query($q1)->row_array()["hpp"];
+         
+         /* $this->db->insert("pengajuan_jurnal", [
+            "kode" => $id,
+            "tanggal" => date("Y-m-d"),
+            "status" => "pending",
+            "jenis"=>"SHU Tahun Berjalan",
+            "nominal"=>$total
+         ]); */
 
          $this->M_keuangan->GenerateJurnal('1111', $id, 'd', $total);
          $this->M_keuangan->GenerateJurnal('4112', $id, 'k', $total);
