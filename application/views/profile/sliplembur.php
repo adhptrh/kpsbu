@@ -27,7 +27,7 @@
             </select>
         </div>
         <div class="col-sm-2">
-            <button type="button" class="btn btn-primary" id="filer2">Slip Gaji</button>
+            <button type="button" class="btn btn-primary" id="filer2">Slip Lembur</button>
         </div>
     </div>
     <hr>

@@ -66,7 +66,7 @@
                                 <div class="col-sm-9">
                                     <select name="jp" id="jp" class="form-control">
                                         <option value="">-</option>
-                                        <?php foreach ($jp as $key => $value) { ?>
+                                        <?php foreach ($jp2 as $key => $value) { ?>
                                             <option <?php if ($item->id_jenis_pegawai == $value->desc) {
                                                 echo ("selected");
                                             }?>><?= $value->desc?></option>
@@ -109,10 +109,11 @@
                             <div class="form-group row">
                                 <label for="no_rek" class="col-sm-3 col-form-label">Pendidikan</label>
                                 <div class="col-sm-9">
+
                                     <select name="pendidikan" class="form-control">
                                         <option value="">-</option>
-                                        <?php foreach ($jp as $k=>$v) { 
-                                            if ($v->desc == $item->id_jenis_pegawai) { ?>
+                                        <?php foreach ($jp as $k=>$v) { ?>
+                                            <?php if ($v->desc == $item->id_jenis_pegawai) { ?>
                                             <option value="<?= $v->pendidikan ?>" <?= ($item->pendidikan == $v->pendidikan) ? "selected":"" ?>><?= $v->pendidikan ?></option>
                                         <?php } } ?>
                                     </select>

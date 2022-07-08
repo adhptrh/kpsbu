@@ -26,6 +26,7 @@
                                 <th>Tanggal Pengajuan</th>
                                 <th>Nama Pegawai</th>
                                 <th>Jumlah Pengajuan (jam lembur)</th>
+                                <th>Nominal Lembur</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>

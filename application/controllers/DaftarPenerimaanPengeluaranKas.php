@@ -87,6 +87,7 @@
         $namafile = "-";
         }
         
+        $total_kas = 0;
         /** INSERT KE TABEL DETAIL */
         foreach ($no_coa as $key => $value) {
             # code...
@@ -109,7 +110,19 @@
                 'nominal' => $nominal[$key],
             );
             $this->db->insert('jurnal', $jurnal);
-            
+
+            if ($no_coa[$key] == '1111') {
+                $data = [
+                    "id_ref"=>$no_dokumen,
+                    "tanggal"=>date("Y-m-d"),
+                    "nominal"=>$nominal[$key],
+                    "kd_coa"=>'1111',
+                    "posisi_dr_cr"=>$posisi_dc[$key],
+                    "keterangan"=>$deskripsi,
+                ];
+                $this->db->insert('buku_pembantu_kas', $data);
+            }
+
         }
 
         /** INSERT KE TB TRANSAKSI BIASA */
@@ -123,7 +136,6 @@
             'file' =>  $namafile,
         ];
         $this->db->insert('penerimaan_pengeluaran_kas', $data);
-
         redirect('DaftarPenerimaanPengeluaranKas');
     }
 }

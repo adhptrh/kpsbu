@@ -117,7 +117,7 @@
                             <div class="col-sm-9">
                                 <select name="jp" id="jp" class="form-control">
                                     <option value="">-</option>
-                                    <?php foreach ($jp as $key => $value) { ?>
+                                    <?php foreach ($jp2 as $key => $value) { ?>
                                     <option value="<?= $value->desc?>"><?= $value->desc?></option>
                                     <?php } ?>
                                 </select>

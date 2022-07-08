@@ -23,7 +23,7 @@
                         <thead>
                             <tr>
                                 <th style="width: 5%;">#</th>
-                                <th>Deskripsi</th>
+                                <th>Nama PTKP</th>
                                 <th>Nominal</th>
                                 <th class="text-center">Aksi</th>
                             </tr>

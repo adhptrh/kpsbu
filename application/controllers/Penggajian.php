@@ -44,12 +44,15 @@ class Penggajian extends CI_Controller
         $tunjanganjabatan = $pegawai->tunjangan_jabatan;
         $tunjangankesehatan = $pegawai->tunjangan_kesehatan;
         $totalbruto = $gajipokok+$tunjangankesehatan+$tunjanganjabatan+$bonus;
-        $biayajabatan = $totalbruto*0.05;
-        if ($biayajabatan > 500000) $biayajabatan = 500000;
-        $totalnetto = $totalbruto-$biayajabatan;
-        $totalnettosetahun = ($totalnetto*12)+$tunjanganhariraya;
+        //$totalnettosetahun = ($totalnetto*12)+$tunjanganhariraya;
+        $totalbrutosetahun = ($totalbruto*12)+$tunjanganhariraya;
+        $biayajabatan = $totalbrutosetahun*0.05;
+        if ($biayajabatan > 6000000) $biayajabatan = 6000000;
+        $totalnetto = $totalbrutosetahun-$biayajabatan;
         $ptkp = $nominal_ptkp;
-        $pkp = $totalnettosetahun-$ptkp;
+        //$pkp = $totalnettosetahun-$ptkp;
+        //$pkp = $totalnettosetahun-$ptkp;
+        $pkp = $totalnetto-$ptkp;
         $pph21 = 0;
         if ($pkp < 50000000) {
             $pph21 = $pkp*0.05;
@@ -62,7 +65,7 @@ class Penggajian extends CI_Controller
         }
         $pph21 = $pph21/12;
         $pph21 = $pegawai->id_jenis_pegawai == "Kontrak" ? 0:$pph21;
-        if ($totalnettosetahun < $ptkp) {
+        if ($totalbrutosetahun < $ptkp) {
             $pph21 = 0;
         }
 

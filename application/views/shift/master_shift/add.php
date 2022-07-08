@@ -10,7 +10,7 @@
         <form action="<?= base_url('c_masterdata/save_shift')?>" method="POST">
             <div class="modal-body">
                 <div class="form-group row">
-                    <label for="desc" class="col-sm-2 col-form-label">Deskrispi</label>
+                    <label for="desc" class="col-sm-2 col-form-label">Nama Shift</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="desc" required placeholder="Deskrispi">
                     </div>

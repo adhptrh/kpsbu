@@ -16,14 +16,14 @@
             </div>
             <div class="x_content">
                 <div id="notif">
-                    <?php echo $this->session->flashdata('notif_ubah'); ?>
+                    <?php echo validation_errors(); ?>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="datatable">
                         <thead>
                             <tr>
                                 <th style="width: 5%;">#</th>
-                                <th>Deskripsi</th>
+                                <th>Nama Jabatan</th>
                                 <th>Tunjangan Jabatan</th>
                                 <th>Tunjangan Kesehatan</th>
                                 <th class="text-center">Aksi</th>

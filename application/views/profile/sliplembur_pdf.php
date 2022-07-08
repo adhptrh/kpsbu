@@ -107,7 +107,7 @@ function encode_img_base64($img_path = false): string
     <p style="font-size: 15px;">
         <strong>
             <i>
-                <?= 'Telah dibayarkan sejumlah ' . number_to_words(0) . ', dan telah dibayarkan kebank yang terdaftar.' ?></strong>
+                <?= 'Telah dibayarkan sejumlah ' . number_to_words($total_nominal_lembur_total) . ', dan telah dibayarkan kebank yang terdaftar.' ?></strong>
             </i>
     </p>
     <p style="font-size: 12px;">

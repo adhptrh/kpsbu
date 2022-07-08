@@ -2594,7 +2594,8 @@ class c_masterdata extends CI_controller
    {
       $jabatan = $this->db->get('tb_jabatan')->result();
       $ptkp = $this->db->get('tb_ptkp')->result();
-      $jp = $this->db->query("SELECT * FROM tb_jenis_pegawai a GROUP BY a.desc")->result();
+      $jp = $this->db->query("SELECT * FROM tb_jenis_pegawai")->result();
+      $jp2 = $this->db->query("SELECT * FROM tb_jenis_pegawai a GROUP BY a.desc")->result();
       $list = $this->db->get('pegawai')->result();
       $nip = $this->M_masterdata->nip_otomatis();
       // print_r($nip);exit;
@@ -2605,6 +2606,7 @@ class c_masterdata extends CI_controller
          'jabatan' => $jabatan,
          'ptkp' => $ptkp,
          'jp' => $jp,
+         'jp2' => $jp2,
          'list' => $list,
          'nip' => $nip,
       ];
@@ -2622,6 +2624,7 @@ class c_masterdata extends CI_controller
          'nip' => $this->input->post('nip'),
          'npwp' => $this->input->post('npwp'),
          'nama' => $this->input->post('nama'),
+         'nama_bank' => $this->input->post('nama_bank'),
          'alamat' => $this->input->post('alamat'),
          'no_telp' => $this->input->post('no_telp'),
          'tempat_lahir' => $this->input->post('tempat_lahir'),
@@ -2770,6 +2773,20 @@ class c_masterdata extends CI_controller
       $desc = $this->input->post('desc');
       $jam_masuk = $this->input->post('jam_masuk');
       $jam_keluar = $this->input->post('jam_keluar');
+
+      $validasi = $this->db->query("SELECT * FROM shift WHERE `desc` = '$desc'")->result();
+      if (count($validasi)>0){
+         $this->session->set_flashdata("notif_ubah","Nama shift sudah ada.");
+         redirect('c_masterdata/shift');
+         return;
+      }
+      $validasi = $this->db->query("SELECT * FROM shift WHERE time_in = '$jam_masuk' AND time_out = '$jam_keluar'")->result();
+      if (count($validasi)>0){
+         $this->session->set_flashdata("notif_ubah","Waktu shift sudah ada (".$validasi[0]->desc.").");
+         redirect('c_masterdata/shift');
+         return;
+      }
+
       $data = [
          'desc'=> $desc,
          'time_in'=> $jam_masuk,
@@ -2803,9 +2820,16 @@ class c_masterdata extends CI_controller
 
    public function save_jenis_pegawai()
    {
+
       $desc = $this->input->post('desc');
       $pendidikan = $this->input->post('pendidikan');
       $gaji_pokok = $this->input->post('gaji_pokok');
+
+      $validasi = $this->db->query("SELECT * FROM tb_jenis_pegawai WHERE `desc` = '$desc' AND pendidikan = '$pendidikan'")->result();
+      if (count($validasi) > 0) {
+         $this->session->set_flashdata("notif_ubah","Data sudah ada");
+         redirect('c_masterdata/jenis_pegawai');
+      }
 
       $data = [
          'desc' => $desc,
@@ -2827,17 +2851,34 @@ class c_masterdata extends CI_controller
 
    public function save_jabatan()
    {
-      $desc = ucwords($this->input->post('desc'));
-      $jabatan = $this->input->post('t_jabatan');
-      $kesehatan = $this->input->post('t_kesehatan');
+      $config = array(
+         array(
+            'field' => 'desc',
+            'label' => 'Nama Jabatan',
+            'rules' => 'is_unique[tb_jabatan.desc]',
+            'errors' => array(
+               'is_unque' => '%s sudah terdaftar di database!',
+            )
+         )
+      );
+      $this->form_validation->set_error_delimiters('<div class="alert alert-danger"> <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>  ', '</div>');
+      $this->form_validation->set_rules($config);
 
-      $data = [
-         'desc' => $desc,
-         'tunjangan_jabatan' => $jabatan,
-         'tunjangan_kesehatan' => $kesehatan,
-      ];
-      $this->db->insert('tb_jabatan', $data);
-      redirect('c_masterdata/jabatan');
+      if ($this->form_validation->run() == FALSE) {
+         $this->jabatan();
+      } else {
+         $desc = ucwords($this->input->post('desc'));
+         $jabatan = $this->input->post('t_jabatan');
+         $kesehatan = $this->input->post('t_kesehatan');
+   
+         $data = [
+            'desc' => $desc,
+            'tunjangan_jabatan' => $jabatan,
+            'tunjangan_kesehatan' => $kesehatan,
+         ];
+         $this->db->insert('tb_jabatan', $data);
+         redirect('c_masterdata/jabatan');
+      }
    }
 
    public function edit_jabatan()
@@ -2911,7 +2952,7 @@ class c_masterdata extends CI_controller
          array(
             'field'  => 'nama_aktivitas',
             'label'  => 'Nama aktivitas',
-            'rules'  => 'alpha',
+            'rules'  => 'regex_match[/^([a-z ])+$/i]',
             'errors' => array(
                'alpha'  => '%s tidak boleh berupa angka.',
             )

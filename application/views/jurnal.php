@@ -61,7 +61,7 @@
 					$id_jurnal = "";
 					foreach ($jurnal as $data) {
 						
-						if ($id_jurnal != $data["id_jurnal"] || substr($data["id_jurnal"], 0, 4) == "GAJI") {
+						if ($id_jurnal != $data["id_jurnal"] ) {
 							$id_jurnal = $data["id_jurnal"];
 							if (count($stack) > 0) {
 								array_push($stacks, $stack);

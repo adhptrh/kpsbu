@@ -14,15 +14,17 @@
                 </div>
             </div>
             <div class="x_content">
-                <div id="notif">
+                <?php if ($this->session->flashdata('notif_ubah')) { ?>
+                <div id="notif" class="alert alert-danger">
                     <?php echo $this->session->flashdata('notif_ubah'); ?>
                 </div>
+                <?php } ?>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="datatable">
                         <thead>
                             <tr>
                                 <th style="width: 5%;">#</th>
-                                <th>Deskripsi</th>
+                                <th>Nama Jenis Pegawai</th>
                                 <th>Pendidikan Terakhir</th>
                                 <th>Gaji Pokok</th>
                                 <th class="text-center">Aksi</th>

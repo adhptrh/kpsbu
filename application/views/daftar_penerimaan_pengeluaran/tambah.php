@@ -86,7 +86,8 @@
                                     <td><input type="text" class="form-control" id="nama_coa1" name="nama_coa[]" readonly></td>
                                     <td>
                                         <select name="nama_aktivitas[]" id="nama_aktivitas1" class="form-control">
-                                            <?php foreach ($aktivitas as $item) { ?>
+                                        <option disabled selected value>-</option>     
+                                        <?php foreach ($aktivitas as $item) { ?>
                                             <option value="<?= $item->nama_aktivitas?>"><?= $item->nama_aktivitas?></option>
                                             <?php } ?>
                                         </select>
@@ -145,7 +146,8 @@
                             <td><input type="text" class="form-control" id="nama_coa${i}" name="nama_coa[]" readonly></td>
                             <td>
                                 <select name="nama_aktivitas[]" id="nama_aktivitas${i}" class="form-control" required>
-                                    <?php foreach ($aktivitas as $item) { ?>
+                                <option disabled selected value>-</option>    
+                                <?php foreach ($aktivitas as $item) { ?>
                                     <option value="<?= $item->nama_aktivitas?>"><?= $item->nama_aktivitas?></option>
                                     <?php } ?>
                                 </select>

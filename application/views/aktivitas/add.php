@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h4 class="modal-title" id="exampleModalLabel">Penerimaan Kas</h4>
+            <h4 class="modal-title" id="exampleModalLabel">Tambah Aktivitas</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -13,7 +13,7 @@
                 <div class="form-group row">
                     <label for="nama_aktivitas" class="col-sm-4 col-form-label">Nama Aktivitas</label>
                     <div class="col-sm-8">
-                    <input type="text" class="form-control" id="nama_aktivitas" name="nama_aktivitas">
+                    <input type="text" class="form-control" id="nama_aktivitas" name="nama_aktivitas" required>
                     <?php echo form_error('nama_aktivitas'); ?>
                     </div>
                 </div>

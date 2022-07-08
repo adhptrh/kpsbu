@@ -25,6 +25,7 @@
                                 <th>NIP</th>
                                 <th>NPWP</th>
                                 <th>No. RFID</th>
+                                <th>No. Anggota Koperasi</th>
                                 <th>Pegawai</th>
                                 <th>No Telp</th>
                                 <th>Alamat</th>
@@ -43,6 +44,7 @@
                                 <td style="text-align:right;"><?= $value->nip ?></td>
                                 <td style="text-align:right;"><?= $value->npwp ?></td>
                                 <td style="text-align:right;"><?= $value->rfid ?></td>
+                                <td style="text-align:right;"><?= $value->no_anggota ?></td>
                                 <td><?= $value->nama ?></td>
                                 <td style="text-align:right;"><?= $value->no_telp ?></td>
                                 <td><?= $value->alamat ?></td>
