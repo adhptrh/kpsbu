@@ -1,5 +1,5 @@
  <?php 
-class c_login extends CI_Controller{
+class C_login extends CI_Controller{
     
   function cek_login()
         {

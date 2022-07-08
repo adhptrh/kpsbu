@@ -31,7 +31,7 @@
                 <div class="form-group row">
                     <label for="jumlah" class="col-sm-4 col-form-label">Jumlah Pengajuan</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah Pengajuan" required>
+                        <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah Pengajuan" required>
                     </div>
                 </div>
                 <div class="form-group row">

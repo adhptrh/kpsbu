@@ -1,5 +1,5 @@
 <?php
-class c_keuangan extends CI_Controller
+class C_keuangan extends CI_Controller
 {
 
 	function __construct()

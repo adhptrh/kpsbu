@@ -1,5 +1,5 @@
 <?php
-class c_masterdata extends CI_controller
+class C_masterdata extends CI_controller
 {
 
    function __construct()

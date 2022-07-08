@@ -1708,6 +1708,16 @@
          if ($this->form_validation->run() == FALSE) {
             $this->form_pembagian();
          } else {
+            //echo "<pre>"; print_r($_POST); echo "</pre>"; die();
+
+
+            $stokbahanbaku = $this->db->query("SELECT * FROM bahan_baku WHERE nama_bb = 'Susu Sapi'")->result()[0];
+            $this->db->update("bahan_baku", [
+               "stok"=>$stokbahanbaku->stok + $this->input->post("jumlah")
+            ], [
+               "nama_bb"=>"Susu Sapi"
+            ]);
+
             $data = array(
                'no_trans' => $_POST['no_trans'],
                'tgl_trans' => $_POST['tgl_trans'],
@@ -5117,6 +5127,22 @@ group by no_bbp";
                'keterangan' => 'Pembayaran Gaji', 
             ];
             $this->db->insert('buku_pembantu_kas', $bpk);
+            } else if (strpos($kode, "PENJT_") !== false) {
+               $detail_penjualan_toko = $this->db->query("SELECT * FROM detail_penjualan_toko WHERE no_trans = '$kode'")->result();
+               $penjualan_toko = $this->db->query("SELECT total,tgl_trans FROM penjualan_toko WHERE no_trans = '$kode'")->result()[0];
+               $bulan = explode("-",$penjualan_toko)[1];
+               $tahun = explode("-",$penjualan_toko)[0];
+               $qhpp0 =  "SELECT ifnull(sum(total2),0) as hpp
+                                           FROM kartu_stok_penj
+                                           WHERE  MONTH(tgl_trans) = '$bulan' AND YEAR(tgl_trans) = '$tahun' AND no_trans LIKE 'PENJT_%'";
+                              $hpptoko = $this->db->query($qhpp0)->row_array()['hpp'];
+               $q1 = "SELECT ifnull(sum(total2),0) as hpp FROM kartu_stok_penj WHERE no_trans ='$kode'";
+               $fix_total = $this->db->query($qhpp0)->row_array()['hpp'];
+               $this->M_keuangan->GenerateJurnal('1111', $kode, 'd', $penjualan_toko->total);
+               $this->M_keuangan->GenerateJurnal('4112', $kode, 'k', $penjualan_toko->total);
+               $this->M_keuangan->GenerateJurnal('6112', $kode, 'd', $hpptoko);
+               $this->M_keuangan->GenerateJurnal('1312', $kode, 'k', $penjualan_toko->total);
+               $this->db->update("pengajuan_jurnal", ['status' => 'selesai', 'tgl_approve' => date('Y-m-d')], ['kode' => $kode]);
          } else if (strpos($kode, 'PMB-KR') !== false ) {
             /** transaksi pembayaran kredit */
 

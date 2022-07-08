@@ -64,8 +64,11 @@
         
         if (is_numeric($barang)) {
             # code...
-            $produk = $this->db->query("SELECT * FROM waserda_produk WHERE barcode_id = '$barang' AND jml > 0")->row();
-            
+            $produk = $this->db->query("SELECT * FROM waserda_produk WHERE barcode_id = '$barang'")->row();
+            if ($produk->jml - $qty < 0) {
+                $this->session->set_flashdata('notif', '<div class="alert alert-danger">Stok produk tidak cukup, stok: '.$produk->jml.'</div>');
+                redirect('Kasir');
+            }
             if(empty($produk->barcode_id)) 
             {
                 $info = [
@@ -75,7 +78,11 @@
             }
         } else {
             # code...
-            $produk = $this->db->query("SELECT * FROM waserda_produk WHERE nama_produk = '$barang' AND jml > 0")->row();
+            $produk = $this->db->query("SELECT * FROM waserda_produk WHERE nama_produk = '$barang'")->row();
+            if ($produk->jml - $qty < 0) {
+                $this->session->set_flashdata('notif', '<div class="alert alert-danger">Stok produk tidak cukup, stok: '.$produk->jml.'</div>');
+                redirect('Kasir');
+            }
             // print_r($produk);exit;
         }
 
