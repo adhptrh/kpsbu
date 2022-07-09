@@ -19,13 +19,13 @@
 
     public function save()
     {
-        $tgl_pengajuan = date('Y-m-d H:i:s', strtotime($this->input->post('tgl')));
+        $tgl_pengajuan = date('Y-m-d', strtotime($this->input->post('tgl')));
         $nama = $this->input->post('nama');
         $jumlah = $this->input->post('jumlah');
         $desc = $this->input->post('desc');
 
         $data = [
-            'tanggal_pengajuan' => $tgl_pengajuan,
+        'tanggal_pengajuan' => $tgl_pengajuan,
             'nama_barang' => $nama,
             'jumlah' => $jumlah,
             'deskripsi' => $desc,
@@ -61,7 +61,7 @@
     public function pengajuanBonus()
     {
         $kode = $this->M_masterdata->id_pengajuan_bonus();
-        $pegawai = $this->db->query("select a.* from pegawai a LEFT JOIN tb_detail_pengajuan_bonus b ON a.nip = b.nip WHERE b.tanggal NOT LIKE '".date("Y-m")."%' OR tanggal IS NULL")->result();
+        $pegawai = $this->db->query("SELECT a.* from pegawai a LEFT JOIN tb_detail_pengajuan_bonus b ON a.nip = b.nip WHERE b.tanggal NOT LIKE '".date("Y-m")."%' OR tanggal IS NULL AND DATE(a.created_at) < '".date("Y-m")."-01'")->result();
        
         // $detail = $this->db->query("SELECT b.*, c.nama          
         // FROM pengajuan_bonus a      

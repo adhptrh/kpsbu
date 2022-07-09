@@ -117,6 +117,7 @@
 							          	$jumlah2 = $row['unit2'];
 							          	$subtotal3 = $row['total2'];
 				      }
+					
 					echo "
 							<tr>
 							<td>".$data['nama_bp']."</td>

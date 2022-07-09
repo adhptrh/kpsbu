@@ -1757,7 +1757,14 @@
             $this->isi_edit_pembagian($id);
          } else {
             // echo "<pre>"; print_r($_POST); echo "</pre>"; die();
-
+            
+            $stokbahanbaku = $this->db->query("SELECT * FROM bahan_baku WHERE nama_bb = 'Susu Sapi'")->result()[0];
+            $this->db->update("bahan_baku", [
+               "stok"=>$stokbahanbaku->stok + $this->input->post("jumlah")
+            ], [
+               "nama_bb"=>"Susu Sapi"
+            ]);
+            
             $id = $_POST['no_trans'];
             $tgl = $_POST['tgl_trans'];
             $no_produk = $_POST['no_prod'];

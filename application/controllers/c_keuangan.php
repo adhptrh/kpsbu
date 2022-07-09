@@ -104,7 +104,7 @@ class C_keuangan extends CI_Controller
 			AND LEFT(a.tgl_jurnal, 7) = '$periode'
 			ORDER BY tgl_jurnal ASC");
 
-			$listBB = array_reverse($query2->result());
+			$listBB = $query2->result();
 			$getSaldo = $query2->row()->saldo_awal ?? 0 ;
 
 			$data = [
@@ -151,7 +151,17 @@ class C_keuangan extends CI_Controller
 			AND LEFT(a.tgl_jurnal, 7) = '$periode'
 			ORDER BY tgl_jurnal ASC");
 
-			$listBB = array_reverse($query2->result());
+			if ($no_coa=='1312'){
+				$query2 = $this->db->query("SELECT
+				a.*, b.nama_coa, b.saldo_awal, b.header
+				FROM jurnal a
+				JOIN coa b ON a.no_coa = b.no_coa
+				WHERE b.no_coa = '$no_coa'
+				AND LEFT(a.tgl_jurnal, 7) = '$periode'
+				ORDER BY a.nominal DESC");
+			}
+
+			$listBB = $query2->result();
 			$getSaldo = $query2->row()->saldo_awal ?? 0 ;
 
 			$data = [

@@ -39,7 +39,7 @@
 			<div class="col-xs-3">
 				<div class="form-group">
 				<label>Jumlah Produk</label>
-				<input readonly type="text" class="form-control"  value="<?php echo $jml_produk?>"  >
+				<input readonly type="text" class="form-control"  value="<?php echo number($jml_produk)?>"  >
 			</div>
 		</div>
 			
@@ -66,15 +66,21 @@
 							<tr>
 							<td>".$no."</td>
 							<td>".$data['nama_produk']."</td>
-							<td>".$data['jumlah']."</td>"; ?>
+							<td align='right'>".number($data['jumlah'])."</td>"; ?>
+
 							<td>
-								<a href = "<?php echo site_url()."/c_keuangan/detail_bp_olahan/".$data['no_trans']."/".$data['no_tp']."/".$data['no_produk'] ;?>">
-							<!-- <a href="isi_edit_produksi_ke2/<?php echo $data['no_trans']; ?>/<?php echo $data['no_produk'];?>"> -->
+							<a href = "<?php echo site_url()."/c_transaksi/isi_edit_produksi_ke2/".$data['no_trans']."/".$data['no_tp']."/".$data['no_produk'] ;?>" >
+							
 							
 							<span class="fa-stack">
 							  <i class="fa fa-square fa-stack-2x" style="color:#2A3F54;"></i>
 							 <span class="glyphicon glyphicon-pencil fa-stack-1x" aria-hidden="true" style="color:white"></span>
 							</span> </a>
+							
+							<span class="fa-stack">
+							  <i class="fa fa-square fa-stack-2x" <?php if($data['status'] == '1'){?>style="color:#28a745;" <?php }else{ ?> style="color:#dc3545" <?php }?>></i>
+							 <span class="glyphicon glyphicon-ok fa-stack-1x" aria-hidden="true" style="color:white"></span>
+							</span>
 							</td>
 
 						</tr>
@@ -88,6 +94,8 @@
 			</tbody>
 
 		</table>
+
+	<a href = "<?php echo site_url()."/c_transaksi/lihat_produksi_ke2"?>" class="btn btn-default" role="button">Kembali</a>
 
 
 		

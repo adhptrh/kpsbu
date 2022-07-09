@@ -59,6 +59,8 @@
 					$stack = [];
 					$stacks = [];
 					$id_jurnal = "";
+
+
 					foreach ($jurnal as $data) {
 						
 						if ($id_jurnal != $data["id_jurnal"] ) {
@@ -90,6 +92,21 @@
 								) {
 									array_push($stacks, $stack);
 									$id_jurnal = "";
+									$stack = [];
+								}
+							array_push($stack, $data);
+						} elseif (count($stack) == 2) {
+							if (
+								$stack[0]["no_coa"] == "5112"  &&
+								$stack[1]["no_coa"] == "5311" ||
+								$stack[0]["no_coa"] == "5113"  &&
+								$stack[1]["no_coa"] == "5312" ||
+								$stack[0]["no_coa"] == "5135"  &&
+								$stack[1]["no_coa"] == "1113" ||
+								$stack[0]["no_coa"] == "1111"  &&
+								$stack[1]["no_coa"] == "4111"
+								) {
+									array_push($stacks, $stack);
 									$stack = [];
 								}
 							array_push($stack, $data);

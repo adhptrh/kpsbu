@@ -80,7 +80,10 @@
 							<td align='right'>1</td>
 							<td align='right'>".number($data['lulus'])."</td>
 							<td>liter</td>
+							
 							<td align='right'>".format_rp($subtotal)."</td>"; ?>
+							
+
 						</tr>
 						
 					<?php
@@ -197,7 +200,7 @@
 	<a href = "<?php echo site_url()."/c_transaksi/lihat_produksi_ke1"?>" class="btn btn-default" role="button">Kembali</a>
 </div>
 <div class="col-md-1">
-  	 	<div style="align-items:  right;">
+  	 	<div style="align-items: : : right;">
 	<!-- <a href = "<?php echo site_url()."/c_transaksi/selesai_produksi_ke1/$id/$total/$jumlah/$no_prod"?>" class="btn btn-dark" role="button">Produksi</a> -->
 		<a class="btn btn-dark" role="button" <?php if($cek == '0'){?> href = "<?php echo site_url()."/c_transaksi/selesai_produksi_ke1/$id/$total/$jmlprod/$no_prod/$bbtk/$bbop"?>" <?php }else{?> hidden <?php } ?>>Produksi</a>
 </div>
