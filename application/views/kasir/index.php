@@ -120,9 +120,9 @@
 </div>
 
 <?php $this->load->view('script'); ?>
-<?php $this->load->view("Kasir/struk"); ?>
-<?php $this->load->view('Kasir/show'); ?>
-<?php $this->load->view('Kasir/bayar'); ?>
+<?php $this->load->view("kasir/struk"); ?>
+<?php $this->load->view('kasir/show'); ?>
+<?php $this->load->view('kasir/bayar'); ?>
 <script>
     function hapus(id) {
         // alert(id)

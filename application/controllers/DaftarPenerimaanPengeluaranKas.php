@@ -23,7 +23,7 @@
         if (isset($periode)) {
             $list = $this->db->query("select * from penerimaan_pengeluaran_kas where periode = '$periode'")->result();
             $data = [
-                'list' => array_reverse($list), 
+                'list' => $list, 
                 'periode' => $periode,
                 'detail' =>$detail
             ];
@@ -31,7 +31,7 @@
         } else {
             $list = $this->db->query("select * from penerimaan_pengeluaran_kas where periode = ''")->result();
             $data = [
-                'list' => array_reverse($list), 
+                'list' => $list, 
                 'periode' => '',
                 'detail' =>$detail
             ];

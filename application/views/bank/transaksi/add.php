@@ -3,7 +3,7 @@
         <h3>Transaksi Bank</h3>
     </div>
     <div class="x_content">
-        <form method="post" action="<?= base_url("c_transaksi/transaksi_bank_submit") ?>">
+        <form method="post" action="<?= base_url("c_transaksi/transaksi_bank_submit") ?>" enctype="multipart/form-data">
             <div class="form-group">
                 <label>Tanggal</label>
                 <input class="form-control" type="date" name="tanggal" value="<?= date('Y-m-d')?>" required>
@@ -28,7 +28,7 @@
             </div>
             <div class="form-group">
                 <label>Bukti Transaksi</label>
-                <input class="form-control" type="text" name="bukti_transaksi" required>
+                <input type="file" name="bukti_transaksi" required>
             </div>
             <div class="form-group">
                 <label>Nominal</label>

@@ -34,7 +34,7 @@
                         <td><?=$k+1?></td>
                         <td><?=$d->tanggal?></td>
                         <td><?=$d->keterangan?></td>
-                        <td><?=$d->bukti_transaksi?></td>
+                        <td><a href="<?= base_url('uploads/'.$d->bukti_transaksi) ?>" target="_blank"><?=$d->bukti_transaksi?></a></td>
                         <td class="text-right"><?= format_rp($d->nominal)?></td>
                         <td class="text-right"><?= format_rp($d->bunga)?></td>
                         <td class="text-right"><?= format_rp($d->pajak)?></td>
