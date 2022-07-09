@@ -27,7 +27,7 @@
 						<td><?= $no++ ?></td>
 						<td><?= date("d F Y", strtotime($data->tgl_transaksi)) ?></td>
 						<td><?= $data->id_anggota ?> - <?= $data->nama_peternak ?></td>
-						<td class="text-right"><?= format_rp($data->subtotal) ?></td>
+						<td><?= format_rp($data->subtotal) ?></td>
 						<td>
 							
 						</td>

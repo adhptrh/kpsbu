@@ -38,9 +38,9 @@
                 <table id="datatable" class="table table-striped table-bordered table-hover jambo_table">
                     <thead>
                         <tr>
-                            <th rowspan="2">Tanggal</th>
-                            <th rowspan="2">Nama Akun</th>
-                            <th rowspan="2">Reff</th>
+                            <th rowspan="2" class="text-center">Tanggal</th>
+                            <th rowspan="2" class="text-center">Nama Akun</th>
+                            <th rowspan="2" class="text-center">Reff</th>
                             <th rowspan="2" class="text-center">Debet</th>
                             <th rowspan="2" class="text-center">Kredit</th>
                             <th rowspan="2" class="text-center">Saldo </th>
@@ -55,14 +55,13 @@
                         <td></td>
                         <td class="text-right"><?= format_rp($saldo_awal) ?></td>
                     </tr>
-                    <?php foreach ($list as $item) { 
-                        ?>
+                    <?php foreach ($list as $item) { ?>
                         <tr>
                             <td><?= $item->tgl_jurnal ?></td>
                             <td><?= $item->nama_coa ?></td>
                             <td><?= $item->no_coa ?></td>
                             <?php if ($item->posisi_dr_cr =='d') { ?>
-								<?php if ($item->header == 1 OR $item->header == 5 OR $item->header == 6 OR $item->header == 3 ) { ?>
+								<?php if (($item->header == 1 AND $item->no_coa != '1414') OR $item->header == 5 OR $item->header == 6  ) { ?>
 									<?php $saldo_awal = $saldo_awal + $item->nominal; ?>
 								<?php } else { ?>
 									<?php $saldo_awal = $saldo_awal - $item->nominal; ?>
@@ -70,7 +69,7 @@
 								<td class="text-right"><?= format_rp($item->nominal)?></td>
 								<td></td>
 							<?php } else { ?>
-								<?php if ($item->header == 1 OR $item->header == 5 OR $item->header == 6 ) { ?>
+								<?php if (($item->header == 1 AND $item->no_coa != '1414') OR $item->header == 5 OR $item->header == 6 ) { ?>
 									<?php $saldo_awal = $saldo_awal - $item->nominal; ?>
 								<?php } else { ?>
 									<?php $saldo_awal = $saldo_awal + $item->nominal; ?>
@@ -80,37 +79,6 @@
 							<?php }?>
 							<td class="text-right"><?= format_rp($saldo_awal)?></td>
                         </tr>
-                        <?php if (
-                            $item->no_coa == '4111' ||
-                            $item->no_coa == '4112' ||
-                            $item->no_coa == '4116'
-                            ) {
-                            $saldo_awal -= $item->nominal;?>
-                            <tr>
-                                <td><?= $item->tgl_jurnal ?></td>
-                                <td><?= "Ikhtisar Laba Rugi" ?></td>
-                                <td><?= "1300" ?></td>
-                                <td class="text-right"><?= format_rp($item->nominal) ?></td>
-                                <td></td>
-                                <td class="text-right"><?= format_rp($saldo_awal) ?></td>
-                            </tr>
-                            <?php
-                            }
-                            if (
-                            $item->no_coa == '5221' ||
-                            $item->no_coa == '5228' ||
-                            $item->no_coa == '5224'
-                            ) { 
-                                $saldo_awal -= $item->nominal;?>
-                                <tr>
-                                    <td><?= $item->tgl_jurnal ?></td>
-                                    <td><?= "Ikhtisar Laba Rugi" ?></td>
-                                    <td><?= "1300" ?></td>
-                                    <td></td>
-                                    <td class="text-right"><?= format_rp($item->nominal) ?></td>
-                                    <td class="text-right"><?= format_rp($saldo_awal) ?></td>
-                                </tr>
-                        <?php } ?>
                     <?php } ?>
                     <!-- <tr>
 						<td colspan="5"><b>Saldo Akhir</b></td>

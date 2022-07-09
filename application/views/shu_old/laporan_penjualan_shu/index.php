@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="total-pnj">
-                    <h5 style="color: black;">Total Penjualan &nbsp; : <?= format_rp($total) ?></h5>
+                    <h5 style="color: black;" class="text-right">Total Penjualan &nbsp; : <?= format_rp($total) ?></h5>
                 </div>
             </div>
         </div>

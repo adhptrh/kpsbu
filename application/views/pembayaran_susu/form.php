@@ -40,14 +40,16 @@
 					<div class="form-group row" id="simpanan_manasuka">
 						<label class="col-sm-1">Simpanan Masuka</label>	
 						<div class="col-sm-3">
-							<input type="text" name="manasuka" class="form-control" value="<?= format_rp($manasuka) ?>" id="manasuka" readonly>
+							<input type="text" class="form-control" value="<?= $manasuka ?>" id="manasukarp" readonly>
+							<input type="hidden" name="manasuka" class="form-control" value="<?= $manasuka ?>" id="manasuka" readonly>
 						</div>
 					</div>
 
 					<div class="form-group row" id="jumlah_pembayaran">
 						<label class="col-sm-1">Simpanan Wajib</label>	
 						<div class="col-sm-3">
-					  		<input type="text" name="jumlah_pembayaran" id="hasil_pembayaran" class="form-control" readonly="">
+					  		<input type="text" id="hasil_pembayaranrp" class="form-control" readonly="">
+					  		<input type="hidden" name="jumlah_pembayaran" id="hasil_pembayaran" class="form-control" readonly="">
 						<div id="info" style="color: red"><strong>jumlah pembayaran didapatkan dari (Rp. 20 x Jumlah liter susu)</strong></div>
 						</div>
 					</div>
@@ -57,7 +59,8 @@
 					<div class="form-group row" id="kalo_ngutang">
 						<label class="col-sm-1">Pinjaman Anggota</label>	
 						<div class="col-sm-3">
-							<input type="text" name="pinjaman" class="form-control" id="pinjaman" readonly>
+							<input type="text" class="form-control" id="pinjamanrp" readonly>
+							<input type="hidden" name="pinjaman" class="form-control" id="pinjaman" readonly>
 						</div>
 
 						<input type="text" id="sp" name="sp">
@@ -66,7 +69,8 @@
 						<div id="byr_tunai">
 							<label class="col-sm-1">Bayar Tunai</label>	
 							<div class="col-sm-3">
-								<input type="text" name="bayar_tunai" class="form-control" id="piutang" readonly="">
+								<input type="text" class="form-control" id="piutangrp" readonly="">
+								<input type="hidden" name="bayar_tunai" class="form-control" id="piutang" readonly="">
 							</div>
 						</div>
 					</div>
@@ -74,7 +78,8 @@
 					<div class="form-group row" id="total_bayar">
 						<label class="col-sm-1">Total bayar</label>	
 						<div class="col-sm-3">
-					  		<input type="text" name="total_trans_susu" id="total_trans_susu" class="form-control" readonly="">
+					  		<input type="text" id="total_trans_susurp" class="form-control" readonly="">
+					  		<input type="hidden" name="total_trans_susu" id="total_trans_susu" class="form-control" readonly="">
 						</div>
 					</div>
 
@@ -89,6 +94,22 @@
 	</div>
 
 	<script type="text/javascript">
+		function formatRupiah(angka, prefix){
+	var number_string = angka.replace(/[^,\d]/g, '').toString(),
+	split   		= number_string.split(','),
+	sisa     		= split[0].length % 3,
+	rupiah     		= split[0].substr(0, sisa),
+	ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+ 
+	// tambahkan titik jika yang di input sudah menjadi angka ribuan
+	if(ribuan){
+		separator = sisa ? '.' : '';
+		rupiah += separator + ribuan.join('.');
+	}
+ 
+	rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+	return prefix == undefined ? rupiah : (rupiah ? 'Rp ' + rupiah : '');
+}
 		$(document).ready(function () {
 			$("#jml_susu").hide();
 			$("#simpanan_manasuka").hide();
@@ -102,22 +123,7 @@
 			$("#id_peternak").change(function() {
 				var id_peternak = $("#id_peternak").val()
 				var notif = '';
-				function formatRupiah(angka, prefix){
-					var number_string = angka.replace(/[^,\d]/g, '').toString(),
-					split   		= number_string.split(','),
-					sisa     		= split[0].length % 3,
-					rupiah     		= split[0].substr(0, sisa),
-					ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
-		
-					// tambahkan titik jika yang di input sudah menjadi angka ribuan
-					if(ribuan){
-						separator = sisa ? '.' : '';
-						rupiah += separator + ribuan.join('.');
-					}
-		
-					rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-					return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
-				}
+
 				$.ajax({
 					url : "<?php echo site_url('c_transaksi/coba');?>",
 	                method : "POST",
@@ -220,10 +226,13 @@
 	                        } else {
 								// var rumus = 500000
 	                        	$("#susu").val(total);
-								$("#manasuka").val(formatRupiah(manasuka,"Rp. "));
-								$("#hasil_pembayaran").val(formatRupiah(simpanan_wajib,"Rp. "));
-								$("#total_trans_susu").val(rumus);
-								$("#tot_sus").val(formatRupiah(total_trans_susu,"Rp. "));
+								$("#manasukarp").val(formatRupiah(manasuka.toString(),"Rp"));
+								$("#manasuka").val(manasuka);
+								$("#hasil_pembayaranrp").val(formatRupiah(simpanan_wajib.toString(),"Rp"));
+								$("#hasil_pembayaran").val(simpanan_wajib);
+								$("#total_trans_susurp").val(formatRupiah(rumus.toString(),"Rp"));
+								$("#total_trans_susu").val(rumus.toString());
+								$("#tot_sus").val(total_trans_susu.toString());
 								
 								if (!sisa_pinjaman) {
 									$("#kalo_ngutang").hide();

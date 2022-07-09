@@ -1,22 +1,14 @@
-
 <div class="row">
     <div class="col-sm-12">
         <div class="x_panel">
             <div class="x_title">
                 <div class="row">
                     <div class="col-sm-10 col-12">
-                        <h3 id="quote">Transaksi SHU</h3>
+                        <h3 id="quote">Alokasi SHU</h3>
                     </div>
                     <div class="col-sm-2 col-12">
                         <h3 id="quote">
-                            <?php 
-                            $datenow = date('Y-m-d');
-                            
-                            $tahun = date('Y');
-                            $format = $tahun.'-12-31';
-                            // $format = '2022-06-14';
-                            $cek = date('Y-m-d', strtotime($format));
-                            if (true/* $datenow == $cek */) { ?>
+                            <?php if ($sisa != 0) { ?>
                                 <button class="btn pull-right btn-primary" data-target="#add" data-toggle="modal">Tambah</button>
                             <?php } ?>
                         </h3>
@@ -32,26 +24,20 @@
                         <thead>
                             <tr>
                                 <th style="width: 5%;">No</th>
-                                <th>Kode</th>
-                                <th>Tanggal</th>
-                                <th>Nominal</th>
-                                <th></th>
+                                <th>Deskripsi</th>
+                                <th>Persentase (%)</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
-                        $no = 1;
-                        foreach ($list as $key => $value) { ?>
+                            <?php 
+                            $no = 1;
+                            foreach ($list as $key => $value) { ?>
                             <tr>
                                 <td><?= $no++ ?></td>
-                                <td><?= $value->kode_shu?></td>
-                                <td><?= $value->tanggal?></td>
-                                <td><?= format_rp($value->nominal)?></td>
-                                <td>
-                                    <a href="#detail_<?= $value->kode_shu?>" data-toggle="modal" class="btn btn-sm btn-default">Detail</a>
-                                </td>
+                                <td><?= $value->deskripsi?></td>
+                                <td><?= $value->persentase?></td>
                             </tr>
-                        <?php } ?>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -59,5 +45,5 @@
         </div>
     </div>
 </div>
-<?php $this->load->view('shu/transaksi/add')?>
-<?php $this->load->view('shu/transaksi/detail')?>
+<?php $this->load->view('script');?>
+<?php $this->load->view('shu/add')?>

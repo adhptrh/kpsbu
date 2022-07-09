@@ -1,10 +1,6 @@
 <?php 
 class Shu extends CI_Controller
 {
-    public function __construct() {
-        parent::__construct();
-        $this->load->model('Jasa_anggota_model', 'Jasa_anggota_model');
-    }
     public function index()
     {
         $kode = $this->M_transaksi->kode_shu();
@@ -28,47 +24,6 @@ class Shu extends CI_Controller
         $pajak = round($shu_sblm_pajak * 0.01);
         $shu_setelah_pajak = ($shu_sblm_pajak - $pajak); 
         // print_r($total_beban);exit;
-        $beban = $this->db->query("SELECT
-        SUM(nominal) AS total, b.nama_coa, tgl_jurnal
-        FROM jurnal a
-        LEFT JOIN (
-            SELECT id, no_coa, nama_coa, is_shu, header
-            FROM coa
-        ) AS b ON a.no_coa = b.no_coa
-        WHERE b.is_shu = 1
-        AND b.header = 5
-        AND YEAR(tgl_jurnal) = '".date("Y")."'
-        AND posisi_dr_cr = 'd'
-        GROUP BY nama_coa")->result();
-
-        $penjualan_ips = $this->db->query("SELECT SUM(total) as total_penjualan FROM penjualan_ips WHERE tgl_trans LIKE '".date("Y")."%'")->result()[0]->total_penjualan;
-        $hpp_ips = $this->db->query("SELECT ifnull(sum(nominal),0) as hpp
-        FROM jurnal
-        WHERE posisi_dr_cr = 'd' AND no_coa = '6111' AND id_jurnal LIKE 'PENJS%' AND YEAR(tgl_jurnal) = '".date("Y")."'")->result()[0]->hpp;
-
-        $penjualan_toko = $this->db->query("SELECT SUM(total) as total_penjualan FROM penjualan_toko WHERE tgl_trans LIKE '".date("Y")."%'")->result()[0]->total_penjualan;
-        $hpp_toko = $this->db->query("SELECT ifnull(sum(nominal),0) as hpp
-        FROM jurnal
-        WHERE posisi_dr_cr = 'd' AND no_coa = '6112' AND id_jurnal LIKE 'PENJT%' AND YEAR(tgl_jurnal) = '".date("Y")."'")->result()[0]->hpp;
-
-        $penjualan_waserda = $this->db->query("SELECT SUM(nominal) as total_nominal FROM jurnal WHERE no_coa = '4116' AND YEAR(tgl_jurnal) = '".date("Y")."'")->result()[0]->total_nominal;
-        $hpp_waserda = $this->db->query("SELECT SUM(nominal) AS nominal, b.nama_coa, a.posisi_dr_cr
-        from jurnal a
-        JOIN coa b ON a.no_coa = b.no_coa
-        WHERE header = 6
-        AND is_waserda = 1 AND YEAR(tgl_jurnal) = '".date("Y")."'")->result()[0]->nominal;
-
-        $totalhpp = $hpp_ips + $hpp_waserda + $hpp_toko;
-
-        $total_penjualan = $penjualan_ips + $penjualan_toko + $penjualan_waserda;
-
-        $labakotor = $total_penjualan - $totalhpp;
-        $totalbeban = 0;
-        foreach ($beban as $item) {
-            $totalbeban += $item->total;
-        }
-        $labakotor -= $totalbeban;
-        $stelah_pajak = $labakotor - ($labakotor * 0.01);
 
         // $this->get_data_jasa_anggota($shu_setelah_pajak);
 
@@ -82,7 +37,7 @@ class Shu extends CI_Controller
         $data = [
             'kode' => $kode,
             'shu' => $shu,
-            'nominal_shu' => $stelah_pajak,
+            'nominal_shu' => $shu_setelah_pajak,
             'cek' => $cek,
             'list' => $list,
             'detail_shu' => $detail_shu,
@@ -95,9 +50,6 @@ class Shu extends CI_Controller
         $kode_shu = $this->input->post('kode_shu');
         $uraian = $this->input->post('uraian');
         $total = $this->input->post('total');
-        $p35 = $this->input->post('p35');
-        $opsi_pembagian_shu = $this->input->post("opsi_pembagian_shu");
-
         $grandtot = 0;
         foreach ($total as $item) {
             $grandtot += $item;
@@ -107,7 +59,6 @@ class Shu extends CI_Controller
             'kode_shu' => $kode_shu,
             'tanggal' => date('Y-m-d'),
             'nominal' => $grandtot,
-            'tahunselanjutnya' => $p35,
             'status' => 2
         ];
         $this->db->insert('transaksi_shu', $shu);
@@ -124,28 +75,20 @@ class Shu extends CI_Controller
         $this->db->insert_batch('detail_transaksi_shu', $detail);
         // print_r($detail);exit;
 
-        // kirim ke db pengajuan jurnal 
-        $pengajuan = [
-            'kode' => $kode_shu,
-            'tanggal' => date('Y-m-d'),
-            'nominal' => $p35,
-            'jenis' => 'SHU Ditahan',
-        ];
-        $this->db->insert("pengajuan_jurnal", $pengajuan);
+        // // kirim ke db pengajuan jurnal 
+        // $pengajuan = [
+        //     'kode' => $kode_shu,
+        //     'tanggal' => date('Y-m-d'),
+        //     'nominal' => $grandtot,
+        //     'jenis' => 'transaksi shu',
+        // ];
+        // $this->db->insert("pengajuan_jurnal", $pengajuan);
         redirect('shu');
     }
 
     public function jasa_anggota()
     {
-        $data = $this->Jasa_anggota_model->getJasaAnggota();
-        $this->template->load('template', 'shu/jasa_anggota/index', $data);
-    }
-
-    public function laporan_pembagian_shu()
-    {
-        $no_anggota = $this->input->get("no_anggota") ?? "nulll";
         $kode = $this->M_transaksi->pembagian_kode();
-        $kode_total = $this->M_transaksi->pembagian_kode_total();
         $cek_tahun = date('Y');
 
         $anggota = $this->db->query("SELECT z.no_peternak, z.nama_peternak, x.*
@@ -160,31 +103,19 @@ class Shu extends CI_Controller
         AND tanggal IS NULL 
         ")->result();
 
-        $anggotas = $this->db->query("SELECT * FROM peternak")->result();
-
         $list = $this->db->query("SELECT a.*, b.nama_peternak
         FROM pembagian_shu a
-        JOIN peternak b ON a.id_anggota = b.no_peternak WHERE b.no_peternak = '$no_anggota'")->result();
-
-        $total_shu = $this->db->query("SELECT SUM(sisa_hasil_usaha) AS shu
-        FROM pembagian_shu a
-        JOIN peternak b ON a.id_anggota = b.no_peternak")->row()->shu;
+        JOIN peternak b ON a.id_anggota = b.no_peternak")->result();
 
         $cek = $this->db->get('transaksi_shu')->num_rows();
         // print_r($cek);exit;
-
-
         $data = [
             'kode' => $kode,
-            'kode_total' => $kode_total,
             'list' => $list,
             'anggota' => $anggota,
             'cek' => $cek,
-            'total_shu' => $total_shu,
-            'no_anggota'=>$no_anggota,
-            "anggotas"=>$anggotas,
         ];
-        $this->template->load('template', 'laporan/pembagian_shu', $data);
+        $this->template->load('template', 'shu/jasa_anggota/index', $data);
     }
 
     public function get_data_jasa_anggota()
@@ -201,22 +132,14 @@ class Shu extends CI_Controller
         $subtotal = 0;
         $total = 0;
         foreach ($get_simpanan as $key => $value) {
-            if ( $value->total_simpanan_wajib + $value->total_masuka <= 0) continue;
             $subtotal += ($value->deposit + $value->total_simpanan_wajib + $value->total_masuka);
             // $total += $subtotal;
         }
-        $list = $this->M_transaksi->data_laporan_shu()->result();
-
         $total_simpanan_peranggota = $this->M_transaksi->simpanan_peranggota($id_peternak)->row()->total_simpanan_anggota;
         $jasa_modal = $this->M_transaksi->jasa_modal()->row()->nominal;
 
-		$penjualan_ips = $this->db->query("SELECT SUM(total) as total_penjualan FROM penjualan_ips WHERE tgl_trans LIKE '".date("Y")."%'")->result()[0]->total_penjualan;
-        $penjualan_toko = $this->db->query("SELECT SUM(total) as total_penjualan FROM penjualan_toko WHERE tgl_trans LIKE '".date("Y")."%'")->result()[0]->total_penjualan;
-        $penjualan_waserda = $this->db->query("SELECT SUM(nominal) as total_nominal FROM jurnal WHERE no_coa = '4116' AND YEAR(tgl_jurnal) = '".date("Y")."'")->result()[0]->total_nominal;
-        $totalpenjualan = $penjualan_ips + $penjualan_toko + $penjualan_waserda;
-
         $data = [
-            'total_penjualan' => $totalpenjualan,
+            'total_penjualan' => $total_penjualan,
             'total_transaksi' => $total_transaksi,
             'jasa_anggota' => $jasa_anggota,
             'total_simpanan' => $subtotal,
@@ -252,13 +175,13 @@ class Shu extends CI_Controller
         $this->db->insert('pembagian_shu', $data);
 
         // pengajuan jurnal 
-        /* $pengajuan_jurnal = [
+        $pengajuan_jurnal = [
             'kode' => $kode,
             'tanggal' => date('Y-m-d'),
             'nominal' => $sisa_hasil_usaha,
             'jenis' => 'pembagian shu',
         ];
-        $this->db->insert('pengajuan_jurnal', $pengajuan_jurnal); */
+        $this->db->insert('pengajuan_jurnal', $pengajuan_jurnal);
 
         redirect('shu/jasa_anggota');
     }
@@ -291,74 +214,19 @@ class Shu extends CI_Controller
         AND posisi_dr_cr = 'd'
         GROUP BY nama_coa")->result();
 
-        $penjualan_ips = $this->db->query("SELECT SUM(total) as total_penjualan FROM penjualan_ips WHERE tgl_trans LIKE '$tahun%'")->result()[0]->total_penjualan;
-        $hpp_ips = $this->db->query("SELECT ifnull(sum(nominal),0) as hpp
-        FROM jurnal
-        WHERE posisi_dr_cr = 'd' AND no_coa = '6111' AND id_jurnal LIKE 'PENJS%' AND YEAR(tgl_jurnal) = '$tahun'")->result()[0]->hpp;
-
-        $penjualan_toko = $this->db->query("SELECT SUM(total) as total_penjualan FROM penjualan_toko WHERE tgl_trans LIKE '$tahun%'")->result()[0]->total_penjualan;
-        $hpp_toko = $this->db->query("SELECT ifnull(sum(nominal),0) as hpp
-        FROM jurnal
-        WHERE posisi_dr_cr = 'd' AND no_coa = '6112' AND id_jurnal LIKE 'PENJT%' AND YEAR(tgl_jurnal) = '$tahun'")->result()[0]->hpp;
-
-        $penjualan_waserda = $this->db->query("SELECT SUM(nominal) as total_nominal FROM jurnal WHERE no_coa = '4116' AND YEAR(tgl_jurnal) = '$tahun'")->result()[0]->total_nominal;
-        $hpp_waserda = $this->db->query("SELECT SUM(nominal) AS nominal, b.nama_coa, a.posisi_dr_cr
-        from jurnal a
-        JOIN coa b ON a.no_coa = b.no_coa
-        WHERE header = 6
-        AND is_waserda = 1 AND YEAR(tgl_jurnal) = '$tahun'")->result()[0]->nominal;
-
-        $totalhpp = $hpp_ips + $hpp_waserda + $hpp_toko;
-
         $hpp = $this->M_transaksi->t_hpp()->result();
         $t_hpp = 0;
         foreach ($hpp as $key => $value) {
             $t_hpp += $value->hpp;
         }
 
-        $total_penjualan = $penjualan_ips + $penjualan_toko + $penjualan_waserda;
-
-        $labakotor = $total_penjualan - $totalhpp;
-
         $data = [
             'beban' => $beban,
             'pnj' => $pnj,
             't_hpp' => $t_hpp,
-            'penjualan_ips' => $penjualan_ips,
-            'penjualan_toko' => $penjualan_toko,
-            'penjualan_waserda' => $penjualan_waserda,
-            'total_penjualan' => $total_penjualan,
-            'totalhpp' => $totalhpp,
-            'labakotor' => $labakotor,
         ];
         // print_r($data);exit;
         $this->template->load('template', 'shu/laporan_shu/index', $data);
     }
-
-    public function simpan_pengajuan_jurnal_jasa_anggota() {
-        var_dump($_POST);
-        $this->db->insert("pembagian_shu_total", [
-            "id_trans"=>$this->input->post("id_trans_total")
-        ]);
-
-        $totalnominal = 0;
-
-        foreach ($this->input->post("id_trans") as $pembagian_shu) {
-            $totalnominal += $this->db->query("SELECT sisa_hasil_usaha FROM pembagian_shu WHERE id_trans = '$pembagian_shu'")->row()->sisa_hasil_usaha;
-            $this->db->set("id_trans_total", $this->input->post("id_trans_total"));
-            $this->db->where("id_trans", $pembagian_shu);
-            $this->db->update("pembagian_shu");
-        }
-
-        $pengajuan = [
-            'kode' => $this->input->post("id_trans_total"),
-            'tanggal' => date('Y-m-d'),
-            'nominal' => $totalnominal,
-            'jenis' => 'SHU Tahun Berjalan',
-        ];
-        $this->db->insert("pengajuan_jurnal", $pengajuan);
-
-        redirect("shu/jasa_anggota");
-    }
-
 }
+?>

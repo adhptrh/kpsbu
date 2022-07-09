@@ -18,14 +18,14 @@
                 <td style="width: 5%;"><?= $no++ ?></td>
                 <td><?= $item->tanggal ?></td>
                 <td><?= $item->nm_pelanggan ?></td>
-                <td><?= format_rp($item->total) ?></td>
+                <td class="text-right"><?= format_rp($item->total) ?></td>
             </tr>
         <?php } ?>
         </tbody>
         <tfoot>
             <tr>
                 <th colspan="3" class="text-center">Grandtotal</th>
-                <th><?= format_rp($total) ?></th>
+                <th class="text-right"><?= format_rp($total) ?></th>
             </tr>
         </tfoot>
     </table>

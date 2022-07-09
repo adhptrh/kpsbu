@@ -15,29 +15,19 @@
                             <tr>
                                 <th>#</th>
                                 <th>Uraian</th>
-                                <th>Persentase</th>
-                                <th>Nominal SHU</th>
-                                <th>Total</th>
+                                <th>Nominal</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php 
                             $no = 1;
-                            $y = 0;
-                            foreach ($detail_shu as $k=>$item) { 
-                                if ($value->kode_shu != $item->kode_shu) continue;
-                                if ($y > 3) $y = 0;
-                                ?>
+                            foreach ($detail_shu as $item) { ?>
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $item->uraian?></td>
-                                <td><?= $shu[$y]->persentase ?>%</td>
-                                <td><?= format_rp($value->nominal) ?></td>
-                                <td><?= format_rp($item->nominal) ?></td>
+                                <td class="text-right"><?= format_rp($item->nominal) ?></td>
                             </tr>
-                            <?php 
-                            $y++;
-                        } ?>
+                            <?php } ?>
                         </tbody>
                     </table> 
                 </div>

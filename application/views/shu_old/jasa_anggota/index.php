@@ -16,17 +16,16 @@
                 </div>
             </div>
             <div class="x_content">
-                <form action="<?= base_url("Shu/simpan_pengajuan_jurnal_jasa_anggota") ?>" method="post">
                 <div id="notif">
                     <?php echo $this->session->flashdata('notif_ubah'); ?>
                 </div>
+                <?php
+                $total = 0;
+                foreach ($list as $item) {
+                    $total += $item->sisa_hasil_usaha;
+                }
+                ?>
                 <div class="table-responsive">
-                    <?php
-                    echo '<input type="hidden" name="id_trans_total" value="'.$kode_total.'">';
-                    foreach ($list as $k=>$v) {
-                        echo '<input type="hidden" name="id_trans[]" value="'.$v->id_trans.'">';
-                    }
-                    ?>
                     <table class="table table-bordered" id="datatable">
                         <thead>
                             <tr>
@@ -43,14 +42,8 @@
                         <tbody>
                         <?php 
                         $no = 1;
-                        $tot_shu = 0;
-                        $persen = 0;
-                        $sum_shu = $total_shu;
+                        $totalpersen = 0;
                         foreach ($list as $item) { ?>
-                            <?php 
-                            $tot_shu += $item->sisa_hasil_usaha;
-                            $persen += number_format(($item->sisa_hasil_usaha / $sum_shu * 100),2);
-                            ?>
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $item->id_trans ?></td>
@@ -59,21 +52,20 @@
                                 <td class="text-right"><?= format_rp($item->jasa_modal) ?></td>
                                 <td class="text-right"><?= format_rp($item->jasa_anggota) ?></td>
                                 <td class="text-right"><?= format_rp($item->sisa_hasil_usaha) ?></td>
-                                <td><?= number_format(($item->sisa_hasil_usaha / $sum_shu * 100),2) . "%"?></td>
+                                <td><?= $item->sisa_hasil_usaha/$total*100 ?>%</td>
                             </tr>
-                        <?php } ?>
+                            
+                        <?php 
+                        $totalpersen = $totalpersen + $item->sisa_hasil_usaha/$total*100;
+                        } ?>
+                        <tr>
+                            <th colspan="6" class="text-center"><b>Total SHU</b></th>
+                            <td class="text-right"><b><?= format_rp($total) ?></b></td>
+                            <td ><b><?= ($totalpersen) ?>%</b></td>
+                        </tr>
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th colspan="6" class="text-center">Total SHU</th>
-                                <th class="text-right"><?= format_rp($tot_shu) ?></th>
-                                <th><?= $persen . "%" ?></th>
-                            </tr>
-                        </tfoot>
                     </table>
                 </div>
-                <button class="btn btn-primary" <?= (count($list) > 0) ? "":"type=\"button\" onclick=\"alert('Data belum diisi')\"" ?>>Simpan Pengajuan Jurnal</button>
-                </form>
             </div>
         </div>
     </div>

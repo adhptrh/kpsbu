@@ -1,4 +1,3 @@
-
 <div class="row">
     <div class="col-sm-12">
         <div class="x_panel">
@@ -11,12 +10,14 @@
                         <h3 id="quote">
                             <?php 
                             $datenow = date('Y-m-d');
+
+                            // hardcode tahun
                             
                             $tahun = date('Y');
-                            $format = $tahun.'-12-31';
-                            // $format = '2022-06-14';
+                            //$format = $tahun.'-12-31';
+                            $format = date("Y-m-d");
                             $cek = date('Y-m-d', strtotime($format));
-                            if (true/* $datenow == $cek */) { ?>
+                            if ($datenow == $cek) { ?>
                                 <button class="btn pull-right btn-primary" data-target="#add" data-toggle="modal">Tambah</button>
                             <?php } ?>
                         </h3>
@@ -46,7 +47,7 @@
                                 <td><?= $no++ ?></td>
                                 <td><?= $value->kode_shu?></td>
                                 <td><?= $value->tanggal?></td>
-                                <td><?= format_rp($value->nominal)?></td>
+                                <td class="text-right"><?= format_rp($value->nominal)?></td>
                                 <td>
                                     <a href="#detail_<?= $value->kode_shu?>" data-toggle="modal" class="btn btn-sm btn-default">Detail</a>
                                 </td>

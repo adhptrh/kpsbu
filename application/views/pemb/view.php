@@ -6,12 +6,7 @@
 			</div>
   	 	
 		   	<div class="x_content">
-				<?php if ($cek == TRUE){ echo "<div class='alert alert-success'><li>".$error."</li></div>"; }?>
-				<?php if($cek == TRUE){?>
-					<a href = "#" class="btn btn-info" role="button" disabled="disabled"><span class="glyphicon glyphicon-plus"></span> Tambah Data</a>
-				<?php }else{ ?>
-				<a href = "<?php echo site_url()."/c_transaksi/form_pemb"?>" class="btn btn-info" role="button"><span class="glyphicon glyphicon-plus"></span> Tambah Data</a>
-						<?php } ?>
+			   <a href = "<?php echo site_url()."/c_transaksi/form_pemb"?>" class="btn btn-info" role="button"><span class="glyphicon glyphicon-plus"></span> Tambah Data</a>
 				<table id="datatable" class="table table-striped table-bordered table-hover jambo_table">
 					<thead>
 						<tr class="headings">

@@ -104,7 +104,14 @@
 								$stack[0]["no_coa"] == "5135"  &&
 								$stack[1]["no_coa"] == "1113" ||
 								$stack[0]["no_coa"] == "1111"  &&
-								$stack[1]["no_coa"] == "4111"
+								$stack[1]["no_coa"] == "4111" ||
+
+								$stack[0]["no_coa"] == "5221"  &&
+								$stack[1]["no_coa"] == "1111" ||
+								$stack[0]["no_coa"] == "5228"  &&
+								$stack[1]["no_coa"] == "1111"  ||
+								$stack[0]["no_coa"] == "5224"  &&
+								$stack[1]["no_coa"] == "1111" 
 								) {
 									array_push($stacks, $stack);
 									$stack = [];
