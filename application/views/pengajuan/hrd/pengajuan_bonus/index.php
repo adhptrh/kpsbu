@@ -9,7 +9,7 @@
             <div class="x_title">
                 <div class="row">
                     <div class="col-sm-10 col-12">
-                        <h4 id="quote">Pengajuan Bonus</h4>
+                        <h4 id="quote">Bonus</h4>
                     </div>
                     <div class="col-sm-2 col-12">
                         <h3 id="quote">

@@ -35,7 +35,7 @@
                             <li><a href="<?= base_url('Cuti')?>">Pengajuan Cuti </a></li>
                             <li><a href="<?= base_url('Lembur')?>">Pengajuan Lembur </a></li>
                             <li><a href="<?= base_url('Penggajian/tunjanganhariraya')?>">Tunjangan Hari Raya </a></li>
-                            <li><a href="<?= base_url('Pengajuan/pengajuanBonus')?>">Pengajuan Bonus </a></li>
+                            <li><a href="<?= base_url('Pengajuan/pengajuanBonus')?>">Bonus </a></li>
                             <li><a href="<?= base_url('Cuti/melahirkan')?>">Cuti Melahirkan</a></li>
                         <?php
                         endif
