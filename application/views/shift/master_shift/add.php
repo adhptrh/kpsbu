@@ -12,7 +12,7 @@
                 <div class="form-group row">
                     <label for="desc" class="col-sm-2 col-form-label">Nama Shift</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="desc" required placeholder="Deskrispi">
+                        <input type="text" class="form-control" name="desc" required placeholder="Nama Shift">
                     </div>
                 </div>
                 <div class="form-group row">
