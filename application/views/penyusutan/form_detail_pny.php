@@ -72,7 +72,6 @@
 					<div class="col-sm-3">
 
 						<?php if (empty($log_penyusutan_kosong)) { ?>
-						<!-- <?php $rumus = $detail_peny->subtotal/$detail_peny->jumlah ?> -->
 						<input type="text" class="form-control" name="harga_perolehan" value="<?= format_rp($detail_peny->subtotal) ?> " readonly>
 						<?php } else { ?>
 						<input type="text" class="form-control" name="harga_perolehan" value="<?= format_rp($log_penyusutan_kosong->nilai_akhir)?>" readonly>
