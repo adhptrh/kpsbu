@@ -38,6 +38,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>NIP</th>
                                 <th>Nama Pegawai</th>
                                 <th>Nominal THR</th>
                             </tr>
@@ -56,6 +57,7 @@
                                         }
                                         " id="cb_<?= $v->nip ?>" type="checkbox" checked>
                                     </td>
+                                    <td><?= $v->nip?></td>
                                     <td><?= $v->nama?></td>
                                     <td class="text-right">
                                         <?= format_rp($thr["$v->nip"]) ?>
