@@ -10,23 +10,25 @@
         <form action="<?= base_url("Penggajian/simpan_tunjangan_hari_raya") ?>" method="post">
             <div class="form-group">
                 <label>Pilih Bulan</label>
-                <select name="bulan" class="form-control" id="bulan" <?= ($dateApplied) ? "disabled":"" ?> required>
+                <select onchange="
+                document.location.href = '?bulan='+document.getElementById('bulan').value;
+                " name="bulan" class="form-control" id="bulan" <?= ($dateApplied) ? "disabled":"" ?> required>
                     <?php if ($dateApplied) :?>
                     <option value="<?= substr($dateApplied->tanggal,5,2) ?>" selected><?= $namabulan[substr($dateApplied->tanggal,5,2)] ?></option>
                     <?php endif ?>
                     <option value="">-</option>
-                    <option value="01">Januari</option>
-                    <option value="02">Februari</option>
-                    <option value="03">Maret</option>
-                    <option value="04">April</option>
-                    <option value="05">Mei</option>
-                    <option value="06">Juni</option>
-                    <option value="07">Juli</option>
-                    <option value="08">Agustus</option>
-                    <option value="09">September</option>
-                    <option value="10">Oktober</option>
-                    <option value="11">November</option>
-                    <option value="12">Desember</option>
+                    <option value="01" <?= $bulanselect == "01" ? "selected":"" ?>>Januari</option>
+                    <option value="02" <?= $bulanselect == "02" ? "selected":"" ?>>Februari</option>
+                    <option value="03" <?= $bulanselect == "03" ? "selected":"" ?>>Maret</option>
+                    <option value="04" <?= $bulanselect == "04" ? "selected":"" ?>>April</option>
+                    <option value="05" <?= $bulanselect == "05" ? "selected":"" ?>>Mei</option>
+                    <option value="06" <?= $bulanselect == "06" ? "selected":"" ?>>Juni</option>
+                    <option value="07" <?= $bulanselect == "07" ? "selected":"" ?>>Juli</option>
+                    <option value="08" <?= $bulanselect == "08" ? "selected":"" ?>>Agustus</option>
+                    <option value="09" <?= $bulanselect == "09" ? "selected":"" ?>>September</option>
+                    <option value="10" <?= $bulanselect == "10" ? "selected":"" ?>>Oktober</option>
+                    <option value="11" <?= $bulanselect == "11" ? "selected":"" ?>>November</option>
+                    <option value="12" <?= $bulanselect == "12" ? "selected":"" ?>>Desember</option>
                 </select>
             </div>
             <div>

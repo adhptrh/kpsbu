@@ -196,8 +196,11 @@ class Penggajian extends CI_Controller
     }
 
     public function tunjanganhariraya() {
-        $date = date("Y")."-".$this->input->get("bulan") ?? date('Y-m');
-        $pegawai = $this->db->query("SELECT a.nama,a.nip,b.nominal,b.tanggal FROM pegawai a LEFT JOIN tunjangan_hari_raya b ON a.nip = b.nip WHERE b.tanggal IS NULL OR b.tanggal NOT LIKE '$date%'")->result();
+        $date = $this->input->get("bulan") ?? date('Y-m');
+        if (strlen($date) < 7) {
+            $date = date("Y-").sprintf("%02d",$date);
+        }
+        $pegawai = $this->db->query("SELECT a.nama,a.nip,b.nominal,b.tanggal FROM pegawai a LEFT JOIN tunjangan_hari_raya b ON a.nip = b.nip WHERE (b.tanggal IS NULL OR b.tanggal NOT LIKE '$date%') AND a.created_at < '$date-01'")->result();
         $pegawais = [];
         $thr = [];
         $dateApplied = $this->db->query("SELECT * FROM tunjangan_hari_raya WHERE tanggal LIKE '".date("Y")."%'")->result()[0] ?? false;
@@ -227,6 +230,7 @@ class Penggajian extends CI_Controller
             "dateApplied"=>$dateApplied,
             "namabulan"=>$namabulan,
             "thr"=>$thr,
+            "bulanselect"=>substr($date,5,7),
         ];
         $this->template->load("template","penggajian/tunjanganhariraya",$data);
     }
