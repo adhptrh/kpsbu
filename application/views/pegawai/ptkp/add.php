@@ -12,7 +12,7 @@
             <form action="<?= base_url('c_masterdata/save_ptkp')?>" method="post">
             <div class="modal-body">
                 <div class="form-group row">
-                    <label for="desc" class="col-sm-3 col-form-label">Deskripsi</label>
+                    <label for="desc" class="col-sm-3 col-form-label">Nama PTKP</label>
                     <div class="col-sm-9">
                         <input type="text" name="desc" class="form-control" id="desc">
                     </div>

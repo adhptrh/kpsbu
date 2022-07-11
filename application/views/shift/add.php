@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="desc" class="col-sm-2 col-form-label">Deskripsi</label>
+                    <label for="desc" class="col-sm-2 col-form-label">Keterangan</label>
                     <div class="col-sm-10">
                         <textarea name="desc" id="desc" cols="10" rows="5" class="form-control" placeholder="Deskripsi"></textarea>
                     </div>
