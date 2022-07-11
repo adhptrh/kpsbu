@@ -67,13 +67,14 @@
                         <thead>
                             <tr>
                                 <th style="width: 4%;">#</th>
-                                <th>ID Penggajian</th>
                                 <th>Tanggal</th>
                                 <th>Nama Pegawai</th>
                                 <th>Gaji Pokok</th>
                                 <th>Tunjangan Jabatan</th>
                                 <th>Tunjangan Kesehatan</th>
+                                <th>Tunjangan Hari Raya</th>
                                 <th>Bonus Kerja</th>
+                                <th>PTKP</th>
                                 <th>PPH 21</th>
                                 <th>Gaji Bersih</th>
                             </tr>
@@ -84,14 +85,16 @@
                         foreach ($list as $key => $value) { ?>
                             <tr>
                                 <td><?= $no++ ?></td>
-                                <td><?= $value->id_penggajian ?></td>
+                                <!-- <td><?= $value->id_penggajian ?></td> -->
                                 <td><?= $value->tanggal ?></td>
                                 <td><?= $value->nm_pegawai ?></td>
                                 <td class="text-right"><?= format_rp($value->gaji_pokok) ?></td>
                                 <td class="text-right"><?= format_rp($value->tunjangan_jabatan) ?></td>
                                 <td class="text-right"><?= format_rp($value->tunjangan_kesehatan) ?></td>
+                                <td class="text-right"><?= format_rp($value->tunjangan_hari_raya) ?></td>
                                 <td class="text-right"><?= format_rp($value->bonus_kerja) ?></td>
                                 <td class="text-right"><?= format_rp($value->ptkp) ?></td>
+                                <td class="text-right"><?= format_rp($value->pph21) ?></td>
                                 <td class="text-right"><?= format_rp($value->total) ?></td>
                             </tr>
                         <?php }?>

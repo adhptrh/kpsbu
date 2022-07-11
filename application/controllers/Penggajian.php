@@ -31,7 +31,7 @@ class Penggajian extends CI_Controller
         $ketptkp = $pegawai->id_jenis_pegawai == "Kontrak" ? "Tidak Kena Pajak" : "Kena Pejak";
         $tunjanganjabatan = $this->db->query("SELECT * FROM tb_jabatan WHERE `desc` LIKE '".$pegawai->id_jabatan."'")->result()[0];
         $pegawai = $this->db->query("SELECT a.id_jenis_pegawai, a.pendidikan, c.tunjangan_jabatan, c.tunjangan_kesehatan, b.gaji_pokok FROM pegawai a JOIN tb_jenis_pegawai b ON a.id_jenis_pegawai = b.desc JOIN tb_jabatan c ON a.id_jabatan = c.desc WHERE a.nip = '$nip' ")->result()[0];
-        $nominal_ptkp = $this->db->query("SELECT * FROM tb_ptkp a JOIN pegawai b ON b.id_ptkp = a.desc WHERE b.nip = '$nip'")->result()[0]->nominal ?? 0;
+        $nominal_ptkp = $this->db->query("SELECT * FROM tb_ptkp a JOIN pegawai b ON b.id_ptkp = a.desc WHERE b.nip = '$nip' ")->result()[0]->nominal ?? 0;
         $tunjanganhariraya = $this->db->query("SELECT * FROM tunjangan_hari_raya WHERE tanggal LIKE '".$periode."%' AND nip = '$nip'")->result()[0]->nominal ?? 0;
         $bonus = $this->db->query("SELECT a.nominal FROM tb_detail_pengajuan_bonus a JOIN pengajuan_bonus b ON a.id_pengajuan = b.id_pengajuan WHERE a.nip = '$nip' AND b.periode LIKE '".$periode."%'")->result()[0]->nominal ?? 0;
         $gajipokok = $this->db->query("SELECT * FROM tb_jenis_pegawai a WHERE a.desc LIKE '".$pegawai->id_jenis_pegawai."' AND a.pendidikan LIKE '".$pegawai->pendidikan."'")->result();
@@ -291,6 +291,8 @@ class Penggajian extends CI_Controller
             $data = $this->slip_gaji($nip,date("Y-m"));
             $total += $data["gajibersih"];
             $this->bayar_gaji2($data,$id_gaji);
+            echo $data["nip"];
+            echo "<br>";
         }
         $tanggal = date('Y-m-d');
         $pengajuan = [
@@ -322,12 +324,15 @@ class Penggajian extends CI_Controller
         /* $id_gaji = $this->Absensi_model->id_gaji(); */
         $this->db->where('nip', $nip);
         $pegawai = $this->db->get('pegawai')->row();
+
+        $unik = md5(random_int(0, PHP_INT_MAX));
         
         $tb_penggajian = [
             'id_penggajian' => $id_gaji,
             'tanggal' => date('Y-m-d'),
             'nm_pegawai' => $pegawai->nama,
             'nominal' => $total,
+            'unik' => $unik,
         ];
         $this->db->insert('tb_penggajian', $tb_penggajian);
 
@@ -343,6 +348,7 @@ class Penggajian extends CI_Controller
             "total" => $total,
             "pph21" => $pph21,
             "tunjangan_hari_raya" => $tunjangan_hari_raya,
+            'unik' => $unik,
         ];
         $this->db->insert('tb_detail_penggajian', $tb_detail_penggajian);
 
@@ -427,8 +433,8 @@ class Penggajian extends CI_Controller
         if (isset($periode)) {
             $list = $this->db->query("SELECT b.*, a.tanggal, a.nm_pegawai
             from tb_penggajian a
-            JOIN tb_detail_penggajian b ON a.id_penggajian = b.id_penggajian
-            where LEFT(tanggal, 7) = '$periode' order by tanggal asc")->result();
+            JOIN tb_detail_penggajian b ON a.unik = b.unik
+            where tanggal LIKE '$periode%'  order by tanggal asc ")->result();
             $data = [
                 'list' => $list,
             ];
