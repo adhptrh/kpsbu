@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-sm-2 col-12">
                         <h3 id="quote">
-                            <?= $role == 'pegawai' ? '<a href="#add" data-toggle="modal" class="btn pull-right btn-primary">Tambah</a>' : '' ?>
+                            <?= ($role == 'pegawai' && (12-$total_cuti_tahun_ini) > 0) ? '<a href="#add" data-toggle="modal" class="btn pull-right btn-primary">Tambah</a>' : '' ?>
                         </h3>
                     </div>
                 </div>
@@ -17,7 +17,10 @@
                 <div id="notif">
                     <?php echo $this->session->flashdata('notif_ubah'); ?>
                 </div>
+                <?php
+                if ($role == "pegawai") { ?>
                 <p class="badge">Sisa Cuti: <?= 12-$total_cuti_tahun_ini ?></p>
+                <?php } ?>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="datatable">
                         <thead>
@@ -73,22 +76,42 @@
 <script>
     let cuti_tahun_ini = <?= $total_cuti_tahun_ini ?>
     
+    let adddays = 0
     $(document).ready(function() {
         $("#info").hide()
         var todaydt = new Date();
         $("#start").datepicker({
+            
+            beforeShowDay: function(date) {
+                var day = date.getDay();
+                return [(day != 0), ''];
+            },
             autoclose: true,
             dateFormat: "yy-mm-dd",
             endDate: todaydt,
             minDate: new Date(),
             onSelect: function (date) {
                 var date2 = $('#start').datepicker('getDate');
-                $('#end').datepicker('option', 'minDate', date2);
-                $('#end').datepicker('option', 'maxDate', new Date(new Date(date2).setDate(new Date(date2).getDate()+12-cuti_tahun_ini)));
+                $('#end').datepicker('option', 'minDate', new Date(new Date(date2).setDate(new Date(date2).getDate() + 1)));
+                let dateend = new Date(new Date(date2).setDate(new Date(date2).getDate()+12-cuti_tahun_ini))
+                let cutileft = 12-cuti_tahun_ini
+                //loop date to dateend check if sunday
+                while (date2 <= dateend) {
+                    var day = date2.getDay();
+                    if (day == 0) {
+                        adddays--
+                    }
+                    date2.setDate(date2.getDate() + 1);
+                }
+                $('#end').datepicker('option', 'maxDate', date2);
                 
             }
         });
         $('#end').datepicker({
+            beforeShowDay: function(date) {
+                var day = date.getDay();
+                return [(day != 0), ''];
+            },
             dateFormat: "yy-mm-dd", 
         });
         
@@ -97,7 +120,7 @@
             const endDate    = $("#end").val();
 
             const diffInMs   = new Date(endDate) - new Date(startDate)
-            const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+            const diffInDays = (diffInMs / (1000 * 60 * 60 * 24))+adddays;
             if (diffInDays <= 12) {
                 $("#jml_hari_cuti").val(diffInDays);
                 $("#info").hide();

@@ -14,7 +14,7 @@
             $listCuti = $this->db->query("select a.*, b.nama, b.status as status_pegawai from tb_cuti a join pegawai b on a.nip = b.nip where b.status = 1 and b.nip ='$nip'")->result();
         }
         $pegawai = $this->db->query("select * from pegawai where status = 1 and nip = '$nip'")->row();
-        $total_cuti_tahun_ini = $this->db->query("SELECT SUM(jumlah_hari) as total_hari FROM tb_cuti WHERE tgl_pengajuan LIKE '".date("Y")."%' AND status = 1")->result();
+        $total_cuti_tahun_ini = $this->db->query("SELECT SUM(jumlah_hari) as total_hari FROM tb_cuti WHERE tgl_pengajuan LIKE '".date("Y")."%' AND nip = '$nip' AND status = 1")->result();
         if (count($total_cuti_tahun_ini) > 0) {
             $total_cuti_tahun_ini = $total_cuti_tahun_ini[0]->total_hari;
         }
