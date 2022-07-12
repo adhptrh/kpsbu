@@ -82,11 +82,11 @@
         $("#hide_ptkp").hide()
         
         $('#jp').on('change', function () {
-            $("#hide_ptkp").hide()
+            /* $("#hide_ptkp").hide() */
             var val = $(this).val()
-            if (val == 'Tetap') {
-                $("#hide_ptkp").show() 
-            }
+            $("#hide_ptkp").show() 
+            /* if (val == 'Tetap') {
+            } */
             if (val) {
                 $.ajax({
                     url : "<?= base_url('c_masterdata/pendidikan')?>", 

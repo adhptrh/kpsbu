@@ -64,7 +64,7 @@ class Penggajian extends CI_Controller
             $pph21 = 95000000+(($pkp-500000000)*0.35);
         }
         $pph21 = $pph21/12;
-        $pph21 = $pegawai->id_jenis_pegawai == "Kontrak" ? 0:$pph21;
+        /* $pph21 = $pegawai->id_jenis_pegawai == "Kontrak" ? 0:$pph21; */
         if ($totalnetto < $ptkp) {
             $pph21 = 0;
         }
