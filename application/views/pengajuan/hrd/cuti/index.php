@@ -17,6 +17,7 @@
                 <div id="notif">
                     <?php echo $this->session->flashdata('notif_ubah'); ?>
                 </div>
+                <p class="badge">Sisa Cuti: <?= 12-$total_cuti_tahun_ini ?></p>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="datatable">
                         <thead>
