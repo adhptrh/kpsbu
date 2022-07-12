@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 25, 2022 at 05:39 PM
+-- Generation Time: Jul 11, 2022 at 07:12 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -136,13 +136,6 @@ CREATE TABLE `bahan_baku` (
   `stok` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `bahan_baku`
---
-
-INSERT INTO `bahan_baku` (`no_bb`, `nama_bb`, `satuan`, `stok`) VALUES
-('BB_001', 'Susu Sapi', 'liter', 140000);
-
 -- --------------------------------------------------------
 
 --
@@ -181,11 +174,11 @@ CREATE TABLE `bahan_penolong` (
 --
 
 INSERT INTO `bahan_penolong` (`no_bp`, `nama_bp`, `satuan`, `stok`) VALUES
-('BP_001', 'Gula', 'gram', 950000),
-('BP_002', 'Bubuk Biang Yoghurt', 'gram', 200000),
-('BP_003', 'Pewarna Makanan', 'ml', 200000),
-('BP_004', 'Perisa Makanan', 'ml', 50000),
-('BP_005', 'Garam', 'gram', 100000);
+('BP_001', 'Gula', 'gram', 0),
+('BP_002', 'Bubuk Biang Yoghurt', 'gram', 0),
+('BP_003', 'Pewarna Makanan', 'ml', 0),
+('BP_004', 'Perisa Makanan', 'ml', 0),
+('BP_005', 'Garam', 'gram', 0);
 
 -- --------------------------------------------------------
 
@@ -246,13 +239,6 @@ CREATE TABLE `bop` (
   `tahun` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `bop`
---
-
-INSERT INTO `bop` (`no_bop`, `tgl_bop`, `bulan`, `tahun`) VALUES
-('BOP_001', '2022-07-10', '0', '0');
-
 -- --------------------------------------------------------
 
 --
@@ -263,13 +249,6 @@ CREATE TABLE `bopo` (
   `no_bopo` varchar(50) NOT NULL,
   `tgl_bopo` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `bopo`
---
-
-INSERT INTO `bopo` (`no_bopo`, `tgl_bopo`) VALUES
-('BOPO_001', '2022-07-10');
 
 -- --------------------------------------------------------
 
@@ -286,13 +265,6 @@ CREATE TABLE `btk` (
   `tarif` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `btk`
---
-
-INSERT INTO `btk` (`no_btk`, `tgl_btk`, `bulan`, `tahun`, `jumlah_pgw`, `tarif`) VALUES
-('BTK_001', '2022-07-10', '0', '0', '150', 108);
-
 -- --------------------------------------------------------
 
 --
@@ -305,13 +277,6 @@ CREATE TABLE `btko` (
   `jumlah_pgw` varchar(50) NOT NULL,
   `tarif` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `btko`
---
-
-INSERT INTO `btko` (`no_btko`, `tgl_btko`, `jumlah_pgw`, `tarif`) VALUES
-('BTKO_001', '2022-07-10', '150', '108');
 
 -- --------------------------------------------------------
 
@@ -398,7 +363,8 @@ INSERT INTO `buku_pembantu_kas` (`id`, `id_ref`, `tanggal`, `nominal`, `kd_coa`,
 (17, 'PMB-KR-20220728001', '2022-07-28', '2775', 1111, 'd', 'Pembayaran Waserda Kredit'),
 (18, 'PMBWASERDA100722003', '2022-07-10', '194250', 1111, 'k', 'Pembelian Barang Waserda'),
 (19, 'PMBWASERDA100722002', '2022-07-10', '3885000', 1111, 'k', 'Pembelian Barang Waserda'),
-(20, 'PNJWASERDA100722002', '2022-07-10', '5550000', 1111, 'd', 'Penjualan Tunai');
+(20, 'PNJWASERDA100722002', '2022-07-10', '5550000', 1111, 'd', 'Penjualan Tunai'),
+(21, 'GAJI-001', '2022-07-11', '66271250', 1111, 'k', 'Pembayaran Gaji');
 
 -- --------------------------------------------------------
 
@@ -411,13 +377,6 @@ CREATE TABLE `cek_kualitas` (
   `tgl_trans` varchar(50) NOT NULL,
   `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `cek_kualitas`
---
-
-INSERT INTO `cek_kualitas` (`no_trans`, `tgl_trans`, `status`) VALUES
-('CK_001', '2022-07-10', '2');
 
 -- --------------------------------------------------------
 
@@ -548,16 +507,6 @@ CREATE TABLE `detail_bop` (
   `harga` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `detail_bop`
---
-
-INSERT INTO `detail_bop` (`no_bop`, `no_jbop`, `harga`) VALUES
-('BOP_001', 'JBOP_001', 101),
-('BOP_001', 'JBOP_002', 102),
-('BOP_001', 'JBOP_003', 103),
-('BOP_001', 'JBOP_004', 104);
-
 -- --------------------------------------------------------
 
 --
@@ -569,16 +518,6 @@ CREATE TABLE `detail_bopo` (
   `no_jbop` varchar(50) NOT NULL,
   `harga` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `detail_bopo`
---
-
-INSERT INTO `detail_bopo` (`no_bopo`, `no_jbop`, `harga`) VALUES
-('BOPO_001', 'JBOP_001', '101'),
-('BOPO_001', 'JBOP_002', '102'),
-('BOPO_001', 'JBOP_003', '103'),
-('BOPO_001', 'JBOP_004', '104');
 
 -- --------------------------------------------------------
 
@@ -596,13 +535,6 @@ CREATE TABLE `detail_cek_kualitas` (
   `subtotal` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `detail_cek_kualitas`
---
-
-INSERT INTO `detail_cek_kualitas` (`no`, `no_trans`, `no_trans_pmb`, `lulus`, `gagal`, `total`, `subtotal`) VALUES
-(4, 'CK_001', 'PMB_001', '140000', '10000', '150000', '855000000');
-
 -- --------------------------------------------------------
 
 --
@@ -615,13 +547,6 @@ CREATE TABLE `detail_pembagian` (
   `jual` varchar(50) NOT NULL,
   `produksi` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `detail_pembagian`
---
-
-INSERT INTO `detail_pembagian` (`no`, `no_trans`, `jual`, `produksi`) VALUES
-(4, 'PGB_001', '130000', '10000');
 
 -- --------------------------------------------------------
 
@@ -726,16 +651,6 @@ CREATE TABLE `detail_pembelian_bb` (
   `no_peternak` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `detail_pembelian_bb`
---
-
-INSERT INTO `detail_pembelian_bb` (`id`, `no_trans`, `no_bb`, `jumlah`, `harga`, `subtotal`, `no_peternak`) VALUES
-(10, 'PMB_001', 'BB_001', 150000, '5700', 855000000, 'PTRNK_011'),
-(19, 'PMB_002', 'BB_001', 500, '5700', 2850000, 'PTRNK_050'),
-(20, 'PMB_002', 'BB_001', 300, '5700', 1710000, 'PTRNK_051'),
-(21, 'PMB_002', 'BB_001', 200, '5700', 1140000, 'PTRNK_052');
-
 -- --------------------------------------------------------
 
 --
@@ -752,17 +667,6 @@ CREATE TABLE `detail_pembelian_bp` (
   `no_supp_bp` varchar(100) NOT NULL,
   `jumlah_kartu_stok` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `detail_pembelian_bp`
---
-
-INSERT INTO `detail_pembelian_bp` (`no`, `no_trans`, `no_bp`, `jumlah`, `harga`, `subtotal`, `no_supp_bp`, `jumlah_kartu_stok`) VALUES
-(16, 'PMBP_001', 'BP_001', 500000, '2000', 1000000000, 'SBP_001', '500000'),
-(17, 'PMBP_001', 'BP_002', 200000, '1000', 200000000, 'SBP_002', '200000'),
-(18, 'PMBP_001', 'BP_003', 200000, '1000', 200000000, 'SBP_003', '200000'),
-(19, 'PMBP_001', 'BP_004', 50000, '10000', 500000000, 'SBP_004', '50000'),
-(20, 'PMBP_001', 'BP_005', 100000, '3000', 300000000, 'SBP_005', '100000');
 
 -- --------------------------------------------------------
 
@@ -832,15 +736,6 @@ CREATE TABLE `detail_penjualan_ips` (
   `hpp` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `detail_penjualan_ips`
---
-
-INSERT INTO `detail_penjualan_ips` (`no`, `no_trans`, `no_produk`, `jumlah`, `harga`, `subtotal`, `no_ips`, `jumlah_kartu_stok`, `hpp`) VALUES
-(10, 'PENJS_001', 'PR_001', 15000, '8083.4', 121251000, 'IPS_001', '0', '93270000'),
-(11, 'PENJS_001', 'PR_001', 15000, '8083.4', 121251000, 'IPS_002', '0', '93270000'),
-(12, 'PENJS_001', 'PR_001', 100000, '8083.4', 808340000, 'IPS_003', '0', '621800000');
-
 -- --------------------------------------------------------
 
 --
@@ -856,17 +751,6 @@ CREATE TABLE `detail_penjualan_toko` (
   `subtotal` varchar(50) NOT NULL,
   `hpp` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `detail_penjualan_toko`
---
-
-INSERT INTO `detail_penjualan_toko` (`no`, `no_trans`, `no_produk`, `jumlah`, `harga`, `subtotal`, `hpp`) VALUES
-(7, 'PENJT_001', 'PR_002', '4000', '9802', '39208000', NULL),
-(8, 'PENJT_001', 'PR_003', '14000', '177756.8', '2488595200', '1914304000'),
-(9, 'PENJT_001', 'PR_004', '1200', '10374', '12448800', NULL),
-(10, 'PENJT_001', 'PR_005', '1200', '10374', '12448800', NULL),
-(11, 'PENJT_001', 'PR_007', '1200', '10228.4', '12274080', NULL);
 
 -- --------------------------------------------------------
 
@@ -926,13 +810,6 @@ CREATE TABLE `detail_produksi_ke1` (
   `jumlah_kartu_stok` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `detail_produksi_ke1`
---
-
-INSERT INTO `detail_produksi_ke1` (`no`, `no_trans`, `no_produk`, `bbb`, `btk`, `bop`, `subtotal`, `jumlah`, `stok_jual`, `jumlah_kartu_stok`) VALUES
-(4, 'PROD1_001', 'PR_001', '798000000', '15120000', '57400000', '870520000', '140000', '130000', '130000');
-
 -- --------------------------------------------------------
 
 --
@@ -953,13 +830,6 @@ CREATE TABLE `detail_produksi_ke2` (
   `jumlah_kartu_stok` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `detail_produksi_ke2`
---
-
-INSERT INTO `detail_produksi_ke2` (`no`, `no_trans`, `tgl_trans`, `no_produk`, `bbb`, `btk`, `bop`, `bp`, `subtotal`, `jumlah`, `jumlah_kartu_stok`) VALUES
-(3, 'PROD2_001', '2022-07-10', 'PR_003', '62180000', '1080000', '4100000', '1300000000', '1367360000', '10000', '0');
-
 -- --------------------------------------------------------
 
 --
@@ -974,13 +844,6 @@ CREATE TABLE `detail_target_produksi` (
   `status` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `detail_target_produksi`
---
-
-INSERT INTO `detail_target_produksi` (`no`, `no_tp`, `no_produk`, `jumlah`, `status`) VALUES
-(3, 'TP_001', 'PR_003', 10000, '1');
-
 -- --------------------------------------------------------
 
 --
@@ -993,16 +856,6 @@ CREATE TABLE `detail_transaksi_shu` (
   `uraian` varchar(50) DEFAULT NULL,
   `nominal` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `detail_transaksi_shu`
---
-
-INSERT INTO `detail_transaksi_shu` (`id`, `kode_shu`, `uraian`, `nominal`) VALUES
-(17, 'SHU20220001', 'Cadangan koperasi', 226384899),
-(18, 'SHU20220001', 'Jasa anggota', 141490562),
-(19, 'SHU20220001', 'Jasa modal', 113192450),
-(20, 'SHU20220001', 'Jasa lain-lain', 84894337);
 
 -- --------------------------------------------------------
 
@@ -1093,80 +946,13 @@ CREATE TABLE `jurnal` (
 --
 
 INSERT INTO `jurnal` (`no`, `id_jurnal`, `tgl_jurnal`, `no_coa`, `posisi_dr_cr`, `nominal`) VALUES
-(1, 'PMB_001', '2022-07-10', 1112, 'd', 855000000),
-(2, 'PMB_001', '2022-07-10', 2111, 'k', 855000000),
-(3, 'CK_001', '2022-07-10', 1112, 'd', 798000000),
-(4, 'CK_001', '2022-07-10', 1111, 'k', 798000000),
-(5, 'PROD1_001', '2022-07-10', 5111, 'd', 798000000),
-(6, 'PROD1_001', '2022-07-10', 1112, 'k', 798000000),
-(7, 'PROD1_001', '2022-07-10', 5112, 'd', 15120000),
-(8, 'PROD1_001', '2022-07-10', 5311, 'k', 15120000),
-(9, 'PROD1_001', '2022-07-10', 5113, 'd', 57400000),
-(10, 'PROD1_001', '2022-07-10', 5312, 'k', 57400000),
-(11, 'PGB_001', '2022-07-10', 1114, 'd', 62180000),
-(12, 'PGB_001', '2022-07-10', 5111, 'k', 57000000),
-(13, 'PGB_001', '2022-07-10', 5112, 'k', 1080000),
-(14, 'PGB_001', '2022-07-10', 5113, 'k', 4100000),
-(15, 'PGB_001', '2022-07-10', 1311, 'd', 808340000),
-(16, 'PGB_001', '2022-07-10', 5111, 'k', 741000000),
-(17, 'PGB_001', '2022-07-10', 5112, 'k', 14040000),
-(18, 'PGB_001', '2022-07-10', 5113, 'k', 53300000),
-(19, 'PMBP_001', '2022-07-10', 1113, 'd', 2200000000),
-(20, 'PMBP_001', '2022-07-10', 1111, 'k', 2200000000),
-(21, 'PROD2_001', '2022-07-10', 5112, 'd', 1080000),
-(22, 'PROD2_001', '2022-07-10', 5311, 'k', 1080000),
-(23, 'PROD2_001', '2022-07-10', 5113, 'd', 4100000),
-(24, 'PROD2_001', '2022-07-10', 5312, 'k', 4100000),
-(25, 'PROD2_001', '2022-07-10', 5135, 'd', 1300000000),
-(26, 'PROD2_001', '2022-07-10', 1113, 'k', 1300000000),
-(27, 'PROD2_001', '2022-07-10', 1312, 'd', 1367360000),
-(28, 'PROD2_001', '2022-07-10', 1114, 'k', 62180000),
-(29, 'PROD2_001', '2022-07-10', 5112, 'k', 1080000),
-(30, 'PROD2_001', '2022-07-10', 5113, 'k', 1304100000),
-(31, 'PENJS_001', '2022-07-10', 1111, 'd', 1050842000),
-(32, 'PENJS_001', '2022-07-10', 4111, 'k', 1050842000),
-(33, 'PENJS_001', '2022-07-10', 6111, 'd', 808340000),
-(34, 'PENJS_001', '2022-07-10', 1311, 'k', 808340000),
-(35, 'PENJT_001', '2022-07-10', 1111, 'd', 2564974880),
-(36, 'PENJT_001', '2022-07-10', 4112, 'k', 2564974880),
-(37, 'PENJT_001', '2022-07-10', 6112, 'd', 1914304000),
-(38, 'PENJT_001', '2022-07-10', 1312, 'k', 1914304000),
-(39, 'PMBAST20220710005', '2022-07-10', 1214, 'd', 202000000),
-(40, 'PMBAST20220710005', '2022-07-10', 1111, 'k', 202000000),
-(41, 'IDA-029', '2022-07-10', 5228, 'd', 15166666),
-(42, 'IDA-029', '2022-07-10', 1125, 'k', 15166666),
-(43, 'PMBWASERDA100722002', '2022-07-10', 1414, 'd', 3500000),
-(44, 'PMBWASERDA100722002', '2022-07-10', 2130, 'd', 385000),
-(45, 'PMBWASERDA100722002', '2022-07-10', 1111, 'k', 3885000),
-(46, 'PNJWASERDA100722002', '2022-07-10', 1111, 'd', 5550000),
-(47, 'PNJWASERDA100722002', '2022-07-10', 2140, 'k', 550000),
-(48, 'PNJWASERDA100722002', '2022-07-10', 4116, 'k', 5000000),
-(49, 'PNJWASERDA100722002', '2022-07-10', 6113, 'd', 3500000),
-(50, 'PNJWASERDA100722002', '2022-07-10', 1414, 'k', 3500000),
-(85, 'DPPTRNK_050', '2022-07-11', 1111, 'd', 50000),
-(86, 'DPPTRNK_050', '2022-07-11', 3111, 'k', 50000),
-(87, 'DPPTRNK_051', '2022-07-11', 1111, 'd', 50000),
-(88, 'DPPTRNK_051', '2022-07-11', 3111, 'k', 50000),
-(89, 'DPPTRNK_052', '2022-07-11', 1111, 'd', 50000),
-(90, 'DPPTRNK_052', '2022-07-11', 3111, 'k', 50000),
-(91, 'PMB_002', '2022-07-11', 1112, 'd', 5700000),
-(92, 'PMB_002', '2022-07-11', 2111, 'k', 5700000),
-(93, 'PMBS-250720220001', '2022-07-25', 2111, 'd', 2850000),
-(94, 'PMBS-250720220001', '2022-07-25', 1111, 'k', 2830000),
-(95, 'PMBS-250720220001', '2022-07-25', 3112, 'k', 10000),
-(96, 'PMBS-250720220001', '2022-07-25', 3113, 'k', 10000),
-(97, 'PMBS-250720220002', '2022-07-25', 2111, 'd', 1710000),
-(98, 'PMBS-250720220002', '2022-07-25', 1111, 'k', 1694000),
-(99, 'PMBS-250720220002', '2022-07-25', 3112, 'k', 6000),
-(100, 'PMBS-250720220002', '2022-07-25', 3113, 'k', 10000),
-(101, 'PMBS-250720220003', '2022-07-25', 2111, 'd', 1140000),
-(102, 'PMBS-250720220003', '2022-07-25', 1111, 'k', 1126000),
-(103, 'PMBS-250720220003', '2022-07-25', 3112, 'k', 4000),
-(104, 'PMBS-250720220003', '2022-07-25', 3113, 'k', 10000),
-(105, 'SHU20220001', '2022-12-31', 3200, 'd', 304748903),
-(106, 'SHU20220001', '2022-12-31', 3100, 'k', 304748903),
-(107, 'PMBGSHU.TOTAL20220001', '2022-12-31', 3300, 'd', 259058410),
-(108, 'PMBGSHU.TOTAL20220001', '2022-12-31', 1111, 'k', 259058410);
+(109, 'GAJI-001', '2022-07-11', 5311, 'd', 69000000),
+(110, 'GAJI-001', '2022-07-11', 5316, 'd', 1350000),
+(111, 'GAJI-001', '2022-07-11', 5315, 'd', 1500000),
+(112, 'GAJI-001', '2022-07-11', 5317, 'd', 0),
+(113, 'GAJI-001', '2022-07-11', 5318, 'd', 0),
+(114, 'GAJI-001', '2022-07-11', 2114, 'k', 5578749),
+(115, 'GAJI-001', '2022-07-11', 1111, 'k', 66271250);
 
 -- --------------------------------------------------------
 
@@ -1193,24 +979,6 @@ CREATE TABLE `kartu_stok_bp` (
   `status_pen` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `kartu_stok_bp`
---
-
-INSERT INTO `kartu_stok_bp` (`no`, `no_trans`, `tgl_trans`, `no_produk`, `no_bp`, `unit1`, `harga1`, `total1`, `unit2`, `harga2`, `total2`, `unit3`, `harga3`, `total3`, `status_pro`, `status_pen`) VALUES
-(32, 'CK_001', '2022-07-10 20:24:58', NULL, 'BB_001', '140000', '5700', '798000000', '-', '-', '-', '140000', '5700', '798000000', '0', '0'),
-(33, 'PROD1_001', '2022-07-10 20:26:38', NULL, 'BB_001', '-', '-', '-', '140000', '5700', '798000000', '0', '0', '0', '0', '0'),
-(34, 'PMBP_001', '2022-07-10 20:29:53', NULL, 'BP_001', '500000', '2000', '1000000000', '-', '-', '-', '500000', '2000', '1000000000', '0', '0'),
-(35, 'PMBP_001', '2022-07-10 20:29:53', NULL, 'BP_002', '200000', '1000', '200000000', '-', '-', '-', '200000', '1000', '200000000', '0', '0'),
-(36, 'PMBP_001', '2022-07-10 20:29:53', NULL, 'BP_003', '200000', '1000', '200000000', '-', '-', '-', '200000', '1000', '200000000', '0', '0'),
-(37, 'PMBP_001', '2022-07-10 20:29:53', NULL, 'BP_004', '50000', '10000', '500000000', '-', '-', '-', '50000', '10000', '500000000', '0', '0'),
-(38, 'PMBP_001', '2022-07-10 20:29:53', NULL, 'BP_005', '100000', '3000', '300000000', '-', '-', '-', '100000', '3000', '300000000', '0', '0'),
-(39, 'PROD2_001', '2022-07-10 20:32:07', 'PR_003', 'BP_001', '-', '-', '-', '50000', '2000', '100000000', '450000', '2000', '900000000', '0', '0'),
-(40, 'PROD2_001', '2022-07-10 20:32:07', 'PR_003', 'BP_002', '-', '-', '-', '200000', '1000', '200000000', '0', '1000', '0', '0', '0'),
-(41, 'PROD2_001', '2022-07-10 20:32:07', 'PR_003', 'BP_003', '-', '-', '-', '200000', '1000', '200000000', '0', '1000', '0', '0', '0'),
-(42, 'PROD2_001', '2022-07-10 20:32:07', 'PR_003', 'BP_004', '-', '-', '-', '50000', '10000', '500000000', '0', '10000', '0', '0', '0'),
-(43, 'PROD2_001', '2022-07-10 20:32:07', 'PR_003', 'BP_005', '-', '-', '-', '100000', '3000', '300000000', '0', '3000', '0', '0', '0');
-
 -- --------------------------------------------------------
 
 --
@@ -1234,17 +1002,6 @@ CREATE TABLE `kartu_stok_penj` (
   `status_pro` varchar(50) DEFAULT NULL,
   `status_pen` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `kartu_stok_penj`
---
-
-INSERT INTO `kartu_stok_penj` (`no`, `no_trans`, `tgl_trans`, `no_produk`, `unit1`, `harga1`, `total1`, `unit2`, `harga2`, `total2`, `unit3`, `harga3`, `total3`, `status_pro`, `status_pen`) VALUES
-(12, 'PROD1_001', '2022-07-10 20:27:44', 'PR_001', '130000', '6218', '808340000', '-', '-', '-', '130000', '6218', '808340000', '0', '0'),
-(13, 'PROD2_001', '2022-07-10 20:32:07', 'PR_003', '10000', '136736', '1367360000', '-', '-', '-', '10000', '136736', '1367360000', '0', '0'),
-(14, 'PENJS_001', '2022-07-10 20:33:19', 'PR_001', '-', '-', '-', '130000', '6218', '808340000', '0', '0', '0', '0', '0'),
-(15, 'PENJT_001', '2022-07-10 20:34:48', 'PR_003', '-', '-', '-', '8000', '136736', '1093888000', '2000', '136736', '273472000', NULL, NULL),
-(16, 'PENJT_001', '2022-07-10 20:35:15', 'PR_003', '-', '-', '-', '6000', '136736', '820416000', '0', '0', '0', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1536,14 +1293,15 @@ CREATE TABLE `pegawai` (
 --
 
 INSERT INTO `pegawai` (`id`, `id_jabatan`, `id_ptkp`, `id_jenis_pegawai`, `pendidikan`, `rfid`, `nip`, `npwp`, `nama`, `alamat`, `no_telp`, `tempat_lahir`, `tgl_lahir`, `nama_bank`, `no_rek`, `status`, `status_kredit`, `created_at`, `riwayat_pendidikan`, `jurusan_pendidikan`, `agama`, `jenis_kelamin`, `no_anggota`) VALUES
-(8, 'Staff', '', 'Kontrak', 'sma', '111', '111', '111111', 'Heni', 'Bandung', '0898998989', 'Bandung', '1998-03-01', 'Mandiri', '11223321', '1', 0, '2021-12-04 11:17:34', '', '', 'islam', 'L', 'ANGGT_0040'),
-(9, 'Staff', 'TK0', 'Tetap', 's1', '1029384756', '1029384756', '1029384756', 'Andi', 'bandung', '1029384756', 'bandung', '1991-03-03', 'BCA', '123123123', '1', 0, '2021-12-15 07:10:28', '', '', 'buddha', 'L', 'ANGGT_0041'),
-(11, 'Staff', '', 'Kontrak', 's2', '323123', '8003250622757', '123142', 'ela', 'aawd', '213213', 'awdsdad', '2003-02-02', 'BCA', '232323232323', '1', 0, '2022-06-25 16:20:07', 'sma, s1', 'rpl', 'kristen', 'P', 'ANGGT_0042'),
-(12, 'Staff', 'TK1', 'Tetap', 's1', '123232323', '1608260622758', '12314222', 'robi', 'awdawd', '1231232333', 'Pekanbaru', '2022-06-26', NULL, '333333333333333', '1', 0, '2022-06-26 01:59:31', '', 'it', 'hindu', 'L', 'ANGGT_0043'),
-(13, 'Sr Programmer ', 'TK2', 'Tetap', 's1', '24123234', '9200270622759', '2424244', 'ramli', 'awwdwad', '123124434', 'awdawdawd', '2000-02-02', NULL, '339391239', '1', 0, '2022-05-27 01:51:36', '', 'rpl', 'Islam', 'L', 'ANGGT_0044'),
-(15, 'Staff', 'TK0', 'Kontrak', 's2', '111111', '1044020722760', '23424', 'tesuser', 'apwodkpakda', '948928471', 'jdiajwdsda', '2000-02-20', NULL, '444444', '1', 0, '2022-07-01 17:14:40', 's1', 'rpl', 'Islam', 'L', 'ANGGT_0045'),
-(16, 'Staff', 'TK0', 'Tetap', 's1', '24421424', '5016030722761', '1212313', 'rafli', 'aowdoakwd', '920480948', 'jkwdoaijwd', '1999-02-20', NULL, '3333333333333332', '1', 0, '2022-07-03 10:19:29', '', 'rpl', 'Kristen', 'P', 'ANGGT_0047'),
-(17, 'Staff', 'TK0', 'Tetap', 's1', '3234235', '5325080722762', '2421525', 'tes userr', '3dwad', '241421521', 'dawdwda', '2000-07-08', 'BCA', '24142142424', '1', 0, '2022-07-08 02:25:18', 's1, s1', 'rpl', 'Islam', 'L', 'ANGGT_0048');
+(8, 'Staff', '', 'Kontrak', 'sma', '12345', '8003250622755', '111111', 'Heni', 'Bandung', '0898998989', 'Bandung', '1998-03-01', 'Mandiri', '11223321', '1', 0, '2021-12-04 11:17:34', '', '', 'islam', 'L', 'ANGGT_0040'),
+(9, 'Staff', 'TK0', 'Tetap', 's1', '1029384756', '8003250622756', '1029384756', 'Andi', 'Bandung', '1029384756', 'Bandung', '1991-03-03', 'BCA', '123123123', '1', 0, '2021-12-15 07:10:28', '', '', 'buddha', 'L', 'ANGGT_0041'),
+(11, 'Staff', '', 'Kontrak', 's2', '323123', '8003250622757', '123142', 'ela', 'Bandung', '213213', 'Bandung', '2003-02-02', 'BCA', '232323232323', '1', 0, '2022-06-25 16:20:07', 'sma, s1', 'rpl', 'kristen', 'P', 'ANGGT_0042'),
+(12, 'Staff', 'TK1', 'Tetap', 's1', '123232323', '1608260622758', '12314222', 'robi', 'Bandung', '1231232333', 'Bandung', '2022-06-26', 'BCA', '333333333333333', '1', 0, '2022-06-26 01:59:31', '', 'it', 'hindu', 'L', 'ANGGT_0043'),
+(13, 'Sr Programmer ', 'TK2', 'Tetap', 's1', '24123234', '9200270622759', '2424244', 'ramli', 'Bandung', '123124434', 'Bandung', '2000-02-02', 'BCA', '339391239', '1', 0, '2022-05-27 01:51:36', '', 'rpl', 'Islam', 'L', 'ANGGT_0044'),
+(15, 'Staff', 'TK0', 'Kontrak', 's2', '111111', '1044020722760', '23424', 'Bagas', 'Bandung', '948928471', 'Bandung', '2000-02-20', 'BCA', '444444', '1', 0, '2022-07-01 17:14:40', 's1', 'rpl', 'Islam', 'L', 'ANGGT_0045'),
+(16, 'Staff', 'TK0', 'Tetap', 's1', '24421424', '5016030722761', '1212313', 'rafli', 'Bandung', '920480948', 'Bandung', '1999-02-20', 'BCA', '3333333333333332', '1', 0, '2022-07-03 10:19:29', '', 'rpl', 'Kristen', 'P', 'ANGGT_0047'),
+(17, 'Staff', 'TK0', 'Tetap', 's2', '3234235', '5325080722762', '2421525', 'Caka', 'Bandung', '241421521', 'Bandung', '2000-07-08', 'BCA', '24142142424', '1', 0, '2022-07-08 02:25:18', 's1', 'rpl', 'Islam', 'L', 'ANGGT_0048'),
+(18, 'Sr Programmer ', 'TK2', 'Tetap', 's2', '52534', '9432110722763', '23123124241', 'Tarmizi', 'Bandung', '123123233323', 'Bandung', '1995-02-02', 'BRI', '2222221323', '1', 0, '2022-07-11 15:42:06', '', 'RPL', 'Islam', 'L', 'ANGGT_0061');
 
 -- --------------------------------------------------------
 
@@ -1558,13 +1316,6 @@ CREATE TABLE `pembagian` (
   `status` varchar(50) NOT NULL,
   `status_penjs` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pembagian`
---
-
-INSERT INTO `pembagian` (`no_trans`, `tgl_trans`, `no_trans_produksi1`, `status`, `status_penjs`) VALUES
-('PGB_001', '2022-07-10', 'PROD1_001', '2', '1');
 
 -- --------------------------------------------------------
 
@@ -1583,15 +1334,6 @@ CREATE TABLE `pembagian_shu` (
   `id_trans_total` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `pembagian_shu`
---
-
-INSERT INTO `pembagian_shu` (`id`, `tanggal`, `id_trans`, `id_anggota`, `jasa_modal`, `jasa_anggota`, `sisa_hasil_usaha`, `id_trans_total`) VALUES
-(10, '2022-07-25', 'PMBG.SHU20220001', 'PTRNK_050', 39617358, 72932979, 112550337, 'PMBGSHU.TOTAL20220001'),
-(11, '2022-07-25', 'PMBG.SHU20220002', 'PTRNK_051', 37353509, 43759788, 81113297, 'PMBGSHU.TOTAL20220001'),
-(12, '2022-07-25', 'PMBG.SHU20220003', 'PTRNK_052', 36221584, 29173192, 65394776, 'PMBGSHU.TOTAL20220001');
-
 -- --------------------------------------------------------
 
 --
@@ -1602,13 +1344,6 @@ CREATE TABLE `pembagian_shu_total` (
   `id` int(11) NOT NULL,
   `id_trans` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_swedish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-
---
--- Dumping data for table `pembagian_shu_total`
---
-
-INSERT INTO `pembagian_shu_total` (`id`, `id_trans`) VALUES
-(0, 'PMBGSHU.TOTAL20220001');
 
 -- --------------------------------------------------------
 
@@ -1650,15 +1385,6 @@ CREATE TABLE `pembayaran_susu` (
   `is_paid` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `pembayaran_susu`
---
-
-INSERT INTO `pembayaran_susu` (`kode_pembayaran`, `total_bayar`, `tgl_transaksi`, `is_paid`) VALUES
-('PMBS-250720220001', 2830000, '2022-07-25', 1),
-('PMBS-250720220002', 1694000, '2022-07-25', 1),
-('PMBS-250720220003', 1126000, '2022-07-25', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -1672,17 +1398,6 @@ CREATE TABLE `pembelian_aset` (
   `status` varchar(255) NOT NULL,
   `tgl_input` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pembelian_aset`
---
-
-INSERT INTO `pembelian_aset` (`id_pembelian`, `no_nota`, `total`, `status`, `tgl_input`) VALUES
-('PMBAST20220709001', 'NOTA20220709001', '151500000', 'selesai', '2022-07-09'),
-('PMBAST20220709002', 'NOTA20220709002', '202000000', 'selesai', '2022-07-09'),
-('PMBAST20220710005', 'NOTA20220710005', '202000000', 'selesai', '2022-07-10'),
-('PMBAST20220724003', 'NOTA20220724003', '121200000', 'selesai', '2022-07-24'),
-('PMBAST20220724004', 'NOTA20220724004', '202000000', 'selesai', '2022-07-24');
 
 -- --------------------------------------------------------
 
@@ -1699,14 +1414,6 @@ CREATE TABLE `pembelian_bb` (
   `id_detail_truck` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `pembelian_bb`
---
-
-INSERT INTO `pembelian_bb` (`id`, `no_trans`, `tgl_trans`, `total`, `status`, `id_detail_truck`) VALUES
-(6, 'PMB_001', '2022-07-10', 855000000, '2', 0),
-(13, 'PMB_002', '2022-07-11', 5700000, '1', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -1719,13 +1426,6 @@ CREATE TABLE `pembelian_bp` (
   `total` int(100) NOT NULL,
   `status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pembelian_bp`
---
-
-INSERT INTO `pembelian_bp` (`no_trans`, `tgl_trans`, `total`, `status`) VALUES
-('PMBP_001', '2022-07-10', 2147483647, '1');
 
 -- --------------------------------------------------------
 
@@ -1820,10 +1520,7 @@ CREATE TABLE `pengajuan_jurnal` (
 --
 
 INSERT INTO `pengajuan_jurnal` (`id`, `kode`, `tanggal`, `nominal`, `status`, `jenis`, `bukti_pembayaran`) VALUES
-(16, 'PMBWASERDA100722002', '2022-07-10', 3885000, 'selesai', 'Pembelian Barang Waserda', NULL),
-(17, 'PNJWASERDA100722002', '2022-07-10', 5550000, 'selesai', 'Penjualan Barang Tunai Waserda', NULL),
-(18, 'SHU20220001', '2022-07-25', 304748903, 'selesai', 'SHU Ditahan', NULL),
-(19, 'PMBGSHU.TOTAL20220001', '2022-07-25', 259058410, 'selesai', 'SHU Tahun Berjalan', NULL);
+(23, 'GAJI-001', '2022-07-11', 66271250, 'selesai', 'penggajian', NULL);
 
 -- --------------------------------------------------------
 
@@ -1858,13 +1555,6 @@ CREATE TABLE `penjualan_ips` (
   `no_trans_pembg` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `penjualan_ips`
---
-
-INSERT INTO `penjualan_ips` (`no_trans`, `tgl_trans`, `jumlah`, `total`, `status`, `status_pembyv`, `no_trans_pembg`) VALUES
-('PENJS_001', '2022-07-10', '130000', 1050842000, '1', NULL, 'PGB_001');
-
 -- --------------------------------------------------------
 
 --
@@ -1878,13 +1568,6 @@ CREATE TABLE `penjualan_toko` (
   `status` varchar(50) NOT NULL,
   `status_pembyv` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `penjualan_toko`
---
-
-INSERT INTO `penjualan_toko` (`no_trans`, `tgl_trans`, `total`, `status`, `status_pembyv`) VALUES
-('PENJT_001', '2022-07-10', '2564974880', '1', NULL);
 
 -- --------------------------------------------------------
 
@@ -2192,8 +1875,8 @@ CREATE TABLE `produk` (
 
 INSERT INTO `produk` (`no_produk`, `nama_produk`, `stok`, `harga_jual`, `satuan`, `id_jenis`) VALUES
 ('PR_001', 'Susu Sapi', 130000, '8083.4', 'liter', 0),
-('PR_002', 'Susu Murni', 1000, '9802', 'liter', 0),
-('PR_003', 'Pasteur Coklat', 1000, '177756.8', 'liter', 0),
+('PR_002', 'Susu Murni', 5000, '9802', 'liter', 0),
+('PR_003', 'Pasteur Coklat', 3000, '177756.8', 'liter', 0),
 ('PR_004', 'Pasteur Vanila', 100, '10374', 'liter', 0),
 ('PR_005', 'Pasteur Strawberry', 100, '10374', 'liter', 0),
 ('PR_006', 'Yoghurt Strawberry', 1300, '10228.4', 'liter', 0),
@@ -2221,13 +1904,6 @@ CREATE TABLE `produksi_ke1` (
   `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `produksi_ke1`
---
-
-INSERT INTO `produksi_ke1` (`no_trans`, `tgl_trans`, `no_trans_ck`, `status`) VALUES
-('PROD1_001', '2022-07-10', 'CK_001', '2');
-
 -- --------------------------------------------------------
 
 --
@@ -2240,13 +1916,6 @@ CREATE TABLE `produksi_ke2` (
   `no_tp` varchar(50) NOT NULL,
   `status` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `produksi_ke2`
---
-
-INSERT INTO `produksi_ke2` (`no_trans`, `tgl_trans`, `no_tp`, `status`) VALUES
-('PROD2_001', '2022-07-10', 'TP_001', '1');
 
 -- --------------------------------------------------------
 
@@ -2391,13 +2060,6 @@ CREATE TABLE `target_produksi` (
   `no_trans_pembagian` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `target_produksi`
---
-
-INSERT INTO `target_produksi` (`no_tp`, `tanggal`, `tgl_tp`, `status`, `no_trans_pembagian`) VALUES
-('TP_001', '2022-07-10', '2022-07-10', '2', 'PGB_001');
-
 -- --------------------------------------------------------
 
 --
@@ -2416,14 +2078,6 @@ CREATE TABLE `tb_cuti` (
   `status` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tb_cuti`
---
-
-INSERT INTO `tb_cuti` (`id`, `id_pengajuan`, `tgl_pengajuan`, `nip`, `jumlah_hari`, `tgl_mulai`, `tgl_selesai`, `alasan_cuti`, `status`) VALUES
-(5, 'CUTI20220702001', '2022-07-02 01:41:13', '8003250622757', 4, '2022-07-02', '2022-07-06', 'cuti', 1),
-(6, 'CUTI20220702002', '2022-07-02 01:54:41', '8003250622757', 4, '2022-07-21', '2022-07-25', 'hhxadw', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -2441,14 +2095,6 @@ CREATE TABLE `tb_cuti_melahirkan` (
   `alasan_cuti` varchar(50) DEFAULT NULL,
   `status` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tb_cuti_melahirkan`
---
-
-INSERT INTO `tb_cuti_melahirkan` (`id`, `id_pengajuan`, `tgl_pengajuan`, `nip`, `jumlah_hari`, `tgl_mulai`, `tgl_selesai`, `alasan_cuti`, `status`) VALUES
-(1, 'CUTIMLHRKN20220630003', '2022-06-30 14:44:15', '8003250622757', 0, '2022-06-30', '2022-06-30', 'adadada', 1),
-(2, 'CUTIMLHRKN20220702003', '2022-07-02 02:02:28', '8003250622757', 90, '2022-07-06', '2022-10-04', 'melahirkan', 1);
 
 -- --------------------------------------------------------
 
@@ -2483,19 +2129,20 @@ CREATE TABLE `tb_detail_penggajian` (
   `tot_penghasilan` int(20) DEFAULT NULL,
   `tot_pengurang` int(20) DEFAULT NULL,
   `total` int(20) NOT NULL DEFAULT 0,
-  `pph21` int(11) NOT NULL
+  `pph21` int(11) NOT NULL,
+  `unik` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_detail_penggajian`
 --
 
-INSERT INTO `tb_detail_penggajian` (`id`, `id_penggajian`, `gaji_pokok`, `tunjangan_jabatan`, `tunjangan_kesehatan`, `tunjangan_hari_raya`, `bonus_kerja`, `ptkp`, `tot_penghasilan`, `tot_pengurang`, `total`, `pph21`) VALUES
-(118, 'GAJI-001', 20000000, 300000, 300000, 20600000, 0, 54000000, 20600000, 54000000, 39019167, 2180833),
-(119, 'GAJI-001', 6000000, 300000, 300000, 6600000, 0, 0, 6600000, 0, 13200000, 0),
-(120, 'GAJI-001', 3000000, 300000, 300000, 3600000, 0, 0, 3600000, 0, 7200000, 0),
-(121, 'GAJI-001', 20000000, 150000, 300000, 20450000, 0, 63000000, 20450000, 63000000, 38856042, 2043958),
-(122, 'GAJI-001', 20000000, 300000, 300000, 20600000, 0, 58500000, 20600000, 58500000, 39075417, 2124583);
+INSERT INTO `tb_detail_penggajian` (`id`, `id_penggajian`, `gaji_pokok`, `tunjangan_jabatan`, `tunjangan_kesehatan`, `tunjangan_hari_raya`, `bonus_kerja`, `ptkp`, `tot_penghasilan`, `tot_pengurang`, `total`, `pph21`, `unik`) VALUES
+(138, 'GAJI-001', 20000000, 300000, 300000, 0, 0, 54000000, 20600000, 54000000, 18676667, 1923333, '1d4fb323721143f4777cee5914c31dc4'),
+(139, 'GAJI-001', 6000000, 300000, 300000, 0, 0, 0, 6600000, 0, 6600000, 0, 'd77ffe6d32bbb98043e02a63675be2d4'),
+(140, 'GAJI-001', 3000000, 300000, 300000, 0, 0, 0, 3600000, 0, 3600000, 0, 'a199d1e6dae716449e98797958369e98'),
+(141, 'GAJI-001', 20000000, 150000, 300000, 0, 0, 63000000, 20450000, 63000000, 18661667, 1788333, 'ef8e6215e521c5c513fc24c5eddd76e0'),
+(142, 'GAJI-001', 20000000, 300000, 300000, 0, 0, 58500000, 20600000, 58500000, 18732917, 1867083, '1d9766a395fab405ddf1fc6299359140');
 
 -- --------------------------------------------------------
 
@@ -2559,20 +2206,6 @@ CREATE TABLE `tb_lembur` (
   `total_nominal_lembur` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tb_lembur`
---
-
-INSERT INTO `tb_lembur` (`id`, `id_pengajuan`, `tgl_pengajuan`, `id_pegawai`, `total_jam`, `status`, `nominal_perjam`, `total_nominal_lembur`) VALUES
-(1, 'LMBR20220513001', '2022-05-13', '1029384756', 1, 2, 20000, 20000),
-(5, 'LMBR20220513002', '2022-05-13', '111', 2, 2, 20000, 40000),
-(6, 'LMBR20220618003', '2022-06-18', '1029384756', 1, 2, 20000, 20000),
-(7, 'LMBR20220621004', '2022-06-21', '1029384756', 1, 3, 20000, 20000),
-(8, 'LMBR20220621005', '2022-06-21', '1029384756', 1, 2, 20000, 20000),
-(9, 'LMBR20220621006', '2022-06-21', '1029384756', 1, 3, 20000, 20000),
-(10, 'LMBR20220625007', '2022-06-25', '1029384756', 3, 3, 20000, 60000),
-(11, 'LMBR20220630008', '2022-06-30', '8003250622757', 1, 3, 20000, 20000);
-
 -- --------------------------------------------------------
 
 --
@@ -2585,19 +2218,20 @@ CREATE TABLE `tb_penggajian` (
   `tanggal` date DEFAULT NULL,
   `nm_pegawai` varchar(50) DEFAULT NULL,
   `nominal` int(11) DEFAULT NULL,
-  `status` varchar(50) DEFAULT NULL
+  `status` varchar(50) DEFAULT NULL,
+  `unik` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_penggajian`
 --
 
-INSERT INTO `tb_penggajian` (`id`, `id_penggajian`, `tanggal`, `nm_pegawai`, `nominal`, `status`) VALUES
-(120, 'GAJI-001', '2022-07-08', 'Andi', 39019167, NULL),
-(121, 'GAJI-001', '2022-07-08', 'ela', 13200000, NULL),
-(122, 'GAJI-001', '2022-07-08', 'Heni', 7200000, NULL),
-(123, 'GAJI-001', '2022-07-08', 'ramli', 38856042, NULL),
-(124, 'GAJI-001', '2022-07-08', 'robi', 39075417, NULL);
+INSERT INTO `tb_penggajian` (`id`, `id_penggajian`, `tanggal`, `nm_pegawai`, `nominal`, `status`, `unik`) VALUES
+(140, 'GAJI-001', '2022-07-11', 'Andi', 18676667, NULL, '1d4fb323721143f4777cee5914c31dc4'),
+(141, 'GAJI-001', '2022-07-11', 'ela', 6600000, NULL, 'd77ffe6d32bbb98043e02a63675be2d4'),
+(142, 'GAJI-001', '2022-07-11', 'Heni', 3600000, NULL, 'a199d1e6dae716449e98797958369e98'),
+(143, 'GAJI-001', '2022-07-11', 'ramli', 18661667, NULL, 'ef8e6215e521c5c513fc24c5eddd76e0'),
+(144, 'GAJI-001', '2022-07-11', 'robi', 18732917, NULL, '1d9766a395fab405ddf1fc6299359140');
 
 -- --------------------------------------------------------
 
@@ -2681,13 +2315,6 @@ CREATE TABLE `transaksi_shu` (
   `tahunselanjutnya` int(11) NOT NULL,
   `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `transaksi_shu`
---
-
-INSERT INTO `transaksi_shu` (`id`, `kode_shu`, `tanggal`, `nominal`, `tahunselanjutnya`, `status`) VALUES
-(5, 'SHU20220001', '2022-07-25', 565962248, 304748903, 2);
 
 -- --------------------------------------------------------
 
@@ -2776,19 +2403,6 @@ CREATE TABLE `tunjangan_hari_raya` (
   `tanggal` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tunjangan_hari_raya`
---
-
-INSERT INTO `tunjangan_hari_raya` (`id`, `nip`, `nama`, `nominal`, `tanggal`) VALUES
-(22, '8003250622757', 'ela', 6600000, '2022-07-01'),
-(23, '111', 'Heni', 3600000, '2022-07-01'),
-(24, '1029384756', 'Jadi andri aja namanya', 20600000, '2022-07-01'),
-(25, '5016030722761', 'rafli', 20600000, '2022-07-01'),
-(26, '9200270622759', 'ramli', 20450000, '2022-07-01'),
-(27, '1608260622758', 'robi', 20600000, '2022-07-01'),
-(28, '1044020722760', 'tesuser', 4100000, '2022-07-01');
-
 -- --------------------------------------------------------
 
 --
@@ -2846,7 +2460,8 @@ INSERT INTO `user` (`id`, `nama_lengkap`, `username`, `password`, `level`, `nip`
 (21, 'tesuser', 'tesuser', '123', 'pegawai', '3668020722760'),
 (22, 'tesuser', 'tesuser', '123', 'pegawai', '1044020722760'),
 (23, 'rafli', 'rafli', '123', 'pegawai', '5016030722761'),
-(24, 'tes userr', 'tesuserr', '123', 'pegawai', '5325080722762');
+(24, 'Caka', 'tesuserr', '123', 'pegawai', '5325080722762'),
+(25, 'Tarmizi', 'Tarmizi', '123', 'pegawai', '9432110722763');
 
 -- --------------------------------------------------------
 
@@ -4412,7 +4027,7 @@ ALTER TABLE `buku_pembantu_bank`
 -- AUTO_INCREMENT for table `buku_pembantu_kas`
 --
 ALTER TABLE `buku_pembantu_kas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `coa`
@@ -4514,7 +4129,7 @@ ALTER TABLE `jenis_penjualan`
 -- AUTO_INCREMENT for table `jurnal`
 --
 ALTER TABLE `jurnal`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 
 --
 -- AUTO_INCREMENT for table `kartu_stok_bp`
@@ -4574,7 +4189,7 @@ ALTER TABLE `log_simpanan_hr`
 -- AUTO_INCREMENT for table `pegawai`
 --
 ALTER TABLE `pegawai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `pembagian_shu`
@@ -4610,7 +4225,7 @@ ALTER TABLE `pengajuan_bonus`
 -- AUTO_INCREMENT for table `pengajuan_jurnal`
 --
 ALTER TABLE `pengajuan_jurnal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `pengeluaran_kas`
@@ -4700,7 +4315,7 @@ ALTER TABLE `tb_detail_pengajuan_bonus`
 -- AUTO_INCREMENT for table `tb_detail_penggajian`
 --
 ALTER TABLE `tb_detail_penggajian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
 
 --
 -- AUTO_INCREMENT for table `tb_jabatan`
@@ -4724,7 +4339,7 @@ ALTER TABLE `tb_lembur`
 -- AUTO_INCREMENT for table `tb_penggajian`
 --
 ALTER TABLE `tb_penggajian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
 
 --
 -- AUTO_INCREMENT for table `tb_ptkp`
@@ -4778,7 +4393,7 @@ ALTER TABLE `update_stok_penj`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `waserda_jenis_anggota`
