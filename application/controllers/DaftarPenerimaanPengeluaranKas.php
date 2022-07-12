@@ -21,7 +21,7 @@
 
         $detail = $this->db->query("SELECT * FROM detail_penerimaan_pengeluaran_kas")->result();
         if (isset($periode)) {
-            $list = $this->db->query("select * from penerimaan_pengeluaran_kas where periode = '$periode'")->result();
+            $list = $this->db->query("select * from penerimaan_pengeluaran_kas where tanggal LIKE '$tahun-$bulan'")->result();
             $data = [
                 'list' => $list, 
                 'periode' => $periode,
@@ -29,7 +29,7 @@
             ];
             $this->template->load('template', 'daftar_penerimaan_pengeluaran/index', $data);
         } else {
-            $list = $this->db->query("select * from penerimaan_pengeluaran_kas where periode = ''")->result();
+            $list = $this->db->query("select * from penerimaan_pengeluaran_kas where")->result();
             $data = [
                 'list' => $list, 
                 'periode' => '',
