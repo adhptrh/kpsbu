@@ -181,7 +181,8 @@
         }
 		$data = [
 			"parapegawai"=>$this->db->query("SELECT * FROM pegawai")->result(),
-            "data_cuti"=>$this->db->query($query)->result()
+            "data_cuti"=>$this->db->query($query)->result(),
+            "periode"=>$periode,
         ];
 		$this->template->load('template', 'laporan/cuti',$data);
     }
@@ -196,7 +197,8 @@
         }
 		$data = [
 			"parapegawai"=>$this->db->query("SELECT * FROM pegawai")->result(),
-            "data_cuti"=>$this->db->query($query)->result()
+            "data_cuti"=>$this->db->query($query)->result(),
+            "periode"=>$periode,
         ];
 		$this->template->load('template', 'laporan/cuti_melahirkan',$data);
     }

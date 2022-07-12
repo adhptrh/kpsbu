@@ -15,7 +15,7 @@
                 <?php } ?>
             </select>
             <label>Periode</label>
-            <input type="month" style="margin-right:10px;" class="form-control" name="periode" value="<?= date("Y-m") ?>">
+            <input type="month" style="margin-right:10px;" class="form-control" name="periode" value="<?= $periode ?? date("Y-m") ?>">
             <button class="btn btn-primary">Filter</button>
         </form>
         <table id="datatable" class="table table-striped table-bordered table-hover jambo-table dataTable no-footer">
