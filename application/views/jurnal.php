@@ -143,7 +143,6 @@
 							foreach ($data as $k => $d) {
 								$result[$id]["totaldata"][$k]["nominal"] += $data[$k]["nominal"];
 							}
-							echo "<br>";
 							array_push($result[$id]["data"], $data);
 						}
 					}
