@@ -113,7 +113,7 @@ class Lembur extends CI_Controller
         $periode = $this->input->get("periode") ?? date("Y-m");
         $query = "SELECT * FROM tb_lembur a LEFT JOIN pegawai b ON a.id_pegawai = b.nip WHERE a.id_pegawai = '$id_pegawai' AND tgl_pengajuan LIKE '$periode%' AND a.status = 3";
         if ($id_pegawai == "semua") {
-            $query = "SELECT * FROM tb_lembur a LEFT JOIN pegawai b ON a.id_pegawai = b.nip WHERE a.status = 3";
+            $query = "SELECT * FROM tb_lembur a LEFT JOIN pegawai b ON a.id_pegawai = b.nip WHERE a.status = 3 AND tgl_pengajuan LIKE '$periode%'";
         }
 		$data = [
 			"parapegawai"=>$this->db->query("SELECT * FROM pegawai")->result(),
