@@ -631,8 +631,11 @@
         where pp.nama_pembeli is not null
         and pdp.invoice = "'.$invoice.'"
         order by pp.date_payment desc')->result();
+        $detailInvoice = $this->db->query('select * from pos_penjualan where nama_pembeli is not null and invoice = "'.$invoice.'" order by date_payment desc')->row();
+        
         $data = [
-            'detail' => $detail
+            'detail' => $detail,
+            'detailInvoice'=>$detailInvoice
         ];
         // print_r($detail);exit;
         $this->template->load('template', 'waserda/penjualan/detailPrint', $data);

@@ -52,8 +52,16 @@
                         </tbody>
                         <tfoot>
                             <tr>
+                                <th colspan="6" class="text-center">Total</th>
+                                <th class="text-right"><?= format_rp($detailInvoice->total_trans) ?></th>
+                            </tr>
+                            <tr>
+                                <th colspan="6" class="text-center">PPN</th>
+                                <th class="text-right"><?= format_rp($detailInvoice->ppn) ?></th>
+                            </tr>
+                            <tr>
                                 <th colspan="6" class="text-center">Grandtotal</th>
-                                <th class="text-right"><?= format_rp($grandtotal) ?></th>
+                                <th class="text-right"><?= format_rp($detailInvoice->total) ?></th>
                             </tr>
                         </tfoot>
                     </table>
