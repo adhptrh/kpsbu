@@ -21,7 +21,7 @@
 
         $detail = $this->db->query("SELECT * FROM detail_penerimaan_pengeluaran_kas")->result();
         if (isset($periode)) {
-            $list = $this->db->query("select * from penerimaan_pengeluaran_kas where tanggal LIKE '$tahun-$bulan'")->result();
+            $list = $this->db->query("select * from penerimaan_pengeluaran_kas where tanggal LIKE '$tahun-$bulan%'")->result();
             $data = [
                 'list' => $list, 
                 'periode' => $periode,
