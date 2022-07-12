@@ -104,7 +104,7 @@
             /** insert ke jurnal */
             $jurnal = array(
                 'id_jurnal' => $no_dokumen,
-                'tgl_jurnal' => date('Y-m-d'),
+                'tgl_jurnal' => $tanggal,
                 'no_coa' => $no_coa[$key],
                 'posisi_dr_cr' => $posisi_dc[$key],
                 'nominal' => $nominal[$key],
@@ -114,7 +114,7 @@
             if ($no_coa[$key] == '1111') {
                 $data = [
                     "id_ref"=>$no_dokumen,
-                    "tanggal"=>date("Y-m-d"),
+                    "tanggal"=>$tanggal,
                     "nominal"=>$nominal[$key],
                     "kd_coa"=>'1111',
                     "posisi_dr_cr"=>$posisi_dc[$key],

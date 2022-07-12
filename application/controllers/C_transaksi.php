@@ -5852,7 +5852,7 @@ group by no_bbp";
             "posisi_dr_cr" => ($this->input->post("jenis_transaksi") == "debit") ? "d" : "k",
             "nominal" => $this->input->post("nominal"),
             "keterangan" => $this->input->post("uraian"),
-            "tanggal" => date("Y-m-d")
+            "tanggal" => $this->input->post("tanggal")
          ];
 
          $this->db->insert("buku_pembantu_bank", $data);
@@ -5863,14 +5863,14 @@ group by no_bbp";
                "no_coa" => 1116,
                "nominal" => $this->input->post("nominal"),
                "posisi_dr_cr" => "d",
-               "tgl_jurnal" => date("Y-m-d"),
+               "tgl_jurnal" => $this->input->post("tanggal"),
                "id_jurnal" => $id_ref
             ]);
             $this->db->insert("jurnal", [
                "no_coa" => 4212,
                "nominal" => $this->input->post("nominal"),
                "posisi_dr_cr" => "k",
-               "tgl_jurnal" => date("Y-m-d"),
+               "tgl_jurnal" => $this->input->post("tanggal"),
                "id_jurnal" => $id_ref
             ]);
          } else {
@@ -5878,14 +5878,14 @@ group by no_bbp";
                "no_coa" => 2113,
                "nominal" => $this->input->post("nominal"),
                "posisi_dr_cr" => "d",
-               "tgl_jurnal" => date("Y-m-d"),
+               "tgl_jurnal" => $this->input->post("tanggal"),
                "id_jurnal" => $id_ref
             ]);
             $this->db->insert("jurnal", [
                "no_coa" => 1116,
                "nominal" => $this->input->post("nominal"),
                "posisi_dr_cr" => "k",
-               "tgl_jurnal" => date("Y-m-d"),
+               "tgl_jurnal" => $this->input->post("tanggal"),
                "id_jurnal" => $id_ref
             ]);
          }
