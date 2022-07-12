@@ -44,7 +44,7 @@
     public function tambah()
     {
         $aktivitas = $this->db->get('aktivitas')->result();
-        $coa = $this->db->get('coa')->result();
+        $coa = $this->db->query('SELECT * FROM coa WHERE is_waserda = 0')->result();
         $data = [
             'aktivitas' => $aktivitas,
             'coa' => $coa,

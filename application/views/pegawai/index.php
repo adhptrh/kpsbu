@@ -31,7 +31,7 @@
                                 <th>Alamat</th>
                                 <th>TTL</th>
                                 <th>Tgl. Terdaftar</th>
-                                <th>Tgl. Mulai Bekerja</th>
+                                <th>TMT</th>
                                 <th>Status</th>
                                 <th class="text-center">Aksi</th>
                             </tr>

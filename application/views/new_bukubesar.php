@@ -62,7 +62,7 @@
                             <td><?= $item->nama_coa ?></td>
                             <td><?= $item->no_coa ?></td>
                             <?php if ($item->posisi_dr_cr =='d') { ?>
-								<?php if ($item->header == 1 OR $item->header == 5 OR $item->header == 6 OR $item->header == 3 ) { ?>
+								<?php if ($item->header == 2 OR $item->header == 1 OR $item->header == 5 OR $item->header == 6 OR $item->header == 3 ) { ?>
 									<?php $saldo_awal = $saldo_awal + $item->nominal; ?>
 								<?php } else { ?>
 									<?php $saldo_awal = $saldo_awal - $item->nominal; ?>
@@ -70,7 +70,7 @@
 								<td class="text-right"><?= format_rp($item->nominal)?></td>
 								<td></td>
 							<?php } else { ?>
-								<?php if ($item->header == 1 OR $item->header == 5 OR $item->header == 6 ) { ?>
+								<?php if ($item->header == 1 OR $item->header == 5 OR $item->header == 6) { ?>
 									<?php $saldo_awal = $saldo_awal - $item->nominal; ?>
 								<?php } else { ?>
 									<?php $saldo_awal = $saldo_awal + $item->nominal; ?>
