@@ -22,13 +22,13 @@
         $this->template->load('template', 'profile/index', $data);
     }
 
-    public function slipgaji($id_gaji)
+    public function slipgaji($unik)
     {
         $query = $this->db->query("SELECT a.nm_pegawai, a.tanggal, c.nip,c.npwp, b.*
         FROM tb_penggajian a 
         JOIN tb_detail_penggajian b ON a.id_penggajian = b.id_penggajian
         JOIN pegawai c ON c.nama = a.nm_pegawai
-        WHERE b.id_penggajian = '$id_gaji' AND c.nip = '".$this->session->userdata("nip")."'
+        WHERE b.unik = '$unik' AND c.nip = '".$this->session->userdata("nip")."'
         ")->row();
         $data = [
             'pegawai' => $query

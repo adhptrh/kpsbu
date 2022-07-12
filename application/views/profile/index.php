@@ -68,7 +68,7 @@
               <td>${element.id_penggajian}</td>
               <td>${element.tanggal}</td>
               <td>
-                  <a class="btn btn-default btn-xs slipgaji" data-id="${element.id_penggajian}")>Slip Gaji</a>
+                  <a class="btn btn-default btn-xs slipgaji" data-unik="${element.unik}")>Slip Gaji</a>
               </td>
           </tr>`;
         });
@@ -93,8 +93,8 @@
   });
 
   $(document).on("click", ".slipgaji", function() {
-    var id = $(this).data("id")
-    var win = window.open('<?= base_url('Profile/slipgaji/')?>' + id, '_blank');
+    var unik = $(this).data("unik")
+    var win = window.open('<?= base_url('Profile/slipgaji/')?>' + unik, '_blank');
     if (win) {
         //Browser has allowed it to be opened
         win.focus();

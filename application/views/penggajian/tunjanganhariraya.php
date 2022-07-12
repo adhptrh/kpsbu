@@ -69,7 +69,9 @@
                         </tbody>
                     </table>
                 </div>
+                <?php if (intval($bulanselect) >= date("m")) { ?>
                 <button class='btn btn-primary'>Simpan</button>
+                <?php } ?>
             </div>
         </form>
     </div>
