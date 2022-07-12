@@ -117,7 +117,8 @@ class Lembur extends CI_Controller
         }
 		$data = [
 			"parapegawai"=>$this->db->query("SELECT * FROM pegawai")->result(),
-            "data_lembur"=>$this->db->query($query)->result()
+            "data_lembur"=>$this->db->query($query)->result(),
+            "periode"=>$periode,
         ];
 		$this->template->load('template', 'laporan/lembur',$data);
     }
