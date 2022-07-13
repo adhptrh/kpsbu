@@ -98,5 +98,4 @@
         </div>
     </div>
 </div>
-<?php $this->load->view('daftar_penerimaan_pengeluaran/add'); ?>
 <?php $this->load->view('daftar_penerimaan_pengeluaran/modal'); ?>

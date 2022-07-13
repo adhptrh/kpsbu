@@ -92,7 +92,7 @@
                                             <?php } ?>
                                         </select>
                                     </td>
-                                    <td><input type="number" class="form-control" name="nominal[]" id="nominal1" required></td>
+                                    <td><input type="number" class="form-control" type="number" min="0" name="nominal[]" id="nominal1" required></td>
                                     <td>
                                         <select name="posisi_dc[]" id="posisi_dc1" class="form-control">
                                             <option value="d">D</option>
