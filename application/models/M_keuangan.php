@@ -142,7 +142,7 @@ class m_keuangan extends CI_model
 		//     ->result();
 	}
 
-	public function get_buku_besar($y, $m, $akun)
+	/* public function get_buku_besar($y, $m, $akun)
 	{
 		$this->db->select('a.id_jurnal,a.no_coa,a.tgl_jurnal,a.nominal,a.posisi_dr_cr,b.nama_coa')
 			->from('jurnal as a')
@@ -166,7 +166,7 @@ class m_keuangan extends CI_model
 			->order_by('a.tgl_jurnal', 'ASC')
 			->order_by('a.id_jurnal', 'ASC');
 		return $this->db->get()->result_array();
-	}
+	} */
 
 	public function getPosisiSaldoNormal($akun)
 	{
@@ -205,7 +205,7 @@ class m_keuangan extends CI_model
 	}
 
 	//get data saldo awal buku besar
-	public function getSaldoAwalBukuBesar($y, $m, $akun)
+	/* public function getSaldoAwalBukuBesar($y, $m, $akun)
 	{
 		$posisi_saldo_awal = $this->getPosisiSaldoAwal($akun);
 		$posisi_saldo_normal = $this->getPosisiSaldoNormal($akun);
@@ -256,10 +256,10 @@ class m_keuangan extends CI_model
 		// 	return false;
 		// }
 		return $saldo_total;
-	}
+	} */
 
 
-	public function GetDataBukuBesar($no_akun, $bulan, $tahun)
+	/* public function GetDataBukuBesar($no_akun, $bulan, $tahun)
 	{
 		//public function GetDataBukuBesar(){
 		// $this->db->limit($limit, $start);
@@ -272,7 +272,7 @@ class m_keuangan extends CI_model
 		$this->db->where('YEAR(tgl_jurnal)', $tahun);
 		$query = $this->db->get();
 		return $query->result_array();
-	}
+	} */
 
 	public function getBB($coa, $tgl)
 	{
