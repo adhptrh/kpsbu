@@ -24,7 +24,7 @@ class Laporan extends CI_Controller
 
     public function buku_pembantu_bank()
     {
-        $bulantahun = $this->input->get("bulantahun") ?? date("Y-m");
+        $bulantahun = $this->input->get("bulantahun") ?? "-";
         $list = $this->db->query("SELECT * FROM buku_pembantu_bank WHERE tanggal LIKE '".$bulantahun."%'")->result();
         $data = [
             'list' => $list,
@@ -35,7 +35,7 @@ class Laporan extends CI_Controller
 
     public function laporan_arus_kas()
     {
-        $bulantahun = $this->input->get("bulantahun") ?? date('Y-m');
+        $bulantahun = $this->input->get("bulantahun") ?? "-";
         $total_d = $this->db->query("select sum(nominal) as total from buku_pembantu_kas where posisi_dr_cr = 'd' AND tanggal LIKE '".$bulantahun."%' ")->row()->total;
         $total_k = $this->db->query("select sum(nominal) as total from buku_pembantu_kas where posisi_dr_cr = 'k' AND tanggal LIKE '".$bulantahun."%' ")->row()->total;
         $kas_debit = $this->db->query("SELECT SUM(nominal) as nominal_total FROM jurnal WHERE no_coa = '1111' AND posisi_dr_cr = 'd' AND tgl_jurnal LIKE '".$bulantahun."%'")->result()[0]->nominal_total;
@@ -368,7 +368,7 @@ class Laporan extends CI_Controller
     // salma 
     public function buku_kas_kecil()
     {
-        $bulantahun = $this->input->get('bulantahun') ?? date("Y-m");
+        $bulantahun = $this->input->get('bulantahun') ?? "-";
         //bulan tahun decrease 1 month
         $bulan_tahun_decrease = date("Y-m", strtotime("-1 month", strtotime($bulantahun)));
         

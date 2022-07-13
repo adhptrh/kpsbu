@@ -8,7 +8,7 @@
                 <form class="form-inline" style="margin-bottom:20px;" method="GET">
                     <div class="form-group">
                         <label>Bulan Tahun</label>
-                        <input name="bulantahun" class="form-control" type="month" value="<?= $bulantahun ?>">
+                        <input name="bulantahun" class="form-control" type="month" value="<?= $bulantahun ?? "" ?>">
                         <button class="btn btn-primary">Filter</button>
                     </div>
                 </form>
