@@ -94,6 +94,11 @@ class Laporan extends CI_Controller
             $pmbaktiva_total += $pmbaktiva->nominal;
         }
 
+        $pmbaktivalist = $this->db->query("SELECT * FROM jurnal WHERE tgl_jurnal LIKE '$bulantahun%' AND no_coa = '1214'")->result();
+        foreach ($pmbaktivalist as $pmbaktiva) {
+            $pmbaktiva_total += $pmbaktiva->nominal;
+        }
+
         $modallist = $this->db->query("SELECT * FROM jurnal WHERE tgl_jurnal LIKE '$bulantahun%' AND no_coa = '3000'")->result();
         $modal_total = 0;
         foreach ($modallist as $modal) {
