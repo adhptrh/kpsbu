@@ -5199,6 +5199,54 @@ group by no_bbp";
             ];
             $this->db->where('kode', $kode);
             $this->db->update('pengajuan_jurnal', $pengajuan_jurnal);
+            $debit = [
+               'id_jurnal' => $kode,
+               'tgl_jurnal' => $tanggal,
+               'no_coa' => 3300,
+               'posisi_dr_cr' => 'd',
+               'nominal' => $nominal,
+            ];
+            $this->db->insert('jurnal', $debit);
+            $kredit = [
+               'id_jurnal' => $kode,
+               'tgl_jurnal' => $tanggal,
+               'no_coa' => 1111,
+               'posisi_dr_cr' => 'k',
+               'nominal' => $nominal,
+            ];
+            $this->db->insert('jurnal', $kredit);
+
+            $pengajuan_jurnal = [
+               'status' => 'selesai',
+               'tgl_approve' => date('Y-m-d H:i:s')
+            ];
+            $this->db->where('kode', $kode);
+            $this->db->update('pengajuan_jurnal', $pengajuan_jurnal);
+         } else if (strpos($kode, "DP") !== false) {
+            $debit = array(
+               "id_jurnal" => $kode,
+               "tgl_jurnal" => date("Y-m-d"),
+               "no_coa" => 1111,
+               "posisi_dr_cr" => "d",
+               "nominal" => $nominal,
+            );
+            $this->db->insert("jurnal", $debit);
+   
+            $kredit = array(
+               "id_jurnal" => $kode,
+               "tgl_jurnal" => date("Y-m-d"),
+               "no_coa" => 3111,
+               "posisi_dr_cr" => "k",
+               "nominal" => $nominal,
+            );
+            $this->db->insert("jurnal", $kredit);
+            
+            $pengajuan_jurnal = [
+               'status' => 'selesai',
+               'tgl_approve' => date('Y-m-d H:i:s')
+            ];
+            $this->db->where('kode', $kode);
+            $this->db->update('pengajuan_jurnal', $pengajuan_jurnal);
          } else if (strpos($kode, 'PMB-KR') !== false) {
             /** transaksi pembayaran kredit */
 
@@ -5550,6 +5598,30 @@ group by no_bbp";
             ];
             $this->db->insert('jurnal', $kredit);
 
+            $pengajuan_jurnal = [
+               'status' => 'selesai',
+            ];
+            $this->db->where('kode', $kode);
+            $this->db->update('pengajuan_jurnal', $pengajuan_jurnal);
+         } else if (strpos($kode, "DP") !== false) {
+            $debit = array(
+               "id_jurnal" => $kode,
+               "tgl_jurnal" => date("Y-m-d"),
+               "no_coa" => 1111,
+               "posisi_dr_cr" => "d",
+               "nominal" => $nominal,
+            );
+            $this->db->insert("jurnal", $debit);
+   
+            $kredit = array(
+               "id_jurnal" => $kode,
+               "tgl_jurnal" => date("Y-m-d"),
+               "no_coa" => 3111,
+               "posisi_dr_cr" => "k",
+               "nominal" => $nominal,
+            );
+            $this->db->insert("jurnal", $kredit);
+            
             $pengajuan_jurnal = [
                'status' => 'selesai',
             ];

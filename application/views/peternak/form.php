@@ -45,7 +45,7 @@
 
 			<div class="form-group">
 			  <label>No. Telepon</label>
-			  <input type = "text" name = "notel" class = "form-control" placeholder="No. Telepon" autocomplete="off">
+			  <input type = "text" name = "notel" class = "form-control" placeholder="No. Telepon" maxlength="12" autocomplete="off">
 			  
 			  <?php echo form_error('notel'); ?>
 			

@@ -777,7 +777,17 @@ class C_masterdata extends CI_controller
          $this->db->insert('peternak', $data);
 
          // jurnal
-         $debit = array(
+
+         
+         $pengajuan = [
+            'kode' => "DP".$_POST['no_peternak'],
+            'tanggal' => date("Y-m-d"),
+            'nominal' => $_POST['deposit'],
+            'jenis' => 'simpanan pokok',
+         ];
+         $this->db->insert("pengajuan_jurnal", $pengajuan);
+
+         /* $debit = array(
             "id_jurnal" => "DP" . $_POST['no_peternak'],
             "tgl_jurnal" => date("Y-m-d"),
             "no_coa" => 1111,
@@ -794,6 +804,7 @@ class C_masterdata extends CI_controller
             "nominal" => $_POST['deposit'],
          );
          $this->db->insert("jurnal", $kredit);
+         redirect('c_masterdata/lihat_peternak'); */
          redirect('c_masterdata/lihat_peternak');
       }
    }
