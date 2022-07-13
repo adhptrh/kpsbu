@@ -5,9 +5,20 @@
                 <div id="notif">
                     <?php echo $this->session->flashdata('notif_ubah'); ?>
                 </div>
+                <form class="form-inline" method="get">
+                    <label>Tahun</label>
+                    <select class="form-control" name="tahun">
+                        <option value="">-</option>
+                        <?php for ($i=date("Y")-5; $i <= date("Y")+5; $i++) { ?>
+                            <option value="<?= $i ?>"><?= $i ?></option>
+                        <?php } ?>
+                    </select>
+                    <button class="btn btn-primary">Filter</button>
+                </form>
                 <div class="header" style="padding-bottom: 10px;">
-                    <h4 class="text-center">Laporan Laba Rugi</h4>
-                    <h5 class="text-center">Periode </h5>
+                    <h1 class="text-center">Koperasi KPSBU</h1>
+                    <h4 class="text-center">Laporan Laba Rugi Waserda</h4>
+                    <h5 class="text-center">Periode <?= $tahun ?? "" ?></h5>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered">

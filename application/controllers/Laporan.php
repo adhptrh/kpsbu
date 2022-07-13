@@ -283,16 +283,19 @@ class Laporan extends CI_Controller
 
     public function laba_rugi()
     {
+        $tahun = $this->input->get('tahun') ?? date("Y");
         $listPendapatan = $this->db->query('SELECT SUM(nominal) AS nominal, b.nama_coa, a.posisi_dr_cr
         from jurnal a
         JOIN coa b ON a.no_coa = b.no_coa
         WHERE header = 4
-        AND is_waserda = 1')->result();
+        AND is_waserda = 1
+        AND tgl_jurnal LIKE "'.$tahun.'%"')->result();
         $listHPP = $this->db->query('SELECT SUM(nominal) AS nominal, b.nama_coa, a.posisi_dr_cr
         from jurnal a
         JOIN coa b ON a.no_coa = b.no_coa
         WHERE header = 6
-        AND is_waserda = 1')->result();
+        AND is_waserda = 1
+        AND tgl_jurnal LIKE "'.$tahun.'%"')->result();
         $listBeban = $this->db->query('SELECT b.nama_coa, a.posisi_dr_cr, SUM(nominal) AS nominal
         from jurnal a
         JOIN coa b ON a.no_coa = b.no_coa
@@ -300,11 +303,13 @@ class Laporan extends CI_Controller
         AND is_waserda = 1 
         AND posisi_dr_cr = "d"
         AND is_beban = 1
-        GROUP BY nama_coa')->result();
+        GROUP BY nama_coa
+        AND tgl_jurnal LIKE "'.$tahun.'%"')->result();
         $data = [
             'pendapatan' => $listPendapatan,
             'beban' => $listBeban,
             'hpp' => $listHPP,
+            'tahun'=>$tahun,
         ];
         // print_r($data);exit;
         $this->template->load('template', 'laporan/laba_rugi', $data);
