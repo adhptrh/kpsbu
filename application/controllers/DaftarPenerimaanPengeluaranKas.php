@@ -41,13 +41,31 @@
 
     }
 
+    public function nodokumen() {
+        $query1   = "SELECT MAX(RIGHT(no_dokumen,4)) as kode FROM penerimaan_pengeluaran_kas";
+        $abc      = $this->db->query($query1);
+        $kode = "";
+        if ($abc->num_rows() > 0) {
+            foreach ($abc->result() as $k) {
+                $tmp = ((int) $k->kode) + 1;
+                $kd  = sprintf("%04s", $tmp);
+            }
+        } else {
+            $kd = "0001";
+        }
+        $kode   = date('Ymd').$kd;
+        return $kode;
+    }
+
     public function tambah()
     {
+        $kode = $this->nodokumen();
         $aktivitas = $this->db->get('aktivitas')->result();
         $coa = $this->db->query('SELECT * FROM coa WHERE is_waserda = 0')->result();
         $data = [
             'aktivitas' => $aktivitas,
             'coa' => $coa,
+            'kode' => $kode,
         ];
         $this->template->load('template', 'daftar_penerimaan_pengeluaran/tambah', $data);
     }

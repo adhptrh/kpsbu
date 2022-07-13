@@ -12,9 +12,15 @@
                         <button class="btn btn-primary">Filter</button>
                     </div>
                 </form>
-				<center>
-					<h3>Buku Kas Kecil</h3>
-				</center>
+				
+                <center>
+                    <b>
+                        <div style="font-size: 25px">KPSBU Lembang</div>
+                        <div style="font-size: 20px">Buku Kas Kecil</div>
+                        <div style="font-size: 15px">Periode <?= $bulantahun ?></div>
+                    </b>
+                </center>
+                <br>
 				<hr>
 				<table id="datatable" class="table table-striped table-bordered table-hover jambo_table">
 					<thead>

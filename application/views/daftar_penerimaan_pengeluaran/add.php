@@ -10,7 +10,7 @@
         <form action="#" method="POST" >
             <div class="modal-body">
                 <div class="form-group row">
-                    <label for="periode" class="col-sm-3 col-form-label">Peridoe</label>
+                    <label for="periode" class="col-sm-3 col-form-label">Periode</label>
                     <div class="col-sm-5">
                         <input type="text" class="form-control" id="periode" name="periode" value="<?= date('Ym')?>" readonly>
                     </div>
@@ -24,7 +24,7 @@
                 <div class="form-group row">
                     <label for="no_dokumen" class="col-sm-3 col-form-label">No. Dokumen</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" id="no_dokumen" name="no_dokumen" placeholder="No. Dokumen">
+                        <input type="text" class="form-control" id="no_dokumen" readonly value="<?= $kode ?>" name="no_dokumen" placeholder="No. Dokumen">
                     </div>
                 </div>
                 <div class="form-group row">
