@@ -77,6 +77,10 @@
         $("#info").hide()
         var todaydt = new Date();
         $("#start").datepicker({
+            beforeShowDay: function(date) {
+                var day = date.getDay();
+                return [(day != 0), ''];
+            },
             autoclose: true,
             dateFormat: "yy-mm-dd",
             endDate: todaydt,
@@ -89,6 +93,7 @@
             }
         });
         $('#end').datepicker({
+            beforeShow: function(i) { if ($(i).attr('readonly')) { return false; } },
             dateFormat: "yy-mm-dd", 
         });
         function diff() {
