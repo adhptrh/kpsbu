@@ -5903,16 +5903,11 @@ group by no_bbp";
 
          $config['upload_path']          = './uploads/';
          $config['allowed_types']        = '*';
-         $config['file_name']            = "TransaksiBank_" . $this->input->post("id_ref");
+         $config['file_name']            = "TransaksiBank_" . $id_ref;
          $config['overwrite']            = true;
          $this->load->library('upload', $config);
          $file = $this->upload->do_upload('bukti_transaksi');
-         $namafile = "TransaksiBank_" . $this->input->post("id_ref") . $this->upload->file_ext;
-         if ($file) {
-         } else {
-            echo $this->upload->display_errors();
-            $namafile = "-";
-         }
+         $namafile = "TransaksiBank_" . $id_ref . $this->upload->file_ext;
 
          $data = [
             "kd_coa" => 1116,
