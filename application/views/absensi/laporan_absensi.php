@@ -17,8 +17,15 @@
                 <div id="notif">
                     <?php echo $this->session->flashdata('notif_ubah'); ?>
                 </div>
+                
+                <form class="form-inline" method="get">
+                    <label>Bulan Tahun</label>
+                    <input name="bulantahun" class="form-control" value="<?= $bulantahun ?? "" ?>" type="month">
+                    <button class="btn btn-primary">Filter</button>
+                </form>
+                <br>
                 <div class="">
-                    <table class="table table-stripped " id="datatable">
+                    <table class="table table-stripped " id="datatable-buttons">
                         <thead>
                             <tr>
                                 <th style="width: 5%;">No</th>

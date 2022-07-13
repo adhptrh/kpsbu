@@ -166,14 +166,17 @@
 
     public function laporan_kehadiran($tgl_awal = '', $tgl_akhir = '')
     {
+        $bulantahun = $this->input->get("bulantahun") ?? date("Y-m");
         $detail = $this->db->query("SELECT a.*, b.tanggal, c.nama
         FROM detail_absen_rfid a 
         JOIN absensi b ON a.id_absensi = b.id
         JOIN pegawai c ON a.rfid = c.rfid
+        WHERE b.tanggal LIKE '$bulantahun%'
         ORDER BY a.id DESC")->result();
 
         $data = [
             'list' => $detail, 
+            'bulantahun' => $bulantahun
         ];
         $this->template->load('template', 'absensi/laporan_absensi', $data);
     }
