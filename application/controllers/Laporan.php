@@ -129,7 +129,7 @@ class Laporan extends CI_Controller
             'pembelian'=>$pembelian_total,
             'pnj_aktiva'=>$pnjaktiva_total,
             'pmb_aktiva'=>$pmbaktiva_total,
-            'modal'=>$laporanNeraca["modal"],
+            'modal'=>$modal_total,
             'prive'=>$prive_total,
             'pinjamanbank'=>$pinjamanbank_total,
             'angsuranpinjaman'=>$angsuranpinjaman_total,
