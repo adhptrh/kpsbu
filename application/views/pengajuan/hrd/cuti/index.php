@@ -74,9 +74,9 @@
 </div>
 <?php $this->load->view('pengajuan/hrd/cuti/add'); ?>
 <script>
-    let cuti_tahun_ini = <?= $total_cuti_tahun_ini ?>
+    let cuti_tahun_ini = <?= $total_cuti_tahun_ini ?? 0 ?>
     
-    let adddays = 0
+    let sundayCount = 0
     $(document).ready(function() {
         $("#info").hide()
         var todaydt = new Date();
@@ -91,15 +91,16 @@
             endDate: todaydt,
             minDate: new Date(),
             onSelect: function (date) {
+                adddays = 0
                 var date2 = $('#start').datepicker('getDate');
-                $('#end').datepicker('option', 'minDate', new Date(new Date(date2).setDate(new Date(date2).getDate() + 1)));
-                let dateend = new Date(new Date(date2).setDate(new Date(date2).getDate()+12-cuti_tahun_ini))
+                $('#end').datepicker('option', 'minDate', new Date(new Date(date2).setDate(new Date(date2).getDate()+1)));
+                let dateend = new Date(new Date(date2).setDate(new Date(date2).getDate()+12-cuti_tahun_ini+1))
                 let cutileft = 12-cuti_tahun_ini
                 //loop date to dateend check if sunday
                 while (date2 <= dateend) {
                     var day = date2.getDay();
                     if (day == 0) {
-                        adddays--
+                        adddays++
                     }
                     date2.setDate(date2.getDate() + 1);
                 }
@@ -118,9 +119,21 @@
         $("#start, #end").on("change", function() {
             const startDate  = $("#start").val();
             const endDate    = $("#end").val();
+            //get sunday count between startdate and enddate
+            sundayCount = 0;
+            var date1 = new Date(startDate);
+            var date2 = new Date(endDate);
+            while (date1 <= date2) {
+                var day = date1.getDay();
+                if (day == 0) {
+                    sundayCount++;
+                }
+                date1.setDate(date1.getDate() + 1);
+            }
+            console.log(sundayCount)
 
             const diffInMs   = new Date(endDate) - new Date(startDate)
-            const diffInDays = (diffInMs / (1000 * 60 * 60 * 24))+adddays;
+            const diffInDays = (diffInMs / (1000 * 60 * 60 * 24))-sundayCount;
             if (diffInDays <= 12) {
                 $("#jml_hari_cuti").val(diffInDays);
                 $("#info").hide();
