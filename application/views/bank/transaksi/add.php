@@ -19,10 +19,6 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>No Transaksi</label>
-                <input class="form-control" type="text" name="no_rek" required>
-            </div>
-            <div class="form-group">
                 <label>Uraian</label>
                 <input class="form-control" type="text" name="uraian" required>
             </div>

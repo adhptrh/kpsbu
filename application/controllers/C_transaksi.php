@@ -5908,6 +5908,11 @@ group by no_bbp";
          $this->load->library('upload', $config);
          $file = $this->upload->do_upload('bukti_transaksi');
          $namafile = "TransaksiBank_" . $id_ref . $this->upload->file_ext;
+         if ($file) {
+         } else {
+            echo $this->upload->display_errors();
+            $namafile = "-";
+         }
 
          $data = [
             "kd_coa" => 1116,
