@@ -18,7 +18,7 @@
             <input type="month" style="margin-right:10px;" class="form-control" name="periode" value="<?= $periode ?? date("Y-m") ?>">
             <button class="btn btn-primary">Filter</button>
         </form>
-        <table id="datatable" class="table table-striped table-bordered table-hover jambo-table dataTable no-footer">
+        <table id="datatable-buttons" class="table table-striped table-bordered table-hover jambo-table dataTable no-footer">
             <thead>
                 <tr class="headings">
                     <th>No</th>
