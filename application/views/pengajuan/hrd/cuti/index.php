@@ -22,7 +22,7 @@
                 <p class="badge">Sisa Cuti: <?= 12-$total_cuti_tahun_ini ?></p>
                 <?php } ?>
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="datatable">
+                    <table class="table table-bordered" id="datatable-buttons">
                         <thead>
                             <tr>
                                 <th style="width: 5%;">#</th>
