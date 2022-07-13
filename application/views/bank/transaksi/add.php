@@ -28,19 +28,19 @@
             </div>
             <div class="form-group">
                 <label>Nominal</label>
-                <input class="form-control" type="text" name="nominal" required>
+                <input class="form-control" type="number" min="0" name="nominal" required>
             </div>
             <div class="form-group">
                 <label>Bunga Bank</label>
-                <input class="form-control" type="text" name="bunga" required>
+                <input class="form-control" type="number" min="0" name="bunga" required>
             </div>
             <div class="form-group">
                 <label>Pajak</label>
-                <input class="form-control" type="text" name="pajak" required>
+                <input class="form-control" type="number" min="0" name="pajak" required>
             </div>
             <div class="form-group">
                 <label>Biaya Admin</label>
-                <input class="form-control" type="text" name="biaya_admin" required>
+                <input class="form-control" type="number" min="0" name="biaya_admin" required>
             </div>
             <div class="form-group">
                 <label>Jenis Transaksi</label>
