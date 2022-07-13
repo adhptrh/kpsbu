@@ -32,7 +32,7 @@
                                 <th>Deskripsi</th>
                                 
                             <?php if ($this->session->userdata('level') != "pegawai") { ?>
-                                <th style="width: 7%;" class="text-center">Aksi</th>
+                                <!-- <th style="width: 7%;" class="text-center">Aksi</th> -->
                                 <?php } ?>
                             </tr>
                         </thead>
@@ -51,7 +51,7 @@
                                 <td><?= $value->tgl_akhir ?></td>
                                 <td><?= $value->desc ?></td>
                                 
-                            <?php if ($this->session->userdata('level') != "pegawai") { ?>
+                            <?php if (false/* $this->session->userdata('level') != "pegawai" */) { ?>
                                 <td class="text-center">
                                     <?php if ($value->is_complete == 0) { ?>
                                         <button class="btn btn-sm btn-secondary" onclick="set_done(<?= $value->id_pegawai ?>)"> Set done</button>
