@@ -2597,6 +2597,20 @@ class C_masterdata extends CI_controller
       $jp = $this->db->query("SELECT * FROM tb_jenis_pegawai")->result();
       $jp2 = $this->db->query("SELECT * FROM tb_jenis_pegawai a GROUP BY a.desc")->result();
       $list = $this->db->get('pegawai')->result();
+      foreach ($list as $k=>$v) {
+         $tgldaftar = $v->created_at;
+         $bulan = intval(date("m",strtotime($tgldaftar)));
+         $tahun = intval(date("Y",strtotime($tgldaftar)));
+         if ($bulan == 12) {
+            $bulan = 1;
+            $tahun += 1;
+         } else {
+            $bulan += 1;
+         }
+         $tahun = strval($tahun);
+         $bulan = sprintf("%02d", $bulan);
+         $v->tglmulaibekerja = $tahun."-".$bulan."-01";
+      }
       $nip = $this->M_masterdata->nip_otomatis();
       // print_r($nip);exit;
 

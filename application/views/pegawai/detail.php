@@ -18,6 +18,7 @@
                                 <th>Jabatan</th>
                                 <th>Status PTKP</th>
                                 <th>Jenis Pegawai</th>
+                                <th>Jenis Kelamin</th>
                                 <th>Pendidikan</th>
                                 <th>Riwayat Pendidikan</th>
                             </tr>
@@ -27,8 +28,9 @@
                                 <td><?= $item->id_jabatan?></td>
                                 <td><?= $item->id_ptkp ? $item->id_ptkp : '-'?></td>
                                 <td><?= $item->id_jenis_pegawai?></td>
+                                <td><?= ($item->jenis_kelamin == "L") ? "Laki-Laki":"Perempuan"?></td>
                                 <td><?= $item->pendidikan?></td>
-                                <td><?= $item->riwayat_pendidikan?></td>
+                                <td><?= ($item->riwayat_pendidikan == "") ? "Belum ada riwayat pendidikan":$item->riwayat_pendidikan?></td>
                             </tr>
                         </table>
                     </div>

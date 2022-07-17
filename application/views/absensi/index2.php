@@ -28,8 +28,13 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function(){
+        console.log('<?= date('w') ?>')
         $("#form-absen").submit(function(e){
             e.preventDefault();
+            if (<?= date('w') ?> == 0) {
+                alert("Hari ini hari libur, tidak ada absen.")
+                return
+            }
             var rfid = $("#rfid").val();
             // console.log(rfid)
             $.ajax({

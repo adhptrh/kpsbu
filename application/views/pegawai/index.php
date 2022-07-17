@@ -31,6 +31,7 @@
                                 <th>Alamat</th>
                                 <th>TTL</th>
                                 <th>Tgl. Terdaftar</th>
+                                <th>Tgl. Mulai Bekerja</th>
                                 <th>Status</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
@@ -50,6 +51,7 @@
                                 <td><?= $value->alamat ?></td>
                                 <td><?= $value->tgl_lahir ?></td>
                                 <td><?= $value->created_at ?></td>
+                                <td><?= $value->tglmulaibekerja ?></td>
                                 <td>
                                     <?php if ($value->status==1) { ?>
                                         <button class="btn btn-xs btn-success status" data-id="<?= $value->id?>">Aktif</button>
