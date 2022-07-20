@@ -6,7 +6,7 @@
         $level = $this->session->userdata('level');
         $nip = $this->session->userdata('nip');
         $listCuti = '';
-        if ($level == 'admin') {
+        if ($level == 'admin' || $level == "personalia") {
             $listCuti = $this->db->query("SELECT a.*, b.nama 
             FROM tb_cuti a
             JOIN pegawai b ON a.nip = b.nip")->result();
