@@ -153,7 +153,6 @@
                     <li><a href="<?= base_url('c_masterdata/ptkp')?>"> PTKP </a></li>
                     <li><a href="<?= base_url('c_masterdata/jabatan')?>"> Jabatan </a></li>
                     <li><a href="<?= base_url('c_masterdata/jenis_pegawai')?>"> Jenis Pegawai </a></li>
-                    <li><a href="<?= base_url('c_masterdata/shift')?>"> Shift </a></li>
 
                     <?php elseif ($this->session->userdata('level') == "produksi1") : ?>
                     <li><a href="<?php echo site_url(); ?>c_masterdata/lihat_bb">Bahan Baku</a></li>
