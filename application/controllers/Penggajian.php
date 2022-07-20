@@ -35,6 +35,7 @@ class Penggajian extends CI_Controller
         $tunjanganhariraya = $this->db->query("SELECT * FROM tunjangan_hari_raya WHERE tanggal LIKE '".$periode."%' AND nip = '$nip'")->result()[0]->nominal ?? 0;
         $bonus = $this->db->query("SELECT a.nominal FROM tb_detail_pengajuan_bonus a JOIN pengajuan_bonus b ON a.id_pengajuan = b.id_pengajuan WHERE a.nip = '$nip' AND b.periode LIKE '".$periode."%'")->result()[0]->nominal ?? 0;
         $gajipokok = $this->db->query("SELECT * FROM tb_jenis_pegawai a WHERE a.desc LIKE '".$pegawai->id_jenis_pegawai."' AND a.pendidikan LIKE '".$pegawai->pendidikan."'")->result();
+        $lembur = $this->db->query("SELECT SUM(total_nominal_lembur) as nominal FROM tb_lembur WHERE id_pegawai = '$nip' AND tgl_pengajuan LIKE '".$periode."%' AND status = 3")->row()->nominal ?? 0;
         if (count($gajipokok) > 0) {
             $gajipokok = $gajipokok[0]->gaji_pokok;
         } else {
@@ -43,7 +44,7 @@ class Penggajian extends CI_Controller
         $ketptkp = $pegawai->id_jenis_pegawai == "Kontrak" ? "Tidak Kena Pajak" : "Kena Pejak";
         $tunjanganjabatan = $pegawai->tunjangan_jabatan;
         $tunjangankesehatan = $pegawai->tunjangan_kesehatan;
-        $totalbruto = $gajipokok+$tunjangankesehatan+$tunjanganjabatan+$bonus;
+        $totalbruto = $gajipokok+$tunjangankesehatan+$tunjanganjabatan+$bonus+$lembur;
         //$totalnettosetahun = ($totalnetto*12)+$tunjanganhariraya;
         $totalbrutosetahun = ($totalbruto*12)+$tunjanganhariraya;
         $biayajabatan = $totalbrutosetahun*0.05;
@@ -85,6 +86,7 @@ class Penggajian extends CI_Controller
             "pph21" => $pph21,
             "gajibersih"=>$gajibersih,
             "bonus"=>$bonus,
+            "lembur"=>$lembur,
             "nip"=>$nip,
         ];
         return $data;

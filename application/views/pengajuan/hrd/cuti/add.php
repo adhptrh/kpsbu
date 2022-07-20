@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Tgl. Pengajuan Cuti</label>
+                    <label for="" class="col-sm-4 col-form-label">Tgl. Cuti</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="start" name="start" placeholder="Tgl. Mulai" required>
                     </div>

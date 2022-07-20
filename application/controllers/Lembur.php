@@ -7,7 +7,7 @@ class Lembur extends CI_Controller
         $level = $this->session->userdata('level');
         $nip = $this->session->userdata('nip');
         $lembur = '';
-        if ($level == 'admin' || $level == 'atasan') {
+        if ($level == 'admin' || $level == 'atasan' || $level == 'personalia') {
             $lembur = $this->db->query("SELECT a.*, b.nama
             FROM tb_lembur a 
             left JOIN pegawai b ON b.nip = a.id_pegawai
@@ -68,14 +68,14 @@ class Lembur extends CI_Controller
             $this->db->where('id_pengajuan', $id_pengajuan);
             $this->db->update('tb_lembur');
             // kirim ke db pengajuan jurnal 
-            $pengajuan = [
+           /*  $pengajuan = [
                 'kode' => $id_pengajuan,
                 'tanggal' => date('Ymd'),
                 'nominal' => $total,
                 'jenis' => 'pengajuan lembur',
                 'status' => 'pending',
             ];
-            $this->db->insert("pengajuan_jurnal", $pengajuan);
+            $this->db->insert("pengajuan_jurnal", $pengajuan); */
         }
         
     }
