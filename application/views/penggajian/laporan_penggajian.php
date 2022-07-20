@@ -39,7 +39,7 @@
         <center>
 				<b>
 					<div style="font-size: 25px">KPSBU Lembang</div>
-					<div style="font-size: 20px">Jurnal</div>
+					<div style="font-size: 20px">Penggajian</div>
 					<?php if (isset($tgl_awal, $tgl_akhir)) { ?>
 						<div style="font-size: 15px">
 							Periode <?php echo $tgl_awal ?> s/d <?php echo $tgl_akhir;
