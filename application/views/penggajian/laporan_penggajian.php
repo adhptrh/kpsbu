@@ -2,44 +2,15 @@
     <div class="col-sm-12">
         <div class="x_panel">
             <div class="x_content">
-                <div class="col-sm-4">
-                    <form action="<?= base_url("Penggajian/laporan_penggajian")?>" method="post">
-                        <div style="margin-bottom: 10px;">
-                            Filter Bulan
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-sm-7">
-                                    <select name="bulan" id="bulan" class="form-control" required>
-                                        <option value="">-</option>
-                                        <option value="01">Januari</option>
-                                        <option value="02">Februari</option>
-                                        <option value="03">Maret</option>
-                                        <option value="04">April</option>
-                                        <option value="05">Mei</option>
-                                        <option value="06">Juni</option>
-                                        <option value="07">Juli</option>
-                                        <option value="08">Agustus</option>
-                                        <option value="09">September</option>
-                                        <option value="10">Oktober</option>
-                                        <option value="11">November</option>
-                                        <option value="12">Desember</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-3">
-                                    <?php $year_now = date('Y')?>
-                                    <select name="tahun" id="tahun" class="form-control" required>
-                                        <option value="">-</option>
-                                        <?php for ($i=2020; $i <= 2025 ; $i++) { ?>
-                                        <option value="<?= $i ?>"<?= $i == $year_now ? 'selected' : '' ?>><?= $i ?></option>
-                                        <?php }?>
-                                    </select>
-                                </div>
-                                <div class="col-sm-1">
-                                    <button type="submit" class="btn btn-md">Filter</button>
-                                </div>
-                            </div>
-                        </div>
+                <div class="">
+                    <form class="form-inline" action="<?= base_url("Penggajian/laporan_penggajian")?>" method="get">
+                        
+                            <label>Tgl Awal</label>
+                <input type="month" style="margin-right:10px;" class="form-control" name="tgl_awal" value="<?= $tgl_awal  ?>">
+                <label>Tgl Akhir</label>
+                <input type="month" style="margin-right:10px;" class="form-control" name="tgl_akhir" value="<?= $tgl_akhir  ?>">
+                <button class="btn btn-primary">Filter</button>
+                           
                     </form>
                 </div>
             </div>
@@ -51,6 +22,7 @@
                 <div class="row">
                     <div class="col-sm-10 col-12">
                         <h3 id="quote">Laporan Penggajian</h3>
+                        
                     </div>
                     <div class="col-sm-2 col-12">
                         <h3 id="quote">
@@ -59,9 +31,24 @@
                 </div>
             </div>
             <div class="x_content">
+                
                 <div id="notif">
                     <?php echo $this->session->flashdata('notif_ubah'); ?>
                 </div>
+                <br>
+        <center>
+				<b>
+					<div style="font-size: 25px">KPSBU Lembang</div>
+					<div style="font-size: 20px">Jurnal</div>
+					<?php if (isset($tgl_awal, $tgl_akhir)) { ?>
+						<div style="font-size: 15px">
+							Periode <?php echo $tgl_awal ?> s/d <?php echo $tgl_akhir;
+															?>
+						</div><?php
+							} ?>
+				</b>
+			</center>
+            <br><br>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="datatable-buttons">
                         <thead>

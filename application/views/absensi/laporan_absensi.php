@@ -19,12 +19,28 @@
                 </div>
                 
                 <form class="form-inline" method="get">
-                    <label>Bulan Tahun</label>
-                    <input name="bulantahun" class="form-control" value="<?= $bulantahun ?? "" ?>" type="month">
+                <label>Tgl Awal</label>
+                <input type="month" style="margin-right:10px;" class="form-control" name="tgl_awal" value="<?= $tgl_awal  ?>">
+                <label>Tgl Akhir</label>
+                <input type="month" style="margin-right:10px;" class="form-control" name="tgl_akhir" value="<?= $tgl_akhir  ?>">
                     <button class="btn btn-primary">Filter</button>
                 </form>
                 <br>
                 <div class="">
+                <br>
+        <center>
+				<b>
+					<div style="font-size: 25px">KPSBU Lembang</div>
+					<div style="font-size: 20px">Jurnal</div>
+					<?php if (isset($tgl_awal, $tgl_akhir)) { ?>
+						<div style="font-size: 15px">
+							Periode <?php echo $tgl_awal ?> s/d <?php echo $tgl_akhir;
+															?>
+						</div><?php
+							} ?>
+				</b>
+			</center>
+            <br><br>
                     <table class="table table-stripped " id="datatable-buttons">
                         <thead>
                             <tr>

@@ -1,0 +1,44 @@
+Revisi Arles:
+- login per user
+- tmt diinputkan pada form tambah pegawai - c_master_data/pegawai
+- tanggal cuti hitung besoknya hari ke 2 bisa pilih hari saat dia pilih
+- pegawai pada hari cuti tidak bisa melakukan presensi
+- pegawai baru muncul saat tmt di tambah jadwal shift - shift
+- laporan cuti,laporan cuti melahirkan, laporan lembur, laporan kehadiran, laporan penggajian atasnya samain dengan jurnal
+- penggajian tambah nominal lembur masuk ke perhitungan bruto
+- penambahan pegawai jika umur lebih kecil 17 tahun gak bisa ke input
+
+menu personalia:
+    HRD
+        - penggajian
+        - bonus
+        - thr
+        - cuti
+        - lembur
+        - cuti melahirkan
+
+    Master data
+        - PTKP
+        - Tunjang Jabatan
+        - Pegawai
+        - Jenis Pegawai
+
+    Laporan
+        - Laporan Cuti
+        - Laporan Cuti Melahirkan
+        - Laporan Penggajian
+        - Laporan Lembur
+
+
+Menu IT:
+    HRD
+        - Tambah shift
+        - Jadwal Shift
+        - Pegawai
+
+    Laporan
+        - Laporan Kehadiran
+
+
+Menu Keuangan
+    

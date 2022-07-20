@@ -110,15 +110,19 @@ class Lembur extends CI_Controller
     public function laporan() 
     {
         $id_pegawai = $this->input->get("id_pegawai") ?? "semua";
-        $periode = $this->input->get("periode") ?? date("Y-m");
-        $query = "SELECT * FROM tb_lembur a LEFT JOIN pegawai b ON a.id_pegawai = b.nip WHERE a.id_pegawai = '$id_pegawai' AND tgl_pengajuan LIKE '$periode%' AND a.status = 3";
+        $tgl_awal = $this->input->get("tgl_awal") ?? "awd";
+        $tgl_akhir = $this->input->get("tgl_akhir") ?? "awd";
+        $tgl_awal .= "-01";
+        $tgl_akhir .= "-01";
+        $query = "SELECT * FROM tb_lembur a LEFT JOIN pegawai b ON a.id_pegawai = b.nip WHERE a.id_pegawai = '$id_pegawai' AND tgl_pengajuan BETWEEN '$tgl_awal' AND '$tgl_akhir' AND a.status = 3";
         if ($id_pegawai == "semua") {
-            $query = "SELECT * FROM tb_lembur a LEFT JOIN pegawai b ON a.id_pegawai = b.nip WHERE a.status = 3 AND tgl_pengajuan LIKE '$periode%'";
+            $query = "SELECT * FROM tb_lembur a LEFT JOIN pegawai b ON a.id_pegawai = b.nip WHERE a.status = 3 AND tgl_pengajuan BETWEEN '$tgl_awal' AND '$tgl_akhir'";
         }
 		$data = [
 			"parapegawai"=>$this->db->query("SELECT * FROM pegawai")->result(),
             "data_lembur"=>$this->db->query($query)->result(),
-            "periode"=>$periode,
+            "tgl_awal"=>($this->input->get("tgl_awal")) ? substr($tgl_awal,0,7):null,
+            "tgl_akhir"=>($this->input->get("tgl_awal")) ? substr($tgl_akhir,0,7):null,
         ];
 		$this->template->load('template', 'laporan/lembur',$data);
     }

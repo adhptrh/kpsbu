@@ -20,6 +20,7 @@
         $q = "SELECT * FROM `jadwal_shift` 
         JOIN `shift` ON `shift`.`id` = `jadwal_shift`.`id_shift` 
         JOIN `pegawai` ON `pegawai`.`nip` = `jadwal_shift`.`id_pegawai` 
+        LEFT JOIN tb_cuti ON tb_cuti.nip = pegawai.nip
         WHERE `rfid` = '$rfid' 
         AND CURRENT_DATE BETWEEN `tgl_awal` and `tgl_akhir`
         AND pegawai.status = 1
@@ -30,8 +31,15 @@
 
         if ($peg) {
             # code...
+            if ($peg->tgl_mulai >= date("Y-m-d") && date("Y-m-d") <= $peg->tgl_selesai ) {
+                $absen = array(
+                    'status' => false,
+                    'info' => 'Hari ini anda cuti ('.$peg->nama.')'
+                );
+                echo json_encode($absen);
+                return;
+            }
             $id_absensi = $this->Absensi_model->absensiID();
-
             $q = "SELECT COUNT(*) AS jml FROM detail_absen_rfid WHERE id_absensi = '$id_absensi' AND rfid = '$rfid'";
             $jml_absen = $this->db->query($q)->row();
             if ($jml_absen->jml >= 2) {
@@ -167,16 +175,22 @@
     public function laporan_kehadiran($tgl_awal = '', $tgl_akhir = '')
     {
         $bulantahun = $this->input->get("bulantahun") ?? date("Y-m");
+        $tgl_awal = $this->input->get("tgl_awal") ?? "awd";
+        $tgl_akhir = $this->input->get("tgl_akhir") ?? "awd";
+        $tgl_awal .= "-01";
+        $tgl_akhir .= "-01";
         $detail = $this->db->query("SELECT a.*, b.tanggal, c.nama
         FROM detail_absen_rfid a 
         JOIN absensi b ON a.id_absensi = b.id
         JOIN pegawai c ON a.rfid = c.rfid
-        WHERE b.tanggal LIKE '$bulantahun%'
+        WHERE b.tanggal BETWEEN '$tgl_awal' AND '$tgl_akhir'
         ORDER BY a.id DESC")->result();
 
         $data = [
             'list' => $detail, 
-            'bulantahun' => $bulantahun
+            'bulantahun' => $bulantahun,
+            "tgl_awal"=>($this->input->get("tgl_awal")) ? substr($tgl_awal,0,7):null,
+            "tgl_akhir"=>($this->input->get("tgl_awal")) ? substr($tgl_akhir,0,7):null,
         ];
         $this->template->load('template', 'absensi/laporan_absensi', $data);
     }

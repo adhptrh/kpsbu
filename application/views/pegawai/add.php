@@ -71,6 +71,7 @@
                             <label for="ttl" class="col-sm-4 col-form-label">Tanggal Lahir</label>
                             <div class="col-sm-8">
                                 <input type="date" name="ttl" class="form-control" id="ttl" required>
+                                <span id="info_umur" class="text-danger">Umur harus lebih dari 16 tahun</span>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -166,12 +167,18 @@
                                 <input type="text" name="no_rek" class="form-control" id="no_rek" placeholder="No Rekening" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="no_rek" class="col-sm-3 col-form-label">TMT</label>
+                            <div class="col-sm-9">
+                                <input type="date" name="tmt" class="form-control" id="tmt" placeholder="TMT"  required>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="submit" id="save_chg" class="btn btn-primary" disabled>Save changes</button>
             </div>
             </form>
         </div>

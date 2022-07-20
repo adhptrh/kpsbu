@@ -1,0 +1,2 @@
+tabel pegawai:
+- tambah kolom tmt

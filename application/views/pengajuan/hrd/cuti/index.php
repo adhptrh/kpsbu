@@ -93,8 +93,8 @@
             onSelect: function (date) {
                 adddays = 0
                 var date2 = $('#start').datepicker('getDate');
-                $('#end').datepicker('option', 'minDate', new Date(new Date(date2).setDate(new Date(date2).getDate()+1)));
-                let dateend = new Date(new Date(date2).setDate(new Date(date2).getDate()+12-cuti_tahun_ini+1))
+                $('#end').datepicker('option', 'minDate', new Date(new Date(date2).setDate(new Date(date2).getDate())));
+                let dateend = new Date(new Date(date2).setDate(new Date(date2).getDate()+12-cuti_tahun_ini))
                 let cutileft = 12-cuti_tahun_ini
                 //loop date to dateend check if sunday
                 while (date2 <= dateend) {
@@ -133,7 +133,7 @@
             console.log(sundayCount)
 
             const diffInMs   = new Date(endDate) - new Date(startDate)
-            const diffInDays = (diffInMs / (1000 * 60 * 60 * 24))-sundayCount;
+            const diffInDays = (diffInMs / (1000 * 60 * 60 * 24))-sundayCount+1;
             if (diffInDays <= 12) {
                 $("#jml_hari_cuti").val(diffInDays);
                 $("#info").hide();

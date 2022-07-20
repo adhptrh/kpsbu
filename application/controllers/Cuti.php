@@ -174,15 +174,19 @@
     public function laporan() 
     {
         $id_pegawai = $this->input->get("id_pegawai") ?? "semua";
-        $periode = $this->input->get("periode") ?? date("Y-m");
-        $query = "SELECT * FROM tb_cuti a LEFT JOIN pegawai b ON a.nip = b.nip WHERE a.nip = '$id_pegawai' AND tgl_mulai LIKE '$periode%'";
+        $tgl_awal = $this->input->get("tgl_awal") ?? "awd";
+        $tgl_akhir = $this->input->get("tgl_akhir") ?? "awd";
+        $tgl_awal .= "-01";
+        $tgl_akhir .= "-01";
+        $query = "SELECT * FROM tb_cuti a LEFT JOIN pegawai b ON a.nip = b.nip WHERE a.nip = '$id_pegawai' AND tgl_mulai BETWEEN '$tgl_awal' AND '$tgl_akhir'";
         if ($id_pegawai == "semua") {
-            $query = "SELECT * FROM tb_cuti a LEFT JOIN pegawai b ON a.nip = b.nip WHERE tgl_mulai LIKE '$periode%'";
+            $query = "SELECT * FROM tb_cuti a LEFT JOIN pegawai b ON a.nip = b.nip WHERE tgl_mulai BETWEEN '$tgl_awal' AND '$tgl_akhir'";
         }
 		$data = [
 			"parapegawai"=>$this->db->query("SELECT * FROM pegawai")->result(),
             "data_cuti"=>$this->db->query($query)->result(),
-            "periode"=>$periode,
+            "tgl_awal"=>($this->input->get("tgl_awal")) ? substr($tgl_awal,0,7):null,
+            "tgl_akhir"=>($this->input->get("tgl_awal")) ? substr($tgl_akhir,0,7):null,
         ];
 		$this->template->load('template', 'laporan/cuti',$data);
     }
@@ -190,15 +194,20 @@
     public function laporan_melahirkan() 
     {
         $id_pegawai = $this->input->get("id_pegawai") ?? "semua";
+        $tgl_awal = $this->input->get("tgl_awal") ?? "awd";
+        $tgl_akhir = $this->input->get("tgl_akhir") ?? "awd";
+        $tgl_awal .= "-01";
+        $tgl_akhir .= "-01";
         $periode = $this->input->get("periode") ?? date("Y-m");
-        $query = "SELECT * FROM tb_cuti_melahirkan a LEFT JOIN pegawai b ON a.nip = b.nip WHERE a.nip = '$id_pegawai' AND tgl_mulai LIKE '$periode%'";
+        $query = "SELECT * FROM tb_cuti_melahirkan a LEFT JOIN pegawai b ON a.nip = b.nip WHERE a.nip = '$id_pegawai' AND tgl_mulai BETWEEN '$tgl_awal' AND '$tgl_akhir'";
         if ($id_pegawai == "semua") {
-            $query = "SELECT * FROM tb_cuti_melahirkan a LEFT JOIN pegawai b ON a.nip = b.nip WHERE tgl_mulai LIKE '$periode%'";
+            $query = "SELECT * FROM tb_cuti_melahirkan a LEFT JOIN pegawai b ON a.nip = b.nip WHERE tgl_mulai BETWEEN '$tgl_awal' AND '$tgl_akhir'";
         }
 		$data = [
 			"parapegawai"=>$this->db->query("SELECT * FROM pegawai")->result(),
             "data_cuti"=>$this->db->query($query)->result(),
-            "periode"=>$periode,
+            "tgl_awal"=>($this->input->get("tgl_awal")) ? substr($tgl_awal,0,7):null,
+            "tgl_akhir"=>($this->input->get("tgl_awal")) ? substr($tgl_akhir,0,7):null,
         ];
 		$this->template->load('template', 'laporan/cuti_melahirkan',$data);
     }

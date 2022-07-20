@@ -1,0 +1,8 @@
+Revisi Arles:
+- login per user
+- tmt diinputkan pada form tambah pegawai - c_master_data/pegawai
+- pegawai baru muncul saat tmt di tambah jadwal shift - shift
+- tanggal cuti hitung besoknya hari ke 2 bisa pilih hari saat dia pilih
+- penambahan pegawai jika umur lebih kecil 17 tahun gak bisa ke input
+- pegawai pada hari cuti tidak bisa melakukan presensi
+- laporan cuti,laporan cuti melahirkan, laporan lembur, laporan kehadiran, laporan penggajian atasnya samain dengan jurnal

@@ -14,10 +14,26 @@
                     <option value="<?= $pegawai->nip ?>"><?= $pegawai->nama ?></option>
                 <?php } ?>
             </select>
-            <label>Periode</label>
-            <input type="month" style="margin-right:10px;" class="form-control" name="periode" value="<?= $periode ?? date("Y-m") ?>">
+            <label>Tgl Awal</label>
+            <input type="month" style="margin-right:10px;" class="form-control" name="tgl_awal" value="<?= $tgl_awal  ?>">
+            <label>Tgl Akhir</label>
+            <input type="month" style="margin-right:10px;" class="form-control" name="tgl_akhir" value="<?= $tgl_akhir  ?>">
             <button class="btn btn-primary">Filter</button>
         </form>
+        <br>
+        <center>
+				<b>
+					<div style="font-size: 25px">KPSBU Lembang</div>
+					<div style="font-size: 20px">Jurnal</div>
+					<?php if (isset($tgl_awal, $tgl_akhir)) { ?>
+						<div style="font-size: 15px">
+							Periode <?php echo $tgl_awal ?> s/d <?php echo $tgl_akhir;
+															?>
+						</div><?php
+							} ?>
+				</b>
+			</center>
+            <br><br>
         <table id="datatable-buttons" class="table table-striped table-bordered table-hover jambo-table dataTable no-footer">
             <thead>
                 <tr class="headings">

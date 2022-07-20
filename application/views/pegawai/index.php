@@ -51,7 +51,7 @@
                                 <td><?= $value->alamat ?></td>
                                 <td><?= $value->tgl_lahir ?></td>
                                 <td><?= $value->created_at ?></td>
-                                <td><?= $value->tglmulaibekerja ?></td>
+                                <td><?= $value->tmt ?></td>
                                 <td>
                                     <?php if ($value->status==1) { ?>
                                         <button class="btn btn-xs btn-success status" data-id="<?= $value->id?>">Aktif</button>
@@ -78,9 +78,23 @@
 <?php $this->load->view('pegawai/edit');?>
 <?php $this->load->view('pegawai/detail');?>
 <script>
+    function calculateAge(birthday) { // birthday is a date
+        var ageDifMs = Date.now() - birthday;
+        var ageDate = new Date(ageDifMs); // miliseconds from epoch
+        return Math.abs(ageDate.getUTCFullYear() - 1970);
+    }
     $(document).ready(function() {
         $("#hide_ptkp").hide()
-        
+        $("#ttl").on("change",() => {
+            let umur = calculateAge(new Date($("#ttl").val()))
+            console.log(umur)
+            if (umur<17) {
+                $("#save_chg").prop("disabled",true)
+                $("#info_umur").show()
+            }else{
+                $("#info_umur").hide()
+            }
+        })
         $('#jp').on('change', function () {
             /* $("#hide_ptkp").hide() */
             var val = $(this).val()

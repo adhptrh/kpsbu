@@ -183,16 +183,21 @@ class Penggajian extends CI_Controller
         $bulan = $this->input->post('bulan');
         $tahun = $this->input->post('tahun');
         $periode = $tahun.'-'.$bulan;
-        if (isset($periode)) {
-            $list = $this->db->query("SELECT b.*, a.tanggal, a.nm_pegawai
-            from tb_penggajian a
-            JOIN tb_detail_penggajian b ON a.unik = b.unik
-            where tanggal LIKE '$periode%'  order by tanggal asc ")->result();
-            $data = [
-                'list' => $list,
-            ];
-            $this->template->load('template', 'penggajian/laporan_penggajian', $data);
-        }
+        $tgl_awal = $this->input->get("tgl_awal") ?? "awd";
+        $tgl_akhir = $this->input->get("tgl_akhir") ?? "awd";
+        $tgl_awal .= "-01";
+        $tgl_akhir .= "-01";
+        $list = $this->db->query("SELECT b.*, a.tanggal, a.nm_pegawai
+        from tb_penggajian a
+        JOIN tb_detail_penggajian b ON a.unik = b.unik
+        where tanggal BETWEEN '$tgl_awal' AND '$tgl_akhir'  order by tanggal asc ")->result();
+        $data = [
+            'list' => $list,
+            "tgl_awal"=>($this->input->get("tgl_awal")) ? substr($tgl_awal,0,7):null,
+            "tgl_akhir"=>($this->input->get("tgl_awal")) ? substr($tgl_akhir,0,7):null,
+        ];
+        $this->template->load('template', 'penggajian/laporan_penggajian', $data);
+        
     }
 
     public function tunjanganhariraya() {

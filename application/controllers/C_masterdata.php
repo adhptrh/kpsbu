@@ -2608,7 +2608,7 @@ class C_masterdata extends CI_controller
       $jp = $this->db->query("SELECT * FROM tb_jenis_pegawai")->result();
       $jp2 = $this->db->query("SELECT * FROM tb_jenis_pegawai a GROUP BY a.desc")->result();
       $list = $this->db->get('pegawai')->result();
-      foreach ($list as $k=>$v) {
+      /* foreach ($list as $k=>$v) {
          $tgldaftar = $v->created_at;
          $bulan = intval(date("m",strtotime($tgldaftar)));
          $tahun = intval(date("Y",strtotime($tgldaftar)));
@@ -2621,7 +2621,7 @@ class C_masterdata extends CI_controller
          $tahun = strval($tahun);
          $bulan = sprintf("%02d", $bulan);
          $v->tglmulaibekerja = $tahun."-".$bulan."-01";
-      }
+      } */
       $nip = $this->M_masterdata->nip_otomatis();
       // print_r($nip);exit;
 
@@ -2658,7 +2658,8 @@ class C_masterdata extends CI_controller
          'jurusan_pendidikan' => $this->input->post('jurusan_pendidikan'),
          'agama' => $this->input->post('agama'),
          'jenis_kelamin' => $this->input->post('jenis_kelamin'),
-         'no_anggota' => $this->M_anggota->kd_anggota()
+         'no_anggota' => $this->M_anggota->kd_anggota(),
+         'tmt' => $this->input->post("tmt"),
       ];
       $this->db->insert('pegawai', $data);
 

@@ -53,7 +53,7 @@
                             $no = 1;    
                             foreach ($pegawai as $key => $value) { ?>
                             <?php 
-                            if ($bulantahun < $value->created_at ) continue;
+                            if ($value->tmt > $bulantahun."-01") continue;
                             $this->db->where('nm_pegawai', $value->nama);
                             $detail = $this->db->get('tb_penggajian')->result();
                             // print_r($detail);exit;
