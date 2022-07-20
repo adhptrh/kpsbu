@@ -92,6 +92,7 @@
                 $("#save_chg").prop("disabled",true)
                 $("#info_umur").show()
             }else{
+                $("#save_chg").prop("disabled",false)
                 $("#info_umur").hide()
             }
         })
