@@ -44,7 +44,7 @@ class Penggajian extends CI_Controller
         $ketptkp = $pegawai->id_jenis_pegawai == "Kontrak" ? "Tidak Kena Pajak" : "Kena Pejak";
         $tunjanganjabatan = $pegawai->tunjangan_jabatan;
         $tunjangankesehatan = $pegawai->tunjangan_kesehatan;
-        $totalbruto = $gajipokok+$tunjangankesehatan+$tunjanganjabatan+$bonus+$lembur;
+        $totalbruto = $gajipokok+$tunjangankesehatan+$tunjanganjabatan+$bonus;
         //$totalnettosetahun = ($totalnetto*12)+$tunjanganhariraya;
         $totalbrutosetahun = ($totalbruto*12)+$tunjanganhariraya;
         $biayajabatan = $totalbrutosetahun*0.05;
@@ -86,7 +86,6 @@ class Penggajian extends CI_Controller
             "pph21" => $pph21,
             "gajibersih"=>$gajibersih,
             "bonus"=>$bonus,
-            "lembur"=>$lembur,
             "nip"=>$nip,
         ];
         return $data;

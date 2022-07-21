@@ -68,14 +68,14 @@ class Lembur extends CI_Controller
             $this->db->where('id_pengajuan', $id_pengajuan);
             $this->db->update('tb_lembur');
             // kirim ke db pengajuan jurnal 
-           /*  $pengajuan = [
+            $pengajuan = [
                 'kode' => $id_pengajuan,
                 'tanggal' => date('Ymd'),
                 'nominal' => $total,
                 'jenis' => 'pengajuan lembur',
                 'status' => 'pending',
             ];
-            $this->db->insert("pengajuan_jurnal", $pengajuan); */
+            $this->db->insert("pengajuan_jurnal", $pengajuan);
         }
         
     }

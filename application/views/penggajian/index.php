@@ -41,7 +41,6 @@
                                     <th>Tunjangan Kesehatan</th>
                                     <th>Tunjangan Jabatan</th>
                                     <th>Tunjangan Hari Raya</th>
-                                    <th>Lembur</th>
                                     <th>Bonus</th>
                                     <th>PTKP</th>
                                     <th>Gaji Bersih</th>
@@ -62,7 +61,7 @@
                                 
                                 <tr>
                                     <td><?= $no++ ?>
-                                    <?php if (is_null($value->tgl_gaji) && $value->created_at < date("Y-m") ) : ?>
+                                    <?php if (is_null($value->tgl_gaji)) : ?>
                                         <input type="hidden" name="nip[]" value="<?=$value->nip?>">
                                     <?php endif ?>
                                 </td>
@@ -76,7 +75,6 @@
                                     <td class="text-right"><?= format_rp($pegawaidetail[$value->nip]["tunjangankesehatan"]) ?></td>
                                     <td class="text-right"><?= format_rp($pegawaidetail[$value->nip]["tunjanganjabatan"]) ?></td>
                                     <td class="text-right"><?= format_rp($pegawaidetail[$value->nip]["tunjanganhariraya"]) ?></td>
-                                    <td class="text-right"><?= format_rp($pegawaidetail[$value->nip]["lembur"] ?? 0) ?></td>
                                     <td class="text-right"><?= format_rp($pegawaidetail[$value->nip]["bonus"]) ?></td>
                                     <td class="text-right"><?= format_rp($pegawaidetail[$value->nip]["ptkp"]) ?></td>
                                     <td class="text-right"><?= format_rp($pegawaidetail[$value->nip]["gajibersih"]) ?></td>
