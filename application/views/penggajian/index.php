@@ -26,6 +26,14 @@
                     <?php echo $this->session->flashdata('notif_ubah'); ?>
                 </div>
                 <form action="<?= base_url("Penggajian/bayar_semua_gaji")?>" method="post">
+                <?php 
+                foreach ($pegawai as $key => $value) { ?>
+                <?php 
+                if ($value->tmt > $bulantahun."-01") continue;
+                if (is_null($value->tgl_gaji)) { ?>
+                    <input type="hidden" name="nip[]" value="<?=$value->nip?>">
+                <?php }
+                } ?>
                 <div class="table-responsive">
                         <table class="table table-bordered" id="datatable">
                             <thead>
@@ -61,9 +69,6 @@
                                 
                                 <tr>
                                     <td><?= $no++ ?>
-                                    <?php if (is_null($value->tgl_gaji)) : ?>
-                                        <input type="hidden" name="nip[]" value="<?=$value->nip?>">
-                                    <?php endif ?>
                                 </td>
                                     <td style="text-align:right;"><?= $value->nip ?></td>
                                     <td style="text-align:right;"><?= $value->npwp ?></td>

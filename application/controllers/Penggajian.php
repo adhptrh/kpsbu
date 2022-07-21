@@ -4,7 +4,12 @@ class Penggajian extends CI_Controller
     public function index()
     {
         $bulantahun = $this->input->get("bulantahun") ?? date("Y-m");
-        $pegawai = $this->db->query("SELECT a.*, b.tanggal as tgl_gaji FROM pegawai a LEFT JOIN tb_penggajian b ON b.nm_pegawai = a.nama WHERE (tanggal IS NULL OR tanggal LIKE '$bulantahun%') AND a.status = 1 GROUP BY a.nama;")->result();
+        $pegawai = $this->db->query("SELECT a.*, b.tanggal as tgl_gaji FROM pegawai a LEFT JOIN tb_penggajian b ON b.nm_pegawai = a.nama AND a.status = 1 GROUP BY a.nama;")->result();
+        foreach ($pegawai as $key => $value) {
+            if (substr($value->tgl_gaji,0,7) != $bulantahun) {
+                $value->tgl_gaji = null;
+            }
+        }
         $pegawais = [];
         foreach ($pegawai as $pgw) {
             $pegawais[$pgw->nip] = $this->slip_gaji($pgw->nip,$bulantahun);
