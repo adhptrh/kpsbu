@@ -50,6 +50,7 @@
                 echo json_encode($absen);
                 return;
             }
+
             $id_absensi = $this->Absensi_model->absensiID();
             $q = "SELECT COUNT(*) AS jml FROM detail_absen_rfid WHERE id_absensi = '$id_absensi' AND rfid = '$rfid'";
             $jml_absen = $this->db->query($q)->row();
@@ -64,7 +65,8 @@
                     'status' => 'keluar',
                     'rfid' => $rfid,
                     'jam' => date("H:i:s"),
-                    'keterangan' => "Presensi Keluar"
+                    'keterangan' => "Presensi Keluar",
+                    'id_shift'=>$peg->id_shift,
                 );
                 $this->db->insert("detail_absen_rfid",$data);
                 $absen = array(
@@ -82,7 +84,8 @@
                     'status' => 'masuk',
                     'rfid' => $rfid,
                     'jam' => date("H:i:s"),
-                    'keterangan' => "Presensi Masuk"
+                    'keterangan' => "Presensi Masuk",
+                    'id_shift'=>$peg->id_shift,
                 );
                 $this->db->insert("detail_absen_rfid",$data);
                 $absen = array(
@@ -95,7 +98,8 @@
                     'status' => 'masuk',
                     'rfid' => $rfid,
                     'jam' => date("H:i:s"),
-                    'keterangan' => "Presensi Masuk, Telat"
+                    'keterangan' => "Presensi Masuk, Telat",
+                    'id_shift'=>$peg->id_shift,
                 );
                 $this->db->insert("detail_absen_rfid",$data);
                 $absen = array(
@@ -190,10 +194,11 @@
         $tgl_akhir = $this->input->get("tgl_akhir") ?? "awd";
         $tgl_awal .= "-01";
         $tgl_akhir .= "-01";
-        $detail = $this->db->query("SELECT a.*, b.tanggal, c.nama
+        $detail = $this->db->query("SELECT a.*, b.tanggal, c.nama, d.desc as jenis_shift
         FROM detail_absen_rfid a 
         JOIN absensi b ON a.id_absensi = b.id
         JOIN pegawai c ON a.rfid = c.rfid
+        JOIN shift d ON a.id_shift = d.id
         WHERE b.tanggal BETWEEN '$tgl_awal' AND '$tgl_akhir'
         ORDER BY a.id DESC")->result();
 

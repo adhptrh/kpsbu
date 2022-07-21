@@ -49,6 +49,7 @@
                                 <th>Jam</th>
                                 <th>Nama Pegawai</th>
                                 <th>No. RFID</th>
+                                <th>Jenis Shift</th>
                                 <th class="text-center">Keterangan</th>
                             </tr>
                         </thead>
@@ -64,6 +65,7 @@
                                 <td><?= $value->jam ?></td>
                                 <td><?= $value->nama ?></td>
                                 <td><?= $value->rfid ?></td>
+                                <td><?= $value->jenis_shift ?></td>
                                 <td class="text-center">
                                     <?= $value->keterangan == 'Presensi Keluar' ? '<button class="btn btn-sm btn-default">'.$value->keterangan.'</button>' : '<button class="btn btn-sm btn-primary">'.$value->keterangan.'</button>';  ?>
                                 </td>

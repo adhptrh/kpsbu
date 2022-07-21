@@ -7,6 +7,7 @@ Revisi Arles:
 - laporan cuti,laporan cuti melahirkan, laporan lembur, laporan kehadiran, laporan penggajian atasnya samain dengan jurnal
 - penggajian tambah nominal lembur masuk ke perhitungan bruto
 - penambahan pegawai jika umur lebih kecil 17 tahun gak bisa ke input
+- tampil shift id di laporan
 
 menu personalia:
     HRD
@@ -49,3 +50,7 @@ Revisi Salma:
 Admin: Admiun sama bagian keangan
 Bagian Keuangan: Masterdata Aktifitas, COA, Bank, Transaksi Penerimaan Pengeluaran, Transaksi Bank, Pengajuan Jurnal, Buku Pembantu Kas, Laporan yg sma kyk user
 Pemilik: Laporan Arus Kas, Jurnal, Buku Besar, Buku Kas Kecil, Buku Pembantu Bank
+
+Revisi Sarah:
+- Filter Laporan Neraca, Laporan Perubahan Modal, Laporan Simpanan
+- Manajemen User

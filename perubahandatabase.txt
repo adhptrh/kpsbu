@@ -1,2 +1,5 @@
 tabel pegawai:
 - tambah kolom tmt
+
+tabel detail_absen_rfid:
+- tambh kolom id_shift
