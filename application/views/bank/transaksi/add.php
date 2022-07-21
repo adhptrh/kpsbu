@@ -28,19 +28,19 @@
             </div>
             <div class="form-group">
                 <label>Nominal</label>
-                <input class="form-control" type="number" min="0" name="nominal" required>
+                <input class="form-control inputtitik" type="text" min="0" name="nominal" required>
             </div>
             <div class="form-group">
                 <label>Bunga Bank</label>
-                <input class="form-control" type="number" min="0" name="bunga" required>
+                <input class="form-control inputtitik" type="text" min="0" name="bunga" required>
             </div>
             <div class="form-group">
                 <label>Pajak</label>
-                <input class="form-control" type="number" min="0" name="pajak" required>
+                <input class="form-control inputtitik" type="text" min="0" name="pajak" required>
             </div>
             <div class="form-group">
                 <label>Biaya Admin</label>
-                <input class="form-control" type="number" min="0" name="biaya_admin" required>
+                <input class="form-control inputtitik" type="text" min="0" name="biaya_admin" required>
             </div>
             <div class="form-group">
                 <label>Jenis Transaksi</label>
@@ -55,3 +55,29 @@
         </form>
     </div>
 </div>
+
+<script>
+            function formatRupiah(angka, prefix) {
+            var number_string = angka.replace(/[^,\d]/g, "").toString(),
+                split = number_string.split(","),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+                console.log(number_string)
+
+            // tambahkan titik jika yang di input sudah menjadi angka ribuan
+            if (ribuan) {
+                separator = sisa ? "." : "";
+                rupiah += separator + ribuan.join(".");
+            }
+
+            rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+            return prefix == undefined ? rupiah : rupiah ? rupiah : "";
+            }
+            $(document).ready(()=>{
+                $(".inputtitik").keyup((e)=>{
+                    var nominal = $(e.target).val()
+                    $(e.target).val(formatRupiah(nominal))
+                })
+            })
+            </script>

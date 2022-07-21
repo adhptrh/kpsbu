@@ -5918,11 +5918,11 @@ group by no_bbp";
             "kd_coa" => 1116,
             "id_ref" => $id_ref,
             "bukti_transaksi" => $namafile,
-            "bunga" => $this->input->post("bunga"),
-            "pajak" => $this->input->post("pajak"),
-            "biaya_admin" => $this->input->post("biaya_admin"),
+            "bunga" => str_replace(".","",$this->input->post("bunga")),
+            "pajak" => str_replace(".","",$this->input->post("pajak")),
+            "biaya_admin" => str_replace(".","",$this->input->post("biaya_admin")),
             "posisi_dr_cr" => ($this->input->post("jenis_transaksi") == "debit") ? "d" : "k",
-            "nominal" => $this->input->post("nominal"),
+            "nominal" => str_replace(".","",$this->input->post("nominal")),
             "keterangan" => $this->input->post("uraian"),
             "tanggal" => $this->input->post("tanggal")
          ];

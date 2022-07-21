@@ -31,7 +31,18 @@
 
         if ($peg) {
             # code...
-            if ($peg->tgl_mulai >= date("Y-m-d") && date("Y-m-d") <= $peg->tgl_selesai ) {
+            $cuti = $this->db->query("SELECT * FROM tb_cuti WHERE nip = '$peg->nip' AND status = 1 AND '".date("Y-m-d")."' BETWEEN tgl_mulai AND tgl_selesai")->result();
+            if (count($cuti) > 0) {
+                $absen = array(
+                    'status' => false,
+                    'info' => 'Hari ini anda cuti ('.$peg->nama.')'
+                );
+                echo json_encode($absen);
+                return;
+            }
+
+            $cutimelahirkan = $this->db->query("SELECT * FROM tb_cuti_melahirkan WHERE nip = '$peg->nip' AND status = 1 AND '".date("Y-m-d")."' BETWEEN tgl_mulai AND tgl_selesai")->result();
+            if (count($cutimelahirkan) > 0) {
                 $absen = array(
                     'status' => false,
                     'info' => 'Hari ini anda cuti ('.$peg->nama.')'
