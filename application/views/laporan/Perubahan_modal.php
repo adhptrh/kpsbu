@@ -9,17 +9,35 @@
 			<h3 class="panel-title"><b>Perubahan Modal</b></h3>
 		</div>
 		<div class="x_content">
-			
 
-			<p>
-				<center><b>
-						<div style="font-size: 25px">
-							KPSBU Lembang</div>
-						<div style="font-size: 20px">Laporan Perubahan Modal</div>
-						<p>Periode per 31 Desember Tahun <?= date("Y") ?></div>
-					</b>
-				</center>
-			</p>
+
+			<div class="row">
+				<div class="col-sm-7">
+					<form method="get" class="form-inline">
+						<span>Periode</span>
+						<select name="tahun" class="form-control">
+							<?php for ($i = 2020; $i <= date("Y"); $i++) { ?>
+								<option value="<?= $i ?>" <?php if ($i == $tahun) echo "selected"; ?>><?= $i ?></option>
+							<?php } ?>
+						</select>
+						<input type="submit" value="filter" class="btn btn-info">
+					</form>
+				</div>
+			</div>
+
+			<br>
+			<center>
+				<b>
+					<div style="font-size: 25px">KPSBU Lembang</div>
+					<div style="font-size: 20px">Laporan Perubahan Modal</div>
+					<?php if (isset($tahun)) { ?>
+						<div style="font-size: 15px">
+							Periode <?php echo $tahun ?>
+						</div><?php
+							} ?>
+				</b>
+			</center>
+			<br>
 
 			<table id="datatable" class="table table-striped table-bordered table-hover jambo_table">
 				<thead>

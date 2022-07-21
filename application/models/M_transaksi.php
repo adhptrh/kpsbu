@@ -427,9 +427,12 @@ class m_transaksi extends CI_Model
 		return $this->db->query($q);
 	}
 
-	public function data_laporan_shu()
+	public function data_laporan_shu($bulantahun = null)
 	{
 		$year = date('Y');
+		if ($bulantahun != null) {
+			$year = $bulantahun;
+		}
 		$q = "SELECT 
         z.nama_peternak, 
         z.no_peternak, 
@@ -452,7 +455,7 @@ class m_transaksi extends CI_Model
             FROM peternak a 
             LEFT JOIN log_pembayaran_susu b ON a.no_peternak = b.id_anggota
             LEFT JOIN pembayaran_susu c ON b.id_pembayaran = c.kode_pembayaran
-            WHERE left(tgl_transaksi, 4) = '$year'
+            WHERE tgl_transaksi LIKE '$year%'
             GROUP BY nama_peternak
         ) AS x ON z.no_peternak = x.no_peternak
         WHERE z.is_deactive = 0 ";

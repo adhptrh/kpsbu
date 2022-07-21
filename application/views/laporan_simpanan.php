@@ -17,6 +17,29 @@
                 <div id="notif">
                     <?php echo $this->session->flashdata('notif_ubah'); ?>
                 </div>
+                <div class="row">
+				<div class="col-sm-7">
+					<form method="get" class="form-inline">
+						<span>Periode</span>
+						<input type="month" name="bulantahun" class="form-control">
+						<input type="submit" value="filter" class="btn btn-info">
+					</form>
+				</div>
+			</div>
+
+			<br>
+			<center>
+				<b>
+					<div style="font-size: 25px">KPSBU Lembang</div>
+					<div style="font-size: 20px">Laporan Simpanan</div>
+					<?php if (isset($bulantahun)) { ?>
+						<div style="font-size: 15px">
+							Periode <?php echo $bulantahun ?>
+						</div><?php
+							} ?>
+				</b>
+			</center>
+			<br>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped">
                         <thead>

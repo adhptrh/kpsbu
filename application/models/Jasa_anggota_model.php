@@ -1,9 +1,12 @@
 <?php
 class Jasa_anggota_model extends CI_Model {
-    public function getJasaAnggota() {
+    public function getJasaAnggota($tahun = null) {
         $kode = $this->M_transaksi->pembagian_kode();
         $kode_total = $this->M_transaksi->pembagian_kode_total();
-        $cek_tahun = date('Y');
+        $cek_tahun = date("Y");
+        if ($tahun != null) {
+            $cek_tahun = $tahun;
+        }
 
         $anggota = $this->db->query("SELECT z.no_peternak, z.nama_peternak, x.*
         FROM peternak z
@@ -19,11 +22,11 @@ class Jasa_anggota_model extends CI_Model {
 
         $list = $this->db->query("SELECT a.*, b.nama_peternak
         FROM pembagian_shu a
-        JOIN peternak b ON a.id_anggota = b.no_peternak")->result();
+        JOIN peternak b ON a.id_anggota = b.no_peternak WHERE a.tanggal LIKE '$cek_tahun-%'")->result();
 
         $total_shu = $this->db->query("SELECT SUM(sisa_hasil_usaha) AS shu
         FROM pembagian_shu a
-        JOIN peternak b ON a.id_anggota = b.no_peternak")->row()->shu;
+        JOIN peternak b ON a.id_anggota = b.no_peternak WHERE a.tanggal LIKE '$cek_tahun-%'")->row()->shu;
 
         $cek = $this->db->get('transaksi_shu')->num_rows();
         // print_r($cek);exit;

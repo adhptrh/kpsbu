@@ -232,10 +232,12 @@ class Laporan extends CI_Controller
         //     GROUP BY nama_peternak
         // ) AS x ON z.no_peternak = x.no_peternak
         // WHERE z.is_deactive = 0")->result();
-        $list = $this->M_transaksi->data_laporan_shu()->result();
+        $bulantahun = $this->input->get("bulantahun") ?? date("Y-m");
+        $list = $this->M_transaksi->data_laporan_shu($bulantahun)->result();
         // print_r($list);exit;
         $data = [
             'list' => $list,
+            'bulantahun' => $bulantahun,
         ];
         $this->template->load('template', 'laporan_simpanan', $data);
     }

@@ -9,8 +9,9 @@ class Perubahan_modal extends CI_Controller {
     }
 
     public function laporan() {
-        $modalAwal = $this->laporan->getLaporanNeraca()["modal"];
-        $jasanaggota = $this->Jasa_anggota_model->getJasaAnggota();
+        $tahun = $this->input->get('tahun') ?? date("Y");
+        $modalAwal = $this->laporan->getLaporanNeracaYear($tahun)["modal"];
+        $jasanaggota = $this->Jasa_anggota_model->getJasaAnggota($tahun);
         $no = 1;
         $tot_shu = 0;
         $persen = 0;
@@ -21,7 +22,7 @@ class Perubahan_modal extends CI_Controller {
             
         }
 
-        $labaditahan = $this->db->query("SELECT * FROM jurnal WHERE no_coa = '3200' AND YEAR(tgl_jurnal) = '".date("Y")."'")->result()[0]->nominal ?? "0";
+        $labaditahan = $this->db->query("SELECT * FROM jurnal WHERE no_coa = '3200' AND YEAR(tgl_jurnal) = '".$tahun."'")->result()[0]->nominal ?? "0";
         $total=$tot_shu+$labaditahan;
         $modalakhir = $total+$modalAwal;
         $data = [
@@ -30,6 +31,7 @@ class Perubahan_modal extends CI_Controller {
             'labaditahan'=>$labaditahan,
             "total"=>$total,
             "modalakhir"=>$modalakhir,
+            "tahun"=>$tahun,
         ];
         $this->template->load('template','laporan/Perubahan_modal',$data);
     }
