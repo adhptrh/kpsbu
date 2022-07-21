@@ -46,7 +46,11 @@
             </thead>
             <tbody>
                 <?php
+                $total_jam = 0;
+                $total_nominal_lembur = 0;
                 foreach ($data_lembur as $k=>$lembur) {
+                    $total_nominal_lembur += $lembur->total_nominal_lembur;
+                    $total_jam += $lembur->total_jam;
                     ?>
                     <tr>
                         <td><?= $k+1 ?></td>
@@ -59,6 +63,13 @@
                 }
                 ?>
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-right">Total</td>
+                    <td class="text-right"><?= $total_jam ?></td>
+                    <td class="text-right"><?= format_rp($total_nominal_lembur) ?></td>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>

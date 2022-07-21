@@ -24,8 +24,8 @@
                         <thead>
                             <tr>
                                 <th style="width: 5%;">#</th>
-                                <th>Nama Jenis Pegawai</th>
                                 <th>Pendidikan Terakhir</th>
+                                <th>Nama Jenis Pegawai</th>
                                 <th>Gaji Pokok</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
@@ -36,8 +36,8 @@
                             foreach ($jp as $key => $value) { ?>
                             <tr>
                                 <td><?= $no++ ?></td>
-                                <td><?= $value->desc?></td>
                                 <td><?= $value->pendidikan?></td>
+                                <td><?= $value->desc?></td>
                                 <td class="text-right"><?= format_rp($value->gaji_pokok)?></td>
                                 <td class="text-center">
                                     <a href="#edit_<?= $value->id ?>" data-toggle="modal" class="btn btn-default btn-sm">Edit</a>
