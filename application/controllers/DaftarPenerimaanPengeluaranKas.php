@@ -114,7 +114,7 @@
                 'no_coa' => $no_coa[$key],
                 'nama_coa' => $nama_coa[$key],
                 'aktivitas' => $nama_aktivitas[$key],
-                'nominal' => $nominal[$key],
+                'nominal' => str_replace(".","",$nominal[$key]),
                 'posisi_dc' => $posisi_dc[$key],
             ];
             $this->db->insert('detail_penerimaan_pengeluaran_kas', $detail);
@@ -125,7 +125,7 @@
                 'tgl_jurnal' => $tanggal,
                 'no_coa' => $no_coa[$key],
                 'posisi_dr_cr' => $posisi_dc[$key],
-                'nominal' => $nominal[$key],
+                'nominal' => str_replace(".","",$nominal[$key]),
             );
             $this->db->insert('jurnal', $jurnal);
 
@@ -133,7 +133,7 @@
                 $data = [
                     "id_ref"=>$no_dokumen,
                     "tanggal"=>$tanggal,
-                    "nominal"=>$nominal[$key],
+                    "nominal"=>str_replace(".","",$nominal[$key]),
                     "kd_coa"=>'1111',
                     "posisi_dr_cr"=>$posisi_dc[$key],
                     "keterangan"=>$deskripsi,

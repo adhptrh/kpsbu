@@ -42,3 +42,10 @@ Menu IT:
 
 Menu Keuangan
     
+Revisi Salma:
+- Status tombol approval dipisah
+- Setiap nominal dikasih titik di input daftar penerimaan pengeluaran kas, transaksi bank
+- Manajemen User
+Admin: Admiun sama bagian keangan
+Bagian Keuangan: Masterdata Aktifitas, COA, Bank, Transaksi Penerimaan Pengeluaran, Transaksi Bank, Pengajuan Jurnal, Buku Pembantu Kas, Laporan yg sma kyk user
+Pemilik: Laporan Arus Kas, Jurnal, Buku Besar, Buku Kas Kecil, Buku Pembantu Bank

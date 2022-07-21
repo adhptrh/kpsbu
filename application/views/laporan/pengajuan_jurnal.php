@@ -17,8 +17,8 @@
                 <div id="notif">
                     <?php echo $this->session->flashdata('notif_ubah'); ?>
                 </div>
+                <form action="<?= base_url("c_transaksi/multiple_status_pengajuan") ?>" method="post" enctype="multipart/form-data">
                 <div class="table-responsive">
-                    <form action="<?= base_url("c_transaksi/multiple_status_pengajuan") ?>" method="post" enctype="multipart/form-data">
                         <?php
                         foreach ($list as $k => $v) {
                             if ($v->status == "pending") {
@@ -39,8 +39,8 @@
                                     <th class="text-center">Tanggal</th>
                                     <th class="text-center">Nominal</th>
                                     <th class="text-center">Bukti Pembayaran</th>
-                                    <th class="text-center">Aksi</th>
                                     <th class="text-center">Status</th>
+                                    <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -78,27 +78,30 @@
                                                 <span class="text-muted">Tidak ada bukti pembayaran</span>
                                             <?php endif ?>
                                         </td>
-                                        <td>
+                                        <td class="text-center">
                                             <?php if ($value->status == 'pending') { ?>
-                                                <a href="<?= base_url("c_transaksi/input_bukti_pembayaran/".$value->kode) ?>">
-                                                    <i class="fa fa-edit"></i>
-                                                    <span>Input/Ubah Bukti Pembayaran</span>
+                                                <a class="btn btn-xs btn-warning"><?= $value->status ?></a>
+                                                <?php } else { ?>
+                                                    <a href="#" class="btn btn-xs btn-success"><?= $value->status ?></a>
+                                                    <?php } ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php if ($value->status == 'pending') { ?>
+                                                <a class="btn btn-xs btn-primary" href="<?= base_url("c_transaksi/input_bukti_pembayaran/".$value->kode) ?>">
+                                                    Input/Ubah Bukti Pembayaran
                                                 </a>
                                             <?php } ?>
-                                        </td>
-                                        <td >
                                             <?php if ($value->status == 'pending') { ?>
-                                                <a href="<?= base_url('c_transaksi/status_pengajuan_subm/' . $value->kode . '/' . $value->tanggal . '/' . $value->nominal.'/true') ?>" onclick="return confirm('Anda yakin?')" class="btn btn-xs btn-warning"><?= $value->status ?></a>
-                                            <?php } else { ?>
-                                                <a href="#" class="btn btn-xs btn-success"><?= $value->status ?></a>
-                                            <?php } ?>
+                                                <a href="<?= base_url('c_transaksi/status_pengajuan_subm/' . $value->kode . '/' . $value->tanggal . '/' . $value->nominal.'/true') ?>" onclick="return confirm('Anda yakin?')" class="btn btn-xs btn-primary">Approve Jurnal</a>
+                                                <?php } else { ?>
+                                                    <?php } ?>
                                         </td>
                                     </tr>
                                     
                                 <?php } ?>
                             </tbody>
                         </table>
-                        <button class="btn btn-primary">Verifikasi</button>
+                        <button class="btn btn-primary">Approve Jurnal</button>
                     </form>
                 </div>
             </div>

@@ -92,7 +92,9 @@
                                             <?php } ?>
                                         </select>
                                     </td>
-                                    <td><input type="number" class="form-control" type="number" min="0" name="nominal[]" id="nominal1" required></td>
+                                    <td>
+                                        <input class="form-control inputtitik" type="text" min="0" name="nominal[]" id="nominal1"  required>
+                                    </td>
                                     <td>
                                         <select name="posisi_dc[]" id="posisi_dc1" class="form-control">
                                             <option value="d">D</option>
@@ -130,10 +132,31 @@
             }
         });
     }
+    function formatRupiah(angka, prefix) {
+      var number_string = angka.replace(/[^,\d]/g, "").toString(),
+        split = number_string.split(","),
+        sisa = split[0].length % 3,
+        rupiah = split[0].substr(0, sisa),
+        ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+        console.log(number_string)
 
+      // tambahkan titik jika yang di input sudah menjadi angka ribuan
+      if (ribuan) {
+        separator = sisa ? "." : "";
+        rupiah += separator + ribuan.join(".");
+      }
+
+      rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+      return prefix == undefined ? rupiah : rupiah ? rupiah : "";
+    }
     $(document).ready(function() {
         var i = 2;
+        $(".inputtitik").keyup((e)=>{
+            $(".inputtitik").val(formatRupiah($(".inputtitik").val()))
+            //$(".inputtitik").val($(".inputtitik_v").val().replaceAll(".",""))
+        })
         $(".add-row").click(function() {
+            console.log("add")
             var data = `<tr>
                             <td>
                                 <select name="no_coa[]" onchange="getCoa('${i}')" id="no_coa${i}" class="form-control" required>
@@ -152,7 +175,9 @@
                                     <?php } ?>
                                 </select>
                             </td>
-                            <td><input type="number" class="form-control" name="nominal[]" id="nominal${i}"></td>
+                            <td>
+                            <input class="form-control inputtitik${i}" type="text" name="nominal[]" id="nominal${i}">
+                            </td>
                             <td>
                                 <select name="posisi_dc[]" id="posisi_dc${i}" class="form-control">
                                     <option value="d">D</option>
@@ -162,7 +187,14 @@
                             <td>
                                 <button type="button" class="btn btn-danger remove-row">Hapus Baris</button>
                             </td>
-                        </tr>`;
+                        </tr>
+                        
+                        \<script\>
+                        $(".inputtitik${i}").keyup((e)=>{
+                            $(".inputtitik${i}").val(formatRupiah($(".inputtitik${i}").val()))
+                        })
+                        \<\/script\>
+                        `;
             $('table').append(data);
             i++;
         });
