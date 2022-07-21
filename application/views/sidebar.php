@@ -330,6 +330,7 @@
                         <!-- laporan sarah -->
                         <li><a href="<?php echo site_url(); ?>laporan/laporan_simpanan">Laporan Simpanan</a></li>
                         <li><a href="<?php echo site_url(); ?>shu/laporan">Laporan SHU</a></li>
+                        <li><a href="<?php echo site_url(); ?>shu/laporan_pembagian_shu">Laporan Pembagian SHU</a></li>
                         <!--  -->
 
                         <li><a href="<?php echo site_url(); ?>simpanan/laporan_setoran_anggota">Laporan Setoran Susu Anggota</a></li>

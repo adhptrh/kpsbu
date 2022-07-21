@@ -435,7 +435,9 @@ class Laporan extends CI_Controller
 
     public function laporan_neraca()
     {
-        $data = $this->laporan->getLaporanNeraca();
+        $tahun = $this->input->get("tahun") ?? date("Y");
+        $data = $this->laporan->getLaporanNeracaYear($tahun);
+        $data["tahun"] = $tahun;
         $this->template->load('template', 'laporan/laporan_neraca', $data);
     }
 }

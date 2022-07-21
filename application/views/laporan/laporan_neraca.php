@@ -5,10 +5,33 @@
                 <div id="notif">
                     <?php echo $this->session->flashdata('notif_ubah'); ?>
                 </div>
-                <div class="header" style="padding-bottom: 10px;">
-                    <h4 class="text-center">Laporan Neraca</h4>
-                    <h5 class="text-center">Periode </h5>
+                <div class="row">
+                    <div class="col-sm-7">
+                        <form method="get" class="form-inline">
+                            <span>Periode</span>
+                            <select name="tahun" class="form-control">
+                                <?php for ($i = 2020; $i <= date("Y"); $i++) { ?>
+                                    <option value="<?= $i ?>" <?php if ($i == $tahun) echo "selected"; ?>><?= $i ?></option>
+                                <?php } ?>
+                            </select>
+                            <input type="submit" value="filter" class="btn btn-info">
+                        </form>
+                    </div>
                 </div>
+
+                <br>
+                <center>
+                    <b>
+                        <div style="font-size: 25px">KPSBU Lembang</div>
+                        <div style="font-size: 20px">Laporan Neraca</div>
+                        <?php if (isset($tahun)) { ?>
+                            <div style="font-size: 15px">
+                                Periode <?php echo $tahun ?>
+                            </div><?php
+                                } ?>
+                    </b>
+                </center>
+                <br>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <tr>

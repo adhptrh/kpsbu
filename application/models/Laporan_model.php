@@ -54,6 +54,149 @@ class Laporan_model extends CI_Model
         return $q;
     }
 
+    public function getLaporanNeracaYear($date1) {
+        $saldo_awal = $this->db->query("SELECT * FROM coa WHERE no_coa = '1111'")->result()[0]->saldo_awal;
+        $query = $this->db->query("SELECT 
+        SUM(nominal) AS debit, 
+        (
+            SELECT sum(nominal) 
+            FROM jurnal 
+            WHERE no_coa = '1111'
+            and tgl_jurnal LIKE '$date1-%'
+            and posisi_dr_cr = 'k' 
+        ) AS kredit
+        FROM jurnal
+        WHERE no_coa = '1111'
+        AND tgl_jurnal LIKE '$date1-%'
+        AND posisi_dr_cr = 'd'")->row();
+        $total_kas = $query->debit - $query->kredit + $saldo_awal;
+
+        $query = $this->db->query("SELECT 
+        SUM(nominal) AS debit, 
+        (
+            SELECT sum(nominal) 
+            FROM jurnal 
+            WHERE no_coa = '1112'
+            AND tgl_jurnal LIKE '$date1-%'
+            and posisi_dr_cr = 'k' 
+        ) AS kredit
+        FROM jurnal
+        WHERE no_coa = '1112'
+        AND tgl_jurnal LIKE '$date1-%'
+        AND posisi_dr_cr = 'd'")->row();
+        $persediaanbahanbaku = $query->debit - $query->kredit + $saldo_awal;
+
+        $query = $this->db->query("SELECT 
+        SUM(nominal) AS debit, 
+        (
+            SELECT sum(nominal) 
+            FROM jurnal 
+            WHERE no_coa = '2111'
+            AND tgl_jurnal LIKE '$date1-%'
+            and posisi_dr_cr = 'k' 
+        ) AS kredit
+        FROM jurnal
+        WHERE no_coa = '2111'
+        AND tgl_jurnal LIKE '$date1-%'
+        AND posisi_dr_cr = 'd'")->row();
+        $utang = $query->debit - $query->kredit + $saldo_awal;
+
+        $query = $this->db->query("SELECT 
+        SUM(nominal) AS debit, 
+        (
+            SELECT sum(nominal) 
+            FROM jurnal 
+            WHERE no_coa = '1125'
+            AND tgl_jurnal LIKE '$date1-%'
+            and posisi_dr_cr = 'k' 
+        ) AS kredit
+        FROM jurnal
+        WHERE no_coa = '1125'
+        AND tgl_jurnal LIKE '$date1-%'
+        AND posisi_dr_cr = 'd'")->row();
+        $akumulasipenyusutankendaraan = $query->kredit + $saldo_awal;
+
+        $query = $this->db->query("SELECT 
+        SUM(nominal) AS debit, 
+        (
+            SELECT sum(nominal) 
+            FROM jurnal 
+            WHERE no_coa = '3111'
+            AND tgl_jurnal LIKE '$date1-%'
+            and posisi_dr_cr = 'k' 
+        ) AS kredit
+        FROM jurnal
+        WHERE no_coa = '3111'
+        AND tgl_jurnal LIKE '$date1-%'
+        AND posisi_dr_cr = 'd'")->row();
+        $simpananpokok = $query->kredit + $saldo_awal;
+
+        $query = $this->db->query("SELECT 
+        SUM(nominal) AS debit, 
+        (
+            SELECT sum(nominal) 
+            FROM jurnal 
+            WHERE no_coa = '3112'
+            AND tgl_jurnal LIKE '$date1-%'
+            and posisi_dr_cr = 'k' 
+        ) AS kredit
+        FROM jurnal
+        WHERE no_coa = '3112'
+        AND tgl_jurnal LIKE '$date1-%'
+        AND posisi_dr_cr = 'd'")->row();
+        $simpananwajib = $query->kredit + $saldo_awal;
+
+        $query = $this->db->query("SELECT 
+        SUM(nominal) AS debit, 
+        (
+            SELECT sum(nominal) 
+            FROM jurnal 
+            WHERE no_coa = '3113'
+            AND tgl_jurnal LIKE '$date1-%'
+            and posisi_dr_cr = 'k' 
+        ) AS kredit
+        FROM jurnal
+        WHERE no_coa = '3112'
+        AND tgl_jurnal LIKE '$date1-%'
+        AND posisi_dr_cr = 'd'")->row();
+        $simpananmasuka = $query->kredit + $saldo_awal;
+
+        $query = $this->db->query("SELECT 
+        SUM(nominal) AS debit, 
+        (
+            SELECT sum(nominal) 
+            FROM jurnal 
+            WHERE no_coa = '3200'
+            AND tgl_jurnal LIKE '$date1-%'
+            and posisi_dr_cr = 'k' 
+        ) AS kredit
+        FROM jurnal
+        WHERE no_coa = '3200'
+        AND tgl_jurnal LIKE '$date1-%'
+        AND posisi_dr_cr = 'd'")->row();
+        $shuditahan = $query->debit - $query->kredit + $saldo_awal;
+        
+        $total_aktifa = $total_kas + $persediaanbahanbaku + $akumulasipenyusutankendaraan;
+        $modal = $total_aktifa - ($utang+$simpananpokok+$simpananwajib+$simpananmasuka);
+        $total_pasiva = $modal+$utang+$simpananpokok+$simpananwajib+$simpananmasuka;
+
+        $data = [
+            'kas' => $total_kas,
+            'persediaanbahanbaku' => $persediaanbahanbaku,
+            'utang' => $utang,
+            "akumulasipenyusutankendaraan"=>$akumulasipenyusutankendaraan,
+            "simpananpokok"=>$simpananpokok,
+            "simpananwajib"=>$simpananwajib,
+            "simpananmasuka"=>$simpananmasuka,
+            "shuditahan"=>$shuditahan,
+            "total_aktifa"=>$total_aktifa,
+            "total_pasiva"=>$total_pasiva,
+            "modal"=>$modal,
+        ];
+
+        return $data;
+    }
+
     public function getLaporanNeraca() {
         $saldo_awal = $this->db->query("SELECT * FROM coa WHERE no_coa = '1111'")->result()[0]->saldo_awal;
         $query = $this->db->query("SELECT 
