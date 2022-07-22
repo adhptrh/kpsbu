@@ -81,6 +81,7 @@
                 var day = date.getDay();
                 return [(day != 0), ''];
             },
+            yearRange:"-0:+0",
             autoclose: true,
             dateFormat: "yy-mm-dd",
             endDate: todaydt,

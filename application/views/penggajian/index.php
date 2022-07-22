@@ -66,7 +66,6 @@
                             $detail = $this->db->get('tb_penggajian')->result();
                             // print_r($detail);exit;
                             ?>
-                                
                                 <tr>
                                     <td><?= $no++ ?>
                                 </td>
