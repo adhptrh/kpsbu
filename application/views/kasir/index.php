@@ -100,7 +100,7 @@
                 <p>Pilih PPN</p>
                 <select onchange="window.location.href = '?id_ppn='+this.value" class="form-control" name="id_ppn" required>
                     <?php foreach ($ppnmasterdata as $v) { ?>
-                    <option value="<?= $v->id ?>"><?= $v->persen ?>%</option>
+                    <option value="<?= $v->id ?>" <?= ($v->id == $id_ppn) ? "selected":"" ?>><?= $v->persen ?>%</option>
                     <?php } ?>
                 </select>
                 
