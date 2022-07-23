@@ -157,7 +157,7 @@
                     <li><a href="<?= base_url('c_masterdata/pegawai')?>"> Pegawai </a></li>
 
                     <?php elseif ($this->session->userdata('level') == "bendahara") : ?>
-                    <li><a href="<?= base_url('c_masterdata/pegawai')?>"> Pegawai </a></li>
+                    <li><a href="<?php echo site_url(); ?>c_masterdata/lihat_coa">COA</a></li>
 
                     <?php elseif ($this->session->userdata('level') == "pengelola") : ?>
                     <li><a href="<?php echo site_url(); ?>c_masterdata/lihat_peternak">Anggota</a></li>
