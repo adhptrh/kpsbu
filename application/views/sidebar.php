@@ -104,6 +104,7 @@
             $this->session->userdata('level') == "keuangan2" or 
             $this->session->userdata('level') == "keuangan" or 
             $this->session->userdata('level') == "personalia" or 
+            $this->session->userdata('level') == "bendahara" or 
             $this->session->userdata('level') == "it" or 
             $this->session->userdata('level') == "arles") : ?>
         <ul class="nav side-menu">
@@ -153,6 +154,9 @@
 
                     <?php elseif ($this->session->userdata('level') == "it") : ?>
                     <li><a href="<?= base_url('c_masterdata/shift')?>"> Shift </a></li>
+                    <li><a href="<?= base_url('c_masterdata/pegawai')?>"> Pegawai </a></li>
+
+                    <?php elseif ($this->session->userdata('level') == "bendahara") : ?>
                     <li><a href="<?= base_url('c_masterdata/pegawai')?>"> Pegawai </a></li>
 
                     <?php elseif ($this->session->userdata('level') == "pengelola") : ?>
