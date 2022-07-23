@@ -54,6 +54,33 @@ Pemilik: Laporan Arus Kas, Jurnal, Buku Besar, Buku Kas Kecil, Buku Pembantu Ban
 Revisi Sarah:
 - Filter Laporan Neraca, Laporan Perubahan Modal, Laporan Simpanan
 - Manajemen User
+Pengelola:
+    Master Data
+        Anggota
+    Transaksi
+        Pembelian Bahan Baku
+
+Anggota:
+    Laporan
+        Laporan Setoran Susu Anggota
+        Laporan Pembagian SHU
+        Laporan Simpanan
+
+Bendahara:
+    Transaksi
+        Pembayaran Susu
+        Transaksi SHU
+        Pembagian SHU
+    Laporan
+        Jurnal
+        Buku Besar
+        Neraca Saldo
+        Laporan Neraca
+        Perubahan Modal
+        Simpanan
+        Laporan SHU
+        Laporan Pembagian SHU
+        Laporan Setora Susu Anggota
 
 Revisi Siti:
 - PPN master data
