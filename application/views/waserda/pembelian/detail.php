@@ -51,7 +51,7 @@
                                 <td class="text-right" colspan="2"><?= format_rp($value->total)?></td>
                             </tr>
                             <tr> 
-                                <th colspan="5">PPN (11%)</th>
+                                <th colspan="5">PPN (<?= $ppndata->persen ?>%)</th>
                                 <td class="text-right" colspan="2"><?= format_rp($value->ppn)?></td>
                             </tr>
                             <tr> 

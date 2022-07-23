@@ -3,3 +3,8 @@ tabel pegawai:
 
 tabel detail_absen_rfid:
 - tambh kolom id_shift
+
+tabel pos_penjualan dan pos_pembelian:
+- tambah kolom id_ppn default 2
+
+penambahan tabel ppn

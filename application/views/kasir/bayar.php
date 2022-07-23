@@ -8,6 +8,7 @@
                 </button>
             </div>
             <form action="<?= base_url('Kasir/checkout')?>" method="post">
+                <input type="hidden" name="id_ppn" value="<?= $id_ppn ?>">
                 <div class="modal-body">
                     <?php foreach ($id_bb as $key => $value) { ?>
                         <input type="hidden" name="id_bb[]" value="<?= $value->id_produk?>">
@@ -70,7 +71,8 @@
                         <div class="form-group row">
                             <label for="pembayaran" class="col-sm-3 col-form-label">Input Pembayaran</label>
                             <div class="col-sm-5">
-                                <input type="number" name="pembayaran" id="input_pembayaran" class="form-control" placeholder="Input Pembayaran" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                                <input id="input_pembayaran2" class="form-control" placeholder="Input Pembayaran" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                                <input name="pembayaran" id="input_pembayaran" class="form-control" placeholder="Input Pembayaran" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                             </div>
                         </div>
                     </div>

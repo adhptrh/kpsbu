@@ -60,7 +60,7 @@ function encode_img_base64($img_path = false): string
 <div style="text-align:right">
 <hr>
 <p><strong>Penjualan</strong> : <?= format_rp($penjualan->total_trans) ?></p>
-<p><strong>PPN (11%)</strong> : <?= format_rp($penjualan->ppn) ?></p>
+<p><strong>PPN (<?= $penjualan->persen ?>%)</strong> : <?= format_rp($penjualan->ppn) ?></p>
 <hr>
 <p><strong>Pembayaran</strong> : <?= format_rp($penjualan->pembayaran) ?></p>
 <p><strong>Total</strong> : <?= format_rp($penjualan->total) ?></p>

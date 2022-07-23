@@ -211,6 +211,7 @@
         $pembayaran = $this->input->post('pembayaran');
         $kembalian = $this->input->post('kembalian');
         $total = $this->input->post('total');
+        $id_ppn = $this->input->post("id_ppn");
         $status = ($tipe == 'kredit') ? 'kredit' : 'terbayar';
 
         $anggota = $this->input->post('anggota');
@@ -232,6 +233,7 @@
             'total_trans' => $total_trans,
             'id_detail_jenis_anggota' => $jenis,
             'status' => $status,
+            'id_ppn' => $id_ppn
         ];
         // print_r($kode);exit;
         $this->db->where('invoice', $kode);
@@ -656,7 +658,7 @@
         where pp.nama_pembeli is not null
         and pdp.invoice = "'.$invoice.'"
         order by pp.date_payment desc')->result();
-        $pnj = $this->db->query('select * from pos_penjualan where invoice = "'.$invoice.'"')->row();
+        $pnj = $this->db->query('select *,ppn.persen as persen  from pos_penjualan join ppn on pos_penjualan.id_ppn = ppn.id where invoice = "'.$invoice.'"')->row();
         $data = [
             'title' => 'pdf', 
             'detail' => $detail,

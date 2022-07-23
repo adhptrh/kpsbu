@@ -44,9 +44,10 @@
                     <div class="form-group row">
                         <label for="total" class="col-sm-4 col-form-label">Input Pembayaran</label>
                         <div class="col-sm-6">
-                        <input id="inpemb" type="number" class="form-control" min="1" max="" name="inpemb" required>
+                            <input id="inpemb" type="number" class="form-control" min="1" max="" name="inpemb" required>
                         </div>
                     </div>
+                    <span class="info hidden text-danger">Input pembayaran sesuai dengan total</span>
                 </div>
                 <div class="modal-footer">
                     <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
@@ -61,8 +62,10 @@
         $("#inpemb").on("keyup",()=>{
             if (parseInt($("#inpemb").val()) > parseInt($("#inpemb").attr("max")) || parseInt($("#inpemb").val()) < parseInt($("#inpemb").attr("min"))) {
                 $("#bayarbtn").prop('disabled', true)
+                $(".info").removeClass("hidden")
             } else {
                 $("#bayarbtn").prop('disabled', false)
+                $(".info").addClass("hidden")
             }
         })
     })

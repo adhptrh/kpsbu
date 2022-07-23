@@ -94,11 +94,12 @@
                 <hr>
                 <?php
                 // rumus
-                $ppn = $total * 0.11;
+                $ppn = $total * ($persen/100);
                 $gtot = $ppn + $total;
                 ?>
+
                 <p>Pilih PPN</p>
-                <select onchange="window.location.href = '?id_ppn='+this.value" class="form-control" name="id_ppn" required>
+                <select onchange="window.location.href = '?id_ppn='+this.value" class="form-control" style="width:200px;" name="id_ppn" required>
                     <?php foreach ($ppnmasterdata as $v) { ?>
                     <option value="<?= $v->id ?>" <?= ($v->id == $id_ppn) ? "selected":"" ?>><?= $v->persen ?>%</option>
                     <?php } ?>
@@ -107,6 +108,7 @@
                 <h5>Total : <?= $total = (empty($total)) ? '-' : format_rp($total) ?></h5>
                 <h5>PPN (<?= $persen ?>%) : <?= $ppn = (empty($ppn)) ? '-' : format_rp($ppn) ?></h5>
                 <h5>Grand Total : <?= $gtot = (empty($gtot)) ? '-' : format_rp($gtot) ?></h5>
+                
                 <hr>
                 <div class="text-left">
                     <!-- <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#bayar">Bayar</button> -->
@@ -291,6 +293,27 @@
                 })
             }
         }) */
+        function formatRupiah(angka, prefix){
+	var number_string = angka.replace(/[^,\d]/g, '').toString(),
+	split   		= number_string.split(','),
+	sisa     		= split[0].length % 3,
+	rupiah     		= split[0].substr(0, sisa),
+	ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+ 
+	// tambahkan titik jika yang di input sudah menjadi angka ribuan
+	if(ribuan){
+		separator = sisa ? '.' : '';
+		rupiah += separator + ribuan.join('.');
+	}   
+ 
+	rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+	return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+}
+        $("#input_pembayaran2").on("input", (e)=>{
+            console.log(e.target.value.replaceAll(".",""))
+            e.target.value = formatRupiah(e.target.value.replaceAll(".",""))
+            $("#input_pembayaran").val(e.target.value.replaceAll(".",""))
+        })
 
 
         $("#tipe").on('change', function() {

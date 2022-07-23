@@ -105,6 +105,16 @@
                     </table>
                     <div class="row">
                         <div class="col-sm-2">
+                            <h5>Pilih PPN</h5>
+                        </div>
+                        <select style="width:200px;" onchange="window.location.href = '?id_ppn='+this.value" class="form-control" name="id_ppn">
+                            <?php foreach ($ppnmasterdata as $v) { ?>
+                                <option value="<?= $v->id ?>" <?= ($v->id == $id_ppn) ? "selected":"" ?>><?= $v->persen ?>%</option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
                             <h5>Total Pembelian</h5>
                         </div>
                         <div class="col-sm-5">
@@ -115,11 +125,11 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-2">
-                            <h5>PPN 11%</h5>
+                            <h5>PPN <?= $ppndata->persen ?>%</h5>
                         </div>
                         <div class="col-sm-5">
                             <h5>
-                                <?php $rumus = $total * 0.11 ?>
+                                <?php $rumus = $total * ($ppndata->persen/100) ?>
                                 <b><?= format_rp($rumus)?></b>
                             </h5>
                         </div>
@@ -138,6 +148,7 @@
                     <form action="<?= base_url('Pembelian/simpan_produk')?>" method="post">
                     <input type="hidden" name="id" value="<?= $kode ?>">
                     <input type="hidden" name="total" value="<?= $total ?>">
+                    <input type="hidden" name="id_ppn" value="<?= $id_ppn ?>">
                     <input type="hidden" name="ppn" value="<?= $ppn ?>">
                     <input type="hidden" name="grandtotal" value="<?= $grandtotal ?>">
                     <?php foreach ($id_bb as $key => $value) { ?>

@@ -26,8 +26,10 @@
         JOIN waserda_produk c ON c.kode = a.id_produk
         WHERE b.invoice = "'.$invoice.'"
         ORDER BY id DESC')->result();
+        $ppndata = $this->db->query("SELECT * FROM ppn WHERE id = ".$query[0]->id_ppn)->row();
         $data = [
-            'detail' => $query
+            'detail' => $query,
+            'ppndata' => $ppndata
         ];
         $this->template->load('template', 'waserda/pembelian/detail', $data);
     }
@@ -62,7 +64,10 @@
         $supplier = $this->db->get('waserda_supplier')->result();
         $detail = $this->produk->detail_pembelian($inv)->result();
         $total = $this->produk->total_pembelian($inv)->row()->total;
-        $ppn = $total * 0.11;
+        $id_ppn = $this->input->get("id_ppn") ?? $this->db->query("SELECT * FROM ppn")->row()->id;
+        $ppnmasterdata = $this->db->query("SELECT * FROM ppn")->result();
+        $ppndata = $this->db->query("SELECT * FROM ppn WHERE id = $id_ppn")->row();
+        $ppn = $total * ($ppndata->persen/100);
         $grand = $total + $ppn;
         $id_bb = $this->db->query("select id_produk from pos_detail_pembelian where invoice = '$inv'")->result();
         // print_r($total);exit;
@@ -74,6 +79,9 @@
             'ppn' => $ppn,
             'grandtotal' => $grand,
             'id_bb' => $id_bb,
+            'id_ppn' => $id_ppn,
+            'ppndata' => $ppndata,
+            'ppnmasterdata'=>$ppnmasterdata,
         ];
         $this->template->load('template', 'waserda/pembelian/add', $data);
     }
@@ -162,12 +170,14 @@
         $ppn = $this->input->post('ppn');
         $grand = $this->input->post('grandtotal');
         $id_bb = $this->input->post('id_bb');
+        $idppn = $this->input->post('id_ppn');
 
         $arr = [
             'total' => $total,
             'ppn' => $ppn,
             'grandtotal' => $grand,
-            'status' => 'selesai'
+            'status' => 'selesai',
+            'id_ppn' => $idppn,
         ];
         // print_r($id_bb);exit;
         $this->db->where('invoice', $id);
