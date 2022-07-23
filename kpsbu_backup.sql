@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2022 at 01:06 AM
+-- Generation Time: Jul 23, 2022 at 05:40 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -37,8 +37,7 @@ CREATE TABLE `absensi` (
 --
 
 INSERT INTO `absensi` (`id`, `tanggal`) VALUES
-(12, '2022-07-03'),
-(13, '2022-07-08');
+(16, '2022-07-22');
 
 -- --------------------------------------------------------
 
@@ -288,7 +287,10 @@ INSERT INTO `buku_kas_kecil` (`id`, `id_ref`, `tgl_transaksi`, `nominal`, `keter
 (12, 'PNJWASERDA120722004', '2022-07-12', 2000, 'Penjualan', 'd'),
 (13, 'PNJWASERDA130722005', '2022-07-13', 25000, 'Penjualan', 'd'),
 (14, 'PNJWASERDA130722001', '2022-07-13', 5000, 'Penjualan', 'd'),
-(15, 'PNJWASERDA140722001', '2022-07-14', 2500, 'Penjualan', 'd');
+(15, 'PNJWASERDA140722001', '2022-07-14', 2500, 'Penjualan', 'd'),
+(16, 'PNJWASERDA210722002', '2022-07-21', 2500, 'Penjualan', 'd'),
+(17, 'PNJWASERDA230722003', '2022-07-23', 37500, 'Penjualan', 'd'),
+(18, 'PNJWASERDA230722004', '2022-07-23', 2500, 'Penjualan', 'd');
 
 -- --------------------------------------------------------
 
@@ -318,7 +320,8 @@ INSERT INTO `buku_pembantu_bank` (`id`, `id_ref`, `bukti_transaksi`, `tanggal`, 
 (19, 'BPNRM20220709001', 'TransaksiBank_.ico', '2022-07-09', '1000000', 1116, 'd', 'transaksi', 2500, 2500, 2500),
 (20, 'BPNRM20220712002', 'TransaksiBank_.png', '2022-05-12', '10000000', 1116, 'd', 'awdwdsd', 2000, 1000, 3000),
 (21, 'BPNRM20220713003', 'TransaksiBank_.png', '2022-07-13', '100000', 1116, 'd', 'aawwa', 1000, 1000, 1000),
-(22, 'BPNRM20220714004', 'TransaksiBank_BPNRM20220714004.png', '2022-07-14', '1000000', 1116, 'd', 'zzzzz', 1000, 1000, 1000);
+(22, 'BPNRM20220714004', 'TransaksiBank_BPNRM20220714004.png', '2022-07-14', '1000000', 1116, 'd', 'zzzzz', 1000, 1000, 1000),
+(23, 'BPNRM20220722005', 'TransaksiBank_BPNRM20220722005.png', '2022-07-22', '1000000', 1116, 'd', 'awdsdawd', 1000, 1000, 1000);
 
 -- --------------------------------------------------------
 
@@ -365,7 +368,14 @@ INSERT INTO `buku_pembantu_kas` (`id`, `id_ref`, `tanggal`, `nominal`, `kd_coa`,
 (30, 'GAJI-001', '2022-07-13', '66201500', 1111, 'k', 'Pembayaran Gaji'),
 (31, 'PNJWASERDA130722001', '2022-07-13', '5550', 1111, 'd', 'Penjualan Tunai'),
 (32, '202207140001', '2022-07-14', '10000000', 1111, 'k', 'kas kecil'),
-(33, 'PMB-KR-20220728002', '2022-07-28', '2775', 1111, 'd', 'Pembayaran Waserda Kredit');
+(33, 'PMB-KR-20220728002', '2022-07-28', '2775', 1111, 'd', 'Pembayaran Waserda Kredit'),
+(34, '202207210002', '2022-07-21', '1000000', 1111, 'd', 'penerimaan'),
+(35, '202207210003', '2022-07-21', '1000000', 1111, 'd', 'penerimaan kas'),
+(36, '202207210004', '2022-07-21', '500.000', 1111, 'd', 'penerimaan kas'),
+(37, '202207210005', '2022-07-21', '10.000.000', 1111, 'd', 'penerimaan'),
+(38, '202207210006', '2022-07-21', '10000000', 1111, 'd', 'penerimaan kas'),
+(39, 'GAJI-001', '2022-07-22', '91389667', 1111, 'k', 'Pembayaran Gaji'),
+(40, 'PNJWASERDA210722002', '2022-07-21', '2775', 1111, 'd', 'Penjualan Tunai');
 
 -- --------------------------------------------------------
 
@@ -485,16 +495,17 @@ CREATE TABLE `detail_absen_rfid` (
   `rfid` varchar(50) DEFAULT NULL,
   `status` enum('masuk','alfa','izin','cuti') DEFAULT NULL,
   `jam` time DEFAULT NULL,
-  `keterangan` varchar(255) DEFAULT NULL
+  `keterangan` varchar(255) DEFAULT NULL,
+  `id_shift` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `detail_absen_rfid`
 --
 
-INSERT INTO `detail_absen_rfid` (`id`, `id_absensi`, `rfid`, `status`, `jam`, `keterangan`) VALUES
-(42, 13, '123232323', 'masuk', '10:17:44', 'Presensi Masuk, Telat'),
-(43, 13, '123232323', '', '10:19:40', 'Presensi Keluar');
+INSERT INTO `detail_absen_rfid` (`id`, `id_absensi`, `rfid`, `status`, `jam`, `keterangan`, `id_shift`) VALUES
+(49, 16, '12345', 'masuk', '01:03:32', 'Presensi Masuk, Telat', 1),
+(50, 16, '123232323', 'masuk', '01:05:58', 'Presensi Masuk, Telat', 1);
 
 -- --------------------------------------------------------
 
@@ -691,7 +702,17 @@ CREATE TABLE `detail_penerimaan_pengeluaran_kas` (
 
 INSERT INTO `detail_penerimaan_pengeluaran_kas` (`id`, `no_dokumen`, `no_coa`, `nama_coa`, `aktivitas`, `nominal`, `posisi_dc`) VALUES
 (38, '202207140001', '1117', 'Kas Kecil', 'Penerimaan Kas', 10000000, 'd'),
-(39, '202207140001', '1111', 'Kas', 'Penerimaan Kas', 10000000, 'k');
+(39, '202207140001', '1111', 'Kas', 'Penerimaan Kas', 10000000, 'k'),
+(40, '202207210002', '1111', 'Kas', 'Penerimaan Kas', 1000000, 'd'),
+(41, '202207210002', '1414', 'Pers. Barang Dagang', 'Penerimaan Kas', 1000000, 'k'),
+(42, '202207210003', '1111', 'Kas', 'Penerimaan Kas', 1000000, 'd'),
+(43, '202207210003', '1414', 'Pers. Barang Dagang', 'Penerimaan Kas', 1000000, 'k'),
+(44, '202207210004', '1111', 'Kas', 'Penerimaan Kas', 500, 'd'),
+(45, '202207210004', '1414', 'Pers. Barang Dagang', 'Penerimaan Kas', 500, 'k'),
+(46, '202207210005', '1111', 'Kas', 'Penerimaan Kas', 10000, 'd'),
+(47, '202207210005', '1414', 'Pers. Barang Dagang', 'Penerimaan Kas', 10000, 'k'),
+(48, '202207210006', '1111', 'Kas', 'Penerimaan Kas', 10000000, 'd'),
+(49, '202207210006', '1414', 'Pers. Barang Dagang', 'Penerimaan Kas', 10000000, 'k');
 
 -- --------------------------------------------------------
 
@@ -832,16 +853,6 @@ CREATE TABLE `detail_transaksi_shu` (
   `nominal` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `detail_transaksi_shu`
---
-
-INSERT INTO `detail_transaksi_shu` (`id`, `kode_shu`, `uraian`, `nominal`) VALUES
-(21, 'SHU20220001', 'Cadangan koperasi', 386),
-(22, 'SHU20220001', 'Jasa anggota', 241),
-(23, 'SHU20220001', 'Jasa modal', 193),
-(24, 'SHU20220001', 'Jasa lain-lain', 145);
-
 -- --------------------------------------------------------
 
 --
@@ -864,11 +875,10 @@ CREATE TABLE `jadwal_shift` (
 --
 
 INSERT INTO `jadwal_shift` (`id`, `id_pegawai`, `id_shift`, `tgl_awal`, `tgl_akhir`, `desc`, `create_by`, `is_complete`) VALUES
-(10, '1029384756', '2', '2022-07-03', '2022-07-04', 'awdaw', 'admin', 0),
-(11, '111', '2', '2022-07-03', '2022-07-04', 'dadad', 'admin', 0),
-(12, '8003250622757', '1', '2022-07-08', '2022-07-08', 'shift', 'admin', 0),
-(13, '1608260622758', '1', '2022-07-08', '2022-07-08', 'shift', 'admin', 0),
-(14, '9200270622759', '2', '2022-07-08', '2022-07-08', 'shift', 'admin', 0);
+(21, '8003250622755', '1', '2022-07-22', '2022-07-31', 'shfit', 'it', 0),
+(22, '8003250622756', '1', '2022-07-22', '2022-07-31', 'shfit', 'it', 0),
+(23, '8003250622757', '1', '2022-07-22', '2022-07-31', 'shfit', 'it', 0),
+(24, '1608260622758', '1', '2022-07-22', '2022-07-31', 'shfit', 'it', 0);
 
 -- --------------------------------------------------------
 
@@ -952,7 +962,35 @@ INSERT INTO `jurnal` (`no`, `id_jurnal`, `tgl_jurnal`, `no_coa`, `posisi_dr_cr`,
 (46, 'PNJWASERDA140722001', '2022-07-28', 6113, 'd', 1750),
 (47, 'PNJWASERDA140722001', '2022-07-28', 1414, 'k', 1750),
 (48, 'LMBR20220728001', '2022-07-28', 5400, 'd', 20000),
-(49, 'LMBR20220728001', '2022-07-28', 1111, 'k', 20000);
+(49, 'LMBR20220728001', '2022-07-28', 1111, 'k', 20000),
+(50, '202207210002', '2022-07-21', 1111, 'd', 1000000),
+(51, '202207210002', '2022-07-21', 1414, 'k', 1000000),
+(52, 'LMBR20220721002', '2022-07-21', 5400, 'd', 40000),
+(53, 'LMBR20220721002', '2022-07-21', 1111, 'k', 40000),
+(54, '202207210003', '2022-07-21', 1111, 'd', 1000000),
+(55, '202207210003', '2022-07-21', 1414, 'k', 1000000),
+(56, '202207210004', '2022-07-21', 1111, 'd', 500),
+(57, '202207210004', '2022-07-21', 1414, 'k', 500),
+(58, '202207210005', '2022-07-21', 1111, 'd', 10000),
+(59, '202207210005', '2022-07-21', 1414, 'k', 10000),
+(60, '202207210006', '2022-07-21', 1111, 'd', 10000000),
+(61, '202207210006', '2022-07-21', 1414, 'k', 10000000),
+(62, 'GAJI-001', '2022-07-22', 5311, 'd', 95000000),
+(63, 'GAJI-001', '2022-07-22', 5316, 'd', 1950000),
+(64, 'GAJI-001', '2022-07-22', 5315, 'd', 2100000),
+(65, 'GAJI-001', '2022-07-22', 5317, 'd', 0),
+(66, 'GAJI-001', '2022-07-22', 5318, 'd', 0),
+(67, 'GAJI-001', '2022-07-22', 2114, 'k', 7660332),
+(68, 'GAJI-001', '2022-07-22', 1111, 'k', 91389667),
+(69, 'PNJWASERDA210722002', '2022-07-22', 1111, 'd', 2775),
+(70, 'PNJWASERDA210722002', '2022-07-22', 2140, 'k', 275),
+(71, 'PNJWASERDA210722002', '2022-07-22', 4116, 'k', 2500),
+(72, 'PNJWASERDA210722002', '2022-07-22', 6113, 'd', 1750),
+(73, 'PNJWASERDA210722002', '2022-07-22', 1414, 'k', 1750),
+(74, 'LMBR20220722003', '2022-07-22', 5400, 'd', 60000),
+(75, 'LMBR20220722003', '2022-07-22', 1111, 'k', 60000),
+(76, 'BPNRM20220722005', '2022-07-22', 1116, 'd', 1000),
+(77, 'BPNRM20220722005', '2022-07-22', 4212, 'k', 1000);
 
 -- --------------------------------------------------------
 
@@ -1057,7 +1095,10 @@ INSERT INTO `laporan_kartu_stock` (`id`, `tanggal`, `kode_produk`, `mode`, `unit
 (24, '2022-07-12 21:24:07', 'WSP002', 'in', 100),
 (25, '2022-07-13 22:59:44', 'WSP001', 'out', 10),
 (26, '2022-07-13 23:00:38', 'WSP001', 'out', 2),
-(27, '2022-07-14 05:30:56', 'WSP001', 'out', 1);
+(27, '2022-07-14 05:30:56', 'WSP001', 'out', 1),
+(28, '2022-07-21 22:48:34', 'WSP001', 'out', 1),
+(29, '2022-07-23 09:54:07', 'WSP001', 'out', 15),
+(30, '2022-07-23 10:28:15', 'WSP001', 'out', 1);
 
 -- --------------------------------------------------------
 
@@ -1292,23 +1333,25 @@ CREATE TABLE `pegawai` (
   `jurusan_pendidikan` varchar(255) NOT NULL,
   `agama` varchar(255) DEFAULT NULL,
   `jenis_kelamin` varchar(1) NOT NULL DEFAULT 'L',
-  `no_anggota` varchar(255) NOT NULL
+  `no_anggota` varchar(255) NOT NULL,
+  `tmt` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pegawai`
 --
 
-INSERT INTO `pegawai` (`id`, `id_jabatan`, `id_ptkp`, `id_jenis_pegawai`, `pendidikan`, `rfid`, `nip`, `npwp`, `nama`, `alamat`, `no_telp`, `tempat_lahir`, `tgl_lahir`, `nama_bank`, `no_rek`, `status`, `status_kredit`, `created_at`, `riwayat_pendidikan`, `jurusan_pendidikan`, `agama`, `jenis_kelamin`, `no_anggota`) VALUES
-(8, 'Staff', 'TK1', 'Kontrak', 'sma', '12345', '8003250622755', '111111', 'Heni', 'Bandung', '0898998989', 'Bandung', '1998-03-01', 'Mandiri', '11223321', '1', 0, '2021-12-04 11:17:34', 'sma', '', 'islam', 'L', 'ANGGT_0040'),
-(9, 'Staff', 'TK0', 'Tetap', 's1', '1029384756', '8003250622756', '1029384756', 'Andi', 'Bandung', '1029384756', 'Bandung', '1991-03-03', 'BCA', '123123123', '1', 0, '2021-12-15 07:10:28', '', '', 'buddha', 'L', 'ANGGT_0041'),
-(11, 'Staff', 'TK1', 'Kontrak', 's2', '323123', '8003250622757', '123142', 'ela', 'Bandung', '213213', 'Bandung', '2003-02-02', 'BCA', '232323232323', '1', 0, '2022-06-25 16:20:07', 'sma, s1, s2', 'rpl', 'kristen', 'P', 'ANGGT_0042'),
-(12, 'Staff', 'TK1', 'Tetap', 's1', '123232323', '1608260622758', '12314222', 'robi', 'Bandung', '1231232333', 'Bandung', '2022-06-26', 'BCA', '333333333333333', '1', 0, '2022-06-26 01:59:31', '', 'it', 'hindu', 'L', 'ANGGT_0043'),
-(13, 'Sr Programmer ', 'TK2', 'Tetap', 's1', '24123234', '9200270622759', '2424244', 'ramli', 'Bandung', '123124434', 'Bandung', '2000-02-02', 'BCA', '339391239', '1', 0, '2022-05-27 01:51:36', '', 'rpl', 'Islam', 'L', 'ANGGT_0044'),
-(15, 'Staff', 'TK0', 'Kontrak', 's2', '111111', '1044020722760', '23424', 'Bagas', 'Bandung', '948928471', 'Bandung', '2000-02-20', 'BCA', '444444', '1', 0, '2022-07-01 17:14:40', 's1', 'rpl', 'Islam', 'L', 'ANGGT_0045'),
-(16, 'Staff', 'TK0', 'Tetap', 's1', '24421424', '5016030722761', '1212313', 'rafli', 'Bandung', '920480948', 'Bandung', '1999-02-20', 'BCA', '3333333333333332', '1', 0, '2022-07-03 10:19:29', '', 'rpl', 'Kristen', 'P', 'ANGGT_0047'),
-(17, 'Staff', 'TK0', 'Tetap', 's2', '3234235', '5325080722762', '2421525', 'Caka', 'Bandung', '241421521', 'Bandung', '2000-07-08', 'BCA', '24142142424', '1', 0, '2022-07-08 02:25:18', 's1', 'rpl', 'Islam', 'L', 'ANGGT_0048'),
-(18, 'Sr Programmer ', 'TK2', 'Tetap', 's2', '52534', '9432110722763', '23123124241', 'Tarmizi', 'Bandung', '123123233323', 'Bandung', '1995-02-02', 'BRI', '2222221323', '1', 0, '2022-07-11 15:42:06', '', 'RPL', 'Islam', 'L', 'ANGGT_0061');
+INSERT INTO `pegawai` (`id`, `id_jabatan`, `id_ptkp`, `id_jenis_pegawai`, `pendidikan`, `rfid`, `nip`, `npwp`, `nama`, `alamat`, `no_telp`, `tempat_lahir`, `tgl_lahir`, `nama_bank`, `no_rek`, `status`, `status_kredit`, `created_at`, `riwayat_pendidikan`, `jurusan_pendidikan`, `agama`, `jenis_kelamin`, `no_anggota`, `tmt`) VALUES
+(8, 'Staff', 'TK1', 'Kontrak', 'sma', '12345', '8003250622755', '111111', 'Heni', 'Bandung', '0898998989', 'Bandung', '1998-03-01', 'Mandiri', '11223321', '1', 0, '2021-12-04 11:17:34', 'sma', '', 'islam', 'L', 'ANGGT_0040', '2021-03-01'),
+(9, 'Staff', 'TK0', 'Tetap', 's1', '1029384756', '8003250622756', '1029384756', 'Andi', 'Bandung', '1029384756', 'Bandung', '1991-03-03', 'BCA', '123123123', '1', 0, '2021-12-15 07:10:28', '', '', 'buddha', 'L', 'ANGGT_0041', '2022-03-01'),
+(11, 'Staff', 'TK1', 'Kontrak', 's2', '323123', '8003250622757', '123142', 'ela', 'Bandung', '213213', 'Bandung', '2003-02-02', 'BCA', '232323232323', '1', 0, '2022-06-25 16:20:07', 'sma, s1, s2', 'rpl', 'kristen', 'P', 'ANGGT_0042', '2022-07-01'),
+(12, 'Staff', 'TK1', 'Tetap', 's1', '123232323', '1608260622758', '12314222', 'robi', 'Bandung', '1231232333', 'Bandung', '2022-06-26', 'BCA', '333333333333333', '1', 0, '2022-06-26 01:59:31', '', 'it', 'hindu', 'L', 'ANGGT_0043', '2022-07-01'),
+(13, 'Sr Programmer ', 'TK2', 'Tetap', 's1', '24123234', '9200270622759', '2424244', 'ramli', 'Bandung', '123124434', 'Bandung', '2000-02-02', 'BCA', '339391239', '1', 0, '2022-05-27 01:51:36', '', 'rpl', 'Islam', 'L', 'ANGGT_0044', '2022-07-01'),
+(15, 'Staff', 'TK0', 'Kontrak', 's2', '111111', '1044020722760', '23424', 'Bagas', 'Bandung', '948928471', 'Bandung', '2000-02-20', 'BCA', '444444', '1', 0, '2022-07-01 17:14:40', 's1', 'rpl', 'Islam', 'L', 'ANGGT_0045', '2022-07-01'),
+(16, 'Staff', 'TK0', 'Tetap', 's1', '24421424', '5016030722761', '1212313', 'rafli', 'Bandung', '920480948', 'Bandung', '1999-02-20', 'BCA', '3333333333333332', '1', 0, '2022-07-03 10:19:29', '', 'rpl', 'Kristen', 'P', 'ANGGT_0047', '2022-07-01'),
+(17, 'Staff', 'TK0', 'Tetap', 's2', '3234235', '5325080722762', '2421525', 'Caka', 'Bandung', '241421521', 'Bandung', '2000-07-08', 'BCA', '24142142424', '1', 0, '2022-07-08 02:25:18', 's1', 'rpl', 'Islam', 'L', 'ANGGT_0048', '2022-08-01'),
+(18, 'Sr Programmer ', 'TK2', 'Tetap', 's2', '52534', '9432110722763', '23123124241', 'Tarmizi', 'Bandung', '123123233323', 'Bandung', '1995-02-02', 'BRI', '2222221323', '1', 0, '2022-07-11 15:42:06', '', 'RPL', 'Islam', 'L', 'ANGGT_0061', '2022-08-01'),
+(19, 'Staff', 'TK0', 'Kontrak', 's1', '212221', '8065210722764', '2222323123', 'testdata', 'wdwda', '23123', 'awdawd', '2000-02-02', 'BCA', '123232', '1', 0, '2022-07-20 17:20:45', '', 'rpl', 'Islam', 'L', 'ANGGT_0065', '2022-08-01');
 
 -- --------------------------------------------------------
 
@@ -1340,13 +1383,6 @@ CREATE TABLE `pembagian_shu` (
   `sisa_hasil_usaha` int(50) DEFAULT NULL,
   `id_trans_total` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pembagian_shu`
---
-
-INSERT INTO `pembagian_shu` (`id`, `tanggal`, `id_trans`, `id_anggota`, `jasa_modal`, `jasa_anggota`, `sisa_hasil_usaha`, `id_trans_total`) VALUES
-(13, '2022-07-14', 'PMBG.SHU20220001', 'PTRNK_055', 0, 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -1487,7 +1523,12 @@ CREATE TABLE `penerimaan_pengeluaran_kas` (
 --
 
 INSERT INTO `penerimaan_pengeluaran_kas` (`id`, `periode`, `tanggal`, `no_dokumen`, `jenis_transaksi`, `tipe_pembayaran`, `deskripsi`, `file`) VALUES
-(20, '202207', '2022-07-14', '202207140001', 'penerimaan kas', 'tunai', 'kas kecil', 'PenerimaanPengeluaranKas_202207140001.sql');
+(20, '202207', '2022-07-14', '202207140001', 'penerimaan kas', 'tunai', 'kas kecil', 'PenerimaanPengeluaranKas_202207140001.sql'),
+(21, '202207', '2022-07-21', '202207210002', 'penerimaan kas', 'tunai', 'penerimaan', 'PenerimaanPengeluaranKas_202207210002.png'),
+(22, '202207', '2022-07-21', '202207210003', 'penerimaan kas', 'tunai', 'penerimaan kas', 'PenerimaanPengeluaranKas_202207210003.sql'),
+(23, '202207', '2022-07-21', '202207210004', 'penerimaan kas', 'tunai', 'penerimaan kas', 'PenerimaanPengeluaranKas_202207210004.png'),
+(24, '202207', '2022-07-21', '202207210005', 'penerimaan kas', 'tunai', 'penerimaan', 'PenerimaanPengeluaranKas_202207210005.sql'),
+(25, '202207', '2022-07-21', '202207210006', 'penerimaan kas', 'tunai', 'penerimaan kas', 'PenerimaanPengeluaranKas_202207210006.sql');
 
 -- --------------------------------------------------------
 
@@ -1528,7 +1569,15 @@ CREATE TABLE `pengajuan_jurnal` (
 INSERT INTO `pengajuan_jurnal` (`id`, `kode`, `tanggal`, `nominal`, `status`, `jenis`, `bukti_pembayaran`) VALUES
 (41, 'PNJWASERDA140722001', '2022-07-14', 2775, 'selesai', 'Penjualan Barang Kredit Waserda', NULL),
 (42, 'PMB-KR-20220728002', '2022-07-28', 2775, 'selesai', 'peternak', NULL),
-(43, 'LMBR20220728001', '2022-07-28', 20000, 'selesai', 'pengajuan lembur', NULL);
+(43, 'LMBR20220728001', '2022-07-28', 20000, 'selesai', 'pengajuan lembur', NULL),
+(44, 'LMBR20220721002', '2022-07-21', 40000, 'selesai', 'pengajuan lembur', NULL),
+(45, 'PNJWASERDA210722002', '2022-07-21', 2775, 'selesai', 'Penjualan Barang Tunai Waserda', NULL),
+(48, 'GAJI-001', '2022-07-22', 91389667, 'selesai', 'penggajian', NULL),
+(49, 'LMBR20220722003', '2022-07-22', 60000, 'selesai', 'pengajuan lembur', NULL),
+(50, 'GAJI-001', '2022-07-22', 182779333, 'pending', 'penggajian', NULL),
+(51, 'GAJI-001', '2022-07-22', 91389667, 'pending', 'penggajian', NULL),
+(52, 'PNJWASERDA230722003', '2022-07-23', 42000, 'pending', 'Penjualan Barang Tunai Waserda', NULL),
+(53, 'PNJWASERDA230722004', '2022-07-23', 3000, 'pending', 'Penjualan Barang Tunai Waserda', NULL);
 
 -- --------------------------------------------------------
 
@@ -1810,7 +1859,10 @@ CREATE TABLE `pos_detail_penjualan` (
 --
 
 INSERT INTO `pos_detail_penjualan` (`id`, `invoice`, `id_produk`, `jml`, `harga`, `status`) VALUES
-(25, 'PNJWASERDA140722001', 'WSP001', '1', 2500, 'dalam proses');
+(25, 'PNJWASERDA140722001', 'WSP001', '1', 2500, 'dalam proses'),
+(26, 'PNJWASERDA210722002', 'WSP001', '1', 2500, 'dalam proses'),
+(27, 'PNJWASERDA230722003', 'WSP001', '15', 2500, 'dalam proses'),
+(28, 'PNJWASERDA230722004', 'WSP001', '1', 2500, 'dalam proses');
 
 -- --------------------------------------------------------
 
@@ -1867,7 +1919,33 @@ CREATE TABLE `pos_penjualan` (
 --
 
 INSERT INTO `pos_penjualan` (`id`, `invoice`, `total`, `status`, `tanggal`, `nama_pembeli`, `jenis_pembayaran`, `kembalian`, `pembayaran`, `ppn`, `total_trans`, `id_detail_jenis_anggota`, `date_payment`, `status_kredit`) VALUES
-(16, 'PNJWASERDA140722001', 2775, 'kredit', '2022-07-14', 'Rizky', 'kredit', 0, 2775, 275, 2500, 1, '2022-07-13 22:30:26', 'lunas');
+(16, 'PNJWASERDA140722001', 2775, 'kredit', '2022-07-14', 'Rizky', 'kredit', 0, 2775, 275, 2500, 1, '2022-07-13 22:30:26', 'lunas'),
+(17, 'PNJWASERDA210722002', 2775, 'terbayar', '2022-07-21', 'Guest', '', 225, 3000, 275, 2500, 2, '2022-07-21 15:48:26', NULL),
+(18, 'PNJWASERDA230722003', 42000, 'terbayar', '2022-07-23', 'Guest', '', 0, 42000, 4125, 37500, 2, '2022-07-23 02:37:53', NULL),
+(19, 'PNJWASERDA230722004', 3000, 'terbayar', '2022-07-23', 'Guest', '', 0, 3000, 275, 2500, 2, '2022-07-23 03:09:37', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ppn`
+--
+
+CREATE TABLE `ppn` (
+  `id` int(11) NOT NULL,
+  `persen` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Dumping data for table `ppn`
+--
+
+INSERT INTO `ppn` (`id`, `persen`) VALUES
+(1, 10),
+(2, 11),
+(3, 12),
+(4, 13),
+(5, 14),
+(6, 15);
 
 -- --------------------------------------------------------
 
@@ -1989,7 +2067,7 @@ CREATE TABLE `shift` (
 --
 
 INSERT INTO `shift` (`id`, `desc`, `time_in`, `time_out`) VALUES
-(1, 'Pagi', '08:00:00', '10:10:00'),
+(1, 'Pagi', '00:23:00', '10:10:00'),
 (2, 'Sore', '17:30:00', '23:00:00');
 
 -- --------------------------------------------------------
@@ -2093,6 +2171,14 @@ CREATE TABLE `tb_cuti` (
   `status` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tb_cuti`
+--
+
+INSERT INTO `tb_cuti` (`id`, `id_pengajuan`, `tgl_pengajuan`, `nip`, `jumlah_hari`, `tgl_mulai`, `tgl_selesai`, `alasan_cuti`, `status`) VALUES
+(9, 'CUTI20220721001', '2022-07-20 17:54:41', '8003250622756', 3, '2022-07-21', '2022-07-23', 'cuti', 1),
+(10, 'CUTI20220721002', '2022-07-20 23:45:12', '8003250622757', 1, '2022-07-21', '2022-07-21', 'abc', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -2110,6 +2196,13 @@ CREATE TABLE `tb_cuti_melahirkan` (
   `alasan_cuti` varchar(50) DEFAULT NULL,
   `status` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_cuti_melahirkan`
+--
+
+INSERT INTO `tb_cuti_melahirkan` (`id`, `id_pengajuan`, `tgl_pengajuan`, `nip`, `jumlah_hari`, `tgl_mulai`, `tgl_selesai`, `alasan_cuti`, `status`) VALUES
+(5, 'CUTIMLHRKN20220722003', '2022-07-21 17:22:21', '8003250622757', 90, '2022-07-22', '2022-10-20', 'melahirkan', 1);
 
 -- --------------------------------------------------------
 
@@ -2147,6 +2240,19 @@ CREATE TABLE `tb_detail_penggajian` (
   `pph21` int(11) NOT NULL,
   `unik` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_detail_penggajian`
+--
+
+INSERT INTO `tb_detail_penggajian` (`id`, `id_penggajian`, `gaji_pokok`, `tunjangan_jabatan`, `tunjangan_kesehatan`, `tunjangan_hari_raya`, `bonus_kerja`, `ptkp`, `tot_penghasilan`, `tot_pengurang`, `total`, `pph21`, `unik`) VALUES
+(222, 'GAJI-001', 20000000, 300000, 300000, 0, 0, 54000000, 20600000, 54000000, 18676667, 1923333, 'b9b7ed8e250a7dfb4706e7e3ed5a7a3f'),
+(223, 'GAJI-001', 6000000, 300000, 300000, 0, 0, 54000000, 6600000, 54000000, 6511500, 88500, '8dcab7b85714e5c88c3d9b85c13ee884'),
+(224, 'GAJI-001', 6000000, 300000, 300000, 0, 0, 58500000, 6600000, 58500000, 6530250, 69750, '787ad2dd02bebb54e1a90ccbcf743f21'),
+(225, 'GAJI-001', 3000000, 300000, 300000, 0, 0, 58500000, 3600000, 58500000, 3600000, 0, '597a569bda368cd3410633759bb2d6fa'),
+(226, 'GAJI-001', 20000000, 300000, 300000, 0, 0, 54000000, 20600000, 54000000, 18676667, 1923333, 'd26c192537b567c47dac551727c34192'),
+(227, 'GAJI-001', 20000000, 150000, 300000, 0, 0, 63000000, 20450000, 63000000, 18661667, 1788333, '307734a107c72d4159a43e9b7e9e6b59'),
+(228, 'GAJI-001', 20000000, 300000, 300000, 0, 0, 58500000, 20600000, 58500000, 18732917, 1867083, 'f0ff8c8787bc5bf52294625990b8d68d');
 
 -- --------------------------------------------------------
 
@@ -2215,7 +2321,9 @@ CREATE TABLE `tb_lembur` (
 --
 
 INSERT INTO `tb_lembur` (`id`, `id_pengajuan`, `tgl_pengajuan`, `id_pegawai`, `total_jam`, `status`, `nominal_perjam`, `total_nominal_lembur`) VALUES
-(13, 'LMBR20220728001', '2022-07-28', '8003250622756', 1, 3, 20000, 20000);
+(13, 'LMBR20220728001', '2022-07-28', '8003250622756', 1, 3, 20000, 20000),
+(14, 'LMBR20220721002', '2022-07-21', '8003250622756', 2, 3, 20000, 40000),
+(15, 'LMBR20220722003', '2022-07-22', '8003250622756', 3, 3, 20000, 60000);
 
 -- --------------------------------------------------------
 
@@ -2232,6 +2340,19 @@ CREATE TABLE `tb_penggajian` (
   `status` varchar(50) DEFAULT NULL,
   `unik` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_penggajian`
+--
+
+INSERT INTO `tb_penggajian` (`id`, `id_penggajian`, `tanggal`, `nm_pegawai`, `nominal`, `status`, `unik`) VALUES
+(224, 'GAJI-001', '2022-07-22', 'Andi', 18676667, NULL, 'b9b7ed8e250a7dfb4706e7e3ed5a7a3f'),
+(225, 'GAJI-001', '2022-07-22', 'Bagas', 6511500, NULL, '8dcab7b85714e5c88c3d9b85c13ee884'),
+(226, 'GAJI-001', '2022-07-22', 'ela', 6530250, NULL, '787ad2dd02bebb54e1a90ccbcf743f21'),
+(227, 'GAJI-001', '2022-07-22', 'Heni', 3600000, NULL, '597a569bda368cd3410633759bb2d6fa'),
+(228, 'GAJI-001', '2022-07-22', 'rafli', 18676667, NULL, 'd26c192537b567c47dac551727c34192'),
+(229, 'GAJI-001', '2022-07-22', 'ramli', 18661667, NULL, '307734a107c72d4159a43e9b7e9e6b59'),
+(230, 'GAJI-001', '2022-07-22', 'robi', 18732917, NULL, 'f0ff8c8787bc5bf52294625990b8d68d');
 
 -- --------------------------------------------------------
 
@@ -2315,13 +2436,6 @@ CREATE TABLE `transaksi_shu` (
   `tahunselanjutnya` int(11) NOT NULL,
   `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `transaksi_shu`
---
-
-INSERT INTO `transaksi_shu` (`id`, `kode_shu`, `tanggal`, `nominal`, `tahunselanjutnya`, `status`) VALUES
-(6, 'SHU20220001', '2022-07-14', 965, 520, 2);
 
 -- --------------------------------------------------------
 
@@ -2451,8 +2565,8 @@ INSERT INTO `user` (`id`, `nama_lengkap`, `username`, `password`, `level`, `nip`
 (5, 'test data', 'data1', '123123', 'pegawai', '1495301221757'),
 (6, 'Kasir Waserda', 'kasir_waserda', '123', 'kasir_waserda', NULL),
 (7, 'Keuangan', 'keuangan1', 'keuangan1', 'keuangan1', NULL),
-(8, 'Keuangan', 'keuangan2', 'keuangan2', 'keuangan2', NULL),
-(9, 'Keuangan', 'keuangan3', 'keuangan3', 'keuangan3', NULL),
+(8, 'IT', 'it', 'it', 'it', NULL),
+(9, 'Personalia', 'personalia', 'personalia', 'personalia', NULL),
 (10, 'Raihan', 'komisikredit', '123', 'komisikredit', NULL),
 (11, 'hanifah', 'koordinatorwilayah', '123', 'koordinatorwilayah', NULL),
 (12, 'Penjualan', 'penjualan', 'penjualan', 'penjualan', NULL),
@@ -2469,7 +2583,15 @@ INSERT INTO `user` (`id`, `nama_lengkap`, `username`, `password`, `level`, `nip`
 (23, 'rafli', 'rafli', '123', 'pegawai', '5016030722761'),
 (24, 'Caka', 'tesuserr', '123', 'pegawai', '5325080722762'),
 (25, 'Tarmizi', 'Tarmizi', '123', 'pegawai', '9432110722763'),
-(26, 'Rika', 'rika', '123', 'keuangan4', '2838274736382');
+(26, 'Rika', 'rika', '123', 'keuangan4', '2838274736382'),
+(27, 'testdata', 'testdata', '123', 'pegawai', '8065210722764'),
+(28, 'Admin', 'admin2', '123', 'admin2', '221121211'),
+(29, 'Keuangan', 'keuangan', '123', 'keuangan', '221121213'),
+(30, 'Pemilik', 'pemilik', '123', 'pemilik', '221121214'),
+(31, 'Keuangan Waserda', 'keuanganwaserda', '123', 'keuangan_waserda', '288328372'),
+(32, 'Penjualan Waserda', 'penjualanwaserda', '123', 'penjualan_waserda', '222323233'),
+(33, 'Persediaan Waserda', 'persediaanwaserda', '123', 'persediaan_waserda', '9939332333'),
+(34, 'Pembelian Waserda', 'pembelianwaserda', '123', 'pembelian_waserda', '99393334433');
 
 -- --------------------------------------------------------
 
@@ -3057,7 +3179,13 @@ INSERT INTO `waserda_kartu_stok` (`no`, `no_transaksi`, `kode`, `tgl_transaksi`,
 (0, 'PNJWASERDA130722001', 'WSP001', '2022-07-13 16:00:38', '', '0', '0', '0', '1', '2500', '2500', '372', '2500', '930000'),
 (0, 'PNJWASERDA130722001', 'WSP001', '2022-07-13 16:00:38', '', '0', '0', '0', '1', '2500', '2500', '100', '2500', '250000'),
 (0, 'PNJWASERDA140722001', 'WSP001', '2022-07-13 22:30:56', '', '0', '0', '0', '1', '2500', '2500', '371', '2500', '927500'),
-(0, 'PNJWASERDA140722001', 'WSP001', '2022-07-13 22:30:56', '', '0', '0', '0', '1', '2500', '2500', '100', '2500', '250000');
+(0, 'PNJWASERDA140722001', 'WSP001', '2022-07-13 22:30:56', '', '0', '0', '0', '1', '2500', '2500', '100', '2500', '250000'),
+(0, 'PNJWASERDA210722002', 'WSP001', '2022-07-21 15:48:34', '', '0', '0', '0', '1', '2500', '2500', '370', '2500', '925000'),
+(0, 'PNJWASERDA210722002', 'WSP001', '2022-07-21 15:48:34', '', '0', '0', '0', '1', '2500', '2500', '100', '2500', '250000'),
+(0, 'PNJWASERDA230722003', 'WSP001', '2022-07-23 02:54:07', '', '0', '0', '0', '1', '2500', '2500', '355', '2500', '887500'),
+(0, 'PNJWASERDA230722003', 'WSP001', '2022-07-23 02:54:07', '', '0', '0', '0', '1', '2500', '2500', '100', '2500', '250000'),
+(0, 'PNJWASERDA230722004', 'WSP001', '2022-07-23 03:28:15', '', '0', '0', '0', '1', '2500', '2500', '354', '2500', '885000'),
+(0, 'PNJWASERDA230722004', 'WSP001', '2022-07-23 03:28:15', '', '0', '0', '0', '1', '2500', '2500', '100', '2500', '250000');
 
 -- --------------------------------------------------------
 
@@ -3224,7 +3352,10 @@ INSERT INTO `waserda_log_stok` (`no_trans`, `id_produk`, `jml_baris_sblmnya`) VA
 ('PNJWASERDA120722004', 'WSP002', 5),
 ('PNJWASERDA130722005', 'WSP001', 2),
 ('PNJWASERDA130722001', 'WSP001', 2),
-('PNJWASERDA140722001', 'WSP001', 2);
+('PNJWASERDA140722001', 'WSP001', 2),
+('PNJWASERDA210722002', 'WSP001', 2),
+('PNJWASERDA230722003', 'WSP001', 2),
+('PNJWASERDA230722004', 'WSP001', 2);
 
 -- --------------------------------------------------------
 
@@ -3293,7 +3424,7 @@ INSERT INTO `waserda_log_transaksi` (`id`, `id_produk`, `jenis_transaksi`, `juml
 (45, 'WSP005', 'Stok Masuk', 100, 100, '2022-07-10 10:30:13'),
 (46, 'WSP003', 'Stok Masuk', 100, 100, '2022-07-10 10:30:13'),
 (47, 'WSP004', 'Stok Masuk', 100, 100, '2022-07-10 10:30:13'),
-(48, 'WSP001', 'Stok Masuk', 2000, 371, '2022-07-10 13:40:40'),
+(48, 'WSP001', 'Stok Masuk', 2000, 354, '2022-07-10 13:40:40'),
 (49, 'WSP001', 'Stok Masuk', 100, 100, '2022-07-12 14:23:55'),
 (50, 'WSP002', 'Stok Masuk', 100, 100, '2022-07-12 14:24:07');
 
@@ -3402,7 +3533,7 @@ CREATE TABLE `waserda_produk` (
 --
 
 INSERT INTO `waserda_produk` (`id`, `kode`, `barcode_id`, `id_kategori`, `id_supplier_produk`, `nama_produk`, `harga_satuan`, `harga_jual`, `satuan_produk`, `jml`, `status`, `created_at`) VALUES
-(1, 'WSP001', '8886008101053', 'WSK001', 'WSS001', 'Indomie Goreng', 1750, 2500, 'pcs', 186, 1, '2021-10-15 15:38:31'),
+(1, 'WSP001', '8886008101053', 'WSK001', 'WSS001', 'Indomie Goreng', 1750, 2500, 'pcs', 169, 1, '2021-10-15 15:38:31'),
 (2, 'WSP002', NULL, 'WSK001', 'WSS001', 'Indomie Goreng Ayam Bawang', 1500, 2000, 'pcs', 199, 1, '2021-10-15 15:38:31'),
 (3, 'WSP003', NULL, 'WSK001', 'WSS002', 'Indomie Goreng Rendang', 1500, 2000, 'pcs', 100, 1, '2021-10-15 15:38:31'),
 (4, 'WSP004', NULL, 'WSK001', 'WSS003', 'Indomie Goreng Aceh', 1500, 2000, 'pcs', 100, 1, '2021-10-15 15:38:31'),
@@ -3837,6 +3968,12 @@ ALTER TABLE `pos_penjualan`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `ppn`
+--
+ALTER TABLE `ppn`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `produk`
 --
 ALTER TABLE `produk`
@@ -4030,7 +4167,7 @@ ALTER TABLE `waserda_supplier`
 -- AUTO_INCREMENT for table `absensi`
 --
 ALTER TABLE `absensi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `aktivitas`
@@ -4060,19 +4197,19 @@ ALTER TABLE `bom`
 -- AUTO_INCREMENT for table `buku_kas_kecil`
 --
 ALTER TABLE `buku_kas_kecil`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `buku_pembantu_bank`
 --
 ALTER TABLE `buku_pembantu_bank`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `buku_pembantu_kas`
 --
 ALTER TABLE `buku_pembantu_kas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `coa`
@@ -4084,7 +4221,7 @@ ALTER TABLE `coa`
 -- AUTO_INCREMENT for table `detail_absen_rfid`
 --
 ALTER TABLE `detail_absen_rfid`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `detail_cek_kualitas`
@@ -4120,7 +4257,7 @@ ALTER TABLE `detail_pembelian_bp`
 -- AUTO_INCREMENT for table `detail_penerimaan_pengeluaran_kas`
 --
 ALTER TABLE `detail_penerimaan_pengeluaran_kas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `detail_penjualan_ips`
@@ -4162,7 +4299,7 @@ ALTER TABLE `detail_transaksi_shu`
 -- AUTO_INCREMENT for table `jadwal_shift`
 --
 ALTER TABLE `jadwal_shift`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `jenis_penjualan`
@@ -4174,7 +4311,7 @@ ALTER TABLE `jenis_penjualan`
 -- AUTO_INCREMENT for table `jurnal`
 --
 ALTER TABLE `jurnal`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT for table `kartu_stok_bp`
@@ -4192,7 +4329,7 @@ ALTER TABLE `kartu_stok_penj`
 -- AUTO_INCREMENT for table `laporan_kartu_stock`
 --
 ALTER TABLE `laporan_kartu_stock`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `log_bayar_pinjaman`
@@ -4234,7 +4371,7 @@ ALTER TABLE `log_simpanan_hr`
 -- AUTO_INCREMENT for table `pegawai`
 --
 ALTER TABLE `pegawai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `pembagian_shu`
@@ -4258,7 +4395,7 @@ ALTER TABLE `penerimaan_kas`
 -- AUTO_INCREMENT for table `penerimaan_pengeluaran_kas`
 --
 ALTER TABLE `penerimaan_pengeluaran_kas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `pengajuan_bonus`
@@ -4270,7 +4407,7 @@ ALTER TABLE `pengajuan_bonus`
 -- AUTO_INCREMENT for table `pengajuan_jurnal`
 --
 ALTER TABLE `pengajuan_jurnal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `pengeluaran_kas`
@@ -4306,7 +4443,7 @@ ALTER TABLE `pos_detail_pembelian`
 -- AUTO_INCREMENT for table `pos_detail_penjualan`
 --
 ALTER TABLE `pos_detail_penjualan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `pos_pembelian`
@@ -4318,7 +4455,13 @@ ALTER TABLE `pos_pembelian`
 -- AUTO_INCREMENT for table `pos_penjualan`
 --
 ALTER TABLE `pos_penjualan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `ppn`
+--
+ALTER TABLE `ppn`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `revaluasi`
@@ -4342,13 +4485,13 @@ ALTER TABLE `shift`
 -- AUTO_INCREMENT for table `tb_cuti`
 --
 ALTER TABLE `tb_cuti`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tb_cuti_melahirkan`
 --
 ALTER TABLE `tb_cuti_melahirkan`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tb_detail_pengajuan_bonus`
@@ -4360,7 +4503,7 @@ ALTER TABLE `tb_detail_pengajuan_bonus`
 -- AUTO_INCREMENT for table `tb_detail_penggajian`
 --
 ALTER TABLE `tb_detail_penggajian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=191;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
 
 --
 -- AUTO_INCREMENT for table `tb_jabatan`
@@ -4378,13 +4521,13 @@ ALTER TABLE `tb_jenis_pegawai`
 -- AUTO_INCREMENT for table `tb_lembur`
 --
 ALTER TABLE `tb_lembur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tb_penggajian`
 --
 ALTER TABLE `tb_penggajian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=231;
 
 --
 -- AUTO_INCREMENT for table `tb_ptkp`
@@ -4438,7 +4581,7 @@ ALTER TABLE `update_stok_penj`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `waserda_jenis_anggota`
