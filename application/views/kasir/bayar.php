@@ -83,9 +83,16 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Total</label>
                         <div class="col-sm-5">
-                            <input type="text" name="total" id="total" class="form-control" placeholder="Total Pembayaran" value="<?= $gtot ?>" readonly>
+                            <input type="text" class="form-control" placeholder="Total Pembayaran" value="<?= $gtot ?>" readonly>
                             <input type="hidden" value="<?= $ppn ?>" name="ppn">
-                            <input type="hidden" value="<?= $total ?>" name="total_trans">
+                            <!-- <input type="hidden" value="<?= $total ?>" name="total_trans"> -->
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Pembulatan Total</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="total" id="total" class="form-control" placeholder="Total Pembayaran" value="<?= pembulatan_penjualan($gtot) ?>" readonly>
+                            <input type="hidden" value="<?= pembulatan_penjualan($total) ?>" name="total_trans">
                         </div>
                     </div>
                     <div class="info">

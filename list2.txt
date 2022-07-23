@@ -54,3 +54,41 @@ Pemilik: Laporan Arus Kas, Jurnal, Buku Besar, Buku Kas Kecil, Buku Pembantu Ban
 Revisi Sarah:
 - Filter Laporan Neraca, Laporan Perubahan Modal, Laporan Simpanan
 - Manajemen User
+
+Revisi Siti:
+- PPN master data
+- Pembulatan di penjualan
+- Manajemen User
+Penjualan:
+    Transaksi Penjualan (Kasir)
+    Pembayaran Kredit
+
+Persediaan:
+    Master Data
+        Produk
+        Kategori Produk
+    Waserda
+        Pengajuan Barang (Hanya Approve)
+    Laporan 
+        Laporan Kartu Stock
+
+Pembelian:
+    Master Data
+        Supplier
+    Waserda
+        Data Pembelian
+        Pengajuan Barang (Hanya Tambah Pengajuan)
+    
+Keuangan
+    Master Data
+        COA
+    Waserda 
+        Pengeluaran Beban
+    Transaksi
+        Pengajuan Jurnal (Hanya Upload Bukti)
+    Laporan
+        Jurnal
+        Laba rugi
+        Laporan penjualan waserda
+        Laporan pembelian waserda
+    

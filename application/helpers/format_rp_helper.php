@@ -9,6 +9,17 @@ function format_rp($a)
 	return $angka;
 }
 
+function pembulatan_penjualan($nominal)
+{
+	$perak = substr($nominal, -3);
+	if ($perak > 500) {
+		$nominal = $nominal + 1000-$perak;
+	} elseif ($perak > 0) {
+		$nominal = $nominal + 500-$perak;
+	}
+	return $nominal;
+}
+
 function number($a)
 {
 	if (!is_numeric($a)) return null;

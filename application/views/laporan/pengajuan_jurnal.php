@@ -41,6 +41,7 @@
                                     <th class="text-center">Bukti Pembayaran</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Aksi</th>
+                                
                                 </tr>
                             </thead>
                             <tbody>
@@ -91,17 +92,22 @@
                                                     Input/Ubah Bukti Pembayaran
                                                 </a>
                                             <?php } ?>
-                                            <?php if ($value->status == 'pending') { ?>
-                                                <a href="<?= base_url('c_transaksi/status_pengajuan_subm/' . $value->kode . '/' . $value->tanggal . '/' . $value->nominal.'/true') ?>" onclick="return confirm('Anda yakin?')" class="btn btn-xs btn-primary">Approve Jurnal</a>
-                                                <?php } else { ?>
-                                                    <?php } ?>
+                                            
+                                            <?php if ($this->session->userdata("level") != "keuangan_waserda") { ?>
+                                                <?php if ($value->status == 'pending') { ?>
+                                                    <a href="<?= base_url('c_transaksi/status_pengajuan_subm/' . $value->kode . '/' . $value->tanggal . '/' . $value->nominal.'/true') ?>" onclick="return confirm('Anda yakin?')" class="btn btn-xs btn-primary">Approve Jurnal</a>
+                                                    <?php } else { ?>
+                                                        <?php } ?>
+                                            <?php } ?>
                                         </td>
                                     </tr>
                                     
                                 <?php } ?>
                             </tbody>
                         </table>
-                        <button class="btn btn-primary">Approve Jurnal</button>
+                        <?php if ($this->session->userdata("level") != "keuangan_waserda") { ?>
+                            <button class="btn btn-primary">Approve Jurnal</button>
+                        <?php } ?>
                     </form>
                 </div>
             </div>

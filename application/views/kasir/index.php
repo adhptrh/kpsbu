@@ -153,6 +153,16 @@
     // }
 </script>
 <script type="text/javascript">
+    function pembulatan_penjualan(nominal)
+    {
+        let perak = parseInt(nominal.substring(nominal.length - 3));
+        if (perak > 500) {
+            nominal = parseInt(nominal) + 1000-perak;
+        } else if (perak > 0) {
+            nominal = parseInt(nominal) + 500-perak;
+        }
+        return parseInt(nominal);
+    }
     $(document).ready(function() {
         time()
         show()
@@ -318,7 +328,7 @@
                     var typing = $(this).val()
                     var total = $("#total").val()
                     var kembalian = typing - total
-                    console.log(typing)
+                    console.log(total)
 
                     if (typing) {
                         if (kembalian >= 0) {

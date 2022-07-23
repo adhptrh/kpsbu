@@ -8,7 +8,9 @@
                     </div>
                     <div class="col-sm-2 col-12">
                         <h3 id="quote">
-                            <a href="#add" data-toggle="modal" class="btn pull-right btn-primary">Tambah</a>
+                            <?php if ($this->session->userdata('level') != 'persediaan_waserda') { ?>
+                                <a href="#add" data-toggle="modal" class="btn pull-right btn-primary">Tambah</a>
+                            <?php } ?>
                         </h3>
                     </div>
                 </div>
@@ -27,7 +29,9 @@
                                 <th>Jumlah Pengajuan</th>
                                 <th>Sisa Stok</th>
                                 <th style="width: 12%;" class="text-center">Status</th>
-                                <th style="width: 7%;" class="text-center">Aksi</th>
+                                <?php if ($this->session->userdata('level') != 'pembelian_waserda') { ?>
+                                    <th style="width: 7%;" class="text-center">Aksi</th>
+                                <?php } ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -56,16 +60,18 @@
                                         <button class="btn btn-xs btn-warning"><?= ucwords($value->status)?></button>
                                     <?php } ?>
                                 </td>
-                                <td class="text-center">
-                                    <?php if ($value->status == 'Approved') { ?>
-                                        <button style="width: 30px;" class="btn btn-xs btn-success"><i class="fa fa-check"></i></button>
-                                    <?php } else if ($value->status == 'Refused') { ?>
-                                        <button style="width: 30px;" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></button>
-                                    <?php } else { ?>
-                                        <button style="width: 30px;" value="acc" data-id="<?= $value->id?>" class="btn btn-xs btn-success btn-terima"><i class="fa fa-check"></i></button>
-                                        <button style="width: 30px;" value="dec" data-id="<?= $value->id?>" class="btn btn-xs btn-danger btn-tolak"><i class="fa fa-times"></i></button>
-                                    <?php } ?>
-                                </td>
+                                <?php if ($this->session->userdata('level') != 'pembelian_waserda') { ?>
+                                    <td class="text-center">
+                                        <?php if ($value->status == 'Approved') { ?>
+                                            <button style="width: 30px;" class="btn btn-xs btn-success"><i class="fa fa-check"></i></button>
+                                        <?php } else if ($value->status == 'Refused') { ?>
+                                            <button style="width: 30px;" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></button>
+                                        <?php } else { ?>
+                                            <button style="width: 30px;" value="acc" data-id="<?= $value->id?>" class="btn btn-xs btn-success btn-terima"><i class="fa fa-check"></i></button>
+                                            <button style="width: 30px;" value="dec" data-id="<?= $value->id?>" class="btn btn-xs btn-danger btn-tolak"><i class="fa fa-times"></i></button>
+                                        <?php } ?>
+                                    </td>
+                                <?php } ?>
                             </tr>
                             <?php } ?>
                         </tbody>
