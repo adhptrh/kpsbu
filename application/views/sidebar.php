@@ -419,6 +419,7 @@
 
                     <?php elseif ($this->session->userdata('level') == "bendahara") : ?>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/view_jurnal">Jurnal</a></li>
+                        <li><a href="<?php echo site_url(); ?>c_keuangan/view_jurnal_penutup">Jurnal Penutup</a></li>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/bukubesar">Buku Besar</a></li>
                         <li><a href="<?php echo site_url(); ?>Laporan/neraca_saldo">Neraca Saldo</a></li>
                         <li><a href="<?= base_url('Laporan/laporan_neraca')?>">Laporan Neraca</a></li>
