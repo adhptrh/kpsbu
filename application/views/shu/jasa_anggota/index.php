@@ -80,6 +80,22 @@
 </div>
 <?php $this->load->view('shu/jasa_anggota/add')?>
 <script>
+    function formatRupiah(angka, prefix){
+	var number_string = angka.replace(/[^,\d]/g, '').toString(),
+	split   		= number_string.split(','),
+	sisa     		= split[0].length % 3,
+	rupiah     		= split[0].substr(0, sisa),
+	ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+ 
+	// tambahkan titik jika yang di input sudah menjadi angka ribuan
+	if(ribuan){
+		separator = sisa ? '.' : '';
+		rupiah += separator + ribuan.join('.');
+	}   
+ 
+	rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+	return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+}
     $(document).ready(function() {
         $(".show-div").hide()
         $("#btn_simpan").prop('disabled', true)
@@ -100,30 +116,41 @@
                         console.log(obj)
                         var jasa_anggota = Math.ceil((obj.total_penjualan / obj.jasa_anggota) * obj.total_transaksi)
                         $("#total_penjualan").val(obj.total_penjualan)
+                        $("#total_penjualan2").val(formatRupiah(obj.total_penjualan.toString()))
                         $("#jasa_anggota").val(obj.jasa_anggota)
+                        $("#jasa_anggota2").val(formatRupiah(obj.jasa_anggota.toString()))
                         var total_trans_susu = obj.total_transaksi
                         if (total_trans_susu) {
                             $("#total_trans_susu").val(total_trans_susu)
+                            $("#total_trans_susu2").val(formatRupiah(total_trans_susu.toString()))
                         } else {
                             $("#total_trans_susu").val(0)
+                            $("#total_trans_susu2").val(formatRupiah("0"))
                         }
                         $("#total_jasa_anggota").val(jasa_anggota)
+                        $("#total_jasa_anggota2").val(formatRupiah(jasa_anggota.toString()))
 
                         // modal
                         var jasa_modal = Math.ceil(((obj.jasa_modal / obj.total_simpanan ) * obj.total_simpanan_peranggota))
                         $("#total_modal").val(obj.jasa_modal)
+                        $("#total_modal2").val(formatRupiah(obj.jasa_modal.toString()))
                         $("#total_simpanan").val(obj.total_simpanan)
+                        $("#total_simpanan2").val(formatRupiah(obj.total_simpanan.toString()))
                         var cek_simpanan_anggota = obj.total_simpanan_peranggota
                         if (cek_simpanan_anggota) {
                             $("#total_simpanan_anggota").val(cek_simpanan_anggota)
+                            $("#total_simpanan_anggota2").val(formatRupiah(cek_simpanan_anggota.toString()))
                         } else {
                             $("#total_simpanan_anggota").val(0)
+                            $("#total_simpanan_anggota2").val(formatRupiah("0"))
                         }
                         $("#jasa_modal").val(jasa_modal)
+                        $("#jasa_modal2").val(formatRupiah(jasa_modal.toString()))
 
                         // shu 
                         var shu = jasa_modal + jasa_anggota
                         $("#sisa_hasil_usaha").val(shu)
+                        $("#sisa_hasil_usaha2").val(formatRupiah(shu.toString()))
 
                         if (shu == 0) {
                             $("#btn_simpan").prop('disabled', true)   

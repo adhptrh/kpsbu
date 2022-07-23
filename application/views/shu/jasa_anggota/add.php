@@ -40,21 +40,24 @@
                         <div class="form-group row">
                             <label for="total_modal" class="col-sm-5 col-form-label">Pembagian Jasa Modal</label>
                             <div class="col-sm-7">
-                                <input type="text" name="total_modal" id="total_modal" class="form-control" readonly>
+                                <input type="text" id="total_modal2" class="form-control" readonly>
+                                <input type="hidden" name="total_modal" id="total_modal" class="form-control" readonly>
                             </div>
                         </div>
     
                         <div class="form-group row">
                             <label for="total_simpanan" class="col-sm-5 col-form-label">Total Simpanan</label>
                             <div class="col-sm-7">
-                                <input type="text" name="total_simpanan" id="total_simpanan" class="form-control" readonly>
+                                <input type="text" id="total_simpanan2" class="form-control" readonly>
+                                <input type="hidden" name="total_simpanan" id="total_simpanan" class="form-control" readonly>
                             </div>
                         </div>
     
                         <div class="form-group row">
                             <label for="total_simpanan_anggota" class="col-sm-5 col-form-label">Total Simpanan Anggota</label>
                             <div class="col-sm-7">
-                                <input type="text" name="total_simpanan_anggota" id="total_simpanan_anggota" class="form-control" readonly required>
+                                <input type="text" id="total_simpanan_anggota2" class="form-control" readonly required>
+                                <input type="hidden" name="total_simpanan_anggota" id="total_simpanan_anggota" class="form-control" readonly required>
                             </div>
                         </div>
 
@@ -74,14 +77,16 @@
                         <div class="form-group row">
                             <label for="jasa_anggota" class="col-sm-5 col-form-label">Pembagian Jasa Anggota</label>
                             <div class="col-sm-7">
-                                <input type="text" name="jasa_anggota" id="jasa_anggota" class="form-control" readonly>
+                                <input type="text" id="jasa_anggota2" class="form-control" readonly>
+                                <input type="hidden" name="jasa_anggota" id="jasa_anggota" class="form-control" readonly>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="total_penjualan" class="col-sm-5 col-form-label">Total Penjualan</label>
                             <div class="col-sm-7">
-                                <input type="text" name="total_penjualan" id="total_penjualan" class="form-control" readonly>
+                                <input type="text" id="total_penjualan2" class="form-control" readonly>
+                                <input type="hidden" name="total_penjualan" id="total_penjualan" class="form-control" readonly>
                             </div>
                         </div>
     
@@ -89,7 +94,8 @@
                         <div class="form-group row">
                             <label for="total_trans_susu" class="col-sm-5 col-form-label">Total Transaksi Susu</label>
                             <div class="col-sm-7">
-                                <input type="text" name="total_trans_susu" id="total_trans_susu" class="form-control" readonly required>
+                                <input type="text" id="total_trans_susu2" class="form-control" readonly required>
+                                <input type="hidden" name="total_trans_susu" id="total_trans_susu" class="form-control" readonly required>
                             </div>
                         </div>
 
@@ -107,19 +113,22 @@
                         <div class="form-group row">
                                 <label for="jasa_modal" class="col-sm-5 col-form-label">Total Jasa Modal</label>
                                 <div class="col-sm-7">
-                                    <input type="text" name="jasa_modal" id="jasa_modal" class="form-control" readonly required>
+                                    <input type="text" id="jasa_modal2" class="form-control" readonly required>
+                                    <input type="hidden" name="jasa_modal" id="jasa_modal" class="form-control" readonly required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="total_jasa_anggota" class="col-sm-5 col-form-label">Total Jasa Anggota</label>
                                 <div class="col-sm-7">
-                                    <input type="text" name="total_jasa_anggota" id="total_jasa_anggota" class="form-control" readonly required>
+                                    <input type="text" id="total_jasa_anggota2" class="form-control" readonly>
+                                    <input type="hidden" name="total_jasa_anggota" id="total_jasa_anggota" class="form-control" readonly required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="sisa_hasil_usaha" class="col-sm-5 col-form-label">Sisa Hasil Usaha</label>
                                 <div class="col-sm-7">
-                                    <input type="text" name="sisa_hasil_usaha" id="sisa_hasil_usaha" class="form-control" readonly>
+                                    <input type="text" id="sisa_hasil_usaha2" class="form-control" readonly>
+                                    <input type="hidden" name="sisa_hasil_usaha" id="sisa_hasil_usaha" class="form-control" readonly>
                                 </div>
                             </div>
                             <span style="color: red; margin-bottom:10px;">*nilai desimal akan dibulatkan pada saat disimpan.</span>
