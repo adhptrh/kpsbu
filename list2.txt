@@ -91,4 +91,3 @@ Keuangan
         Laba rugi
         Laporan penjualan waserda
         Laporan pembelian waserda
-    

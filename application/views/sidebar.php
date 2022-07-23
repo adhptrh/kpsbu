@@ -544,6 +544,7 @@
                         
                         <?php elseif ($this->session->userdata('level') == "penjualan_waserda") : ?>
                             <li><a href="<?= base_url('Kasir')?>">Kasir</a></li>
+                            <li><a href="<?= base_url('Kasir/list_penjualan')?>">Data Penjualan</a></li>
                             <li><a href="<?= base_url('Kasir/pmb_kredit')?>">Pembayaran Kredit</a></li>
                         
                         <?php elseif ($this->session->userdata('level') == "persediaan_waserda") : ?>
