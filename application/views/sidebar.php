@@ -110,6 +110,7 @@
                 <a><i class="fa fa-table"></i> Master Data <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <?php if ($this->session->userdata('level') == "admin") : ?>
+                    <li><a href="<?php echo base_url('c_masterdata/ppn'); ?>">PPN</a></li>
                     <li><a href="<?php echo base_url('c_masterdata/aktivitas'); ?>">Aktivitas</a></li>
                     <li><a href="<?php echo base_url('Produk'); ?>">Produk Waserda</a></li>
                     <li><a href="<?php echo base_url('Kategori')?>">Kategori Produk</a></li>

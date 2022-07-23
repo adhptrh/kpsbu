@@ -59,6 +59,8 @@ Revisi Siti:
 - PPN master data
 - Pembulatan di penjualan
 - Manajemen User
+- Nominal titik2 di Kasir, Pengeluaran Beban, Master Produk Waserda
+- Laporan Waserda, Laba Rugi, Kartu stock waserda dikasih header seperti jurnal
 Penjualan:
     Transaksi Penjualan (Kasir)
     Pembayaran Kredit

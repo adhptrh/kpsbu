@@ -2962,6 +2962,39 @@ class C_masterdata extends CI_controller
       redirect('c_masterdata/alokasi_shu');
    }
 
+
+   public function ppn()
+   {
+      $ppn = $this->db->get('ppn')->result();
+      $data = [
+         'ppn' => $ppn, 
+      ];
+      $this->template->load('template', 'ppn/index', $data);
+   }
+
+   public function save_ppn()
+   {
+      $persen = $this->input->post('persen');
+      $data = [
+         'persen' => $persen,
+      ];
+      $this->db->insert('ppn', $data);
+      redirect('c_masterdata/ppn');
+   }
+
+   public function edit_ppn()
+   {
+      $id = $this->input->post('id');
+      $persen = $this->input->post('persen');
+      // data ini data yang akan diubah
+      $data = [
+         'persen' => $persen,
+      ];
+      $this->db->where('id', $id);
+      $this->db->update('ppn', $data);
+
+      redirect('c_masterdata/ppn');
+   }
    // salma
    public function aktivitas()
    {

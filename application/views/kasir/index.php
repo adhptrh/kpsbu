@@ -97,8 +97,15 @@
                 $ppn = $total * 0.11;
                 $gtot = $ppn + $total;
                 ?>
+                <p>Pilih PPN</p>
+                <select onchange="window.location.href = '?id_ppn='+this.value" class="form-control" name="id_ppn" required>
+                    <?php foreach ($ppnmasterdata as $v) { ?>
+                    <option value="<?= $v->id ?>"><?= $v->persen ?>%</option>
+                    <?php } ?>
+                </select>
+                
                 <h5>Total : <?= $total = (empty($total)) ? '-' : format_rp($total) ?></h5>
-                <h5>PPN (11%) : <?= $ppn = (empty($ppn)) ? '-' : format_rp($ppn) ?></h5>
+                <h5>PPN (<?= $persen ?>%) : <?= $ppn = (empty($ppn)) ? '-' : format_rp($ppn) ?></h5>
                 <h5>Grand Total : <?= $gtot = (empty($gtot)) ? '-' : format_rp($gtot) ?></h5>
                 <hr>
                 <div class="text-left">

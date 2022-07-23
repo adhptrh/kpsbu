@@ -12,6 +12,9 @@
 
     public function index()
     {
+        $id_ppn = $this->input->get("id_ppn") ?? $this->db->query("SELECT * FROM ppn")->row()->id;
+        $persen = $this->db->query("SELECT * FROM ppn WHERE id = $id_ppn")->row()->persen;
+        $ppnmasterdata = $this->db->query("SELECT * FROM ppn")->result();
         $user = $this->session->nama_lengkap;
         // print_r($user);exit;
         $inv = $this->master->invoice();
@@ -21,7 +24,7 @@
         where invoice = '$inv'
         and id_produk is NOT null")->result();
         $total = $this->produk->get_total_detail($inv)->row()->total;
-        $ppn = $total * 0.11;
+        $ppn = $total * ($persen/100);
         $gtot = $total + $ppn;
         $detail = $this->produk->detail_pos($inv)->result();
         // print_r($id_bb);exit;
@@ -36,6 +39,9 @@
             'jenis_anggota' => $this->db->get('waserda_jenis_anggota')->result(), 
             'anggota' => $this->db->get('peternak')->result(),
             'id_bb' => $id_bb,
+            'persen'=> $persen,
+            'id_ppn' => $id_ppn,
+            'ppnmasterdata' => $ppnmasterdata,
         ];
         // print_r($data['total']);exit;
         $this->template->load('template', 'kasir/index', $data);
