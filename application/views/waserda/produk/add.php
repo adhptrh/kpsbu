@@ -65,14 +65,16 @@
                 <div class="form-group row">
                     <label for="harga" class="col-sm-3 col-form-label">Harga Satuan</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="desc" placeholder="Harga Satuan" name="harga" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required>
+                        <input type="text" class="form-control" id="desc2" placeholder="Harga Satuan" required>
+                        <input type="hidden" class="form-control" id="desc" placeholder="Harga Satuan" name="harga"  required>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="harga_jual" class="col-sm-3 col-form-label">Harga Jual</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="harga_jual" placeholder="Harga Jual" name="harga_jual" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required>
+                        <input type="text" class="form-control" id="harga_jual2" placeholder="Harga Jual" required>
+                        <input type="hidden" class="form-control" id="harga_jual" placeholder="Harga Jual" name="harga_jual"  required>
                     </div>
                 </div>
 
@@ -85,3 +87,29 @@
         </div>
     </div>
 </div>
+<script>
+    function formatRupiah(angka, prefix){
+			var number_string = angka.replace(/[^,\d]/g, '').toString(),
+			split   		= number_string.split(','),
+			sisa     		= split[0].length % 3,
+			rupiah     		= split[0].substr(0, sisa),
+			ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+ 
+			// tambahkan titik jika yang di input sudah menjadi angka ribuan
+			if(ribuan){
+				separator = sisa ? '.' : '';
+				rupiah += separator + ribuan.join('.');
+			}
+ 
+			rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+			return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+		}
+    $("#desc2").on("input",()=>{
+        $("#desc2").val(formatRupiah($("#desc2").val()))
+        $("#desc").val($("#desc2").val().replaceAll(".",""))
+    })
+    $("#harga_jual2").on("input",()=>{
+        $("#harga_jual2").val(formatRupiah($("#harga_jual2").val()))
+        $("#harga_jual").val($("#harga_jual2").val().replaceAll(".",""))
+    })
+</script>

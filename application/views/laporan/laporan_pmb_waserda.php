@@ -58,6 +58,20 @@
                 <div id="notif">
                     <?php echo $this->session->flashdata('notif_ubah'); ?>
                 </div>
+                
+                <br>
+			<center>
+				<b>
+					<div style="font-size: 25px">KPSBU Lembang</div>
+					<div style="font-size: 20px">Pembelian Waserda</div>
+					<?php if (isset($bulan)) { ?>
+						<div style="font-size: 15px">
+							Periode <?= $tahun."-".$bulan ?>
+						</div><?php
+							} ?>
+				</b>
+			</center>
+            <br>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="datatable-buttons">
                         <thead>

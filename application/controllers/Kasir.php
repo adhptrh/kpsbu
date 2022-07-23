@@ -680,7 +680,7 @@
         where pp.nama_pembeli is not null
         and pdp.invoice = "'.$invoice.'"
         order by pp.date_payment desc')->result();
-        $pnj = $this->db->query('select * from pos_penjualan where invoice = "'.$invoice.'"')->row();
+        $pnj = $this->db->query('select *,ppn.persen as persen from pos_penjualan join ppn on pos_penjualan.id_ppn = ppn.id where invoice = "'.$invoice.'"')->row();
         $data = [
             'title' => 'pdf', 
             'detail' => $detail,

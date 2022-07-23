@@ -18,7 +18,20 @@
             <button class="btn btn-primary">Filter</button>
         </form>
         </div>
-
+        <br>
+			<center>
+				<b>
+					<div style="font-size: 25px">KPSBU Lembang</div>
+					<div style="font-size: 20px">Jurnal</div>
+					<?php if (isset($bulantahun)) { ?>
+						<div style="font-size: 15px">
+							Periode <?php echo $bulantahun;
+															?>
+						</div><?php
+							} ?>
+				</b>
+			</center>
+            <br>
         <table id="datatable" class="table table-striped table-bordered table-hover jambo-table dataTable no-footer">
             <thead>
                 <tr class="headings">

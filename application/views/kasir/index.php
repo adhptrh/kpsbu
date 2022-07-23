@@ -391,8 +391,8 @@
         $('.btn-checkout').prop('disabled', true)
         $('.btn-checkout-print').prop('disabled', true)
 
-        $("input[name='pembayaran']").focusout(function() {
-            var typing = $(this).val()
+        $("#input_pembayaran2").keyup(function() {
+            var typing = $("#input_pembayaran").val()
             var total = $("#total").val()
             var kembalian = typing - total
             console.log(typing)

@@ -16,7 +16,8 @@
                     <button class="btn btn-primary">Filter</button>
                 </form>
                 <div class="header" style="padding-bottom: 10px;">
-                    <h1 class="text-center">Koperasi KPSBU</h1>
+                    
+					<div class="text-center font-weight-bold" style="font-size: 25px"><b>KPSBU Lembang</b></div>
                     <h4 class="text-center">Laporan Laba Rugi Waserda</h4>
                     <h5 class="text-center">Periode <?= $tahun ?? "" ?></h5>
                 </div>

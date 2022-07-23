@@ -43,7 +43,8 @@
                 <div class="form-group row">
                     <label for="nominal" class="col-sm-4 col-form-label">Nominal</label>
                     <div class="col-sm-8">
-                    <input type="text" class="form-control" name="nominal" id="nominal" placeholder="Nominal" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required>
+                    <input type="text" class="form-control"  id="nominal2" placeholder="Nominal" required>
+                    <input type="hidden" class="form-control" name="nominal" id="nominal" placeholder="Nominal" required>
                     </div>
                 </div>
             </div>

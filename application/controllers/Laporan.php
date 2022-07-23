@@ -258,6 +258,8 @@ class Laporan extends CI_Controller
             WHERE LEFT(tanggal, 7) = '$periode'")->result();
             $data = [
                 'list' => $list, 
+                'bulan'=>$bulan,
+                'tahun'=>$tahun
             ];
             $this->template->load('template', 'laporan/laporan_penjualan_waserda', $data);
         }
@@ -278,6 +280,8 @@ class Laporan extends CI_Controller
             WHERE LEFT(tanggal, 7) = '$periode'")->result();
             $data = [
                 'list' => $list, 
+                'bulan'=>$bulan,
+                'tahun'=>$tahun
             ];
             $this->template->load('template', 'laporan/laporan_pmb_waserda', $data);
         }
