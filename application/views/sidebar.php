@@ -163,7 +163,8 @@
                     <li><a href="<?php echo site_url(); ?>c_masterdata/lihat_peternak">Anggota</a></li>
 
                     <?php elseif ($this->session->userdata('level') == "keuangan_waserda") : ?>
-                    <li><a href="<?php echo site_url(); ?>c_masterdata/lihat_coa">COA</a></li>
+                        <li><a href="<?php echo base_url('c_masterdata/ppn'); ?>">PPN</a></li>>
+                    <li><a href="<?php echo site_url(); ?>c_masterdata/lihat_coa">COA</a></li
 
                     <?php elseif ($this->session->userdata('level') == "persediaan_waserda") : ?>
                     <li><a href="<?php echo base_url('Produk'); ?>">Produk Waserda</a></li>
