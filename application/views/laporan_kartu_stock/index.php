@@ -22,7 +22,7 @@
 			<center>
 				<b>
 					<div style="font-size: 25px">KPSBU Lembang</div>
-					<div style="font-size: 20px">Jurnal</div>
+					<div style="font-size: 20px">Laporan Kartu Stock</div>
 					<?php if (isset($bulantahun)) { ?>
 						<div style="font-size: 15px">
 							Periode <?php echo $bulantahun;
