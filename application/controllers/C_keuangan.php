@@ -71,6 +71,7 @@ class C_keuangan extends CI_Controller
 		if (isset($no_coa, $periode)) {
 			// $periode = $this->input->post('bulan');
 			$akun = $this->db->get('coa')->result();
+			$coad = $this->db->get_where('coa', ['no_coa' => $no_coa])->row();
 			$cek = date('m-Y', strtotime("-1 months", strtotime($periode)));
 			$bulan1 = substr($cek, 0, 2);
 			$tahun1 = substr($cek, 3, 7);
@@ -109,8 +110,10 @@ class C_keuangan extends CI_Controller
 
 			$data = [
 				'coa' => $akun,
+				'nama_coa' => $coad->nama_coa,
 				'list' => $listBB, 
-				'saldo_awal' => $saldo_awal
+				'saldo_awal' => $saldo_awal,
+				'bulan' => $periode,
 			];
 			$this->template->load('template', 'new_bukubesar', $data);
 		} else {

@@ -28,12 +28,11 @@
                     <center>
                         <b>
                             <div style="font-size: 25px">KPSBU</div>
-                            <div style="font-size: 20px">Buku Besar </div>
-                            <div style="font-size: 15px">Periode </div>
+                            <div style="font-size: 20px">Buku Besar <?= $nama_coa ?? "" ?> </div>
+                            <div style="font-size: 15px">Periode <?= $bulan ?? "" ?></div>
                         </b>
                     </center>
                 </p>
-
                 <hr>
                 <table id="datatable" class="table table-striped table-bordered table-hover jambo_table">
                     <thead>
