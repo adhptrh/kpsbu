@@ -12,6 +12,5 @@ class Tunjanganhariraya extends CI_Controller {
             "pegawai"=>$pegawais
         ];
         var_dump($data);
-        $this->template->load("template","penggajian/tunjanganhariraya",$data);
     }
 }

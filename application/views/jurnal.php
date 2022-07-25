@@ -60,7 +60,6 @@
 					$stacks = [];
 					$id_jurnal = "";
 
-
 					foreach ($jurnal as $data) {
 						
 						if ($id_jurnal != $data["id_jurnal"] ) {
@@ -111,7 +110,9 @@
 								$stack[0]["no_coa"] == "5228"  &&
 								$stack[1]["no_coa"] == "1111"  ||
 								$stack[0]["no_coa"] == "5224"  &&
-								$stack[1]["no_coa"] == "1111" 
+								$stack[1]["no_coa"] == "1111"   ||
+								$stack[0]["no_coa"] == "1111"  &&
+								$stack[1]["no_coa"] == "4112" 
 								) {
 									array_push($stacks, $stack);
 									$stack = [];
@@ -130,16 +131,19 @@
 						foreach ($data as $d) {
 							$id .= $d["tgl_jurnal"] . $d["no_coa"] . $d["posisi_dr_cr"];
 						}
-						//$id = md5($id);
+						$id = md5($id);
 						if (!isset($result[$id])) {
 							$result[$id]["jumlah_paket"] = 1;
 							$result[$id]["data"] = [$data];
 							$result[$id]["totaldata"] = $data;
+							/* var_dump($data);
+							echo "<br>"; */
 						} else {
 							$result[$id]["jumlah_paket"]++;
 							foreach ($data as $k => $d) {
 								$result[$id]["totaldata"][$k]["nominal"] += $data[$k]["nominal"];
 							}
+							echo "<br>";
 							array_push($result[$id]["data"], $data);
 						}
 					}
