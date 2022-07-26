@@ -13,16 +13,18 @@
                 </div>
             </div>
             <div class="x_content">
-                <form method="get" class="form-inline form-group">
-                    <label for="periode">Anggota</label>
-                    <select name="no_anggota" required class="form-control">
-                        <option selected disabled value>Pilih anggota</option>
-                        <?php foreach ($anggotas as $anggota) { ?>
-                            <option value="<?= $anggota->no_peternak ?>" <?= ($anggota->no_peternak == $no_anggota) ? "selected":"" ?>><?= $anggota->nama_peternak ?></option>
-                        <?php } ?>
-                    </select>
-                    <button class="btn btn-primary">Filter</button>
-                </form>
+                <?php if ($this->session->userdata("level") != "anggota") { ?>
+                    <form method="get" class="form-inline form-group">
+                        <label for="periode">Anggota</label>
+                        <select name="no_anggota" required class="form-control">
+                            <option selected disabled value>Pilih anggota</option>
+                            <?php foreach ($anggotas as $anggota) { ?>
+                                <option value="<?= $anggota->no_peternak ?>" <?= ($anggota->no_peternak == $no_anggota) ? "selected":"" ?>><?= $anggota->nama_peternak ?></option>
+                            <?php } ?>
+                        </select>
+                        <button class="btn btn-primary">Filter</button>
+                    </form>
+                <?php } ?>
                 <form action="<?= base_url("Shu/simpan_pengajuan_jurnal_jasa_anggota") ?>" method="post">
                     <div id="notif">
                         <?php echo $this->session->flashdata('notif_ubah'); ?>

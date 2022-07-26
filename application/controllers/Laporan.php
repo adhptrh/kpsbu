@@ -234,6 +234,9 @@ class Laporan extends CI_Controller
         // WHERE z.is_deactive = 0")->result();
         $bulantahun = $this->input->get("bulantahun") ?? date("Y-m");
         $list = $this->M_transaksi->data_laporan_shu($bulantahun)->result();
+        if ($this->session->userdata("level") == "anggota") {
+            $list = $this->M_transaksi->data_laporan_shu($bulantahun, $this->session->userdata("nama_lengkap"))->result();
+        }
         // print_r($list);exit;
         $data = [
             'list' => $list,

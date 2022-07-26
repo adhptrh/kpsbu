@@ -427,7 +427,7 @@ class m_transaksi extends CI_Model
 		return $this->db->query($q);
 	}
 
-	public function data_laporan_shu($bulantahun = null)
+	public function data_laporan_shu($bulantahun = null, $nama_peternak = null)
 	{
 		$year = date('Y');
 		if ($bulantahun != null) {
@@ -458,7 +458,10 @@ class m_transaksi extends CI_Model
             WHERE tgl_transaksi LIKE '$year%'
             GROUP BY nama_peternak
         ) AS x ON z.no_peternak = x.no_peternak
-        WHERE z.is_deactive = 0 ";
+        WHERE z.is_deactive = 0";
+		if ($nama_peternak != null) {
+			$q .= " AND z.nama_peternak = '$nama_peternak'";
+		}
 		return $this->db->query($q);
 	}
 

@@ -144,6 +144,9 @@ class Shu extends CI_Controller
     public function laporan_pembagian_shu()
     {
         $no_anggota = $this->input->get("no_anggota") ?? "nulll";
+        if ($this->session->userdata("level") == "anggota") {
+            $no_anggota = $this->db->query("SELECT * FROM peternak WHERE nama_peternak = '".$this->session->userdata("nama_lengkap")."'")->row()->no_peternak;
+        }
         $kode = $this->M_transaksi->pembagian_kode();
         $kode_total = $this->M_transaksi->pembagian_kode_total();
         $cek_tahun = date('Y');

@@ -5,21 +5,23 @@
     <h3 class="panel-title"><b>Laporan Setoran Susu Anggota</b></h3>
   </div>
   	 <div class="x_content">
-  	 	<div class="row">
-  	 		<div class="col-sm-7">
-  	 			<form method="post" action="<?php echo site_url().'simpanan/laporan_setoran_anggota' ?> " class="form-inline">
-					<label>Pilih anggota</label>
-					<select name="id_peternak" class="form-control">
-						<option value="#" >Pilih anggota</option>
-						<?php foreach ($peternak as $data ) { ?>
-						<option value="<?= $data->no_peternak?>"><?= $data->nama_peternak?></option>
-						<?php } ?>
-					</select>&nbsp&nbsp
-					<input type="submit" value="Filter" class="btn btn-info">
-				</form>
-			</div>
-			<hr>
-		</div>
+		<?php if ($this->session->userdata("level") != "anggota") { ?>
+			<div class="row">
+				<div class="col-sm-7">
+					<form method="post" action="<?php echo site_url().'simpanan/laporan_setoran_anggota' ?> " class="form-inline">
+					 <label>Pilih anggota</label>
+					 <select name="id_peternak" class="form-control">
+						 <option value="#" >Pilih anggota</option>
+						 <?php foreach ($peternak as $data ) { ?>
+						 <option value="<?= $data->no_peternak?>"><?= $data->nama_peternak?></option>
+						 <?php } ?>
+					 </select>&nbsp&nbsp
+					 <input type="submit" value="Filter" class="btn btn-info">
+				 </form>
+			 </div>
+			 <hr>
+		 </div>
+		<?php } ?>
 		<hr>
 		<center>
 			<h3>Laporan Setoran Susu Anggota</h3>

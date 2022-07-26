@@ -22,6 +22,9 @@ class simpanan extends ci_controller
 	public function laporan_setoran_anggota()
 	{
 		$id_peternak = $this->input->post("id_peternak");
+		if ($this->session->userdata("level") == "anggota") {
+			$id_peternak = $this->db->query("SELECT * FROM peternak WHERE nama_peternak = '".$this->session->userdata("nama_lengkap")."'")->row()->no_peternak;
+		}
 		if (isset($id_peternak)) {
 			# code...
 			$data = array(
