@@ -34,7 +34,7 @@
 				<b>
 					<div style="font-size: 25px">KPSBU Lembang</div>
 					<div style="font-size: 20px">Laporan Simpanan</div>
-					<?php if (isset($bulantahun)) { ?>
+					<?php if (isset($bulantahun) && $this->session->userdata("level") != "anggota") { ?>
 						<div style="font-size: 15px">
 							Periode <?php echo $bulantahun ?>
 						</div><?php
