@@ -120,3 +120,56 @@ Keuangan
         Laba rugi
         Laporan penjualan waserda
         Laporan pembelian waserda
+
+Perpajakan
+    Master Data
+        COA
+        Aset
+        Supplier Aset
+    Transaksi
+        Pembelian Aset
+        Penyusutan
+        Perbaikan
+        Revaluasi
+    Laporan
+        Jurnal
+        Buku Besar
+        Kartu Penyusutan Aset
+
+Pemilik1
+    Laporan
+        Kartu Penyusutan Aset
+        Jurnal
+        Buku Besar
+
+petugasadministrasidaerah
+    Master Data
+        Anggota
+    Transaksi
+        Pembelian Bahan Baku
+
+koordinatorwilayah
+    Master Data
+         TPS
+    Transaksi
+        Pembayaran Susu
+
+staffadministrasisimpanpinjam
+    Master Data
+        COA
+    Kartu Simpanan Anggota
+        *
+    Laporan
+        Jurnal
+        Buku Besar
+        Buku Pembantu Pinjaman
+
+komisikredit
+    Laporan
+        Jurnal
+        Buku Besar
+        Laporan Kartu Simpanan
+    Kartu Simpanan Anggota
+        *
+    Transaksi
+        Pinjaman Anggota

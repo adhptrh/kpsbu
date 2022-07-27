@@ -49,7 +49,7 @@
 				<td><?= $data->no_trans ?></td>
 				<td><?= $data->tgl_trans ?></td>
 				<td><?= $data->nama_peternak ?></td>
-				<td class="text-right"><?= $data->jumlah ?></td>
+				<td class="text-right"><?= $data->jumlah ?> liter</td>
 				<td align='right'><?= format_rp($data->harga) ?></td>
 				<td align='right'><?= format_rp($data->subtotal) ?></td>
 			</tr>

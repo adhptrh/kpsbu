@@ -103,8 +103,12 @@
             $this->session->userdata('level') == "keuangan1" or 
             $this->session->userdata('level') == "keuangan2" or 
             $this->session->userdata('level') == "keuangan" or 
+            $this->session->userdata('level') == "perpajakan" or 
+            $this->session->userdata('level') == "petugasadministrasidaerah" or 
             $this->session->userdata('level') == "personalia" or 
             $this->session->userdata('level') == "bendahara" or 
+            $this->session->userdata('level') == "koordinatorwilayah" or 
+            $this->session->userdata('level') == "staffadministrasisimpanpinjam" or 
             $this->session->userdata('level') == "it" or 
             $this->session->userdata('level') == "arles") : ?>
         <ul class="nav side-menu">
@@ -156,8 +160,22 @@
                     <li><a href="<?= base_url('c_masterdata/shift')?>"> Shift </a></li>
                     <li><a href="<?= base_url('c_masterdata/pegawai')?>"> Pegawai </a></li>
 
+                    <?php elseif ($this->session->userdata('level') == "koordinatorwilayah") : ?>
+                    <li><a href="<?php echo site_url(); ?>c_masterdata/tps">TPS</a></li>
+                    
+                    <?php elseif ($this->session->userdata('level') == "staffadministrasisimpanpinjam") : ?>
+                    <li><a href="<?php echo site_url(); ?>c_masterdata/lihat_coa">COA</a></li>
+
+                    <?php elseif ($this->session->userdata('level') == "perpajakan") : ?>
+                    <li><a href="<?php echo site_url(); ?>c_masterdata/lihat_coa">COA</a></li>
+                    <li><a href="<?php echo site_url(); ?>c_masterdata/aset">Aset</a></li>
+                    <li><a href="<?php echo site_url(); ?>c_masterdata/supplier_aset">Supplier Aset</a></li>
+
                     <?php elseif ($this->session->userdata('level') == "bendahara") : ?>
                     <li><a href="<?php echo site_url(); ?>c_masterdata/lihat_coa">COA</a></li>
+
+                    <?php elseif ($this->session->userdata('level') == "petugasadministrasidaerah") : ?>
+                    <li><a href="<?php echo site_url(); ?>c_masterdata/lihat_peternak">Anggota</a></li>
 
                     <?php elseif ($this->session->userdata('level') == "pengelola") : ?>
                     <li><a href="<?php echo site_url(); ?>c_masterdata/lihat_peternak">Anggota</a></li>
@@ -239,7 +257,11 @@
             $this->session->userdata('level') == "produksi2" or 
             $this->session->userdata('level') == "keuangan" or 
             $this->session->userdata('level') == "bendahara" or 
+            $this->session->userdata('level') == "perpajakan" or 
+            $this->session->userdata('level') == "petugasadministrasidaerah" or 
+            $this->session->userdata('level') == "koordinatorwilayah" or 
             $this->session->userdata('level') == "keuangan_waserda" or 
+            $this->session->userdata('level') == "komisikredit" or 
             $this->session->userdata('level') == "penjualan") :
         ?>
             <ul class="nav side-menu">
@@ -304,6 +326,21 @@
 
                     <?php elseif ($this->session->userdata('level') == "pengelola") : ?>
                         <li><a href="<?php echo site_url(); ?>c_transaksi/lihat_pemb">Pembelian Bahan Baku</a></li>
+                        
+                    <?php elseif ($this->session->userdata('level') == "koordinatorwilayah") : ?>
+                        <li><a href="<?php echo site_url(); ?>c_transaksi/pembayaran_susu">Pembayaran Susu</a></li>
+
+                    <?php elseif ($this->session->userdata('level') == "petugasadministrasidaerah") : ?>
+                        <li><a href="<?php echo site_url(); ?>c_transaksi/lihat_pemb">Pembelian Bahan Baku</a></li>
+                        
+                    <?php elseif ($this->session->userdata('level') == "komisikredit") : ?>
+                        <li><a href="<?php echo site_url(); ?>c_transaksi/pinjaman">Pinjaman</a></li>
+
+                    <?php elseif ($this->session->userdata('level') == "perpajakan") : ?>
+                        <li><a href="<?php echo site_url(); ?>c_transaksi/pembelian_aset">Pembelian Aset</a></li>
+                        <li><a href="<?php echo site_url(); ?>c_transaksi/penyusutan">Penyusutan</a></li>
+                        <li><a href="<?php echo site_url(); ?>c_transaksi/perbaikan">Perbaikan</a></li>
+                        <li><a href="<?php echo site_url(); ?>c_transaksi/revaluasi">Revaluasi</a></li>
 
                     <?php elseif ($this->session->userdata('level') == "keuangan_waserda") : ?>
                         <li><a href="<?= base_url('c_transaksi/pengajuan_jurnal')?>">Pengajuan Jurnal</a></li>
@@ -348,7 +385,11 @@
             $this->session->userdata('level') == "keuangan" or 
             $this->session->userdata('level') == "bendahara" or 
             $this->session->userdata('level') == "pemilik" or 
+            $this->session->userdata('level') == "perpajakan" or 
+            $this->session->userdata('level') == "pemilik1" or 
             $this->session->userdata('level') == "it" or 
+            $this->session->userdata('level') == "komisikredit" or 
+            $this->session->userdata('level') == "staffadministrasisimpanpinjam" or 
             $this->session->userdata('level') == "keuangan3") : ?>
             <ul class="nav side-menu">
                 <li>
@@ -421,6 +462,26 @@
 
                     <?php elseif ($this->session->userdata('level') == "persediaan_waserda") : ?>
                         <li><a href="<?= base_url('laporan_kartu_stock') ?>">Laporan Kartu Stock Waserda</a></li>
+                    
+                    <?php elseif ($this->session->userdata('level') == "staffadministrasisimpanpinjam") : ?>
+                        <li><a href="<?php echo site_url(); ?>c_keuangan/view_jurnal">Jurnal</a></li>
+                        <li><a href="<?php echo site_url(); ?>c_keuangan/bukubesar">Buku Besar</a></li>
+                        <li><a href="<?php echo site_url(); ?>c_transaksi/kartu_aset">Kartu Penyusutan Aset</a></li>
+
+                    <?php elseif ($this->session->userdata('level') == "komisikredit") : ?>
+                        <li><a href="<?php echo site_url(); ?>c_keuangan/view_jurnal">Jurnal</a></li>
+                        <li><a href="<?php echo site_url(); ?>c_keuangan/bukubesar">Buku Besar</a></li>
+                        <li><a href="<?php echo site_url(); ?>c_transaksi/kartu_aset">Kartu Penyusutan Aset</a></li>
+
+                    <?php elseif ($this->session->userdata('level') == "pemilik1") : ?>
+                        <li><a href="<?php echo site_url(); ?>c_keuangan/view_jurnal">Jurnal</a></li>
+                        <li><a href="<?php echo site_url(); ?>c_keuangan/bukubesar">Buku Besar</a></li>
+                        <li><a href="<?php echo site_url(); ?>c_transaksi/kartu_aset">Kartu Penyusutan Aset</a></li>
+
+                    <?php elseif ($this->session->userdata('level') == "perpajakan") : ?>
+                        <li><a href="<?php echo site_url(); ?>c_keuangan/view_jurnal">Jurnal</a></li>
+                        <li><a href="<?php echo site_url(); ?>c_keuangan/bukubesar">Buku Besar</a></li>
+                        <li><a href="<?php echo site_url(); ?>c_transaksi/kartu_aset">Kartu Penyusutan Aset</a></li>
 
                     <?php elseif ($this->session->userdata('level') == "bendahara") : ?>
                         <li><a href="<?php echo site_url(); ?>c_keuangan/view_jurnal">Jurnal</a></li>
@@ -530,14 +591,28 @@
 
         <!-- menu baru -->
         <?php if (!empty($this->session->userdata('level'))) : ?>
-        <?php if ($this->session->userdata('level') == "admin" or $this->session->userdata('level') == "produksi1" or $this->session->userdata('level') == "produksi2" or $this->session->userdata('level') == "penjualan" or $this->session->userdata('level') == "keuangan1" or $this->session->userdata('level') == "keuangan2" or $this->session->userdata('level') == "keuangan3") : ?>
+        <?php if (
+            $this->session->userdata('level') == "admin" or 
+            $this->session->userdata('level') == "produksi1" or 
+            $this->session->userdata('level') == "produksi2" or 
+            $this->session->userdata('level') == "penjualan" or 
+            $this->session->userdata('level') == "staffadministrasisimpanpinjam" or 
+            $this->session->userdata('level') == "komisikredit" or 
+            $this->session->userdata('level') == "keuangan1" or 
+            $this->session->userdata('level') == "keuangan2" or 
+            $this->session->userdata('level') == "keuangan3") : ?>
             <ul class="nav side-menu">
                 <li>
                     <a>
                     <i class="fa fa-bar-chart-o"></i>Kartu Simpanan Anggota <span class="fa fa-chevron-down"></span>
                     </a>
                     <ul class="nav child_menu">
-                    <?php if ($this->session->userdata('level') == "keuangan" or $this->session->userdata('level') == "admin") : ?>
+                    <?php if (
+                        $this->session->userdata('level') == "keuangan" or 
+                        $this->session->userdata('level') == "admin" or
+                        $this->session->userdata('level') == "komisikredit" or
+                        $this->session->userdata('level') == "staffadministrasisimpanpinjam") 
+                        : ?>
                         <li><a href="<?php echo site_url(); ?>simpanan/kartu_simpanan_wajib">Kartu Simpanan Wajib</a></li>
                         <li><a href="<?php echo site_url(); ?>simpanan/kartu_simpanan_masuka">Kartu Simpanan Masuka</a></li>
                         <li><a href="<?php echo site_url(); ?>simpanan/kartu_simpanan_hr">Kartu Simpanan Hari Raya</a></li>
