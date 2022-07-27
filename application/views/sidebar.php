@@ -14,7 +14,6 @@
                 $this->session->userdata('level') == "admin" or 
                 $this->session->userdata('level') == "produksi1" or 
                 $this->session->userdata('level') == "produksi2" or 
-                $this->session->userdata('level') == "penjualan" or 
                 $this->session->userdata('level') == "keuangan1" or 
                 $this->session->userdata('level') == "keuangan2" or 
                 $this->session->userdata('level') == "keuangan3" or
@@ -595,7 +594,6 @@
             $this->session->userdata('level') == "admin" or 
             $this->session->userdata('level') == "produksi1" or 
             $this->session->userdata('level') == "produksi2" or 
-            $this->session->userdata('level') == "penjualan" or 
             $this->session->userdata('level') == "staffadministrasisimpanpinjam" or 
             $this->session->userdata('level') == "komisikredit" or 
             $this->session->userdata('level') == "keuangan1" or 
@@ -631,7 +629,6 @@
                 $this->session->userdata('level') == "admin" or 
                 $this->session->userdata('level') == "produksi1" or 
                 $this->session->userdata('level') == "produksi2" or 
-                $this->session->userdata('level') == "penjualan" or
                 $this->session->userdata('level') == "penjualan_waserda" or
                 $this->session->userdata('level') == "pembelian_waserda" or
                 $this->session->userdata('level') == "persediaan_waserda" or
