@@ -59,10 +59,10 @@
 <script>
     $(document).on("ready",()=>{
         $("#inpemb").on("keyup",()=>{
-            if (parseInt($("#inpemb").val()) <= parseInt($("#inpemb").attr("max")) && parseInt($("#inpemb").val()) > 0) {
-                $("#bayarbtn").prop('disabled', false)
-            } else {
+            if (parseInt($("#inpemb").val()) > parseInt($("#inpemb").attr("max")) || parseInt($("#inpemb").val()) < parseInt($("#inpemb").attr("min"))) {
                 $("#bayarbtn").prop('disabled', true)
+            } else {
+                $("#bayarbtn").prop('disabled', false)
             }
         })
     })

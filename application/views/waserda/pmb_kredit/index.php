@@ -43,7 +43,7 @@
                                 <td class="text-right"><?= format_rp($value->nominal) ?></td>
                                 <td class="text-center">
                                     <?php if ($value->status == 2) { ?>
-                                    <?php } else if (date('d') == '6' AND is_null($value->id_pembayaran) AND $value->status == 0) { ?>
+                                    <?php } else if (date('d') == '28' AND is_null($value->id_pembayaran) AND $value->status == 0) { ?>
                                         <a href="#bayar" data-toggle="modal" class="btn btn-xs btn-primary bayar" 
                                         data-invoice="<?= $value->invoice?>"
                                         data-pembeli="<?= $value->nama?>"
@@ -76,5 +76,6 @@
         $(".modal-body #anggota").val( anggota );
         $(".modal-body #total").val( total );
         $(".modal-body #inpemb").attr({"max":total});
+        $(".modal-body #inpemb").attr({"min":total});
     });
 </script>

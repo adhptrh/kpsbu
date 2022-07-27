@@ -68,13 +68,13 @@
                     <div class="form-group row">
                         <label for="desc" class="col-sm-3 col-form-label">Deskripsi</label>
                         <div class="col-sm-9">
-                        <input type="text" class="form-control" id="desc" placeholder="Deskripsi" name="desc">
+                        <input type="text" class="form-control" id="desc" placeholder="Deskripsi" name="desc" required>
                         </div>
                     </div>
                     <div class="ln_solid"></div>
                     <div class="group-btn">
                         <button type="submit" class="btn btn-primary">Simpan</button>
-                        <button type="button" class="btn btn-default">Reset</button>
+                        <!-- <button type="button" class="btn btn-default">Reset</button> -->
                     </div>
                 </form>
             </div>
