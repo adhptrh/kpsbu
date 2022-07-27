@@ -17,15 +17,17 @@
                 <div id="notif">
                     <?php echo $this->session->flashdata('notif_ubah'); ?>
                 </div>
+                <?php if ($this->session->userdata("level") != "anggota") { ?>
                 <div class="row">
-				<div class="col-sm-7">
-					<form method="get" class="form-inline">
-						<span>Periode</span>
-						<input type="month" name="bulantahun" class="form-control">
-						<input type="submit" value="filter" class="btn btn-info">
-					</form>
-				</div>
-			</div>
+                    <div class="col-sm-7">
+                        <form method="get" class="form-inline">
+                            <span>Periode</span>
+                            <input type="month" name="bulantahun" class="form-control">
+                            <input type="submit" value="filter" class="btn btn-info">
+                        </form>
+                    </div>
+                </div>
+                <?php } ?>
 
 			<br>
 			<center>
