@@ -56,7 +56,7 @@
                                 <th class="text-right"><?= format_rp($detailInvoice->total_trans) ?></th>
                             </tr>
                             <tr>
-                                <th colspan="6" class="text-center">PPN</th>
+                                <th colspan="6" class="text-center">PPN (<?= $detailInvoice->persen ?>%)</th>
                                 <th class="text-right"><?= format_rp($detailInvoice->ppn) ?></th>
                             </tr>
                             <tr>

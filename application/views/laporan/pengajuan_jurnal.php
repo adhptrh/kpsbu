@@ -81,9 +81,9 @@
                                         </td>
                                         <td class="text-center">
                                             <?php if ($value->status == 'pending') { ?>
-                                                <a class="btn btn-xs btn-warning"><?= $value->status ?></a>
+                                                <p><?= $value->status ?></p>
                                                 <?php } else { ?>
-                                                    <a href="#" class="btn btn-xs btn-success"><?= $value->status ?></a>
+                                                    <p><?= $value->status ?></p>
                                                     <?php } ?>
                                         </td>
                                         <td class="text-center">

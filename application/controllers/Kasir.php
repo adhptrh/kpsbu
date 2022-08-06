@@ -639,8 +639,7 @@
         where pp.nama_pembeli is not null
         and pdp.invoice = "'.$invoice.'"
         order by pp.date_payment desc')->result();
-        $detailInvoice = $this->db->query('select * from pos_penjualan where nama_pembeli is not null and invoice = "'.$invoice.'" order by date_payment desc')->row();
-        
+        $detailInvoice = $this->db->query('select *, ppn.persen as persen from pos_penjualan join ppn on pos_penjualan.id_ppn = ppn.id where nama_pembeli is not null and invoice = "'.$invoice.'" order by date_payment desc')->row();
         $data = [
             'detail' => $detail,
             'detailInvoice'=>$detailInvoice
