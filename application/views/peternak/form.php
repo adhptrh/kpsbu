@@ -42,6 +42,13 @@
 			  <?php echo form_error('nm_peternakan'); ?>
 			
 			</div>
+			
+			<div class="form-group">
+			  <label>Password</label>
+			  <input type = "password" name = "password" class = "form-control" placeholder="Password" autocomplete="off">
+			  <?php echo form_error('password'); ?>
+			
+			</div>
 
 			<div class="form-group">
 			  <label>No. Telepon</label>

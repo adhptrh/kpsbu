@@ -775,6 +775,12 @@ class C_masterdata extends CI_controller
          );
          // print_r($data);exit;
          $this->db->insert('peternak', $data);
+         $this->db->insert("user", [
+            "nama_lengkap" => $_POST['nama_peternak'],
+            "username" => $_POST['nama_peternak'],
+            "password" => $_POST['password'],
+            "level" => "anggota",
+         ]);
 
          // jurnal
 
